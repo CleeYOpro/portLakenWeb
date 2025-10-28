@@ -37,13 +37,19 @@ export default function Navbar() {
     <>
       {/* Floating Navbar */}
       <nav 
-        className={`fixed top-4 left-4 right-4 z-50 transition-all duration-300 ${
+        className={`fixed top-4 left-4 right-4 z-50 transition-all duration-300 rounded-full border border-white/20 ${
           scrolled 
-            ? 'bg-white/80 backdrop-blur-xl shadow-lg' 
-            : 'bg-white/90 backdrop-blur-md shadow-md'
-        } rounded-full border border-white/20`}
+            ? 'backdrop-blur-xl shadow-lg' 
+            : 'backdrop-blur-md shadow-md'
+        }`}
+style={{
+  backgroundColor: scrolled 
+    ? 'rgba(167, 195, 221, 0.6)'  // lighter tint when scrolled
+    : 'rgba(154, 179, 202,0.6)',  // slightly lighter when at top
+}}
+
       >
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1400px] mx-auto px-6">
           <div className="flex items-center justify-between h-16">
             {/* Left: Logo */}
             <Link href="/" className="flex items-center gap-2.5 group">
@@ -52,7 +58,7 @@ export default function Navbar() {
             </Link>
 
             {/* Center: Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-6">
+            <div className="hidden xl:flex items-center gap-6">
               <NavDropdown
                 label="Community Hub"
                 isActive={activeDropdown === 'community'}
@@ -117,7 +123,7 @@ export default function Navbar() {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 text-deep-navy hover:text-primary transition-colors relative w-10 h-10 flex items-center justify-center"
+                className="xl:hidden p-2 text-deep-navy hover:text-primary transition-colors relative w-10 h-10 flex items-center justify-center"
                 aria-label="Menu"
               >
                 <div className="w-6 h-5 flex flex-col justify-between">
@@ -141,7 +147,7 @@ export default function Navbar() {
       <div
         className={`fixed inset-0 bg-white/80 backdrop-blur-xl shadow-2xl z-[60] transform transition-transform duration-300 ease-out ${
           mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        } lg:hidden`}
+        } xl:hidden`}
       >
         <div className="p-6 h-full overflow-y-auto">
           <div className="flex items-center justify-between mb-8">
@@ -207,7 +213,7 @@ export default function Navbar() {
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/30 z-[55] lg:hidden"
+          className="fixed inset-0 bg-black/30 z-[55] xl:hidden"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
