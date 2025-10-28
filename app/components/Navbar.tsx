@@ -36,17 +36,16 @@ export default function Navbar() {
   return (
     <>
       {/* Floating Navbar */}
-      <nav 
-        className={`fixed top-4 left-4 right-4 z-50 transition-all duration-300 rounded-full border border-white/20 ${
-          scrolled 
-            ? 'backdrop-blur-xl shadow-lg' 
+      <nav
+        className={`fixed top-4 left-4 right-4 z-50 transition-all duration-300 rounded-full border border-white/20 ${scrolled
+            ? 'backdrop-blur-xl shadow-lg'
             : 'backdrop-blur-md shadow-md'
-        }`}
-style={{
-  backgroundColor: scrolled 
-    ? 'rgba(167, 195, 221, 0.6)'  // lighter tint when scrolled
-    : 'rgba(154, 179, 202,0.6)',  // slightly lighter when at top
-}}
+          }`}
+        style={{
+          backgroundColor: scrolled
+            ? 'rgba(242, 246, 250, 0.9)'  // lighter tint when scrolled
+            : 'rgba(242, 246, 250, 0.9)',  // slightly lighter when at top
+        }}
 
       >
         <div className="max-w-[1400px] mx-auto px-6">
@@ -127,15 +126,12 @@ style={{
                 aria-label="Menu"
               >
                 <div className="w-6 h-5 flex flex-col justify-between">
-                  <span className={`block h-0.5 w-full bg-current transform transition-all duration-300 ease-out ${
-                    mobileMenuOpen ? 'rotate-45 translate-y-2' : 'rotate-0 translate-y-0'
-                  }`} />
-                  <span className={`block h-0.5 w-full bg-current transition-all duration-300 ease-out ${
-                    mobileMenuOpen ? 'opacity-0' : 'opacity-100'
-                  }`} />
-                  <span className={`block h-0.5 w-full bg-current transform transition-all duration-300 ease-out ${
-                    mobileMenuOpen ? '-rotate-45 -translate-y-2' : 'rotate-0 translate-y-0'
-                  }`} />
+                  <span className={`block h-0.5 w-full bg-current transform transition-all duration-300 ease-out ${mobileMenuOpen ? 'rotate-45 translate-y-2' : 'rotate-0 translate-y-0'
+                    }`} />
+                  <span className={`block h-0.5 w-full bg-current transition-all duration-300 ease-out ${mobileMenuOpen ? 'opacity-0' : 'opacity-100'
+                    }`} />
+                  <span className={`block h-0.5 w-full bg-current transform transition-all duration-300 ease-out ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : 'rotate-0 translate-y-0'
+                    }`} />
                 </div>
               </button>
             </div>
@@ -145,9 +141,8 @@ style={{
 
       {/* Mobile Slide-out Menu */}
       <div
-        className={`fixed inset-0 bg-white/80 backdrop-blur-xl shadow-2xl z-[60] transform transition-transform duration-300 ease-out ${
-          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        } xl:hidden`}
+        className={`fixed inset-0 bg-white/80 backdrop-blur-xl shadow-2xl z-[60] transform transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          } xl:hidden`}
       >
         <div className="p-6 h-full overflow-y-auto">
           <div className="flex items-center justify-between mb-8">
@@ -287,7 +282,7 @@ function NavDropdown({
       </button>
 
       {isActive && (
-<div className="absolute top-full left-0 mt-6 bg-white/90 backdrop-blur-2xl rounded-2xl shadow-lg border border-white/20 py-3 min-w-[240px] animate-fadeIn">
+        <div className="absolute top-full left-0 mt-6 bg-white/90 backdrop-blur-2xl rounded-2xl shadow-lg border border-white/20 py-3 min-w-[240px] animate-fadeIn">
           {children}
         </div>
       )}

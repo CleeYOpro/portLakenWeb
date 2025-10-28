@@ -22,7 +22,7 @@ const heroSlides = [
   },
   {
     id: 2,
-    image: "https://placehold.co/1920x1080/000000/FFFFFF?text=.",
+    image: "/iceskate.png",
     title: "Winter",
     titleItalic: "Highlights",
     description: "The downtown ice rink reopens this December! Enjoy free skating weekends, winter lights, and cozy cocoa pop-ups across Port Laken.",
@@ -31,7 +31,7 @@ const heroSlides = [
   },
   {
     id: 3,
-    image: "https://placehold.co/1920x1080/000000/FFFFFF?text=.",
+    image: "/marvinsroom.png",
     title: "Latest",
     titleItalic: "News",
     description: "Port Laken launches new recycling initiative this week and announces city council decisions affecting local parks and public spaces.",
@@ -40,7 +40,7 @@ const heroSlides = [
   },
   {
     id: 4,
-    image: "https://placehold.co/1920x1080/000000/FFFFFF?text=.", title: "Smart",
+    image: "coolai.gif", title: "Smart",
     titleItalic: "Resources",
     description: "Explore Port Laken’s new AI-powered features — from instant service guides to a chatbot that helps you find exactly what you need, faster.",
     buttonText: "Explore Features",
@@ -74,12 +74,19 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section with Carousel */}
-      <div className={`relative min-h-screen transition-all duration-500 ${scrolled ? 'rounded-b-[50px] overflow-hidden' : ''}`}>
-        {heroSlides.map((slide, index) => (
+      <div className={`relative min-h-screen transition-all duration-500 overflow-hidden ${scrolled ? 'rounded-b-[50px]' : ''}`}>
+        {heroSlides.map((slide, index) => {
+          const isActive = index === activeSlide;
+          const isPrev = index === (activeSlide - 1 + heroSlides.length) % heroSlides.length;
+          
+          return (
           <div
             key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-700 ${index === activeSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
-              }`}
+            className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+              isActive ? 'translate-x-0 opacity-100 z-10' : 
+              isPrev ? '-translate-x-full opacity-0 z-0' :
+              'translate-x-full opacity-0 z-0'
+            }`}
           >
             <div
               className={`relative flex items-end min-h-screen px-6 md:px-20 pb-20 pt-24 bg-cover bg-center bg-no-repeat transition-all duration-500 ${scrolled ? 'rounded-b-[50px]' : ''}`}
@@ -109,7 +116,8 @@ export default function Home() {
               </div>
             </div>
           </div>
-        ))}
+        );
+        })}
 
         {/* Navigation Dots */}
         <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-4">
