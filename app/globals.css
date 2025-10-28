@@ -6,12 +6,11 @@
   --font-playfair: "Playfair Display", serif;
   --font-nunito: "Nunito Sans", sans-serif;
   
-  /* Color Palette */
-  --color-primary: #C49475;
-  --color-primary-shade: #F5E6D3;
-  --color-secondary: #2E8BC0;
-  --color-secondary-shade: #A8D5E2;
-  
+/* Deep Coastal Teal Palette */
+  --color-primary: #708AA3;       /* Deep ocean teal — bold, grounded, modern */
+  --color-primary-shade: #244C5C; /* Light seafoam teal — soft, airy complement */
+
+
   /* Neutrals */
   --color-white: #FFFFFF;
   --color-gray-100: #E5E5E5;

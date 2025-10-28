@@ -31,7 +31,7 @@ const heroSlides = [
   },
   {
     id: 3,
-   image: "https://placehold.co/1920x1080/000000/FFFFFF?text=.",
+    image: "https://placehold.co/1920x1080/000000/FFFFFF?text=.",
     title: "Latest",
     titleItalic: "News",
     description: "Port Laken launches new recycling initiative this week and announces city council decisions affecting local parks and public spaces.",
@@ -40,7 +40,7 @@ const heroSlides = [
   },
   {
     id: 4,
-image: "https://placehold.co/1920x1080/000000/FFFFFF?text=.",    title: "Smart",
+    image: "https://placehold.co/1920x1080/000000/FFFFFF?text=.", title: "Smart",
     titleItalic: "Resources",
     description: "Explore Port Laken’s new AI-powered features — from instant service guides to a chatbot that helps you find exactly what you need, faster.",
     buttonText: "Explore Features",
@@ -51,31 +51,38 @@ image: "https://placehold.co/1920x1080/000000/FFFFFF?text=.",    title: "Smart",
 
 export default function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Auto-play carousel every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % heroSlides.length);
     }, 4000);
-
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
 
   return (
     <main className="relative min-h-screen w-full bg-white">
       <Navbar />
 
       {/* Hero Section with Carousel */}
-      <div className="relative min-h-screen">
+      <div className={`relative min-h-screen transition-all duration-500 ${scrolled ? 'rounded-b-[50px] overflow-hidden' : ''}`}>
         {heroSlides.map((slide, index) => (
           <div
             key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-700 ${
-              index === activeSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
-            }`}
+            className={`absolute inset-0 transition-opacity duration-700 ${index === activeSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
+              }`}
           >
             <div
-              className="relative flex items-end min-h-screen px-6 md:px-20 pb-20 pt-24 bg-cover bg-center bg-no-repeat"
+              className={`relative flex items-end min-h-screen px-6 md:px-20 pb-20 pt-24 bg-cover bg-center bg-no-repeat transition-all duration-500 ${scrolled ? 'rounded-b-[50px]' : ''}`}
               style={{ backgroundImage: `url('${slide.image}')` }}
             >
               <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40"></div>
@@ -110,11 +117,10 @@ export default function Home() {
             <button
               key={slide.id}
               onClick={() => setActiveSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === activeSlide
-                  ? 'bg-white scale-125 shadow-lg'
-                  : 'bg-white/50 hover:bg-white/75'
-              }`}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${index === activeSlide
+                ? 'bg-white scale-125 shadow-lg'
+                : 'bg-white/50 hover:bg-white/75'
+                }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
@@ -159,7 +165,7 @@ export default function Home() {
       </section>
 
       {/* Services */}
-      <section id="services" className="relative py-20 px-6 md:px-20 bg-primary">
+      <section id="services" className={`relative py-20 px-6 md:px-20 bg-primary transition-all duration-500 ${scrolled ? 'rounded-b-[50px]' : ''}`}>
         <div className="max-w-7xl mx-auto">
           <h2 className="font-playfair text-4xl md:text-5xl text-white mb-12 text-center">Our Services</h2>
           <div className="grid md:grid-cols-3 gap-6">
@@ -182,31 +188,148 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Upcoming Events */}
-      <section id="events" className="relative py-20 px-6 md:px-20 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="font-playfair text-4xl md:text-5xl text-gray-900 mb-12 text-center">Upcoming Events</h2>
-          <div className="space-y-4">
-            <div className="bg-gray-50 rounded-2xl p-6 flex items-center gap-4 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-primary">
-              <div className="bg-primary/10 rounded-xl p-4">
-                <MdEvent className="text-primary text-3xl" />
-              </div>
-              <div>
-                <h3 className="text-gray-900 font-bold text-lg">Summer Festival</h3>
-                <p className="text-gray-600">Join us for music, food, and fun - July 15th</p>
+      {/* Awards & Recognition */}
+      <section id="awards" className="relative py-20 px-6 bg-white w-full">
+        <div className="w-full">
+          <div className="max-w-7xl mx-auto px-4">
+            <h3 className="font-playfair text-left text-xl md:text-3xl font-semibold text-gray-600 max-w-5xl mb-16">
+              In 2025, Port Laken received numerous awards for its quality of life and innovation, including <a href="https://www.usnews.com/" target="_blank" rel="noopener noreferrer" className="hover:underline font-semibold" style={{ color: 'var(--color-primary)' }}>#1 Family-Friendly City in the US</a>,
+              <a href="https://urbannext.com/" target="_blank" rel="noopener noreferrer" className="hover:underline font-semibold" style={{ color: 'var(--color-primary)' }}> Most Innovative City</a>, and <a href="https://urbannext.com/" target="_blank" rel="noopener noreferrer" className="hover:underline font-semibold" style={{ color: 'var(--color-primary)' }}>Work-Life Balance honors</a>.
+            </h3>
+          </div>
+          <div className="relative">
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+            <div className="relative overflow-hidden group">
+              <div className="awards-container flex gap-16 pb-16">
+                {[
+                  {
+                    id: 1,
+                    award: "#1 Best Family-Friendly Place to Live in the U.S.",
+                    source: "U.S. News & World Report, 2025",
+                    description: "Safe neighborhoods, top-rated schools, and a community built on connection and care.",
+                    image: "/awards/family-friendly.jpg"
+                  },
+                  {
+                    id: 2,
+                    award: "Most Innovative Mid-Sized City in the Northwest",
+                    source: "UrbanNext Magazine, 2025",
+                    description: "AI-powered public services, clean energy, and citizen-first tech.",
+                    image: "/awards/innovation.jpg"
+                  },
+                  {
+                    id: 3,
+                    award: "#1 Civic Building Redesign — Port Laken City Hall",
+                    source: "Design Forward Awards, 2025",
+                    description: "A blend of heritage design, solar glass, and open-floor collaboration.",
+                    image: "/awards/city-hall.jpg"
+                  },
+                  {
+                    id: 4,
+                    award: "Best Winter Festival in a Small City",
+                    source: "Travel & Culture Weekly, 2025",
+                    description: "Celebrated for ice sculptures, art shows, and live harbor performances.",
+                    image: "/awards/winter-festival.jpg"
+                  },
+                  {
+                    id: 5,
+                    award: "Top 100 Emerging AI Startups — NeuralHaven Labs",
+                    source: "TechNation, 2025",
+                    description: "Port Laken's own accessibility-focused AI firm making global waves.",
+                    image: "/awards/neuralhaven.jpg"
+                  }
+                ].map((award, index) => (
+                  <div key={award.id} className="flex-none w-80 sm:w-96 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all border group/card" style={{ borderColor: 'var(--color-primary-shade)' }}>
+                    <div className="h-48 overflow-hidden relative" style={{ backgroundColor: 'var(--color-primary-shade)' }}>
+                      <div className="absolute inset-0 flex items-center justify-center" style={{ color: 'var(--color-primary)' }}>
+                        <span className="text-sm font-medium">Award Image</span>
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 h-1" style={{ backgroundColor: 'var(--color-primary)' }}></div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-gray-900 font-bold text-xl mb-2 transition-colors" style={{ color: '' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-primary)'} onMouseLeave={(e) => e.currentTarget.style.color = '#111827'}>{award.award}</h3>
+                      <p className="text-sm text-gray-500 mb-3">{award.source}</p>
+                      <p className="text-gray-600">{award.description}</p>
+                    </div>
+                  </div>
+                ))}
+                {/* Duplicate items for infinite scroll effect */}
+                {[
+                  {
+                    id: 1,
+                    award: "#1 Best Family-Friendly Place to Live in the U.S.",
+                    source: "U.S. News & World Report, 2025",
+                    description: "Safe neighborhoods, top-rated schools, and a community built on connection and care.",
+                    image: "/awards/family-friendly.jpg"
+                  },
+                  {
+                    id: 2,
+                    award: "Most Innovative Mid-Sized City in the Northwest",
+                    source: "UrbanNext Magazine, 2025",
+                    description: "AI-powered public services, clean energy, and citizen-first tech.",
+                    image: "/awards/innovation.jpg"
+                  },
+                  {
+                    id: 3,
+                    award: "#1 Civic Building Redesign — Port Laken City Hall",
+                    source: "Design Forward Awards, 2025",
+                    description: "A blend of heritage design, solar glass, and open-floor collaboration.",
+                    image: "/awards/city-hall.jpg"
+                  },
+                  {
+                    id: 4,
+                    award: "Best Winter Festival in a Small City",
+                    source: "Travel & Culture Weekly, 2025",
+                    description: "Celebrated for ice sculptures, art shows, and live harbor performances.",
+                    image: "/awards/winter-festival.jpg"
+                  },
+                  {
+                    id: 5,
+                    award: "Top 100 Emerging AI Startups — NeuralHaven Labs",
+                    source: "TechNation, 2025",
+                    description: "Port Laken's own accessibility-focused AI firm making global waves.",
+                    image: "/awards/neuralhaven.jpg"
+                  }
+                ].map((award, index) => (
+                  <div key={`duplicate-${award.id}`} className="flex-none w-80 sm:w-96 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all border group/card" style={{ borderColor: 'var(--color-primary-shade)' }}>
+                    <div className="h-48 overflow-hidden relative" style={{ backgroundColor: 'var(--color-primary-shade)' }}>
+                      <div className="absolute inset-0 flex items-center justify-center" style={{ color: 'var(--color-primary)' }}>
+                        <span className="text-sm font-medium">Award Image</span>
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 h-1" style={{ backgroundColor: 'var(--color-primary)' }}></div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-gray-900 font-bold text-xl mb-2 transition-colors" style={{ color: '' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-primary)'} onMouseLeave={(e) => e.currentTarget.style.color = '#111827'}>{award.award}</h3>
+                      <p className="text-sm text-gray-500 mb-3">{award.source}</p>
+                      <p className="text-gray-600">{award.description}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="bg-gray-50 rounded-2xl p-6 flex items-center gap-4 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-secondary">
-              <div className="bg-secondary/10 rounded-xl p-4">
-                <MdEvent className="text-secondary text-3xl" />
-              </div>
-              <div>
-                <h3 className="text-gray-900 font-bold text-lg">Town Hall Meeting</h3>
-                <p className="text-gray-600">Community discussion and updates - July 22nd</p>
-              </div>
-            </div>
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
           </div>
         </div>
+        <style jsx>{`
+          @keyframes scroll {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(calc(-100% / 2));
+            }
+          }
+          .awards-container {
+            display: flex;
+            width: max-content;
+            animation: scroll 40s linear infinite;
+          }
+          .group:hover .awards-container {
+            animation-play-state: paused;
+          }
+          .awards-container:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
       </section>
 
       {/* Footer */}
@@ -217,7 +340,7 @@ export default function Home() {
             <span className="text-white font-playfair font-bold text-2xl">Port Laken</span>
           </div>
           <p className="text-white/90 mb-8 text-lg">Building community, one connection at a time.</p>
-          <div className="flex justify-center gap-8 mb-6">
+          <div className="flex justify-center gap-4 mb-6">
             <FaTwitter className="text-2xl text-white/80 hover:text-white transition-colors cursor-pointer hover:scale-110 transform" />
             <FaInstagram className="text-2xl text-white/80 hover:text-white transition-colors cursor-pointer hover:scale-110 transform" />
             <FaEnvelope className="text-2xl text-white/80 hover:text-white transition-colors cursor-pointer hover:scale-110 transform" />
