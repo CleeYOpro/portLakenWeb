@@ -13,8 +13,21 @@ const config: Config = {
         nunito: ['"Nunito Sans"', 'sans-serif'],
       },
       colors: {
-        primary: '#C49475',
-        secondary: '#2E8BC0',
+        primary: 'var(--color-primary)',
+        'primary-shade': 'var(--color-primary-shade)',
+        secondary: 'var(--color-secondary)',
+        'secondary-shade': 'var(--color-secondary-shade)',
+        'fog-white': 'var(--color-fog-white)',
+        'deep-navy': 'var(--color-deep-navy)',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(-10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        fadeIn: 'fadeIn 0.2s ease-out',
       },
     },
   },

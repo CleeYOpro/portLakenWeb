@@ -1,14 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Custom CSS */
 
 :root {
   --font-playfair: "Playfair Display", serif;
   --font-nunito: "Nunito Sans", sans-serif;
+  
+/* Deep Coastal Teal Palette */
+  --color-primary: #708AA3;      
+  --color-primary-shade: #244C5C;
+
+
+  /* Neutrals */
+  --color-white: #FFFFFF;
+  --color-gray-100: #E5E5E5;
+  --color-gray-200: #CCCCCC;
+  --color-gray-300: #999999;
+  --color-gray-400: #808080;
+  --color-gray-500: #666666;
+  --color-gray-600: #4D4D4D;
+  --color-gray-700: #333333;
+  --color-gray-800: #1A1A1A;
+  --color-black: #000000;
+  
+  /* Semantic Colors */
+  --color-fog-white: #F7F9FB;
+  --color-deep-navy: #32424F;
 }
 
 html {
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -16,26 +39,5 @@ body {
   padding: 0;
   font-family: var(--font-nunito);
   overflow-x: hidden;
-}
-
-.glassmorphic {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.glassmorphic-strong {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-nav {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
+  background-color: var(--color-fog-white);
 }
