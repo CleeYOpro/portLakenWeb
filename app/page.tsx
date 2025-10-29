@@ -8,6 +8,8 @@ import { IoMdAlert } from "react-icons/io";
 import { HiDocumentText } from "react-icons/hi";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { BsCalendarEventFill } from "react-icons/bs";
+import { FaBus } from "react-icons/fa";
+import { MdPayment } from "react-icons/md";
 import Navbar from "./components/Navbar";
 
 const heroSlides = [
@@ -48,17 +50,41 @@ const heroSlides = [
   }
 ];
 
+const quickActions = [
+  {
+    title: "Emergency Alerts",
+    link: "#alerts",
+    icon: <IoMdAlert className="text-3xl text-primary" />
+  },
+  {
+    title: "Submit Resource",
+    link: "#submit",
+    icon: <HiDocumentText className="text-3xl text-primary" />
+  },
+  {
+    title: "Pay Utilities",
+    link: "#utilities",
+    icon: <MdPayment className="text-3xl text-primary" />
+  },
+  {
+    title: "Transportation & Maps",
+    link: "#transportation",
+    icon: <FaBus className="text-3xl text-primary" />
+  }
+];
 
 export default function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [scrolled, setScrolled] = useState(false);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
+    if (paused) return;
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % heroSlides.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [paused]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,45 +104,44 @@ export default function Home() {
         {heroSlides.map((slide, index) => {
           const isActive = index === activeSlide;
           const isPrev = index === (activeSlide - 1 + heroSlides.length) % heroSlides.length;
-          
+
           return (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-              isActive ? 'translate-x-0 opacity-100 z-10' : 
-              isPrev ? '-translate-x-full opacity-0 z-0' :
-              'translate-x-full opacity-0 z-0'
-            }`}
-          >
             <div
-              className={`relative flex items-end min-h-screen px-6 md:px-20 pb-20 pt-24 bg-cover bg-center bg-no-repeat transition-all duration-500 ${scrolled ? 'rounded-b-[50px]' : ''}`}
-              style={{ backgroundImage: `url('${slide.image}')` }}
+              key={slide.id}
+              className={`absolute inset-0 transition-all duration-700 ease-in-out ${isActive ? 'translate-x-0 opacity-100 z-10' :
+                isPrev ? '-translate-x-full opacity-0 z-0' :
+                  'translate-x-full opacity-0 z-0'
+                }`}
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40"></div>
-              <div className="relative max-w-7xl w-full mx-auto z-10">
-                <div className="max-w-4xl">
-                  <h1 className="text-white mb-6">
-                    <span className="font-playfair text-5xl md:text-8xl font-bold">{slide.title} </span>
-                    <span className="font-playfair text-5xl md:text-8xl font-bold italic">{slide.titleItalic}</span>
-                  </h1>
+              <div
+                className={`relative flex items-end min-h-screen px-6 md:px-20 pb-20 pt-24 bg-cover bg-center bg-no-repeat transition-all duration-500 ${scrolled ? 'rounded-b-[50px]' : ''}`}
+                style={{ backgroundImage: `url('${slide.image}')` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40"></div>
+                <div className="relative max-w-7xl w-full mx-auto z-10">
+                  <div className="max-w-4xl">
+                    <h1 className="text-white mb-6">
+                      <span className="font-playfair text-5xl md:text-8xl font-bold">{slide.title} </span>
+                      <span className="font-playfair text-5xl md:text-8xl font-bold italic">{slide.titleItalic}</span>
+                    </h1>
 
-                  <div className="flex flex-col md:flex-row md:items-end md:gap-8">
-                    <p className="text-white/90 text-base md:text-med mb-3 md:mb-0 leading-relaxed max-w-xl">
-                      {slide.description}
-                    </p>
+                    <div className="flex flex-col md:flex-row md:items-end md:gap-8">
+                      <p className="text-white/90 text-base md:text-med mb-3 md:mb-0 leading-relaxed max-w-xl">
+                        {slide.description}
+                      </p>
 
-                    {slide.buttonText && (
-                      <button className="bg-primary hover:bg-white hover:text-primary transition-all px-6 py-3 rounded-full text-white font-medium text-base shadow-lg flex items-center gap-2 whitespace-nowrap">
-                        {slide.buttonText}
-                        <FaArrowRight className="text-sm" />
-                      </button>
-                    )}
+                      {slide.buttonText && (
+                        <button className="bg-primary hover:bg-white hover:text-primary transition-all px-6 py-3 rounded-full text-white font-medium text-base shadow-lg flex items-center gap-2 whitespace-nowrap">
+                          {slide.buttonText}
+                          <FaArrowRight className="text-sm" />
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        );
+          );
         })}
 
         {/* Navigation Dots */}
@@ -134,44 +159,135 @@ export default function Home() {
           ))}
         </div>
       </div>
-
       {/* Quick Actions */}
-      <section className="relative py-16 px-6 md:px-20 bg-white">
+      <section className="relative py-8 px-4 sm:px-6 md:px-20 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="font-playfair text-3xl md:text-4xl text-gray-900 mb-10 text-center">Quick Actions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <a href="#alerts" className="bg-white border-2 border-gray-100 rounded-2xl p-8 hover:shadow-xl transition-all hover:border-primary group">
-              <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center mb-4 group-hover:bg-red-100 transition-colors">
-                <IoMdAlert className="text-3xl text-red-500" />
-              </div>
-              <h3 className="text-gray-900 font-bold text-lg mb-2">Emergency Alerts</h3>
-              <p className="text-gray-600 text-sm">Stay informed about important community alerts</p>
-            </a>
-            <a href="#submit" className="bg-white border-2 border-gray-100 rounded-2xl p-8 hover:shadow-xl transition-all hover:border-secondary group">
-              <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-blue-100 transition-colors">
-                <HiDocumentText className="text-3xl text-secondary" />
-              </div>
-              <h3 className="text-gray-900 font-bold text-lg mb-2">Submit Resource</h3>
-              <p className="text-gray-600 text-sm">Share resources with the community</p>
-            </a>
-            <a href="#taxes" className="bg-white border-2 border-gray-100 rounded-2xl p-8 hover:shadow-xl transition-all hover:border-primary group">
-              <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mb-4 group-hover:bg-green-100 transition-colors">
-                <RiMoneyDollarCircleFill className="text-3xl text-green-600" />
-              </div>
-              <h3 className="text-gray-900 font-bold text-lg mb-2">Pay Taxes</h3>
-              <p className="text-gray-600 text-sm">Quick and secure online tax payments</p>
-            </a>
-            <a href="#events" className="bg-white border-2 border-gray-100 rounded-2xl p-8 hover:shadow-xl transition-all hover:border-secondary group">
-              <div className="w-16 h-16 rounded-full bg-purple-50 flex items-center justify-center mb-4 group-hover:bg-purple-100 transition-colors">
-                <BsCalendarEventFill className="text-3xl text-purple-600" />
-              </div>
-              <h3 className="text-gray-900 font-bold text-lg mb-2">Town Events</h3>
-              <p className="text-gray-600 text-sm">Discover upcoming community events</p>
-            </a>
+
+
+
+          {/* Responsive Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5">
+            {quickActions.map((action, idx) => {
+              const [first, ...rest] = action.title.split(' ');
+              const second = rest.join(' ') || '';
+
+              return (
+                <a
+                  key={idx}
+                  href={action.link}
+                  className="group relative block rounded-full p-[2px] sm:p-[3px] transition-all duration-300 hover:scale-[1.03] hover:shadow-lg active:scale-[0.98] touch-manipulation"
+                  style={{
+                    background:
+                      'linear-gradient(135deg, var(--color-primary, #1e40af), var(--color-primary-shade, #172554))',
+                  }}
+                >
+                  {/* Responsive Inner Pill */}
+                  <div className="flex items-center gap-3 sm:gap-4 bg-white rounded-full px-4 py-3.5 sm:px-6 sm:py-5 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-primary/5 group-hover:to-primary/10">
+
+                    {/* Responsive Icon Circle */}
+                    <div className="flex-shrink-0 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-primary to-primary/80 p-2.5 sm:p-3 text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                      {action.icon}
+                    </div>
+
+                    {/* Responsive Two-Line Title */}
+                    <div className="flex flex-col leading-tight">
+                      <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900">
+                        {first}
+                      </span>
+                      {second && (
+                        <span className="text-sm sm:text-base md:text-lg font-semibold text-gray-700">
+                          {second}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Subtle Glow (only on hover-capable devices) */}
+                  <div className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 [@media(hover:hover)]:block hidden sm:block">
+                    <div
+                      className="absolute inset-0 rounded-full"
+                      style={{
+                        boxShadow: '0 0 20px rgba(30, 64, 175, 0.3)',
+                      }}
+                    />
+                  </div>
+                </a>
+              );
+            })}
           </div>
         </div>
       </section>
+      {/* About Section */}
+<section className="relative py-16 md:py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+    <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
 
+      {/* Left: Text + Button */}
+      <div className="space-y-6 order-2 md:order-1">
+        <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+          Welcome to <span className="text-primary">Port Laken</span>
+        </h2>
+        <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
+          Port Laken is a city where community meets innovation. From scenic parks to thriving neighborhoods, it’s a place where families, businesses, and visitors all feel at home. Discover how tradition and progress come together to make our city unique.
+        </p>
+        <a
+          href="/about"
+          className="inline-flex items-center gap-2 bg-primary text-white font-medium px-6 py-3 rounded-full hover:bg-primary/90 hover:shadow-lg transition-all duration-300 hover:scale-105"
+        >
+          Learn More About Us
+          <FaArrowRight className="text-sm" />
+        </a>
+      </div>
+
+      {/* Right: Parallax Image */}
+      <div className="relative order-1 md:order-2 h-64 md:h-96 rounded-2xl overflow-hidden shadow-2xl">
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10"></div>
+
+        {/* Parallax Container */}
+        <div className="parallax-image absolute inset-0 w-full h-full">
+          <img
+            src="/port-laken-skyline.jpg" // Replace with your city image
+            alt="Port Laken Skyline"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  {/* Parallax CSS */}
+  <style jsx>{`
+    .parallax-image {
+      transform: translateY(0);
+      transition: transform 0.3s ease-out;
+    }
+    @media (min-width: 768px) {
+      .parallax-image {
+        transform: translateY(calc(var(--scroll-y, 0) * -0.3));
+      }
+    }
+  `}</style>
+
+  {/* Scroll Listener for Parallax */}
+  <script
+    dangerouslySetInnerHTML={{
+      __html: `
+        if (typeof window !== 'undefined') {
+          const parallax = document.querySelector('.parallax-image');
+          const updateParallax = () => {
+            if (!parallax) return;
+            const scrollY = window.scrollY;
+            parallax.style.setProperty('--scroll-y', scrollY + 'px');
+          };
+          window.addEventListener('scroll', updateParallax);
+          updateParallax();
+        }
+      `,
+    }}
+  />
+</section>
       {/* Services */}
       <section id="services" className={`relative py-20 px-6 md:px-20 bg-primary transition-all duration-500 ${scrolled ? 'rounded-b-[50px]' : ''}`}>
         <div className="max-w-7xl mx-auto">
