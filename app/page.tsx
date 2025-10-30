@@ -1,16 +1,22 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FaTwitter, FaInstagram, FaEnvelope, FaArrowRight } from "react-icons/fa";
-import { GiWaves } from "react-icons/gi";
-import { MdEvent, MdPeople, MdInfo } from "react-icons/md";
+import {
+  FaTwitter,
+  FaInstagram,
+  FaEnvelope,
+  FaArrowRight,
+  FaHospital,
+  FaChild,
+  FaHandsHelping,
+} from "react-icons/fa";
+import { GiWaves, GiTreeGrowth } from "react-icons/gi";
 import { IoMdAlert } from "react-icons/io";
 import { HiDocumentText } from "react-icons/hi";
-import { RiMoneyDollarCircleFill } from "react-icons/ri";
-import { BsCalendarEventFill } from "react-icons/bs";
-import { FaBus } from "react-icons/fa";
 import { MdPayment } from "react-icons/md";
+import { FaBus } from "react-icons/fa";
 import Navbar from "./components/Navbar";
+import SpotlightCard from "@/components/ui/spotlight-card";
 
 const heroSlides = [
   {
@@ -18,59 +24,64 @@ const heroSlides = [
     image: "/dundee.png",
     title: "Community",
     titleItalic: "First",
-    description: "For over a century, connecting residents, honoring our heritage, and embracing innovation to build a community where everyone belongs and thrives.",
+    description:
+      "For over a century, connecting residents, honoring our heritage, and embracing innovation to build a community where everyone belongs and thrives.",
     buttonText: "Our Story",
-    buttonLink: "/about"
+    buttonLink: "/about",
   },
   {
     id: 2,
     image: "/iceskate.png",
     title: "Winter",
     titleItalic: "Highlights",
-    description: "The downtown ice rink reopens this December! Enjoy free skating weekends, winter lights, and cozy cocoa pop-ups across Port Laken.",
+    description:
+      "The downtown ice rink reopens this December! Enjoy free skating weekends, winter lights, and cozy cocoa pop-ups across Port Laken.",
     buttonText: "Read More",
-    buttonLink: "/news"
+    buttonLink: "/news",
   },
   {
     id: 3,
     image: "/marvinsroom.png",
     title: "Latest",
     titleItalic: "News",
-    description: "Port Laken launches new recycling initiative this week and announces city council decisions affecting local parks and public spaces.",
+    description:
+      "Port Laken launches new recycling initiative this week and announces city council decisions affecting local parks and public spaces.",
     buttonText: "Read More",
-    buttonLink: "/news"
+    buttonLink: "/news",
   },
   {
     id: 4,
-    image: "coolai.gif", title: "Smart",
+    image: "coolai.gif",
+    title: "Smart",
     titleItalic: "Resources",
-    description: "Explore Port Laken’s new AI-powered features — from instant service guides to a chatbot that helps you find exactly what you need, faster.",
+    description:
+      "Explore Port Laken’s new AI-powered features — from instant service guides to a chatbot that helps you find exactly what you need, faster.",
     buttonText: "Explore Features",
-    buttonLink: "/resource-directory"
-  }
+    buttonLink: "/resource-directory",
+  },
 ];
 
 const quickActions = [
   {
     title: "Emergency Alerts",
     link: "#alerts",
-    icon: <IoMdAlert className="text-3xl text-primary" />
+    icon: <IoMdAlert className="text-3xl text-primary" />,
   },
   {
     title: "Submit Resource",
     link: "#submit",
-    icon: <HiDocumentText className="text-3xl text-primary" />
+    icon: <HiDocumentText className="text-3xl text-primary" />,
   },
   {
     title: "Pay Utilities",
     link: "#utilities",
-    icon: <MdPayment className="text-3xl text-primary" />
+    icon: <MdPayment className="text-3xl text-primary" />,
   },
   {
     title: "Transportation & Maps",
     link: "#transportation",
-    icon: <FaBus className="text-3xl text-primary" />
-  }
+    icon: <FaBus className="text-3xl text-primary" />,
+  },
 ];
 
 export default function Home() {
@@ -84,66 +95,93 @@ export default function Home() {
       setActiveSlide((prev) => (prev + 1) % heroSlides.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, [paused]);
+  }, [paused, activeSlide]);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
 
   return (
     <main className="relative min-h-screen w-full bg-white">
       <Navbar />
 
-      {/* Hero Section with Carousel */}
-      <div className={`relative min-h-screen transition-all duration-500 overflow-hidden ${scrolled ? 'rounded-b-[50px]' : ''}`}>
-        {heroSlides.map((slide, index) => {
-          const isActive = index === activeSlide;
-          const isPrev = index === (activeSlide - 1 + heroSlides.length) % heroSlides.length;
+      {/* HERO SECTION – NO WHITE FLASH, CURVED WHEN SCROLLED */}
+      <div className="relative min-h-screen bg-primary">
+        {/* Curve Mask */}
+        <div
+          className={`
+            absolute inset-0 overflow-hidden
+            ${scrolled ? "rounded-b-[50px]" : ""}
+          `}
+        >
+          {heroSlides.map((slide, index) => {
+            const isActive = index === activeSlide;
+            const isPrev =
+              index === (activeSlide - 1 + heroSlides.length) % heroSlides.length;
 
-          return (
-            <div
-              key={slide.id}
-              className={`absolute inset-0 transition-all duration-700 ease-in-out ${isActive ? 'translate-x-0 opacity-100 z-10' :
-                isPrev ? '-translate-x-full opacity-0 z-0' :
-                  'translate-x-full opacity-0 z-0'
-                }`}
-            >
+            return (
               <div
-                className={`relative flex items-end min-h-screen px-6 md:px-20 pb-20 pt-24 bg-cover bg-center bg-no-repeat transition-all duration-500 ${scrolled ? 'rounded-b-[50px]' : ''}`}
-                style={{ backgroundImage: `url('${slide.image}')` }}
+                key={slide.id}
+                className={`
+                  absolute inset-0 transition-all duration-700 ease-in-out
+                  ${isActive
+                    ? "translate-x-0 opacity-100 z-10"
+                    : isPrev
+                    ? "-translate-x-full opacity-0 z-0"
+                    : "translate-x-full opacity-0 z-0"}
+                `}
               >
-                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40"></div>
-                <div className="relative max-w-7xl w-full mx-auto z-10">
-                  <div className="max-w-4xl">
-                    <h1 className="text-white mb-6">
-                      <span className="font-playfair text-5xl md:text-8xl font-bold">{slide.title} </span>
-                      <span className="font-playfair text-5xl md:text-8xl font-bold italic">{slide.titleItalic}</span>
-                    </h1>
+                {/* Background Image + Primary Fallback */}
+                <div
+                  className="absolute inset-0 bg-primary bg-cover bg-center bg-no-repeat"
+                  style={{
+                    backgroundImage: `url('${slide.image}')`,
+                  }}
+                />
 
-                    <div className="flex flex-col md:flex-row md:items-end md:gap-8">
-                      <p className="text-white/90 text-base md:text-med mb-3 md:mb-0 leading-relaxed max-w-xl">
-                        {slide.description}
-                      </p>
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none" />
 
-                      {slide.buttonText && (
-                        <button className="bg-primary hover:bg-white hover:text-primary transition-all px-6 py-3 rounded-full text-white font-medium text-base shadow-lg flex items-center gap-2 whitespace-nowrap">
-                          {slide.buttonText}
-                          <FaArrowRight className="text-sm" />
-                        </button>
-                      )}
+                {/* Content */}
+                <div className="relative flex items-end min-h-screen px-6 md:px-20 pb-20 pt-24">
+                  <div className="relative max-w-7xl w-full mx-auto z-10">
+                    <div className="max-w-4xl">
+                      <h1 className="text-white mb-6">
+                        <span className="font-playfair text-5xl md:text-8xl font-bold">
+                          {slide.title}{" "}
+                        </span>
+                        <span className="font-playfair text-5xl md:text-8xl font-bold italic">
+                          {slide.titleItalic}
+                        </span>
+                      </h1>
+
+                      <div className="flex flex-col md:flex-row md:items-end md:gap-8">
+                        <p className="text-white/90 text-base md:text-lg mb-3 md:mb-0 leading-relaxed max-w-xl">
+                          {slide.description}
+                        </p>
+
+                        {slide.buttonText && (
+                          <a
+                            href={slide.buttonLink}
+                            className="bg-white hover:bg-primary/90 hover:text-white text-primary transition-all px-6 py-3 rounded-full font-medium text-base shadow-lg flex items-center gap-2 whitespace-nowrap border border-white/20"
+                          >
+                            {slide.buttonText}
+                            <FaArrowRight className="text-sm" />
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-
+            );
+          })}
+        </div>
+      </div>
         {/* Navigation Dots */}
         <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-4">
           {heroSlides.map((slide, index) => (
@@ -158,65 +196,70 @@ export default function Home() {
             />
           ))}
         </div>
-      </div>
+
       {/* Quick Actions */}
-      <section className="relative py-8 px-4 sm:px-6 md:px-20 bg-white">
-        <div className="max-w-7xl mx-auto">
+<section className="relative py-16 px-4 sm:px-6 md:px-20 overflow-hidden rounded-b-3xl">
+  {/* Background Image with Overlay */}
+  <div className="absolute inset-0 z-0 rounded-b-3xl overflow-hidden">
+    <img 
+      src="/quick-actions-bg.jpg" 
+      alt="" 
+      className="w-full h-full object-cover"
+    />
+    <div className="absolute inset-0 bg-primary backdrop-blur-sm"></div>
+  </div>
+  
+  <div className="max-w-7xl mx-auto relative z-10">
 
+    {/* Responsive Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {quickActions.map((action, idx) => {
+        const [first, ...rest] = action.title.split(' ');
+        const second = rest.join(' ') || '';
 
+        return (
+          <a
+            key={idx}
+            href={action.link}
+            className="group relative block transition-all duration-300 hover:scale-[1.03] hover:shadow-lg active:scale-[0.98] touch-manipulation"
+            // Removed: p-[2px] gradient border
+          >
+            {/* Inner Pill - No outer border, just background */}
+            <div className="flex items-center gap-3 sm:gap-4 bg-white rounded-full px-4 py-3.5 sm:px-6 sm:py-5 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-primary/5 group-hover:to-primary/10">
 
-          {/* Responsive Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5">
-            {quickActions.map((action, idx) => {
-              const [first, ...rest] = action.title.split(' ');
-              const second = rest.join(' ') || '';
+              {/* Icon Circle */}
+              <div className="flex-shrink-0 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-primary to-primary/80 p-2.5 sm:p-3 text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                {action.icon}
+              </div>
 
-              return (
-                <a
-                  key={idx}
-                  href={action.link}
-                  className="group relative block rounded-full p-[2px] sm:p-[3px] transition-all duration-300 hover:scale-[1.03] hover:shadow-lg active:scale-[0.98] touch-manipulation"
-                  style={{
-                    background:
-                      'linear-gradient(135deg, var(--color-primary, #1e40af), var(--color-primary-shade, #172554))',
-                  }}
-                >
-                  {/* Responsive Inner Pill */}
-                  <div className="flex items-center gap-3 sm:gap-4 bg-white rounded-full px-4 py-3.5 sm:px-6 sm:py-5 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-primary/5 group-hover:to-primary/10">
+              {/* Two-Line Title */}
+              <div className="flex flex-col leading-tight">
+                <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900">
+                  {first}
+                </span>
+                {second && (
+                  <span className="text-sm sm:text-base md:text-lg font-semibold text-gray-700">
+                    {second}
+                  </span>
+                )}
+              </div>
+            </div>
 
-                    {/* Responsive Icon Circle */}
-                    <div className="flex-shrink-0 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-primary to-primary/80 p-2.5 sm:p-3 text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                      {action.icon}
-                    </div>
-
-                    {/* Responsive Two-Line Title */}
-                    <div className="flex flex-col leading-tight">
-                      <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900">
-                        {first}
-                      </span>
-                      {second && (
-                        <span className="text-sm sm:text-base md:text-lg font-semibold text-gray-700">
-                          {second}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Subtle Glow (only on hover-capable devices) */}
-                  <div className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 [@media(hover:hover)]:block hidden sm:block">
-                    <div
-                      className="absolute inset-0 rounded-full"
-                      style={{
-                        boxShadow: '0 0 20px rgba(30, 64, 175, 0.3)',
-                      }}
-                    />
-                  </div>
-                </a>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+            {/* Subtle Glow on Hover */}
+            <div className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 [@media(hover:hover)]:block hidden sm:block">
+              <div
+                className="absolute inset-0 rounded-full"
+                style={{
+                  boxShadow: '0 0 20px rgba(30, 64, 175, 0.3)',
+                }}
+              />
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</section>
       {/* About Section */}
 <section className="relative py-16 md:py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
@@ -287,30 +330,102 @@ export default function Home() {
       `,
     }}
   />
-</section>
-      {/* Services */}
-      <section id="services" className={`relative py-20 px-6 md:px-20 bg-primary transition-all duration-500 ${scrolled ? 'rounded-b-[50px]' : ''}`}>
-        <div className="max-w-7xl mx-auto">
-          <h2 className="font-playfair text-4xl md:text-5xl text-white mb-12 text-center">Our Services</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 hover:shadow-2xl transition-all hover:bg-white hover:scale-105">
-              <MdInfo className="text-primary text-4xl mb-4" />
-              <h3 className="text-gray-900 font-bold text-xl mb-2">Community Resources</h3>
-              <p className="text-gray-600">Access essential services and resources for residents.</p>
+  </section>
+{/* Services */}
+<section
+  id="services"
+  className={`relative py-24 px-6 md:px-12 lg:px-20 bg-primary transition-all duration-500 ${
+    scrolled ? 'rounded-b-[50px]' : ''
+  } animate-fadeIn overflow-hidden`}
+>
+  {/* Decorative Circles */}
+  <div className="absolute inset-0 opacity-10">
+    <div className="absolute -top-20 -right-20 w-64 h-64 bg-white rounded-full mix-blend-overlay"></div>
+    <div className="absolute -bottom-32 -left-32 w-80 h-80 bg-white rounded-full mix-blend-overlay"></div>
+  </div>
+
+  <div className="max-w-7xl mx-auto relative z-10">
+    {/* Header */}
+    <div className="text-center max-w-6xl mx-auto mb-16">
+      <h2 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+        Supporting <span className="text-primary-500">Every Chapter</span> of Your Story
+      </h2>
+      <p className="text-lg text-white/80 max-w-5xl mx-auto">
+        From healthcare to outdoor adventures, we're here to provide the resources and support you need to thrive in Port Laken.
+      </p>
+    </div>
+
+    {/* Services Grid */}
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {[
+        {
+          icon: <FaHospital className="w-6 h-6" />,
+          title: 'HarborView Medical Center',
+          description:
+            "Comprehensive care from emergency to wellness — the heartbeat of Port Laken's health network.",
+        },
+        {
+          icon: <GiTreeGrowth className="w-6 h-6" />,
+          title: 'Mountains to Sound Greenway',
+          description:
+            'Ecological restoration, hiking, and environmental recreation resources for all ages.',
+        },
+        {
+          icon: <FaHandsHelping className="w-6 h-6" />,
+          title: 'Crisis Support Network',
+          description: '24/7 crisis line, recovery help, warm line, and teen outreach services.',
+        },
+        {
+          icon: <FaChild className="w-6 h-6" />,
+          title: 'BrightSteps Childcare',
+          description:
+            "Nurturing Port Laken's youngest residents with quality early education and care.",
+        },
+      ].map((service, index) => (
+        <SpotlightCard
+          key={index}
+          className="h-full group hover:scale-[1.02] transition-transform duration-300 border border-white/20"
+          spotlightColor="rgba(255, 255, 255, 0.1)"
+        >
+          <div className="flex flex-col h-full p-5 bg-primary rounded-lg ">
+            {/* Icon */}
+            <div className="w-14 h-14 rounded-lg mb-5 flex items-center justify-center bg-white/20 shadow-lg">
+              <div className="text-white text-2xl">{service.icon}</div>
             </div>
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 hover:shadow-2xl transition-all hover:bg-white hover:scale-105">
-              <MdEvent className="text-primary text-4xl mb-4" />
-              <h3 className="text-gray-900 font-bold text-xl mb-2">Local Events</h3>
-              <p className="text-gray-600">Stay updated with community gatherings and celebrations.</p>
-            </div>
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 hover:shadow-2xl transition-all hover:bg-white hover:scale-105">
-              <MdPeople className="text-primary text-4xl mb-4" />
-              <h3 className="text-gray-900 font-bold text-xl mb-2">Connect</h3>
-              <p className="text-gray-600">Join local groups and meet your neighbors.</p>
+
+            {/* Title */}
+            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-white transition-colors">
+              {service.title}
+            </h3>
+
+            {/* Description */}
+            <p className="text-white flex-grow text-sm leading-relaxed">{service.description}</p>
+
+            {/* Learn More */}
+            <div className="mt-4 pt-3 border-t border-white/20">
+              <a
+                href="#"
+                className="inline-flex items-center text-sm font-medium text-white hover:text-white/80 transition-colors group-hover:translate-x-1 duration-300"
+              >
+                Learn more
+                <svg
+                  className="ml-1 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
             </div>
           </div>
-        </div>
-      </section>
+        </SpotlightCard>
+      ))}
+    </div>
+  </div>
+</section>
+
+
 
       {/* Awards & Recognition */}
       <section id="awards" className="relative py-20 px-6 bg-white w-full">
