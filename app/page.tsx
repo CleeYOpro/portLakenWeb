@@ -304,14 +304,12 @@ export default function Home() {
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10"></div>
 
-              {/* Parallax Container */}
-              <div className="parallax-image absolute inset-0 w-full h-full">
-                <img
-                  src={galleryImages[0]}
-                  alt="Port Laken Skyline"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              {/* Parallax Image */}
+              <img
+                src={galleryImages[0]}
+                alt="Port Laken Skyline"
+                className="w-full h-full object-cover"
+              />
             </div>
 
           </div>
@@ -476,7 +474,7 @@ export default function Home() {
           {/* Header */}
           <div className="mb-12">
             <h2 className="font-playfair text-4xl md:text-6xl font-extrabold text-gray-900 mb-4">
-              WHAT'S <span className="text-primary italic">HAPPENING</span> IN PORT LAKEN?
+              WHAT&apos;S <span className="text-primary italic">HAPPENING</span> IN PORT LAKEN?
             </h2>
             <p className="text-gray-600 text-lg md:text-xl">
               Stories and updates from across the city this December.{' '}
@@ -792,7 +790,7 @@ export default function Home() {
               LOVE, <span className="italic">PORT LAKEN</span>
             </h2>
             <p className="text-white/90 text-lg md:text-xl max-w-3xl mx-auto">
-              "it's in the details"
+              &quot;it&apos;s in the details&quot;
             </p>
           </div>
 
