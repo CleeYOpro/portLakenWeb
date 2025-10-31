@@ -37,9 +37,9 @@ export default function Navbar() {
     <>
       {/* Floating Navbar */}
       <nav
-        className={`fixed top-4 left-4 right-4 z-50 transition-all duration-300 rounded-full border border-white/20 ${scrolled
-            ? 'backdrop-blur-xl shadow-lg'
-            : 'backdrop-blur-md shadow-md'
+        className={`fixed top-4 z-50 transition-all duration-500 ease-in-out rounded-full border border-white/20 ${scrolled
+            ? 'backdrop-blur-xl shadow-lg left-1/2 -translate-x-1/2 w-full max-w-[80rem] px-4'
+            : 'backdrop-blur-md shadow-md left-4 right-4'
           }`}
         style={{
           backgroundColor: scrolled
@@ -48,7 +48,7 @@ export default function Navbar() {
         }}
 
       >
-        <div className="max-w-[1400px] mx-auto px-6">
+        <div className={`${scrolled ? 'max-w-full' : 'max-w-[1400px]'} mx-auto px-6 transition-all duration-500 ease-in-out`}>
           <div className="flex items-center justify-between h-16">
             {/* Left: Logo */}
             <Link href="/" className="flex items-center gap-2.5 group">

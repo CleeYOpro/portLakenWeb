@@ -16,7 +16,28 @@ import { HiDocumentText } from "react-icons/hi";
 import { MdPayment } from "react-icons/md";
 import { FaBus } from "react-icons/fa";
 import Navbar from "./components/Navbar";
+import { Footer } from "./components/Footer";
 import SpotlightCard from "@/components/ui/spotlight-card";
+import Masonry from "@/components/ui/Masonry";
+
+// Gallery Images
+const galleryImages = [
+  "https://cdn.pixabay.com/photo/2018/10/22/20/34/hamburg-3766309_960_720.jpg",
+  "https://cdn.pixabay.com/photo/2023/04/16/15/00/port-7930392_640.jpg",
+  "https://cdn.pixabay.com/photo/2020/03/22/10/19/fog-4956588_960_720.jpg",
+  "https://cdn.pixabay.com/photo/2016/02/26/13/38/england-1224050_1280.jpg",
+  "https://cdn.pixabay.com/photo/2023/05/03/12/25/boats-7967544_1280.jpg",
+  "https://cdn.pixabay.com/photo/2020/05/01/11/31/grey-geese-5116582_640.jpg",
+  "https://cdn.pixabay.com/photo/2016/11/07/09/07/river-1805188_640.jpg",
+  "https://cdn.pixabay.com/photo/2019/10/04/10/56/father-4525302_640.jpg",
+  "https://cdn.pixabay.com/photo/2021/11/01/11/31/taiwan-6760128_1280.jpg",
+  "https://cdn.pixabay.com/photo/2022/10/13/07/54/crane-houses-7518536_960_720.jpg",
+  "https://cdn.pixabay.com/photo/2019/08/26/10/10/dockland-4431309_960_720.jpg",
+  "https://cdn.pixabay.com/photo/2014/10/22/17/59/couple-498457_960_720.jpg",
+  "https://cdn.pixabay.com/photo/2018/08/10/18/34/fireworks-3597389_1280.jpg",
+  "https://cdn.pixabay.com/photo/2021/12/28/10/57/couple-6898971_640.jpg",
+  "https://cdn.pixabay.com/photo/2021/12/28/10/57/couple-6898971_640.jpg",
+];
 
 const heroSlides = [
   {
@@ -200,14 +221,9 @@ export default function Home() {
 
       {/* Quick Actions */}
       <section className="relative py-16 px-4 sm:px-6 md:px-20 overflow-hidden rounded-b-3xl">
-        {/* Background Image with Overlay */}
+        {/* Background with Overlay */}
         <div className="absolute inset-0 z-0 rounded-b-[40px] overflow-hidden">
-          <img
-            src="/quick-actions-bg.jpg"
-            alt=""
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-primary backdrop-blur-sm"></div>
+          <div className="absolute inset-0 bg-primary"></div>
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
@@ -291,7 +307,7 @@ export default function Home() {
               {/* Parallax Container */}
               <div className="parallax-image absolute inset-0 w-full h-full">
                 <img
-                  src="/port-laken-skyline.jpg" // Replace with your city image
+                  src={galleryImages[0]}
                   alt="Port Laken Skyline"
                   className="w-full h-full object-cover"
                 />
@@ -334,109 +350,219 @@ export default function Home() {
       </section>
 
 
-      {/* Services */}
+      {/* Services – Clean & Curved */}
       <section
         id="services"
-        className={`relative py-24 px-6 md:px-12 lg:px-20 bg-primary transition-all duration-500 ${scrolled ? 'rounded-b-[50px]' : ''
-          } animate-fadeIn overflow-hidden`}
+        className="relative py-20 md:py-24 overflow-hidden rounded-b-[40px]"
+        style={{
+          background: `linear-gradient(to bottom, var(--color-primary), var(--color-primary-shade))`,
+        }}
       >
-        {/* Decorative Circles */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute -top-20 -right-20 w-64 h-64 bg-white rounded-full mix-blend-overlay"></div>
-          <div className="absolute -bottom-32 -left-32 w-80 h-80 bg-white rounded-full mix-blend-overlay"></div>
+        {/* -------------------  Animated Waves (far below cards) ------------------- */}
+        <div className="absolute inset-x-0 -bottom-48 h-[560px] opacity-30 pointer-events-none">
+          <svg
+            className="absolute bottom-0 w-full h-full"
+            viewBox="0 0 1440 320"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#708AA3" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#244C5C" stopOpacity="0.9" />
+              </linearGradient>
+            </defs>
+
+            <path
+              fill="url(#waveGrad)"
+              fillOpacity="0.7"
+              d="M0,160L48,176C96,192,192,224,288,213C384,202,480,149,576,133C672,117,768,139,864,171C960,203,1056,245,1152,240C1248,235,1344,181,1392,155C1440,129,1440,96,1440,64L1440,320L0,320Z"
+            >
+              <animate
+                attributeName="d"
+                dur="22s"
+                repeatCount="indefinite"
+                values="
+            M0,160L48,176C96,192,192,224,288,213C384,202,480,149,576,133C672,117,768,139,864,171C960,203,1056,245,1152,240C1248,235,1344,181,1392,155C1440,129,1440,96,1440,64L1440,320L0,320Z;
+            M0,180L48,165C96,150,192,160,288,170C384,181,480,192,576,176C672,160,768,117,864,112C960,107,1056,139,1152,155C1248,171,1344,171,1392,171C1440,171,1440,171,1440,171L1440,320L0,320Z;
+            M0,160L48,176C96,192,192,224,288,213C384,202,480,149,576,133C672,117,768,139,864,171C960,203,1056,245,1152,240C1248,235,1344,181,1392,155C1440,129,1440,96,1440,64L1440,320L0,320Z
+          "
+              />
+            </path>
+          </svg>
         </div>
 
-        <div className="max-w-7xl mx-auto relative z-10">
+        {/* Content Container */}
+        <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-6 md:px-12 lg:px-20">
           {/* Header */}
-          <div className="text-center max-w-6xl mx-auto mb-16">
-            <h2 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Supporting <span className="text-primary-500">Every Chapter</span> of Your Story
+          <div className="text-center mx-auto mb-12 md:mb-16">
+            <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 leading-tight px-2">
+              Supporting <span className="italic">Every Chapter</span> of Your Story
             </h2>
-            <p className="text-lg text-white/80 max-w-5xl mx-auto">
-              From healthcare to outdoor adventures, we're here to provide the resources and support you need to thrive in Port Laken.
+            <p className="text-base md:text-lg text-white/70 max-w-4xl mx-auto leading-relaxed px-4">
+              From healing hearts to nurturing futures — Port Laken thrives with care, connection, and nature.
             </p>
           </div>
 
           {/* Services Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {[
               {
-                image: "/images/harborview.jpg",
+                image: galleryImages[1],
                 title: "HarborView Medical Center",
-                description:
-                  "Comprehensive care from emergency to wellness — the heartbeat of Port Laken's health network.",
+                description: "Comprehensive care from emergency to wellness — the heartbeat of Port Laken's health network.",
               },
               {
-                image: "/images/greenway.jpg",
+                image: galleryImages[2],
                 title: "Mountains to Sound Greenway",
-                description:
-                  "Ecological restoration, hiking, and environmental recreation resources for all ages.",
+                description: "Ecological restoration, hiking, and environmental recreation resources for all ages.",
               },
               {
-                image: "/images/crisis-support.jpg",
+                image: galleryImages[3],
                 title: "Crisis Support Network",
-                description:
-                  "24/7 crisis line, recovery help, warm line, and teen outreach services.",
+                description: "24/7 crisis line, recovery help, warm line, and teen outreach services.",
               },
               {
-                image: "/images/brightsteps.jpg",
+                image: galleryImages[4],
                 title: "BrightSteps Childcare",
-                description:
-                  "Nurturing Port Laken's youngest residents with quality early education and care.",
+                description: "Nurturing Port Laken's youngest residents with quality early education and care.",
               },
-            ]
-              .map((service, index) => (
-                <SpotlightCard
-                  key={index}
-                  className="h-full group hover:scale-[1.02] transition-transform duration-300  rounded-[40px]" // thicker border + stronger rounding
-                  spotlightColor="rgba(255, 255, 255, 0.1)"
-                >
-                  <div className="flex flex-col h-full p-6 bg-primary">
-                    {/* Image Holder */}
-                    <div className="h-16 w-48 rounded-xl mb-5 flex items-center justify-center bg-white/20 overflow-hidden shadow-md">
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
+            ].map((service, index) => (
+              <div
+                key={index}
+                className={`group relative h-full transition-all duration-400 ${index % 2 === 0 ? 'lg:-translate-y-3' : 'lg:translate-y-3'
+                  }`}
+              >
+                {/* Glass Card */}
+                <div className="relative h-full bg-white/5 backdrop-blur-xl rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 shadow-xl md:shadow-2xl transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-[#708AA3]/20">
+                  {/* Image */}
+                  <div className="relative h-44 sm:h-48 md:h-56 overflow-hidden">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#244C5C]/70 via-transparent to-transparent"></div>
+                  </div>
 
-
-
-                    {/* Title */}
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-white transition-colors">
+                  {/* Content */}
+                  <div className="p-4 sm:p-5 md:p-6 space-y-2 md:space-y-3">
+                    <h3 className="text-lg sm:text-xl font-bold text-white leading-tight group-hover:text-[#708AA3] transition-colors">
                       {service.title}
                     </h3>
-
-                    {/* Description */}
-                    <p className="text-white flex-grow text-sm leading-relaxed">{service.description}</p>
-
-                    {/* Learn More */}
-                    <div className="mt-4 pt-3 border-t border-white/20">
-                      <a
-                        href="#"
-                        className="inline-flex items-center text-sm font-medium text-white hover:text-white/80 transition-colors group-hover:translate-x-1 duration-300"
-                      >
-                        Learn more
-                        <svg
-                          className="ml-1 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </a>
-                    </div>
+                    <p className="text-white/70 text-xs sm:text-sm leading-relaxed line-clamp-3">
+                      {service.description}
+                    </p>
                   </div>
-                </SpotlightCard>
 
-              ))}
+                  {/* Learn More Button */}
+                  <a
+                    href="#"
+                    className="absolute bottom-3 right-3 md:bottom-4 md:right-4 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-400 hover:bg-[#708AA3]/30 hover:border-[#708AA3] hover:scale-110"
+                  >
+                    <svg className="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* News Section */}
+      <section className="relative py-20 px-6 md:px-16 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="mb-12">
+            <h2 className="font-playfair text-4xl md:text-6xl font-extrabold text-gray-900 mb-4">
+              WHAT'S <span className="text-primary italic">HAPPENING</span> IN PORT LAKEN?
+            </h2>
+            <p className="text-gray-600 text-lg md:text-xl">
+              Stories and updates from across the city this December.{' '}
+              <a
+                href="/news"
+                className="text-color-black border-b-2 border-transparent hover:border-primary-500 hover:text-primary">
+                Read All News →
+              </a>
+            </p>
 
+          </div>
+
+          {/* News Grid */}
+          <div className="space-y-16">
+            {[
+              {
+                date: "DEC 1, 2025",
+                title: "Frosty Lane Lights Up Downtown",
+                desc: "Downtown Port Laken kicks off the season with nightly parades, lights, and music. Join us for free skating, hot cocoa, and festive entertainment for the whole family.",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4zKfRQ2XFUvpJRK9uhsvCOl5bwSBQWJRWPA&s",
+              },
+              {
+                date: "DEC 8, 2025",
+                title: "Winter Market Returns to Harbor Plaza",
+                desc: "Local artisans and food trucks bring festive cheer to Harbor Plaza every weekend. Shop handmade gifts, enjoy live music, and support local businesses.",
+                image: "https://res.cloudinary.com/traveltripperweb/image/upload/c_limit,f_auto,h_2500,q_auto,w_2500/v1736299824/d5qijxqom1kdbx31ie9u.jpg",
+              },
+              {
+                date: "DEC 15, 2025",
+                title: "City Hall Announces 2026 Projects",
+                desc: "From green spaces to public safety, see what's ahead for Port Laken's growth. Mayor Johnson unveils ambitious plans for sustainable development and community enhancement.",
+                image: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Colorado_Springs_City_Hall_by_David_Shankbone.jpg",
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="group cursor-pointer"
+              >
+                <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                  {/* Image */}
+                  <div className={`relative ${i % 2 === 0 ? 'md:order-1' : 'md:order-2'}`}>
+                    <div className="relative h-80 rounded-[40px] overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-[1.05] bg-gray-200">
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          console.error('Image failed to load:', item.image);
+                          e.currentTarget.style.display = 'none';
+                        }}
+                      />
+                      {/* Decorative gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className={`${i % 2 === 0 ? 'md:order-2' : 'md:order-1'}`}>
+                    <p className="text-primary text-sm font-bold tracking-wider mb-3 group-hover:text-primary/80 transition-colors duration-300">
+                      {item.date}
+                    </p>
+                    <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors duration-300 font-playfair">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                      {item.desc}
+                    </p>
+                    <a
+                      href="#"
+                      className="inline-flex items-center gap-2 text-primary font-semibold text-lg hover:gap-4 transition-all duration-300 group-hover:translate-x-2"
+                    >
+                      Read Full Story
+                      <FaArrowRight className="text-sm" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                {i < 2 && (
+                  <div className="mt-16 w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       {/* Port Laken Calendar Spotlight - Themed Version */}
       <section
         className="relative py-16 px-4 md:px-12 lg:px-20 flex justify-center items-center overflow-hidden rounded-b-[40px]"
@@ -453,32 +579,19 @@ export default function Home() {
           {/* Title + Divider */}
           <div className="mb-10">
             <h2 className="font-playfair text-5xl md:text-6xl font-extrabold text-white text-left tracking-tight drop-shadow-lg">
-              Port Laken <span className="text-primary-200">City Calendar</span>
+              <span className="text-primary-200">
+                See What’s <em className="italic">Next</em>
+              </span>
             </h2>
             <p className="text-white/90 text-left mt-3 text-lg md:text-xl max-w-2xl">
               Discover all the events, holidays, and community gatherings happening in Port Laken. Stay connected and never miss out on what’s coming up next!
             </p>
-            <div className="w-full h-1 bg-white/40 rounded-full mt-6"></div>
+            <div className="w-full h-1 bg-white rounded-full mt-6"></div>
           </div>
 
           <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start justify-between">
-            {/* Spotlight Image Card */}
-            <div className="flex-1 flex flex-col items-center md:items-start md:ml-0">
-              <div className="relative w-full sm:max-w-[480px] aspect-[4/3] rounded-3xl overflow-hidden shadow-xl bg-primary/30 border border-white/30 flex items-end min-h-[220px] md:mx-0 mx-auto">
-                <img
-                  src="/calendar-spotlight.jpg"
-                  alt="Calendar"
-                  className="w-full h-full object-cover absolute inset-0"
-                />
-                <div className="absolute bottom-0 left-0 w-full bg-white/90 px-6 py-4 rounded-b-3xl">
-                  <h3 className="font-bold text-lg text-primary">Frosty Lane</h3>
-                  <p className="text-gray-700 text-sm">
-                    Enjoy snow, lights, music, and nightly parades at 7 PM. Free parking and fun for everyone.
-                  </p>
-                </div>
-              </div>
-            </div>
-
+            {/* Spotlight Slideshow */}
+            <SpotlightSlideshow />
 
             {/* Event Cards - Improved Design */}
             <div className="flex-1 flex flex-col gap-5 w-full md:w-auto">
@@ -524,6 +637,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
 
       {/* Awards & Recognition */}
       <section id="awards" className="relative py-20 px-6 bg-white w-full">
@@ -669,22 +783,166 @@ export default function Home() {
         `}</style>
       </section>
 
-      {/* Footer */}
-      <footer className="relative py-16 px-6 md:px-20 bg-gradient-to-br from-primary to-primary/80">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <GiWaves className="text-white text-3xl" />
-            <span className="text-white font-playfair font-bold text-2xl">Port Laken</span>
+      {/* Masonry Gallery Section */}
+      <section className="relative py-20 px-6 md:px-20 rounded-b-[40px] bg-primary overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="font-playfair text-4xl md:text-6xl font-extrabold text-white mb-4">
+              LOVE, <span className="italic">PORT LAKEN</span>
+            </h2>
+            <p className="text-white/90 text-lg md:text-xl max-w-3xl mx-auto">
+              "it's in the details"
+            </p>
           </div>
-          <p className="text-white/90 mb-8 text-lg">Building community, one connection at a time.</p>
-          <div className="flex justify-center gap-4 mb-6">
-            <FaTwitter className="text-2xl text-white/80 hover:text-white transition-colors cursor-pointer hover:scale-110 transform" />
-            <FaInstagram className="text-2xl text-white/80 hover:text-white transition-colors cursor-pointer hover:scale-110 transform" />
-            <FaEnvelope className="text-2xl text-white/80 hover:text-white transition-colors cursor-pointer hover:scale-110 transform" />
+
+          {/* Masonry Grid */}
+          <div className="w-full" style={{ height: '1000px' }}>
+            <Masonry
+              items={galleryImages.map((img, index) => ({
+                id: `${index + 1}`,
+                img: img,
+                url: img,
+                height: [600, 450, 700, 500, 650, 550, 600, 480, 700, 520, 580, 650, 720, 500, 400][index] || 600,
+              }))}
+              ease="power3.out"
+              duration={0.6}
+              stagger={0.05}
+              animateFrom="bottom"
+              scaleOnHover={true}
+              hoverScale={0.95}
+              blurToFocus={true}
+              colorShiftOnHover={false}
+            />
           </div>
-          <p className="text-white/60 text-sm">© 2024 Port Laken. All rights reserved.</p>
         </div>
-      </footer>
+      </section>
+
+      {/* Newsletter Signup */}
+<section className="relative py-20 px-6 md:px-20 overflow-hidden">
+  {/* Optional subtle background accent */}
+  <div className="absolute inset-0 -z-10">
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-primary-shade/3 rounded-full blur-3xl"></div>
+  </div>
+
+  <div className="max-w-6xl mx-auto">
+    <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
+      {/* Left: Heading */}
+      <div className="space-y-4">
+        <h3 className="font-playfair text-4xl md:text-5xl font-bold text-primary-shade leading-tight tracking-tight">
+          <span className="italic">Stay in the loop.</span> Port Laken’s latest stories, creative highlights, and the people shaping our city’s future.</h3>
+        <p className="text-primary-shade/70 text-sm font-light tracking-wide hover:text-primary-shade/90 transition-colors duration-300">
+          yoooooooooooooooooooooooooooooooooooooooooooo
+        </p>
+      </div>
+
+      {/* Right: Form */}
+      <div>
+        <form className="space-y-8">
+          {/* First Name */}
+          <div className="relative group">
+            <input
+              type="text"
+              placeholder="First name*"
+              required
+              className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
+            />
+            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
+          </div>
+
+          {/* Last Name */}
+          <div className="relative group">
+            <input
+              type="text"
+              placeholder="Last name*"
+              required
+              className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
+            />
+            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
+          </div>
+
+          {/* Email */}
+          <div className="relative group">
+            <input
+              type="email"
+              placeholder="Email*"
+              required
+              className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
+            />
+            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="group relative inline-flex items-center justify-center px-10 py-3.5 border-2 border-primary-shade text-primary-shade font-medium rounded-full overflow-hidden transition-all duration-300 hover:text-white hover:shadow-xl hover:-translate-y-0.5 active:scale-95"
+          >
+            <span className="relative z-10 tracking-wider">Submit</span>
+            <div className="absolute inset-0 bg-primary-shade translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <Footer />
     </main>
+  );
+}
+
+// Spotlight Slideshow Component
+function SpotlightSlideshow() {
+  const spotlightData = [
+    {
+      image: galleryImages[11],
+      title: "Frosty Lane",
+      description:
+        "Enjoy snow, lights, music, and nightly parades at 7 PM. Free parking and fun for everyone.",
+    },
+    {
+      image: galleryImages[12],
+      title: "Sunny Shores",
+      description:
+        "Relax with live music, beach games, and sunset bonfires every evening.",
+    },
+    {
+      image: galleryImages[13],
+      title: "Mystic Trails",
+      description:
+        "Explore enchanted forests with guided hikes and storytelling under the stars.",
+    },
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % spotlightData.length);
+    }, 5000); // Change every 5 seconds
+    return () => clearInterval(interval);
+  }, []);
+
+  const { image, title, description } = spotlightData[currentIndex];
+
+  return (
+    <div className="flex-1 flex flex-col items-center md:items-start md:ml-0">
+      <div className="relative w-full sm:max-w-[480px] aspect-[4/3] rounded-3xl overflow-hidden shadow-xl bg-primary/30 border border-white/30 flex items-end min-h-[220px] md:mx-0 mx-auto transition-all duration-700 ease-in-out">
+        <img
+          key={image}
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 ease-in-out"
+        />
+        <div className="absolute bottom-0 left-0 w-full bg-white/90 px-6 py-4 rounded-b-3xl">
+          <h3 className="font-bold text-lg text-primary transition-all duration-500">
+            {title}
+          </h3>
+          <p className="text-gray-700 text-sm transition-all duration-500">
+            {description}
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
