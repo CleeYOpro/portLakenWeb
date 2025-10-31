@@ -30,7 +30,6 @@
 }
 
 html {
-  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
@@ -40,4 +39,28 @@ body {
   font-family: var(--font-nunito);
   overflow-x: hidden;
   background-color: var(--color-fog-white);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-fog-white);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-shade);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) var(--color-fog-white);
 }
