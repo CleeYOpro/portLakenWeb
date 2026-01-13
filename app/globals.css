@@ -1,34 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Custom CSS */
 
+/* =========================
+   Fonts
+========================= */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1");
+
+/* =========================
+   CSS Variables (old)
+========================= */
 :root {
   --font-playfair: "Playfair Display", serif;
-  --font-nunito: "Nunito Sans", sans-serif;
-  
-/* Deep Coastal Teal Palette */
-  --color-primary: #708AA3;      
-  --color-primary-shade: #244C5C;
+  --font-inter: "Inter", sans-serif;
 
+  /* Coastal palette */
+  --color-primary: #708aa3;
+  --color-primary-shade: #244c5c;
 
   /* Neutrals */
-  --color-white: #FFFFFF;
-  --color-gray-100: #E5E5E5;
-  --color-gray-200: #CCCCCC;
+  --color-white: #ffffff;
+  --color-gray-100: #e5e5e5;
+  --color-gray-200: #cccccc;
   --color-gray-300: #999999;
   --color-gray-400: #808080;
   --color-gray-500: #666666;
-  --color-gray-600: #4D4D4D;
+  --color-gray-600: #4d4d4d;
   --color-gray-700: #333333;
-  --color-gray-800: #1A1A1A;
+  --color-gray-800: #1a1a1a;
   --color-black: #000000;
-  
-  /* Semantic Colors */
-  --color-fog-white: #F7F9FB;
-  --color-deep-navy: #32424F;
+
+  /* these are new */
+  --color-fog-white: #f7f9fb;
+  --color-deep-navy: #32424f;
 }
 
+/* =========================
+   Global Layout
+========================= */
 html {
   scroll-behavior: smooth;
 }
@@ -36,14 +46,25 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--font-nunito);
+  font-family: var(--font-nunito-sans, Inter, system-ui, sans-serif);
+  color: #1e3a5f;
+  background-color: #f8fafb;
   overflow-x: hidden;
-  background-color: var(--color-fog-white);
 }
 
-/* Custom Scrollbar */
+/* =========================
+   Material Icons
+========================= */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400;
+  vertical-align: middle;
+}
+
+/* =========================
+   Scrollbar (Unified)
+========================= */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -51,7 +72,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
+  background: #a8c5db;
   border-radius: 6px;
 }
 
@@ -59,8 +80,128 @@ body {
   background: var(--color-primary-shade);
 }
 
-/* Firefox scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-primary) var(--color-fog-white);
+  scrollbar-color: #a8c5db var(--color-fog-white);
 }
+
+/* =========================
+   Glass + Cards
+========================= */
+.glass {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+}
+
+.card-hover {
+  @apply transition-all duration-300;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(30, 58, 95, 0.15);
+}
+
+/* =========================
+   Images
+========================= */
+.img-zoom {
+  overflow: hidden;
+}
+
+.img-zoom img {
+  @apply transition-transform duration-700;
+}
+
+.img-zoom:hover img {
+  transform: scale(1.08);
+}
+
+/* =========================
+   Gradients
+========================= */
+.animated-gradient {
+  background: linear-gradient(-45deg, #1e3a5f, #2d4a6f, #4a6d8c, #6b9bc3);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 58, 95, 0.7) 0%,
+    rgba(45, 74, 111, 0.5) 50%,
+    rgba(74, 109, 140, 0.3) 100%
+  );
+}
+
+/* =========================
+   Reveal Animation
+========================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================
+   Snowflake
+========================= */
+.snowflake {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  animation: snowfall linear infinite;
+}
+
+/* =========================
+   Buttons
+========================= */
+.btn-primary {
+  @apply bg-port-navy text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 inline-flex items-center gap-2;
+}
+
+.btn-primary:hover {
+  @apply bg-port-slate;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(30, 58, 95, 0.2);
+}
+
+.btn-secondary {
+  @apply bg-white text-port-navy px-6 py-3 rounded-xl font-semibold border-2 border-port-mist transition-all duration-300 inline-flex items-center gap-2;
+}
+
+.btn-secondary:hover {
+  @apply border-port-navy;
+  transform: translateY(-2px);
+}
+
+/* =========================
+   Calendar
+========================= */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  font-size: 14px;
+}
+
+/* =========================
+   Delays
+========================= */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }

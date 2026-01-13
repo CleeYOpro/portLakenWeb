@@ -480,7 +480,7 @@ export default function Home() {
               Stories and updates from across the city this December.{' '}
               <a
                 href="/news"
-                className="text-color-black border-b-2 border-transparent hover:border-primary-500 hover:text-primary">
+                className="text-black border-b-2 border-transparent hover:border-primary hover:text-primary">
                 Read All News →
               </a>
             </p>
@@ -576,8 +576,8 @@ export default function Home() {
         <div className="max-w-6xl w-full mx-auto relative z-10">
           {/* Title + Divider */}
           <div className="mb-10">
-            <h2 className="font-playfair text-5xl md:text-6xl font-extrabold text-white text-left tracking-tight drop-shadow-lg">
-              <span className="text-primary-200">
+              <h2 className="font-playfair text-5xl md:text-6xl font-extrabold text-white text-left tracking-tight drop-shadow-lg">
+              <span className="text-primary">
                 See What’s <em className="italic">Next</em>
               </span>
             </h2>
@@ -884,7 +884,6 @@ export default function Home() {
   </div>
 </section>
 
-      <Footer />
     </main>
   );
 }
