@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import {
   FaTwitter,
   FaInstagram,
@@ -305,10 +306,12 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10"></div>
 
               {/* Parallax Image */}
-              <img
+              <Image
                 src={galleryImages[0]}
                 alt="Port Laken Skyline"
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
               />
             </div>
 
@@ -434,10 +437,12 @@ export default function Home() {
                 <div className="relative h-full bg-white/5 backdrop-blur-xl rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 shadow-xl md:shadow-2xl transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-[#708AA3]/20">
                   {/* Image */}
                   <div className="relative h-44 sm:h-48 md:h-56 overflow-hidden">
-                    <img
+                    <Image
                       src={service.image}
                       alt={service.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 25vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#244C5C]/70 via-transparent to-transparent"></div>
                   </div>
@@ -517,10 +522,12 @@ export default function Home() {
                   {/* Image */}
                   <div className={`relative ${i % 2 === 0 ? 'md:order-1' : 'md:order-2'}`}>
                     <div className="relative h-80 rounded-[40px] overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-[1.05] bg-gray-200">
-                      <img 
-                        src={item.image} 
+                      <Image
+                        src={item.image}
                         alt={item.title}
-                        className="w-full h-full object-cover"
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="object-cover"
                         onError={(e) => {
                           console.error('Image failed to load:', item.image);
                           e.currentTarget.style.display = 'none';
@@ -918,18 +925,20 @@ function SpotlightSlideshow() {
       setCurrentIndex((prev) => (prev + 1) % spotlightData.length);
     }, 5000); // Change every 5 seconds
     return () => clearInterval(interval);
-  }, []);
+  }, [spotlightData.length]);
 
   const { image, title, description } = spotlightData[currentIndex];
 
   return (
     <div className="flex-1 flex flex-col items-center md:items-start md:ml-0">
       <div className="relative w-full sm:max-w-[480px] aspect-[4/3] rounded-3xl overflow-hidden shadow-xl bg-primary/30 border border-white/30 flex items-end min-h-[220px] md:mx-0 mx-auto transition-all duration-700 ease-in-out">
-        <img
+        <Image
           key={image}
           src={image}
           alt={title}
-          className="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 ease-in-out"
+          fill
+          sizes="(max-width: 768px) 100vw, 40vw"
+          className="object-cover transition-opacity duration-700 ease-in-out"
         />
         <div className="absolute bottom-0 left-0 w-full bg-white/90 px-6 py-4 rounded-b-3xl">
           <h3 className="font-bold text-lg text-primary transition-all duration-500">

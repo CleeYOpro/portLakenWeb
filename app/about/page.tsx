@@ -1,5 +1,6 @@
 import RevealOnScroll from "@/components/RevealOnScroll";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function AboutPage() {
   return (
@@ -7,10 +8,12 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920&q=80"
             alt="Skyline"
-            className="w-full h-full object-cover"
+            fill
+            sizes="100vw"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-port-navy/60 via-port-navy/40 to-port-navy/80"></div>
         </div>
@@ -95,11 +98,13 @@ export default function AboutPage() {
             <RevealOnScroll>
               <div className="text-center">
                 <div className="w-12 h-12 bg-port-sky rounded-full mx-auto mb-6"></div>
-                <div className="aspect-square rounded-2xl overflow-hidden mb-4 bg-port-mist">
-                  <img
+                <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 bg-port-mist">
+                  <Image
                     src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=400&q=80"
                     alt="1847"
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    className="object-cover"
                   />
                 </div>
                 <h4 className="text-2xl font-display font-bold text-port-navy mb-1">
@@ -111,11 +116,13 @@ export default function AboutPage() {
             <RevealOnScroll className="delay-100">
               <div className="text-center">
                 <div className="w-12 h-12 bg-port-sky rounded-full mx-auto mb-6"></div>
-                <div className="aspect-square rounded-2xl overflow-hidden mb-4 bg-port-mist">
-                  <img
+                <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 bg-port-mist">
+                  <Image
                     src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400&q=80"
                     alt="1920"
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    className="object-cover"
                   />
                 </div>
                 <h4 className="text-2xl font-display font-bold text-port-navy mb-1">
@@ -127,11 +134,13 @@ export default function AboutPage() {
             <RevealOnScroll className="delay-200">
               <div className="text-center">
                 <div className="w-12 h-12 bg-port-sky rounded-full mx-auto mb-6"></div>
-                <div className="aspect-square rounded-2xl overflow-hidden mb-4 bg-port-mist">
-                  <img
+                <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 bg-port-mist">
+                  <Image
                     src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&q=80"
                     alt="2000"
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    className="object-cover"
                   />
                 </div>
                 <h4 className="text-2xl font-display font-bold text-port-navy mb-1">
@@ -143,11 +152,13 @@ export default function AboutPage() {
             <RevealOnScroll className="delay-300">
               <div className="text-center">
                 <div className="w-12 h-12 bg-port-sky rounded-full mx-auto mb-6"></div>
-                <div className="aspect-square rounded-2xl overflow-hidden mb-4 bg-port-mist">
-                  <img
+                <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 bg-port-mist">
+                  <Image
                     src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=400&q=80"
                     alt="Today"
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    className="object-cover"
                   />
                 </div>
                 <h4 className="text-2xl font-display font-bold text-port-navy mb-1">
@@ -166,11 +177,15 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <RevealOnScroll>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <img
-                  src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80"
-                  alt="Solar panels"
-                  className="w-full aspect-[4/3] object-cover"
-                />
+                <div className="relative w-full aspect-[4/3]">
+                  <Image
+                    src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80"
+                    alt="Solar panels"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </RevealOnScroll>
             <RevealOnScroll className="delay-200">

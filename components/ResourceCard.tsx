@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface ResourceCardProps {
   title: string;
   description: string;
@@ -16,10 +18,12 @@ export default function ResourceCard({
   return (
     <div className="card-hover bg-white rounded-2xl overflow-hidden shadow-sm border border-port-mist">
       <div className="relative h-48 img-zoom">
-        <img
+        <Image
           src={image}
           alt={title}
-          className="w-full h-full object-cover"
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-port-navy/70 to-transparent"></div>
         <div className="absolute top-4 left-4">

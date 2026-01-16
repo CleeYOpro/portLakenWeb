@@ -1,4 +1,5 @@
 import RevealOnScroll from "@/components/RevealOnScroll";
+import Image from "next/image";
 
 const benefits = [
   { title: "Community Impact", description: "Shape the future through public service.", icon: "public" },
@@ -12,10 +13,12 @@ export default function CareersPage() {
       {/* Hero */}
       <section className="relative h-[80vh] min-h-[600px] flex items-center pt-20 overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80"
             alt="Buildings"
-            className="w-full h-full object-cover"
+            fill
+            sizes="100vw"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-port-navy/70 to-port-navy/40"></div>
         </div>

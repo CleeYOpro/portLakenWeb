@@ -7,6 +7,7 @@ import { IoEarth } from "react-icons/io5";
 import { HiUserGroup } from "react-icons/hi";
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 
 const volunteerOpportunities = [
   {
@@ -327,10 +328,12 @@ export default function GetInvolvedPage() {
                     </p>
                   </div>
                   <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
-                    <img
+                    <Image
                       src={testimonial.image}
                       alt={testimonial.name}
-                      className="w-12 h-12 rounded-full object-cover"
+                      width={48}
+                      height={48}
+                      className="rounded-full object-cover"
                     />
                     <div>
                       <p className="font-nunito font-semibold text-[#244C5C]">{testimonial.name}</p>
