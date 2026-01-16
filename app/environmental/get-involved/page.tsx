@@ -161,7 +161,7 @@ export default function GetInvolvedPage() {
 
             <p className="font-nunito text-xl text-white/80 max-w-3xl mx-auto mb-8">
               Join thousands of Port Laken residents who are actively working to protect our environment.
-              Whether you have an hour or a lifetime, there's a place for you in our green movement.
+              Whether you have an hour or a lifetime, there&apos;s a place for you in our green movement.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -214,7 +214,7 @@ export default function GetInvolvedPage() {
                 Ways to Help
               </h2>
               <p className="font-nunito text-lg text-gray-500 max-w-2xl mx-auto">
-                There are many ways to contribute to Port Laken's environmental mission.
+                There are many ways to contribute to Port Laken&apos;s environmental mission.
               </p>
             </div>
           </RevealOnScroll>
@@ -323,7 +323,7 @@ export default function GetInvolvedPage() {
                 <div className="bg-white p-6 rounded-2xl shadow-md h-full flex flex-col">
                   <div className="flex-1">
                     <p className="font-nunito text-gray-600 italic mb-4">
-                      "{testimonial.quote}"
+                      {testimonial.quote}
                     </p>
                   </div>
                   <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
@@ -357,7 +357,7 @@ export default function GetInvolvedPage() {
                   Join Our Green Team
                 </h2>
                 <p className="font-nunito text-gray-500">
-                  Fill out this form and we'll connect you with the perfect opportunity.
+                  Fill out this form and we&apos;ll connect you with the perfect opportunity.
                 </p>
               </div>
 
