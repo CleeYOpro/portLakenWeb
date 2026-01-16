@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface HeroSectionProps {
   title: string;
@@ -48,10 +49,12 @@ export default function HeroSection({
     <section className={`relative ${height} flex items-center justify-center overflow-hidden`}>
       {/* Background */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src={backgroundImage}
           alt="Hero background"
-          className="w-full h-full object-cover"
+          fill
+          sizes="100vw"
+          className="object-cover"
         />
         <div className="absolute inset-0 hero-gradient"></div>
         <div className="absolute inset-0 animated-gradient opacity-30"></div>

@@ -6,6 +6,7 @@ import { FaRecycle, FaSolarPanel, FaWater, FaSeedling, FaLeaf, FaTree, FaArrowRi
 import { GiTreeGrowth, GiWaterDrop, GiWindmill } from "react-icons/gi";
 import { IoEarth } from "react-icons/io5";
 import Link from "next/link";
+import Image from "next/image";
 
 const programs = [
   {
@@ -144,10 +145,12 @@ export default function EnvironmentalPage() {
 
             {/* Modal Header Image */}
             <div className="relative h-48">
-              <img
+              <Image
                 src={activeInitiative.image}
                 alt={activeInitiative.title}
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#244C5C]/80 to-transparent"></div>
               <div className="absolute bottom-4 left-6 flex items-center gap-3">
@@ -193,10 +196,12 @@ export default function EnvironmentalPage() {
       {/* Hero */}
       <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=80"
             alt="Forest"
-            className="w-full h-full object-cover scale-105 animate-slow-zoom"
+            fill
+            sizes="100vw"
+            className="object-cover scale-105 animate-slow-zoom"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#244C5C]/50 via-[#244C5C]/60 to-[#244C5C]/90"></div>
         </div>
@@ -381,11 +386,13 @@ export default function EnvironmentalPage() {
                 <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}>
                   {/* Image */}
                   <div className="flex-1 w-full">
-                    <div className="relative rounded-3xl overflow-hidden shadow-xl group">
-                      <img
+                    <div className="relative h-[300px] md:h-[400px] rounded-3xl overflow-hidden shadow-xl group">
+                      <Image
                         src={initiative.image}
                         alt={initiative.title}
-                        className="w-full h-[300px] md:h-[400px] object-cover transition-transform duration-700 group-hover:scale-110"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#244C5C]/60 via-transparent to-transparent"></div>
                       <div className="absolute bottom-6 left-6">

@@ -1,5 +1,6 @@
 import RevealOnScroll from "@/components/RevealOnScroll";
 import Link from "next/link";
+import Image from "next/image";
 
 const services = [
   { title: "Affordable Housing", description: "Resources to support your housing needs.", icon: "home" },
@@ -16,10 +17,12 @@ export default function ResidentsPage() {
       {/* Hero */}
       <section className="relative h-[60vh] min-h-[400px] flex items-center justify-start overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920&q=80"
             alt="City"
-            className="w-full h-full object-cover"
+            fill
+            sizes="100vw"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-port-navy/80 to-port-navy/40"></div>
         </div>
@@ -71,10 +74,12 @@ export default function ResidentsPage() {
           <RevealOnScroll>
             <div className="bg-port-frost rounded-3xl overflow-hidden shadow-xl flex flex-col md:flex-row">
               <div className="md:w-1/2 relative h-64 md:h-auto min-h-[300px]">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80"
                   alt="Parks"
-                  className="absolute inset-0 w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
                 />
               </div>
               <div className="md:w-1/2 p-10 md:p-16 flex flex-col justify-center">

@@ -1,4 +1,5 @@
 import RevealOnScroll from "@/components/RevealOnScroll";
+import Image from "next/image";
 
 const businesses = [
   { name: "Harbor Brew Coffee", type: "Coffee House", icon: "coffee", color: "bg-port-navy", description: "Local coffee shop that donates 10% of profits to homeless shelters." },
@@ -13,10 +14,12 @@ export default function CommunityHubPage() {
       <section className="pt-32 pb-8 bg-gradient-to-b from-port-mist to-port-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative min-h-[400px] rounded-2xl overflow-hidden flex items-center animate-fade-in-up">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=80"
               alt="City sunset"
-              className="absolute inset-0 w-full h-full object-cover"
+              fill
+              sizes="100vw"
+              className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-port-navy/70 to-port-navy/30"></div>
             <div className="relative z-10 px-12 max-w-2xl">
@@ -49,10 +52,12 @@ export default function CommunityHubPage() {
           <div className="grid md:grid-cols-2 gap-8 mb-8">
             <RevealOnScroll>
               <div className="group relative rounded-2xl overflow-hidden h-[400px]">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80"
                   alt="Sarah Martinez"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-port-navy via-transparent to-transparent opacity-90"></div>
                 <div className="absolute bottom-0 p-8 text-white">
@@ -66,10 +71,12 @@ export default function CommunityHubPage() {
             </RevealOnScroll>
             <RevealOnScroll className="delay-100">
               <div className="group relative rounded-2xl overflow-hidden h-[400px]">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
                   alt="Michael Chen"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-port-navy via-transparent to-transparent opacity-90"></div>
                 <div className="absolute bottom-0 p-8 text-white">
@@ -143,11 +150,13 @@ export default function CommunityHubPage() {
             ].map((news, index) => (
               <RevealOnScroll key={news.title} className={`delay-${index * 100}`}>
                 <div className="group bg-port-frost rounded-2xl overflow-hidden card-hover">
-                  <div className="h-48 overflow-hidden">
-                    <img
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
                       src={news.image}
                       alt={news.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   </div>
                   <div className="p-6">
