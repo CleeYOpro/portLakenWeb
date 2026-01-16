@@ -293,7 +293,7 @@ export default function EnvironmentalPage() {
             </h2>
             <p className="font-nunito text-xl text-gray-600 leading-relaxed">
               Port Laken is committed to building a sustainable future through innovative environmental programs,
-              community partnerships, and responsible resource management. Together, we're creating a cleaner,
+              community partnerships, and responsible resource management. Together, we&apos;re creating a cleaner,
               greener city for everyone.
             </p>
           </RevealOnScroll>
@@ -309,7 +309,7 @@ export default function EnvironmentalPage() {
                 Key Programs
               </h2>
               <p className="font-nunito text-lg text-gray-500 max-w-2xl mx-auto">
-                Discover how we're making Port Laken a model for environmental sustainability.
+                Discover how we&apos;re making Port Laken a model for environmental sustainability.
               </p>
             </div>
           </RevealOnScroll>
