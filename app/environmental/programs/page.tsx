@@ -163,7 +163,7 @@ export default function ProgramsPage() {
 
             <p className="font-nunito text-xl text-white/80 max-w-3xl mx-auto mb-8">
               Discover the initiatives that are making Port Laken a leader in environmental sustainability.
-              Find the program that's right for you and start making a difference today.
+              Find the program that&apos;s right for you and start making a difference today.
             </p>
 
             <Link
