@@ -1,4 +1,5 @@
 import RevealOnScroll from "@/components/RevealOnScroll";
+import Image from "next/image";
 
 const programs = [
   { title: "Recycling & Waste", description: "Collection schedules and waste reduction goals.", icon: "recycling" },
@@ -13,10 +14,12 @@ export default function SustainabilityPage() {
       {/* Hero */}
       <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=80"
             alt="Forest"
-            className="w-full h-full object-cover"
+            fill
+            sizes="100vw"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-port-navy/50 to-port-navy/70"></div>
         </div>

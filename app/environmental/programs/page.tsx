@@ -7,6 +7,7 @@ import { TbPlant } from "react-icons/tb";
 import { IoEarth } from "react-icons/io5";
 import { BsLightningCharge } from "react-icons/bs";
 import Link from "next/link";
+import Image from "next/image";
 
 const programs = [
   {
@@ -219,11 +220,13 @@ export default function ProgramsPage() {
                   className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow`}
                 >
                   {/* Image */}
-                  <div className="lg:w-2/5 relative">
-                    <img
+                  <div className="lg:w-2/5 relative h-64 lg:h-full">
+                    <Image
                       src={program.image}
                       alt={program.title}
-                      className="w-full h-64 lg:h-full object-cover"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                      className="object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#244C5C]/40 to-transparent"></div>
                     <div className="absolute bottom-4 left-4 lg:bottom-6 lg:left-6">
