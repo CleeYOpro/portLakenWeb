@@ -57,7 +57,7 @@ export default function Navbar() {
             </Link>
 
             {/* Center: Desktop Navigation */}
-            <div className="hidden xl:flex items-center gap-6">
+            <div className="hidden lg:flex items-center gap-6">
               <NavDropdown
                 label="Community Hub"
                 isActive={activeDropdown === 'community'}
@@ -122,7 +122,7 @@ export default function Navbar() {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="xl:hidden p-2 text-deep-navy hover:text-primary transition-colors relative w-10 h-10 flex items-center justify-center"
+                className="lg:hidden p-2 text-deep-navy hover:text-primary transition-colors relative w-10 h-10 flex items-center justify-center"
                 aria-label="Menu"
               >
                 <div className="w-6 h-5 flex flex-col justify-between">
@@ -142,7 +142,7 @@ export default function Navbar() {
       {/* Mobile Slide-out Menu */}
       <div
         className={`fixed inset-0 bg-white/80 backdrop-blur-xl shadow-2xl z-[60] transform transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          } xl:hidden`}
+          } lg:hidden`}
       >
         <div className="p-6 h-full overflow-y-auto">
           <div className="flex items-center justify-between mb-8">
@@ -208,7 +208,7 @@ export default function Navbar() {
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/30 z-[55] xl:hidden"
+          className="fixed inset-0 bg-black/30 z-[55] lg:hidden"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
