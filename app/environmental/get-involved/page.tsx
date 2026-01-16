@@ -148,7 +148,7 @@ export default function GetInvolvedPage() {
           <div className="absolute top-1/2 left-1/3"><FaHeart className="text-6xl text-white" /></div>
         </div>
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-6 py-2 rounded-full mb-6 border border-white/20">
               <FaHandsHelping className="text-[#ABD1E6] text-xl" />
@@ -207,7 +207,7 @@ export default function GetInvolvedPage() {
 
       {/* Ways to Help */}
       <section className="py-20 bg-gray-50">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="text-center mb-12">
               <h2 className="font-playfair text-4xl font-bold text-[#244C5C] mb-4">
@@ -248,7 +248,7 @@ export default function GetInvolvedPage() {
 
       {/* Volunteer Opportunities */}
       <section id="volunteer" className="py-20 bg-white scroll-mt-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="text-center mb-12">
               <h2 className="font-playfair text-4xl font-bold text-[#244C5C] mb-4">
@@ -305,7 +305,7 @@ export default function GetInvolvedPage() {
 
       {/* Testimonials */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="text-center mb-12">
               <h2 className="font-playfair text-3xl font-bold text-[#244C5C] mb-4">
