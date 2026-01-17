@@ -19,7 +19,7 @@ function Footer() {
             </p>
 
             {/* Contact Info */}
-            <div className="mt-6 space-y-3">
+            <div id="footer-contact" className="mt-6 space-y-3 transition-all duration-500 rounded-xl p-3 -ml-3">
               <a href="mailto:info@portlaken.com" className="flex items-center gap-2 text-white hover:text-white/80 transition-colors">
                 <Mail className="w-4 h-4" />
                 <span className="text-sm">info@portlaken.com</span>
