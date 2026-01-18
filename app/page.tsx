@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import {
   FaTwitter,
@@ -16,7 +16,6 @@ import { IoMdAlert } from "react-icons/io";
 import { HiDocumentText } from "react-icons/hi";
 import { MdPayment } from "react-icons/md";
 import { FaBus } from "react-icons/fa";
-import Navbar from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import SpotlightCard from "@/components/ui/spotlight-card";
 import Masonry from "@/components/ui/Masonry";
@@ -129,7 +128,6 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen w-full bg-white">
-      <Navbar />
 
       {/* HERO SECTION – NO WHITE FLASH, CURVED WHEN SCROLLED */}
       <div className="relative min-h-screen bg-primary">
@@ -352,126 +350,7 @@ export default function Home() {
 
 
       {/* Services – Clean & Curved */}
-      <section
-        id="services"
-        className="relative py-20 md:py-24 overflow-hidden rounded-b-[40px]"
-        style={{
-          background: `linear-gradient(to bottom, var(--color-primary), var(--color-primary-shade))`,
-        }}
-      >
-        {/* -------------------  Animated Waves (far below cards) ------------------- */}
-        <div className="absolute inset-x-0 -bottom-48 h-[560px] opacity-30 pointer-events-none">
-          <svg
-            className="absolute bottom-0 w-full h-full"
-            viewBox="0 0 1440 320"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#708AA3" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#244C5C" stopOpacity="0.9" />
-              </linearGradient>
-            </defs>
-
-            <path
-              fill="url(#waveGrad)"
-              fillOpacity="0.7"
-              d="M0,160L48,176C96,192,192,224,288,213C384,202,480,149,576,133C672,117,768,139,864,171C960,203,1056,245,1152,240C1248,235,1344,181,1392,155C1440,129,1440,96,1440,64L1440,320L0,320Z"
-            >
-              <animate
-                attributeName="d"
-                dur="22s"
-                repeatCount="indefinite"
-                values="
-            M0,160L48,176C96,192,192,224,288,213C384,202,480,149,576,133C672,117,768,139,864,171C960,203,1056,245,1152,240C1248,235,1344,181,1392,155C1440,129,1440,96,1440,64L1440,320L0,320Z;
-            M0,180L48,165C96,150,192,160,288,170C384,181,480,192,576,176C672,160,768,117,864,112C960,107,1056,139,1152,155C1248,171,1344,171,1392,171C1440,171,1440,171,1440,171L1440,320L0,320Z;
-            M0,160L48,176C96,192,192,224,288,213C384,202,480,149,576,133C672,117,768,139,864,171C960,203,1056,245,1152,240C1248,235,1344,181,1392,155C1440,129,1440,96,1440,64L1440,320L0,320Z
-          "
-              />
-            </path>
-          </svg>
-        </div>
-
-        {/* Content Container */}
-        <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-6 md:px-12 lg:px-20">
-          {/* Header */}
-          <div className="text-center mx-auto mb-12 md:mb-16">
-            <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 leading-tight px-2">
-              Supporting <span className="italic">Every Chapter</span> of Your Story
-            </h2>
-            <p className="text-base md:text-lg text-white/70 max-w-4xl mx-auto leading-relaxed px-4">
-              From healing hearts to nurturing futures — Port Laken thrives with care, connection, and nature.
-            </p>
-          </div>
-
-          {/* Services Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {[
-              {
-                image: galleryImages[1],
-                title: "HarborView Medical Center",
-                description: "Comprehensive care from emergency to wellness — the heartbeat of Port Laken's health network.",
-              },
-              {
-                image: galleryImages[2],
-                title: "Mountains to Sound Greenway",
-                description: "Ecological restoration, hiking, and environmental recreation resources for all ages.",
-              },
-              {
-                image: galleryImages[3],
-                title: "Crisis Support Network",
-                description: "24/7 crisis line, recovery help, warm line, and teen outreach services.",
-              },
-              {
-                image: galleryImages[4],
-                title: "BrightSteps Childcare",
-                description: "Nurturing Port Laken's youngest residents with quality early education and care.",
-              },
-            ].map((service, index) => (
-              <div
-                key={index}
-                className={`group relative h-full transition-all duration-400 ${index % 2 === 0 ? 'lg:-translate-y-3' : 'lg:translate-y-3'
-                  }`}
-              >
-                {/* Glass Card */}
-                <div className="relative h-full bg-white/5 backdrop-blur-xl rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 shadow-xl md:shadow-2xl transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-[#708AA3]/20">
-                  {/* Image */}
-                  <div className="relative h-44 sm:h-48 md:h-56 overflow-hidden">
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 25vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#244C5C]/70 via-transparent to-transparent"></div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-4 sm:p-5 md:p-6 space-y-2 md:space-y-3">
-                    <h3 className="text-lg sm:text-xl font-bold text-white leading-tight group-hover:text-[#708AA3] transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-white/70 text-xs sm:text-sm leading-relaxed line-clamp-3">
-                      {service.description}
-                    </p>
-                  </div>
-
-                  {/* Learn More Button */}
-                  <a
-                    href="#"
-                    className="absolute bottom-3 right-3 md:bottom-4 md:right-4 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-400 hover:bg-[#708AA3]/30 hover:border-[#708AA3] hover:scale-110"
-                  >
-                    <svg className="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PortLakenServicesSection galleryImages={galleryImages} />
 
       {/* News Section */}
       <section className="relative py-20 px-6 md:px-16 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
@@ -595,9 +474,6 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start justify-between">
-            {/* Spotlight Slideshow */}
-            <SpotlightSlideshow />
-
             {/* Event Cards - Improved Design */}
             <div className="flex-1 flex flex-col gap-5 w-full md:w-auto">
               {[
@@ -638,6 +514,11 @@ export default function Home() {
                 </a>
               </div>
 
+            </div>
+
+            {/* Spotlight Slideshow */}
+            <div className="w-full md:w-auto md:flex-1">
+              <SpotlightSlideshow />
             </div>
           </div>
         </div>
@@ -895,6 +776,213 @@ export default function Home() {
   );
 }
 
+// Port Laken Services Section Component
+function PortLakenServicesSection({ galleryImages }) {
+  const services = [
+    {
+      image: galleryImages[1],
+      title: "HarborView Medical Center",
+      description:
+        "Comprehensive care from emergency to wellness — the backbone of Port Laken's health network.",
+    },
+    {
+      image: galleryImages[2],
+      title: "Mountains to Sound Greenway",
+      description:
+        "Protected trails, restoration projects, and outdoor access connecting people to nature.",
+    },
+    {
+      image: galleryImages[3],
+      title: "Crisis Support Network",
+      description:
+        "24/7 crisis line, recovery support, and outreach services for all ages.",
+    },
+    {
+      image: galleryImages[4],
+      title: "BrightSteps Childcare",
+      description:
+        "Safe, nurturing early education spaces supporting families and young learners.",
+    },
+  ];
+
+  const [active, setActive] = useState(0);
+
+  const prev = () =>
+    setActive((i) => (i === 0 ? services.length - 1 : i - 1));
+  const next = () =>
+    setActive((i) => (i === services.length - 1 ? 0 : i + 1));
+
+  return (
+    <section
+      id="services"
+      className="relative py-16 md:py-24 overflow-hidden rounded-b-[40px]"
+      style={{
+        background:
+          "linear-gradient(to bottom, var(--color-primary), var(--color-primary-shade))",
+      }}
+    >
+      {/* Decorative Waves */}
+      <div className="absolute inset-x-0 -bottom-48 h-[560px] opacity-30 pointer-events-none">
+        <svg
+          className="absolute bottom-0 w-full h-full"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+        >
+          <path
+            fill="#244C5C"
+            fillOpacity="0.7"
+            d="M0,160L48,176C96,192,192,224,288,213C384,202,480,149,576,133C672,117,768,139,864,171C960,203,1056,245,1152,240C1248,235,1344,181,1392,155C1440,129,1440,96,1440,64L1440,320L0,320Z"
+          />
+        </svg>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+        {/* Header - Single Line at Max Width */}
+        <div className="text-center mb-6 md:mb-8">
+          <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 leading-tight">
+            Supporting <span className="italic">Every Chapter</span> of Your Story
+          </h2>
+          <p className="text-white/70 text-base md:text-lg max-w-4xl mx-auto">
+
+            From healthcare to community support, Port Laken is built around care, connection, and opportunity.
+          </p>
+        </div>
+
+        {/* Carousel Container */}
+        <div className="relative">
+          {/* Cards Track - Positioned Container */}
+          <div className="relative min-h-96 sm:min-h-[450px] md:min-h-[550px] flex items-center justify-center">
+            {/* Cards Wrapper - Absolute positioning for carousel effect */}
+            <div className="relative w-full h-full">
+              {services.map((service, i) => {
+                const offset = (i - active + services.length) % services.length;
+                let position = offset;
+                
+                // Convert to -1, 0, 1 (left, center, right)
+                if (position > 1) position -= services.length;
+
+                const isCenter = position === 0;
+                const isLeft = position === -1;
+                const isRight = position === 1;
+
+                let translateX = 0;
+                let scale = 0.7;
+                let opacity = 0;
+                let zIndex = 0;
+
+                if (isCenter) {
+                  translateX = 0;
+                  scale = 1;
+                  opacity = 1;
+                  zIndex = 30;
+                } else if (isLeft) {
+                  translateX = -320;
+                  scale = 0.75;
+                  opacity = 0.6;
+                  zIndex = 20;
+                } else if (isRight) {
+                  translateX = 320;
+                  scale = 0.75;
+                  opacity = 0.6;
+                  zIndex = 20;
+                } else {
+                  opacity = 0;
+                  zIndex = 0;
+                }
+
+                return (
+                  <div
+                    key={i}
+                    className="absolute top-1/2 left-1/2 transition-all duration-500 ease-out pointer-events-auto"
+                    style={{
+                      transform: `translate(calc(-50% + ${translateX}px), -50%) scale(${scale})`,
+                      opacity: opacity,
+                      zIndex: zIndex,
+                      visibility: opacity === 0 ? 'hidden' : 'visible',
+                    }}
+                  >
+                    <div className="w-80 sm:w-96 md:w-[520px] rounded-2xl md:rounded-3xl overflow-hidden bg-white shadow-lg hover:shadow-2xl transition pointer-events-auto">
+                      {/* Image */}
+                      <div className="relative w-full h-48 sm:h-56 md:h-64">
+                        <Image
+                          src={service.image}
+                          alt={service.title}
+                          fill
+                          className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                      </div>
+
+                      {/* Content - Dynamic height */}
+                      <div className="p-4 sm:p-5 md:p-6">
+                        <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 text-gray-900">
+                          {service.title}
+                        </h3>
+                        <p className="text-gray-600 text-sm md:text-base leading-normal mb-4">
+                          {service.description}
+                        </p>
+                        <a
+                          href="#"
+                          className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition pointer-events-auto"
+                        >
+                          More Info →
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Navigation Arrows - Overlapping on Side Cards */}
+          <button
+            onClick={prev}
+            className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 md:left-6 h-11 w-11 md:h-13 md:w-13 rounded-full text-white font-bold text-lg md:text-xl transition flex items-center justify-center pointer-events-auto z-50 shadow-lg"
+            style={{
+              backgroundColor: 'var(--color-primary)',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-primary-shade)')}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-primary)')}
+            aria-label="Previous service"
+          >
+            ‹
+          </button>
+
+          <button
+            onClick={next}
+            className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-4 md:right-6 h-11 w-11 md:h-13 md:w-13 rounded-full text-white font-bold text-lg md:text-xl transition flex items-center justify-center pointer-events-auto z-50 shadow-lg"
+            style={{
+              backgroundColor: 'var(--color-primary)',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-primary-shade)')}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-primary)')}
+            aria-label="Next service"
+          >
+            ›
+          </button>
+
+          {/* Indicator Dots */}
+          <div className="flex justify-center gap-2 mt-6 md:mt-8 relative z-10 pointer-events-auto">
+            {services.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  i === active ? 'bg-white w-6' : 'bg-white/40 w-2.5 hover:bg-white/60'
+                }`}
+                aria-label={`Go to service ${i + 1}`}
+                aria-current={i === active ? 'true' : 'false'}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // Spotlight Slideshow Component
 function SpotlightSlideshow() {
   const spotlightData = [
@@ -930,8 +1018,8 @@ function SpotlightSlideshow() {
   const { image, title, description } = spotlightData[currentIndex];
 
   return (
-    <div className="flex-1 flex flex-col items-center md:items-start md:ml-0">
-      <div className="relative w-full sm:max-w-[480px] aspect-[4/3] rounded-3xl overflow-hidden shadow-xl bg-primary/30 border border-white/30 flex items-end min-h-[220px] md:mx-0 mx-auto transition-all duration-700 ease-in-out">
+    <div className="flex-1 flex flex-col items-center md:items-start md:ml-0 w-full md:w-auto h-full">
+      <div className="relative w-full sm:max-w-[480px] aspect-[4/3] md:aspect-auto md:max-h-[640px] rounded-3xl overflow-hidden shadow-xl bg-primary/30 border border-white/30 flex items-end min-h-[220px] md:mx-0 mx-auto transition-all duration-700 ease-in-out h-full">
         <Image
           key={image}
           src={image}
@@ -948,6 +1036,249 @@ function SpotlightSlideshow() {
             {description}
           </p>
         </div>
+      </div>
+    </div>
+  );
+}
+
+// Services Carousel Component
+interface ServiceItem {
+  image: string;
+  title: string;
+  description: string;
+}
+
+function ServicesCarousel({ services }: { services: ServiceItem[] }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState(0);
+  const [dragCurrent, setDragCurrent] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Handle drag start
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setDragStart(e.clientX);
+    setDragCurrent(e.clientX);
+  };
+
+  // Handle drag move
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    setDragCurrent(e.clientX);
+  };
+
+  // Handle drag end
+  const handleMouseUp = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+
+    const delta = dragStart - dragCurrent;
+    const threshold = 50;
+
+    if (Math.abs(delta) > threshold) {
+      if (delta > 0) {
+        // Dragged left, show next
+        setCurrentIndex((prev) => (prev + 1) % services.length);
+      } else {
+        // Dragged right, show previous
+        setCurrentIndex((prev) => (prev - 1 + services.length) % services.length);
+      }
+    }
+  };
+
+  // Handle touch events for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsDragging(true);
+    setDragStart(e.touches[0].clientX);
+    setDragCurrent(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    setDragCurrent(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    handleMouseUp();
+  };
+
+  // Navigate to specific index
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  // Navigation buttons
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev - 1 + services.length) % services.length);
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % services.length);
+  };
+
+  return (
+    <div className="relative w-full">
+      {/* Main Carousel Container */}
+      <div
+        ref={containerRef}
+        className="relative w-full overflow-hidden"
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {/* Carousel Track */}
+        <div className="relative h-96 md:h-[420px] flex items-center justify-center">
+          {services.map((service, index) => {
+            const isCenter = index === currentIndex;
+            const isLeft = index === (currentIndex - 1 + services.length) % services.length;
+            const isRight = index === (currentIndex + 1) % services.length;
+
+            let position = "right-full";
+            let scale = 0.75;
+            let opacity = 0;
+            let zIndex = 0;
+
+            if (isCenter) {
+              position = "left-1/2 -translate-x-1/2";
+              scale = 1;
+              opacity = 1;
+              zIndex = 20;
+            } else if (isLeft) {
+              position = "left-0";
+              scale = 0.75;
+              opacity = 0.6;
+              zIndex = 10;
+            } else if (isRight) {
+              position = "right-0";
+              scale = 0.75;
+              opacity = 0.6;
+              zIndex = 10;
+            }
+
+            return (
+              <div
+                key={index}
+                className={`
+                  absolute top-1/2 -translate-y-1/2 w-11/12 sm:w-2/3 lg:w-1/2 
+                  transition-all duration-500 ease-out cursor-grab active:cursor-grabbing
+                  ${position} ${isDragging ? "" : ""}
+                `}
+                style={{
+                  transform: `${position.includes("left-1/2") ? "translateX(-50%)" : ""} scale(${scale})`,
+                  opacity: opacity,
+                  zIndex: zIndex,
+                }}
+              >
+                {/* Service Card */}
+                <div className="group relative h-full bg-white/5 backdrop-blur-xl rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 shadow-xl transition-all duration-500">
+                  {/* Image Container */}
+                  <div className="relative w-full h-48 md:h-56 overflow-hidden">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#244C5C]/70 via-transparent to-transparent"></div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-5 md:p-6 space-y-2 md:space-y-3">
+                    <h3 className="text-lg md:text-xl font-bold text-white leading-tight transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-white/70 text-sm leading-relaxed">
+                      {service.description}
+                    </p>
+                  </div>
+
+                  {/* Learn More Button */}
+                  <a
+                    href="#"
+                    className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-300 hover:bg-[#708AA3]/30 hover:border-[#708AA3] hover:scale-110"
+                  >
+                    <svg
+                      className="w-5 h-5 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeWidth={2.5}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Navigation Arrows */}
+        <button
+          onClick={goToPrevious}
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-300 hover:bg-white/20 hover:scale-110 -ml-6 md:-ml-8 group active:scale-95"
+          aria-label="Previous service"
+        >
+          <svg
+            className="w-6 h-6 md:w-7 md:h-7 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </button>
+
+        <button
+          onClick={goToNext}
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-300 hover:bg-white/20 hover:scale-110 -mr-6 md:-mr-8 group active:scale-95"
+          aria-label="Next service"
+        >
+          <svg
+            className="w-6 h-6 md:w-7 md:h-7 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+      </div>
+
+      {/* Indicator Dots */}
+      <div className="flex justify-center gap-2 mt-8 md:mt-10">
+        {services.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              index === currentIndex
+                ? "bg-white w-8"
+                : "bg-white/40 w-2 hover:bg-white/60"
+            }`}
+            aria-label={`Go to service ${index + 1}`}
+            aria-current={index === currentIndex ? "true" : "false"}
+          />
+        ))}
       </div>
     </div>
   );
