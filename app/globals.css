@@ -46,7 +46,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--font-nunito-sans, Inter, system-ui, sans-serif);
+  font-family: var(--font-inter), system-ui, sans-serif;
   color: #1e3a5f;
   background-color: #f8fafb;
   overflow-x: hidden;
