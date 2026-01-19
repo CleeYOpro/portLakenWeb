@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { GiWaves } from 'react-icons/gi';
 import { Search, LogIn, ChevronDown, Menu, X } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -38,8 +39,8 @@ export default function Navbar() {
       {/* Floating Navbar */}
       <nav
         className={`fixed top-4 z-50 transition-all duration-500 ease-in-out rounded-full border border-white/20 ${scrolled
-            ? 'backdrop-blur-xl shadow-lg left-1/2 -translate-x-1/2 w-full max-w-[80rem] px-4'
-            : 'backdrop-blur-md shadow-md left-4 right-4'
+          ? 'backdrop-blur-xl shadow-lg left-1/2 -translate-x-1/2 w-full max-w-[80rem] px-4'
+          : 'backdrop-blur-md shadow-md left-4 right-4'
           }`}
         style={{
           backgroundColor: scrolled
@@ -225,15 +226,10 @@ export default function Navbar() {
           >
             <div className="flex items-center gap-3 border-b-2 border-primary pb-3">
               <Search className="w-6 h-6 text-primary" />
-              <input
-                type="text"
-                placeholder="Search Port Laken..."
-                className="flex-1 text-lg font-nunito text-deep-navy outline-none bg-transparent"
-                autoFocus
-              />
+              <SearchInput setSearchOpen={setSearchOpen} />
             </div>
             <div className="mt-4 text-sm text-gray-500 font-nunito">
-              Start typing to search...
+              Start typing and press Enter to search...
             </div>
           </div>
         </div>
@@ -344,5 +340,29 @@ function MobileLink({ href, label, onClick }: { href: string; label: string; onC
     >
       {label}
     </Link>
+  );
+}
+
+function SearchInput({ setSearchOpen }: { setSearchOpen: (open: boolean) => void }) {
+  const [query, setQuery] = useState("");
+  const router = useRouter();
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && query.trim()) {
+      setSearchOpen(false);
+      router.push(`/resource-directory?q=${encodeURIComponent(query.trim())}`);
+    }
+  };
+
+  return (
+    <input
+      type="text"
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+      onKeyDown={handleKeyDown}
+      placeholder="Search Port Laken..."
+      className="flex-1 text-lg font-nunito text-deep-navy outline-none bg-transparent"
+      autoFocus
+    />
   );
 }
