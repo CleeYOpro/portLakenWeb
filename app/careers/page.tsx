@@ -162,6 +162,7 @@ export default function CareersPage() {
                 </Link>
               </div>
             </RevealOnScroll>
+            
 
             <RevealOnScroll className="delay-100">
               <div className="space-y-6">
