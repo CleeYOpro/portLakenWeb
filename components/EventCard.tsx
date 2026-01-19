@@ -8,6 +8,8 @@ interface EventCardProps {
   date: string;
   location?: string;
   time?: string;
+  onReadMore?: () => void;
+  readMoreLabel?: string;
 }
 
 export default function EventCard({
@@ -18,6 +20,8 @@ export default function EventCard({
   date,
   location,
   time,
+  onReadMore,
+  readMoreLabel = "Read more",
 }: EventCardProps) {
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
@@ -40,6 +44,15 @@ export default function EventCard({
         </div>
         <h3 className="font-bold text-xl text-port-navy mb-3">{title}</h3>
         <p className="text-sm text-port-slate mb-4">{description}</p>
+        {onReadMore && (
+          <button
+            type="button"
+            onClick={onReadMore}
+            className="text-sm font-semibold text-port-navy hover:text-port-sky transition mb-4"
+          >
+            {readMoreLabel}
+          </button>
+        )}
         {(location || time) && (
           <div className="flex items-center gap-4 text-xs text-port-slate">
             {location && (
