@@ -30,26 +30,37 @@ const galleryImages = [
 ];
 const upcomingEvents = [
   {
-    month: 'NOV',
-    day: '11',
-    title: 'Veterans Day',
-    desc: 'City Hall offices closed',
-    isHoliday: true,
+    month: 'FEB',
+    day: '2',
+    title: 'Groundhog Day Celebration',
+    desc: 'Join us at the park for the annual Groundhog Day festivities with local treats and games.',
   },
   {
-    month: 'NOV',
-    day: '12',
-    title: 'Meet & Green',
-    desc: 'Community meet-up at the lakefront',
+    month: 'FEB',
+    day: '14',
+    title: 'Valentine’s Day Market',
+    desc: 'Local vendors showcase handmade gifts, flowers, and sweets for everyone to enjoy.',
   },
   {
-    month: 'NOV',
-    day: '27',
-    title: 'Thanksgiving Day',
-    desc: 'City Hall offices closed',
-    isHoliday: true,
+    month: 'FEB',
+    day: '17',
+    title: 'Winter Arts Workshop',
+    desc: 'Interactive workshops for all ages at the community arts center.',
+  },
+  {
+    month: 'FEB',
+    day: '20',
+    title: 'City Council Town Hall',
+    desc: 'Discuss upcoming projects and community initiatives with local leaders.',
+  },
+  {
+    month: 'FEB',
+    day: '28',
+    title: 'Community Clean-Up Day',
+    desc: 'Volunteer to help keep our parks and streets clean; tools and refreshments provided.',
   },
 ];
+
 const heroSlides = [
   {
     id: 1,
@@ -457,14 +468,10 @@ export default function Home() {
       <section
         className="relative py-16 md:py-20 lg:py-24 px-5 sm:px-8 md:px-12 lg:px-16 overflow-hidden"
         style={{
-          backgroundImage: "url('/huron.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 30%',
-          backgroundAttachment: 'fixed',
+          backgroundColor: 'var(--color-primary)',
         }}
       >
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/55 to-black/70" />
+
 
         <div className="relative z-10 max-w-7xl mx-auto">
           {/* Header */}
@@ -482,54 +489,53 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-10 xl:gap-14 items-start">
             {/* Events Column */}
             <div className="space-y-6">
-              {upcomingEvents.map((event, idx) => (
+              {upcomingEvents.slice(0, 4).map((event, idx) => (
                 <div
                   key={idx}
-                  className={`
-                  group flex items-center gap-5 p-5 md:p-6 bg-white/95 backdrop-blur-sm 
-                  rounded-2xl border border-white/30 shadow-lg transition-all duration-300
-                  hover:shadow-xl hover:-translate-y-1 hover:border-primary/40
-                  ${event.isHoliday ? 'border-l-4 border-l-amber-500' : ''}
-                `}
+                  className="
+        group flex items-center gap-5 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm
+        hover:shadow-md hover:-translate-y-0.5 transition-all duration-200
+      "
                 >
                   <div
-                    className={`
-                    flex-shrink-0 flex flex-col items-center justify-center w-20 h-20 
-                    rounded-2xl font-bold text-white shadow-md
-                    ${event.isHoliday ? 'bg-amber-600' : 'bg-primary'}
-                  `}
+                    className="
+          flex-shrink-0 flex flex-col items-center justify-center w-16 h-16 
+          rounded-2xl font-bold text-white
+          bg-primary
+        "
                   >
                     <span className="text-xs tracking-wider uppercase">{event.month}</span>
-                    <span className="text-3xl">{event.day}</span>
+                    <span className="text-2xl">{event.day}</span>
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <h4 className="font-bold text-lg md:text-xl text-gray-900 group-hover:text-primary transition-colors">
+                    <h4 className="font-semibold text-lg text-gray-900 group-hover:text-primary transition-colors">
                       {event.title}
                     </h4>
-                    <p className="text-gray-700 text-sm md:text-base mt-1 line-clamp-2">
+                    <p className="text-gray-600 text-sm mt-1 line-clamp-2">
                       {event.desc}
                     </p>
                   </div>
                 </div>
               ))}
 
-              {/* CTA */}
-              <div className="pt-4">
+              {/* CTA Button */}
+              <div className="flex justify-end pt-2">
                 <a
                   href="/calendar"
                   className="
-                  inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-semibold 
-                  rounded-full shadow-lg hover:bg-primary/90 hover:shadow-xl 
-                  transition-all duration-300 hover:scale-[1.02] active:scale-95
-                  border-2 border-white/20 hover:border-white/40
-                "
+        inline-flex items-center gap-2 px-5 py-2 bg-white text-primary font-semibold 
+        rounded-full border-2 border-transparent shadow-sm
+        hover:bg-transparent hover:text-white hover:border-white
+        transition-all duration-200
+      "
                 >
                   View Full Calendar
-                  <FaArrowRight className="text-lg" />
+                  <FaArrowRight className="text-sm" />
                 </a>
               </div>
             </div>
+
 
             {/* Spotlight Slideshow - now much more prominent */}
             <div className="lg:sticky lg:top-8">
@@ -1006,20 +1012,21 @@ function SpotlightSlideshow() {
   const spotlightData = [
     {
       image: galleryImages[11],
-      title: "Frosty Lane",
-      description: "Snow-filled evenings with lights, music & nightly parades at 7 PM. Free parking.",
+      title: "Winter Film Festival",
+      description: "Catch indie films and documentaries at the downtown theater from 6 PM nightly. Tickets available online.",
     },
     {
       image: galleryImages[12],
-      title: "Sunny Shores",
-      description: "Live music, beach games, and golden-hour bonfires every evening.",
+      title: "Valentine’s Craft Fair",
+      description: "Local artisans showcase handmade gifts, flowers, and sweets at the city hall plaza all weekend.",
     },
     {
       image: galleryImages[13],
-      title: "Mystic Trails",
-      description: "Guided enchanted forest hikes & storytelling under a blanket of stars.",
+      title: "Community Charity Run",
+      description: "5K run through the park to raise funds for local shelters. Registration starts at 8 AM.",
     },
   ];
+
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
