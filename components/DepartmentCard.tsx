@@ -1,3 +1,5 @@
+'use client';
+
 interface DepartmentCardProps {
   title: string;
   description: string;

@@ -16,9 +16,9 @@ const config: Config = {
          Font Families
       ========================= */
       fontFamily: {
-        playfair: ["Playfair Display", "serif"],
-        display: ["Playfair Display", "serif"],
-        nunito: ['"Nunito Sans"', "sans-serif"],
+        playfair: ["var(--font-playfair)", "serif"],
+        display: ["var(--font-playfair)", "serif"],
+        nunito: ["var(--font-nunito)", "sans-serif"],
       },
 
       /* =========================
