@@ -23,6 +23,10 @@ export default function ResourceCard({
             whileHover={{ y: -4 }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
+            drag
+            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+            dragElastic={0.1}
+            whileDrag={{ scale: 1.03, zIndex: 10 }}
         >
             {/* Image Header */}
             <div className="relative h-48 w-full overflow-hidden">

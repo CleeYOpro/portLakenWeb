@@ -129,8 +129,8 @@ function ResourceDirectoryContent() {
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
 
-          {/* Left Sidebar (Filters) */}
-          <aside className="w-full lg:w-1/4 flex-shrink-0 space-y-8 sticky top-36 h-fit">
+          {/* Left Sidebar (Filters) - Hidden on mobile */}
+          <aside className="w-full lg:w-1/4 flex-shrink-0 space-y-8 sticky top-36 h-fit hidden md:block">
             <div className="bg-white p-6 rounded-3xl border border-port-mist shadow-sm">
               <div className="mb-6 border-b border-port-mist pb-4">
                 <h2 className="font-display text-xl font-bold text-port-navy">Filters</h2>
@@ -189,8 +189,8 @@ function ResourceDirectoryContent() {
             </div>
           </aside>
 
-          {/* Right Main Content */}
-          <main className="w-full lg:w-3/4">
+          {/* Right Main Content - Full width on mobile, 3 column grid on mobile */}
+          <main className="w-full md:w-3/4">
             {/* AI Overview */}
             <div className="mb-8">
               <AIOverview
@@ -206,12 +206,12 @@ function ResourceDirectoryContent() {
               <span className="text-sm text-port-slate">resources</span>
             </div>
 
-            {/* Grid */}
+            {/* Grid - Changed to 1 column on mobile, 3 on desktop */}
             <Reorder.Group
               axis="y"
               onReorder={setFilteredResources}
               values={filteredResources}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 bg-white p-4 md:p-6 rounded-3xl"
               as="ul"
             >
               {filteredResources.map((resource) => (
