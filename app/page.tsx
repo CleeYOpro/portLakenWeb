@@ -466,7 +466,7 @@ export default function Home() {
 
       {/* Port Laken Calendar Spotlight - Themed Version */}
       <section
-        className="relative py-16 md:py-20 lg:py-24 px-5 sm:px-8 md:px-12 lg:px-16 overflow-hidden"
+        className="relative py-16 md:py-20 lg:py-24 px-5 sm:px-8 md:px-12 lg:px-16 overflow-hidden rounded-b-[40px]"
         style={{
           backgroundColor: 'var(--color-primary)',
         }}
@@ -476,9 +476,10 @@ export default function Home() {
         <div className="relative z-10 max-w-7xl mx-auto">
           {/* Header */}
           <div className="max-w-3xl mb-12 md:mb-16">
-            <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight drop-shadow-xl">
-              See What’s <em className="not-italic text-primary">Next</em>
+            <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight drop-shadow-xl">
+              See What’s <em className="italic font-bold text-white">Next</em>
             </h2>
+
             <p className="mt-5 text-lg sm:text-xl text-white/90 max-w-2xl leading-relaxed">
               Discover upcoming events, holidays, markets, and community moments in Port Laken.
               Stay in the know — never miss what’s happening next!
@@ -524,9 +525,9 @@ export default function Home() {
                 <a
                   href="/calendar"
                   className="
-        inline-flex items-center gap-2 px-5 py-2 bg-white text-primary font-semibold 
-        rounded-full border-2 border-transparent shadow-sm
-        hover:bg-transparent hover:text-white hover:border-white
+        inline-flex items-center gap-2 px-5 py-2 text-white font-semibold 
+        rounded-full border-2 border-white shadow-sm
+        hover:bg-white hover:text-primary
         transition-all duration-200
       "
                 >

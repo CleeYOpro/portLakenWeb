@@ -92,8 +92,8 @@ const Masonry: React.FC<MasonryProps> = ({
   colorShiftOnHover = false
 }) => {
   const columns = useMedia(
-    ['(min-width:1500px)', '(min-width:1000px)', '(min-width:600px)', '(min-width:400px)'],
-    [5, 4, 3, 2],
+    ['(min-width:1500px)', '(min-width:1000px)', '(min-width:600px)', '(min-width:400px)', '(max-width:399px)'],
+    [5, 4, 3, 2, 1], // Show 1 column on screens smaller than 400px
     1
   );
 
@@ -136,14 +136,17 @@ const Masonry: React.FC<MasonryProps> = ({
   const grid = useMemo<GridItem[]>(() => {
     if (!width) return [];
     const colHeights = new Array(columns).fill(0);
-    const gap = 16;
+    // Reduce gap on smaller screens for better mobile experience
+    const gap = width < 400 ? 8 : 16;
     const totalGaps = (columns - 1) * gap;
     const columnWidth = (width - totalGaps) / columns;
 
     return items.map(child => {
       const col = colHeights.indexOf(Math.min(...colHeights));
       const x = col * (columnWidth + gap);
-      const height = child.height / 2;
+      // Reduce image height on smaller screens to make them more compact
+      const heightFactor = width < 400 ? 0.7 : width < 600 ? 0.85 : 0.5;
+      const height = child.height * heightFactor;
       const y = colHeights[col];
 
       colHeights[col] += height + gap;
