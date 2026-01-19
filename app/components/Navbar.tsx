@@ -79,7 +79,7 @@ export default function Navbar() {
               >
                 <DropdownLink href="/living-in-portlaken" label="Life" />
                 <DropdownLink href="/forms" label="Forms & Applications" />
-                <DropdownLink href="/employment" label="Employment" />
+                <DropdownLink href="/careers" label="Employment" />
               </NavDropdown>
 
               <NavLink href="/departments" label="Departments" />
@@ -175,7 +175,7 @@ export default function Navbar() {
             <MobileDropdown label="Residents">
               <MobileLink href="/living-in-portlaken" label="Life" onClick={() => setMobileMenuOpen(false)} />
               <MobileLink href="/forms" label="Forms & Applications" onClick={() => setMobileMenuOpen(false)} />
-              <MobileLink href="/employment" label="Employment" onClick={() => setMobileMenuOpen(false)} />
+              <MobileLink href="/careers" label="Employment" onClick={() => setMobileMenuOpen(false)} />
             </MobileDropdown>
 
             <MobileNavLink href="/departments" label="Departments" onClick={() => setMobileMenuOpen(false)} />
