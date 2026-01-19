@@ -2,23 +2,13 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import {
-  FaTwitter,
-  FaInstagram,
-  FaEnvelope,
-  FaArrowRight,
-  FaHospital,
-  FaChild,
-  FaHandsHelping,
-} from "react-icons/fa";
-import { GiWaves, GiTreeGrowth } from "react-icons/gi";
 import { IoMdAlert } from "react-icons/io";
 import { HiDocumentText } from "react-icons/hi";
 import { MdPayment } from "react-icons/md";
 import { FaBus } from "react-icons/fa";
 import { Footer } from "./components/Footer";
-import SpotlightCard from "@/components/ui/spotlight-card";
 import Masonry from "@/components/ui/Masonry";
+import { FaArrowRight } from 'react-icons/fa6';
 
 // Gallery Images
 const galleryImages = [
@@ -38,7 +28,28 @@ const galleryImages = [
   "https://cdn.pixabay.com/photo/2021/12/28/10/57/couple-6898971_640.jpg",
   "https://cdn.pixabay.com/photo/2021/12/28/10/57/couple-6898971_640.jpg",
 ];
-
+const upcomingEvents = [
+  {
+    month: 'NOV',
+    day: '11',
+    title: 'Veterans Day',
+    desc: 'City Hall offices closed',
+    isHoliday: true,
+  },
+  {
+    month: 'NOV',
+    day: '12',
+    title: 'Meet & Green',
+    desc: 'Community meet-up at the lakefront',
+  },
+  {
+    month: 'NOV',
+    day: '27',
+    title: 'Thanksgiving Day',
+    desc: 'City Hall offices closed',
+    isHoliday: true,
+  },
+];
 const heroSlides = [
   {
     id: 1,
@@ -188,6 +199,8 @@ export default function Home() {
                           <a
                             href={slide.buttonLink}
                             className="bg-white hover:bg-primary/90 hover:text-white text-primary transition-all px-6 py-3 rounded-full font-medium text-base shadow-lg flex items-center gap-2 whitespace-nowrap border border-white/20"
+                            onMouseEnter={() => setPaused(true)}
+                            onMouseLeave={() => setPaused(false)}
                           >
                             {slide.buttonText}
                             <FaArrowRight className="text-sm" />
@@ -353,171 +366,173 @@ export default function Home() {
       <PortLakenServicesSection galleryImages={galleryImages} />
 
       {/* News Section */}
-      <section className="relative py-20 px-6 md:px-16 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+      <section className="relative py-16 px-6 md:px-12 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="mb-12">
-            <h2 className="font-playfair text-4xl md:text-6xl font-extrabold text-gray-900 mb-4">
+          <div className="mb-10 text-center md:text-left">
+            <h2 className="font-playfair text-4xl md:text-5xl font-extrabold text-gray-900 mb-3">
               WHAT&apos;S <span className="text-primary italic">HAPPENING</span> IN PORT LAKEN?
             </h2>
-            <p className="text-gray-600 text-lg md:text-xl">
-              Stories and updates from across the city this December.{' '}
+            <p className="text-gray-600 text-lg">
+              Fresh stories and winter updates from around the city this season.{' '}
               <a
                 href="/news"
-                className="text-black border-b-2 border-transparent hover:border-primary hover:text-primary">
+                className="text-black border-b-2 border-transparent hover:border-primary hover:text-primary transition-colors"
+              >
                 Read All News →
               </a>
             </p>
-
           </div>
 
-          {/* News Grid */}
-          <div className="space-y-16">
+          {/* News Grid - Compressed */}
+          <div className="space-y-8">
             {[
               {
-                date: "DEC 1, 2025",
-                title: "Frosty Lane Lights Up Downtown",
-                desc: "Downtown Port Laken kicks off the season with nightly parades, lights, and music. Join us for free skating, hot cocoa, and festive entertainment for the whole family.",
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4zKfRQ2XFUvpJRK9uhsvCOl5bwSBQWJRWPA&s",
+                date: "JAN 19, 2026",
+                title: "MLK Day Service & Community Glow",
+                desc: "Port Laken honors the legacy with a special MLK Day event at the waterfront park, featuring community service, live music, and glowing lantern displays.",
+                image: "https://images.unsplash.com/photo-1540979388789-7cee28a1cdc9?auto=format&fit=crop&q=80",
               },
               {
-                date: "DEC 8, 2025",
-                title: "Winter Market Returns to Harbor Plaza",
-                desc: "Local artisans and food trucks bring festive cheer to Harbor Plaza every weekend. Shop handmade gifts, enjoy live music, and support local businesses.",
-                image: "https://res.cloudinary.com/traveltripperweb/image/upload/c_limit,f_auto,h_2500,q_auto,w_2500/v1736299824/d5qijxqom1kdbx31ie9u.jpg",
+                date: "JAN 25, 2026",
+                title: "Coastal Winter Market Lights Up Harbor",
+                desc: "The Winter Market returns to Harbor Plaza with local artisans, warm food trucks, craft drinks, and waterfront lights.",
+                image: "https://images.unsplash.com/photo-1519167758481-83f269a90c33?auto=format&fit=crop&q=80",
               },
               {
-                date: "DEC 15, 2025",
-                title: "City Hall Announces 2026 Projects",
-                desc: "From green spaces to public safety, see what's ahead for Port Laken's growth. Mayor Johnson unveils ambitious plans for sustainable development and community enhancement.",
-                image: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Colorado_Springs_City_Hall_by_David_Shankbone.jpg",
+                date: "FEB 10, 2026",
+                title: "City Unveils 2026 Sustainability Vision",
+                desc: "Mayor Johnson outlines new green spaces, waterfront upgrades, and eco-friendly public projects.",
+                image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&q=80",
               },
             ].map((item, i) => (
-              <div
-                key={i}
-                className="group cursor-pointer"
-              >
-                <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+              <div key={i} className="group cursor-pointer">
+                <div className="grid md:grid-cols-2 gap-4 md:gap-6 items-center">
                   {/* Image */}
                   <div className={`relative ${i % 2 === 0 ? 'md:order-1' : 'md:order-2'}`}>
-                    <div className="relative h-80 rounded-[40px] overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-[1.05] bg-gray-200">
+                    <div className="relative h-44 md:h-52 rounded-2xl overflow-hidden shadow-md group-hover:shadow-lg transition">
                       <Image
                         src={item.image}
                         alt={item.title}
                         fill
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-cover"
-                        onError={(e) => {
-                          console.error('Image failed to load:', item.image);
-                          e.currentTarget.style.display = 'none';
-                        }}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      {/* Decorative gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     </div>
                   </div>
 
                   {/* Content */}
                   <div className={`${i % 2 === 0 ? 'md:order-2' : 'md:order-1'}`}>
-                    <p className="text-primary text-sm font-bold tracking-wider mb-3 group-hover:text-primary/80 transition-colors duration-300">
+                    <p className="text-primary text-xs font-semibold tracking-wide mb-1">
                       {item.date}
                     </p>
-                    <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors duration-300 font-playfair">
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 font-playfair">
                       {item.title}
                     </h3>
-                    <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                    <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-3">
                       {item.desc}
                     </p>
                     <a
                       href="#"
-                      className="inline-flex items-center gap-2 text-primary font-semibold text-lg hover:gap-4 transition-all duration-300 group-hover:translate-x-2"
+                      className="inline-flex items-center gap-1.5 text-primary text-sm font-semibold transition group-hover:translate-x-1"
                     >
-                      Read Full Story
-                      <FaArrowRight className="text-sm" />
+                      Read Story
+                      <FaArrowRight className="text-xs" />
                     </a>
                   </div>
                 </div>
 
-                {/* Divider */}
                 {i < 2 && (
-                  <div className="mt-16 w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+                  <div className="mt-8 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
                 )}
               </div>
             ))}
           </div>
+
         </div>
       </section>
+
       {/* Port Laken Calendar Spotlight - Themed Version */}
       <section
-        className="relative py-16 px-4 md:px-12 lg:px-20 flex justify-center items-center overflow-hidden rounded-b-[40px]"
+        className="relative py-16 md:py-20 lg:py-24 px-5 sm:px-8 md:px-12 lg:px-16 overflow-hidden"
         style={{
           backgroundImage: "url('/huron.png')",
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center 30%',
+          backgroundAttachment: 'fixed',
         }}
       >
-        <div className="absolute inset-0 bg-black/40 md:bg-black/50 z-0"></div>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/55 to-black/70" />
 
-        <div className="max-w-6xl w-full mx-auto relative z-10">
-          {/* Title + Divider */}
-          <div className="mb-10">
-              <h2 className="font-playfair text-5xl md:text-6xl font-extrabold text-white text-left tracking-tight drop-shadow-lg">
-              <span className="text-primary">
-                See What’s <em className="italic">Next</em>
-              </span>
+        <div className="relative z-10 max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="max-w-3xl mb-12 md:mb-16">
+            <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight drop-shadow-xl">
+              See What’s <em className="not-italic text-primary">Next</em>
             </h2>
-            <p className="text-white/90 text-left mt-3 text-lg md:text-xl max-w-2xl">
-              Discover all the events, holidays, and community gatherings happening in Port Laken. Stay connected and never miss out on what’s coming up next!
+            <p className="mt-5 text-lg sm:text-xl text-white/90 max-w-2xl leading-relaxed">
+              Discover upcoming events, holidays, markets, and community moments in Port Laken.
+              Stay in the know — never miss what’s happening next!
             </p>
-            <div className="w-full h-1 bg-white rounded-full mt-6"></div>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start justify-between">
-            {/* Event Cards - Improved Design */}
-            <div className="flex-1 flex flex-col gap-5 w-full md:w-auto">
-              {[
-                { month: 'NOV', day: '11', title: 'Veterans Day - City Hall Offices Closed', desc: 'City Hall offices closed' },
-                { month: 'NOV', day: '12', title: 'Meet and Green', desc: 'Community meet-up' },
-                { month: 'NOV', day: '27', title: 'Thanksgiving Day - City Hall Offices Closed', desc: 'City Hall offices closed' },
-              ].map((event, idx) => (
+          {/* Main content - grid layout */}
+          <div className="grid lg:grid-cols-2 gap-10 xl:gap-14 items-start">
+            {/* Events Column */}
+            <div className="space-y-6">
+              {upcomingEvents.map((event, idx) => (
                 <div
                   key={idx}
-                  className="group flex items-center bg-white rounded-3xl px-6 py-5 shadow-md border border-primary/20 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:border-primary"
-                  style={{ cursor: 'pointer' }}
+                  className={`
+                  group flex items-center gap-5 p-5 md:p-6 bg-white/95 backdrop-blur-sm 
+                  rounded-2xl border border-white/30 shadow-lg transition-all duration-300
+                  hover:shadow-xl hover:-translate-y-1 hover:border-primary/40
+                  ${event.isHoliday ? 'border-l-4 border-l-amber-500' : ''}
+                `}
                 >
-                  {/* Date Pill */}
-                  <div className="flex flex-col items-center justify-center mr-5 bg-primary rounded-full w-16 h-16 shadow-sm transition-all duration-300 group-hover:bg-primary/90">
-                    <span className="text-white font-bold text-xs leading-none tracking-wide">
-                      {event.month}
-                    </span>
-                    <span className="text-white text-2xl font-bold leading-none">
-                      {event.day}
-                    </span>
+                  <div
+                    className={`
+                    flex-shrink-0 flex flex-col items-center justify-center w-20 h-20 
+                    rounded-2xl font-bold text-white shadow-md
+                    ${event.isHoliday ? 'bg-amber-600' : 'bg-primary'}
+                  `}
+                  >
+                    <span className="text-xs tracking-wider uppercase">{event.month}</span>
+                    <span className="text-3xl">{event.day}</span>
                   </div>
-                  <div>
-                    <h4 className="font-bold text-lg text-black mb-1 group-hover:text-primary transition-colors duration-300">{event.title}</h4>
-                    <p className="text-sm text-gray-700">{event.desc}</p>
+
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-bold text-lg md:text-xl text-gray-900 group-hover:text-primary transition-colors">
+                      {event.title}
+                    </h4>
+                    <p className="text-gray-700 text-sm md:text-base mt-1 line-clamp-2">
+                      {event.desc}
+                    </p>
                   </div>
                 </div>
               ))}
 
-              {/* View Full Calendar Button */}
-              <div className="flex justify-end mt-6">
+              {/* CTA */}
+              <div className="pt-4">
                 <a
-                  href="#"
-                  className="inline-flex items-center gap-2 bg-primary text-white font-medium px-6 py-3 rounded-full border-2 border-primary 
-               transition-all duration-300 hover:bg-white hover:text-primary hover:border-4 hover:shadow-lg hover:scale-105"
+                  href="/calendar"
+                  className="
+                  inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-semibold 
+                  rounded-full shadow-lg hover:bg-primary/90 hover:shadow-xl 
+                  transition-all duration-300 hover:scale-[1.02] active:scale-95
+                  border-2 border-white/20 hover:border-white/40
+                "
                 >
-                  VIEW FULL CALENDAR
-                  <FaArrowRight className="text-sm transition-colors duration-300 group-hover:text-primary" />
+                  View Full Calendar
+                  <FaArrowRight className="text-lg" />
                 </a>
               </div>
-
             </div>
 
-            {/* Spotlight Slideshow */}
-            <div className="w-full md:w-auto md:flex-1">
+            {/* Spotlight Slideshow - now much more prominent */}
+            <div className="lg:sticky lg:top-8">
               <SpotlightSlideshow />
             </div>
           </div>
@@ -683,7 +698,7 @@ export default function Home() {
           </div>
 
           {/* Masonry Grid */}
-          <div className="w-full" style={{ height: '1000px' }}>
+          <div className="w-full" style={{ height: 'auto', minHeight: '1000px' }}>
             <Masonry
               items={galleryImages.map((img, index) => ({
                 id: `${index + 1}`,
@@ -705,72 +720,72 @@ export default function Home() {
       </section>
 
       {/* Newsletter Signup */}
-<section className="relative py-20 px-6 md:px-20 overflow-hidden">
-  {/* Optional subtle background accent */}
-  <div className="absolute inset-0 -z-10">
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-primary-shade/3 rounded-full blur-3xl"></div>
-  </div>
+      <section className="relative py-20 px-6 md:px-20 overflow-hidden">
+        {/* Optional subtle background accent */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-primary-shade/3 rounded-full blur-3xl"></div>
+        </div>
 
-  <div className="max-w-6xl mx-auto">
-    <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
-      {/* Left: Heading */}
-      <div className="space-y-4">
-        <h3 className="font-playfair text-4xl md:text-5xl font-bold text-primary-shade leading-tight tracking-tight">
-          <span className="italic">Stay in the loop.</span> Port Laken’s latest stories, creative highlights, and the people shaping our city’s future.</h3>
-        <p className="text-primary-shade/70 text-sm font-light tracking-wide hover:text-primary-shade/90 transition-colors duration-300">
-          yoooooooooooooooooooooooooooooooooooooooooooo
-        </p>
-      </div>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
+            {/* Left: Heading */}
+            <div className="space-y-4">
+              <h3 className="font-playfair text-4xl md:text-5xl font-bold text-primary-shade leading-tight tracking-tight">
+                <span className="italic">Stay in the loop.</span> Port Laken’s latest stories, creative highlights, and the people shaping our city’s future.</h3>
+              <p className="text-primary-shade/70 text-sm font-light tracking-wide hover:text-primary-shade/90 transition-colors duration-300">
+                Subscribe for weekly updates on events and news in Port Laken
+              </p>
+            </div>
 
-      {/* Right: Form */}
-      <div>
-        <form className="space-y-8">
-          {/* First Name */}
-          <div className="relative group">
-            <input
-              type="text"
-              placeholder="First name*"
-              required
-              className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
-            />
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
+            {/* Right: Form */}
+            <div>
+              <form className="space-y-8" onSubmit={(e) => { e.preventDefault(); alert('Form submitted!'); }}>
+                {/* First Name */}
+                <div className="relative group">
+                  <input
+                    type="text"
+                    placeholder="First name*"
+                    required
+                    className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
+                  />
+                  <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
+                </div>
+
+                {/* Last Name */}
+                <div className="relative group">
+                  <input
+                    type="text"
+                    placeholder="Last name*"
+                    required
+                    className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
+                  />
+                  <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
+                </div>
+
+                {/* Email */}
+                <div className="relative group">
+                  <input
+                    type="email"
+                    placeholder="Email*"
+                    required
+                    className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
+                  />
+                  <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  className="group relative inline-flex items-center justify-center px-10 py-3.5 border-2 border-primary-shade text-primary-shade font-medium rounded-full overflow-hidden transition-all duration-300 hover:text-white hover:shadow-xl hover:-translate-y-0.5 active:scale-95"
+                >
+                  <span className="relative z-10 tracking-wider">Submit</span>
+                  <div className="absolute inset-0 bg-primary-shade translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
+                </button>
+              </form>
+            </div>
           </div>
-
-          {/* Last Name */}
-          <div className="relative group">
-            <input
-              type="text"
-              placeholder="Last name*"
-              required
-              className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
-            />
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
-          </div>
-
-          {/* Email */}
-          <div className="relative group">
-            <input
-              type="email"
-              placeholder="Email*"
-              required
-              className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
-            />
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
-          </div>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="group relative inline-flex items-center justify-center px-10 py-3.5 border-2 border-primary-shade text-primary-shade font-medium rounded-full overflow-hidden transition-all duration-300 hover:text-white hover:shadow-xl hover:-translate-y-0.5 active:scale-95"
-          >
-            <span className="relative z-10 tracking-wider">Submit</span>
-            <div className="absolute inset-0 bg-primary-shade translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
+        </div>
+      </section>
 
     </main>
   );
@@ -784,24 +799,28 @@ function PortLakenServicesSection({ galleryImages }) {
       title: "HarborView Medical Center",
       description:
         "Comprehensive care from emergency to wellness — the backbone of Port Laken's health network.",
+      resourceId: "1",
     },
     {
       image: galleryImages[2],
       title: "Mountains to Sound Greenway",
       description:
         "Protected trails, restoration projects, and outdoor access connecting people to nature.",
+      resourceId: "32",
     },
     {
       image: galleryImages[3],
       title: "Crisis Support Network",
       description:
         "24/7 crisis line, recovery support, and outreach services for all ages.",
+      resourceId: "5",
     },
     {
       image: galleryImages[4],
       title: "BrightSteps Childcare",
       description:
         "Safe, nurturing early education spaces supporting families and young learners.",
+      resourceId: "7",
     },
   ];
 
@@ -858,7 +877,7 @@ function PortLakenServicesSection({ galleryImages }) {
               {services.map((service, i) => {
                 const offset = (i - active + services.length) % services.length;
                 let position = offset;
-                
+
                 // Convert to -1, 0, 1 (left, center, right)
                 if (position > 1) position -= services.length;
 
@@ -923,7 +942,7 @@ function PortLakenServicesSection({ galleryImages }) {
                           {service.description}
                         </p>
                         <a
-                          href="#"
+                          href={`/resource-directory?resourceId=${service.resourceId}`}
                           className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition pointer-events-auto"
                         >
                           More Info →
@@ -969,9 +988,8 @@ function PortLakenServicesSection({ galleryImages }) {
               <button
                 key={i}
                 onClick={() => setActive(i)}
-                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                  i === active ? 'bg-white w-6' : 'bg-white/40 w-2.5 hover:bg-white/60'
-                }`}
+                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${i === active ? 'bg-white w-6' : 'bg-white/40 w-2.5 hover:bg-white/60'
+                  }`}
                 aria-label={`Go to service ${i + 1}`}
                 aria-current={i === active ? 'true' : 'false'}
               />
@@ -989,53 +1007,78 @@ function SpotlightSlideshow() {
     {
       image: galleryImages[11],
       title: "Frosty Lane",
-      description:
-        "Enjoy snow, lights, music, and nightly parades at 7 PM. Free parking and fun for everyone.",
+      description: "Snow-filled evenings with lights, music & nightly parades at 7 PM. Free parking.",
     },
     {
       image: galleryImages[12],
       title: "Sunny Shores",
-      description:
-        "Relax with live music, beach games, and sunset bonfires every evening.",
+      description: "Live music, beach games, and golden-hour bonfires every evening.",
     },
     {
       image: galleryImages[13],
       title: "Mystic Trails",
-      description:
-        "Explore enchanted forests with guided hikes and storytelling under the stars.",
+      description: "Guided enchanted forest hikes & storytelling under a blanket of stars.",
     },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % spotlightData.length);
-    }, 5000); // Change every 5 seconds
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % spotlightData.length);
+        setIsAnimating(false);
+      }, 600); // match transition duration
+    }, 5200);
+
     return () => clearInterval(interval);
-  }, [spotlightData.length]);
+  }, []);
 
   const { image, title, description } = spotlightData[currentIndex];
 
   return (
-    <div className="flex-1 flex flex-col items-center md:items-start md:ml-0 w-full md:w-auto h-full">
-      <div className="relative w-full sm:max-w-[480px] aspect-[4/3] md:aspect-auto md:max-h-[640px] rounded-3xl overflow-hidden shadow-xl bg-primary/30 border border-white/30 flex items-end min-h-[220px] md:mx-0 mx-auto transition-all duration-700 ease-in-out h-full">
-        <Image
-          key={image}
-          src={image}
-          alt={title}
-          fill
-          sizes="(max-width: 768px) 100vw, 40vw"
-          className="object-cover transition-opacity duration-700 ease-in-out"
-        />
-        <div className="absolute bottom-0 left-0 w-full bg-white/90 px-6 py-4 rounded-b-3xl">
-          <h3 className="font-bold text-lg text-primary transition-all duration-500">
-            {title}
-          </h3>
-          <p className="text-gray-700 text-sm transition-all duration-500">
-            {description}
-          </p>
-        </div>
+    <div className="relative w-full aspect-[4/3] sm:aspect-[5/4] md:aspect-[4/5] lg:aspect-[3/4] max-h-[580px] rounded-3xl overflow-hidden shadow-2xl">
+      <Image
+        src={image}
+        alt={title}
+        fill
+        className={`object-cover transition-all duration-700 ease-out ${isAnimating ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
+          }`}
+        priority={currentIndex === 0}
+      />
+
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+
+      {/* Content */}
+      <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white z-10 transform transition-all duration-700">
+        <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-2 drop-shadow-md">
+          {title}
+        </h3>
+        <p className="text-base md:text-lg text-white/90 max-w-md drop-shadow-sm">
+          {description}
+        </p>
+      </div>
+
+      {/* Dots indicator */}
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2.5 z-20">
+        {spotlightData.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => {
+              setIsAnimating(true);
+              setTimeout(() => {
+                setCurrentIndex(idx);
+                setIsAnimating(false);
+              }, 400);
+            }}
+            className={`w-2.5 h-2.5 rounded-full transition-all duration-400 ${idx === currentIndex ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/80'
+              }`}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
       </div>
     </div>
   );
@@ -1270,11 +1313,10 @@ function ServicesCarousel({ services }: { services: ServiceItem[] }) {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              index === currentIndex
-                ? "bg-white w-8"
-                : "bg-white/40 w-2 hover:bg-white/60"
-            }`}
+            className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex
+              ? "bg-white w-8"
+              : "bg-white/40 w-2 hover:bg-white/60"
+              }`}
             aria-label={`Go to service ${index + 1}`}
             aria-current={index === currentIndex ? "true" : "false"}
           />
