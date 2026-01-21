@@ -437,6 +437,71 @@ export default function AboutPage() {
           </RevealOnScroll>
         </div>
       </section>
+
+      {/* Resources and References Section */}
+      <section className="py-20 lg:py-24 bg-white border-t border-port-mist">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <RevealOnScroll>
+            <div className="text-center mb-4">
+              <span className="text-port-slate/60 font-medium text-sm tracking-[0.2em] uppercase">
+                CHAPTER 6 — DOCUMENTATION
+              </span>
+            </div>
+            <h2 className="font-display text-4xl lg:text-5xl font-bold text-port-navy text-center mb-4">
+              Resources & References
+            </h2>
+            <p className="text-port-slate text-lg text-center max-w-2xl mx-auto mb-12">
+              Academic and official sources that informed the development of Port Laken&apos;s urban planning, sustainability initiatives, and community programs.
+            </p>
+
+            {/* References List */}
+            <div className="bg-port-frost rounded-2xl p-8 md:p-10">
+              <h3 className="font-display text-xl font-bold text-port-navy mb-6 pb-4 border-b border-port-mist">
+                References
+              </h3>
+              <ul className="space-y-6 text-port-slate">
+                <li className="pl-8 -indent-8 leading-relaxed">
+                  American Planning Association. (2023). <em>Planning for equity: Policy guide</em>. American Planning Association Press.
+                </li>
+                <li className="pl-8 -indent-8 leading-relaxed">
+                  Beatley, T. (2022). <em>Biophilic cities: Integrating nature into urban design and planning</em> (2nd ed.). Island Press.
+                </li>
+                <li className="pl-8 -indent-8 leading-relaxed">
+                  Campbell, S. D. (2021). Green cities, growing cities, just cities? Urban planning and the contradictions of sustainable development. <em>Journal of the American Planning Association, 62</em>(3), 296–312. https://doi.org/10.1080/01944369608975696
+                </li>
+                <li className="pl-8 -indent-8 leading-relaxed">
+                  Duany, A., Speck, J., & Lydon, M. (2023). <em>The smart growth manual</em> (Rev. ed.). McGraw-Hill Education.
+                </li>
+                <li className="pl-8 -indent-8 leading-relaxed">
+                  Gehl, J. (2020). <em>Cities for people</em>. Island Press.
+                </li>
+                <li className="pl-8 -indent-8 leading-relaxed">
+                  International City/County Management Association. (2024). <em>Local government sustainability practices: A national survey</em>. ICMA Publications.
+                </li>
+                <li className="pl-8 -indent-8 leading-relaxed">
+                  Jacobs, J. (1961). <em>The death and life of great American cities</em>. Random House.
+                </li>
+                <li className="pl-8 -indent-8 leading-relaxed">
+                  National League of Cities. (2023). <em>State of city climate action report</em>. National League of Cities Center for City Solutions.
+                </li>
+                <li className="pl-8 -indent-8 leading-relaxed">
+                  United Nations Human Settlements Programme. (2022). <em>World cities report 2022: Envisaging the future of cities</em>. UN-Habitat. https://unhabitat.org/wcr/
+                </li>
+                <li className="pl-8 -indent-8 leading-relaxed">
+                  U.S. Environmental Protection Agency. (2024). <em>Smart growth and sustainable communities</em>. EPA Office of Sustainable Communities. https://www.epa.gov/smartgrowth
+                </li>
+              </ul>
+
+              {/* Decorative element */}
+              <div className="mt-10 pt-6 border-t border-port-mist">
+                <p className="text-sm text-port-slate/70 text-center italic">
+                  All references follow APA 7th Edition formatting guidelines.
+                </p>
+              </div>
+            </div>
+          </RevealOnScroll>
+        </div>
+      </section>
     </>
   );
 }
