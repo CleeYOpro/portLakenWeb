@@ -56,34 +56,74 @@ const imageCredits = [
   {
     category: "City & Architecture",
     sources: [
-      { name: "City skyline aerial view", source: "Unsplash", photographer: "Various Contributors", license: "Unsplash License" },
-      { name: "Historic downtown buildings", source: "Unsplash", photographer: "Various Contributors", license: "Unsplash License" },
-      { name: "City Hall exterior", source: "Unsplash", photographer: "Various Contributors", license: "Unsplash License" },
-      { name: "Modern office buildings", source: "Unsplash", photographer: "Various Contributors", license: "Unsplash License" },
+      { title: "Dundee, Scotland: View of the City and River Tay from Dundee Law", url: "https://www.alamy.com/stock-photo/dundee-law-hill.html", source: "Alamy" },
+      { title: "Urban canal with buildings reflected in the water under a cloudy sky", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Foggy city street at night illuminated by streetlights", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Harbor boats at sunset with reflections on the water", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Boats on calm water with snow-capped mountains in the distance", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Aerial view of a large bridge spanning a body of water", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Rolling green hills under soft natural light", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Winding road cutting through green hills from an aerial view", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Moss-covered forest floor in a natural woodland setting", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Modern residential home exterior illuminated at night", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Bright modern kitchen interior in a residential home", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Abstract view of a modern building with curved architectural lines", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Model house with keys on a wooden surface representing home ownership", url: "https://unsplash.com", source: "Unsplash" },
     ],
   },
   {
     category: "Nature & Parks",
     sources: [
-      { name: "Waterfront and marina", source: "Unsplash", photographer: "Various Contributors", license: "Unsplash License" },
-      { name: "Community parks", source: "Unsplash", photographer: "Various Contributors", license: "Unsplash License" },
-      { name: "Sunset landscapes", source: "Unsplash", photographer: "Various Contributors", license: "Unsplash License" },
+      { title: "Hands holding soil and a small plant symbolizing environmental conservation", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Sunlight streaming through lush green forest", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Trees planted creating urban forests", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Wetland restoration area with natural habitat", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Solar panels and sustainable energy installation", url: "https://unsplash.com", source: "Unsplash" },
     ],
   },
   {
     category: "Community & Events",
     sources: [
-      { name: "Community gatherings", source: "Unsplash", photographer: "Various Contributors", license: "Unsplash License" },
-      { name: "Farmers market scenes", source: "Unsplash", photographer: "Various Contributors", license: "Unsplash License" },
-      { name: "Local business imagery", source: "Unsplash", photographer: "Various Contributors", license: "Unsplash License" },
+      { title: "Family recycling together using a blue curbside recycling bin", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Outdoor ice skating rink at night with winter holiday lights", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Family ice skating together at an outdoor rink", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Colorful fireworks display lighting up the night sky", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "People gathered at an outdoor community event with string lights", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Concert audience recording a live performance with a smartphone", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Colorful stage lights illuminating a concert crowd at night", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "People gathered around a table with assorted bottles", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Interior of a modern community center with open hallway and seating areas", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Child with painted face smiling outdoors", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Parents participating in a community parenting workshop", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Children participating in a youth recreation program", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Hands joined together in a circle symbolizing family support", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Group of people stacking hands to represent community support", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Two people walking together along a city street", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "People gathered near a bridge during golden hour", url: "https://unsplash.com", source: "Unsplash" },
     ],
   },
   {
-    category: "Sustainability",
+    category: "Healthcare & Services",
     sources: [
-      { name: "Solar panel installations", source: "Unsplash", photographer: "Various Contributors", license: "Unsplash License" },
-      { name: "Electric vehicle charging", source: "Unsplash", photographer: "Various Contributors", license: "Unsplash License" },
-      { name: "Green infrastructure", source: "Unsplash", photographer: "Various Contributors", license: "Unsplash License" },
+      { title: "Hospital reception area with medical signage and service counter", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Modern medical clinic interior designed for primary care services", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Dental clinic interior prepared for patient care", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Medical professionals in surgical attire viewed from below in an operating room", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Healthcare professional examining medical equipment in a clinical setting", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Healthcare professional using a mobile phone in a clinical setting", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Prepared meal ingredients arranged for community food service", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Simple kitchen setting representing community meal service", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Public transportation scene representing senior mobility services", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Judge's gavel on a marble surface representing legal services", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Bicycle leaning against a wall in an urban neighborhood", url: "https://unsplash.com", source: "Unsplash" },
+    ],
+  },
+  {
+    category: "Business & Technology",
+    sources: [
+      { title: "Group collaborating in an office with sticky notes on a wall", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Colleagues working together at a desk with laptops and documents", url: "https://unsplash.com", source: "Unsplash" },
+      { title: "Person using a smartphone beside a laptop computer", url: "https://unsplash.com", source: "Unsplash" },
     ],
   },
 ];
@@ -299,27 +339,33 @@ export default function ReferencesPage() {
                   >
                     <span className="font-bold text-port-navy">{category.category}</span>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm text-port-slate">{category.sources.length} items</span>
+                      <span className="text-sm text-port-sky">{category.sources.length} items</span>
                       {expandedCategory === category.category ? (
-                        <FaChevronUp className="text-port-slate" />
+                        <FaChevronUp className="text-port-sky" />
                       ) : (
-                        <FaChevronDown className="text-port-slate" />
+                        <FaChevronDown className="text-port-sky" />
                       )}
                     </div>
                   </button>
                   {expandedCategory === category.category && (
-                    <div className="px-6 pb-5 space-y-3">
-                      {category.sources.map((source, idx) => (
-                        <div key={idx} className="flex items-center justify-between py-2 border-b border-port-mist last:border-0">
-                          <div>
-                            <p className="text-port-navy text-sm font-medium">{source.name}</p>
-                            <p className="text-port-slate text-xs">{source.photographer}</p>
-                          </div>
-                          <span className="px-2 py-1 bg-white text-port-slate text-xs rounded-lg">
-                            {source.license}
-                          </span>
-                        </div>
-                      ))}
+                    <div className="px-6 pb-5 bg-white border-t border-port-mist">
+                      <ul className="space-y-4 pt-4">
+                        {category.sources.map((source, idx) => (
+                          <li key={idx} className="text-sm text-port-slate leading-relaxed">
+                            <span className="text-port-navy font-medium">Photographer unknown.</span>{" "}
+                            <em>&quot;{source.title}&quot;</em>. {source.source}.{" "}
+                            <a
+                              href={source.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-port-sky hover:underline break-all"
+                            >
+                              {source.url}
+                            </a>
+                            . Accessed 21 Jan. 2026.
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   )}
                 </div>
