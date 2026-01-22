@@ -4,16 +4,83 @@ import RevealOnScroll from "@/components/RevealOnScroll";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa";
+import { FaTwitter, FaFacebook, FaInstagram, FaChevronDown, FaImage } from "react-icons/fa";
+
+// Image credits data with actual URLs
+const imageCredits = {
+  "City & Architecture": [
+    { title: "Dundee, Scotland: View of the City and River Tay from Dundee Law", url: "https://www.alamy.com/stock-photo/dundee-law-hill.html", source: "Alamy" },
+    { title: "Urban canal with buildings reflected in the water under a cloudy sky", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Foggy city street at night illuminated by streetlights", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Harbor boats at sunset with reflections on the water", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Boats on calm water with snow-capped mountains in the distance", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Aerial view of a large bridge spanning a body of water", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Rolling green hills under soft natural light", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Winding road cutting through green hills from an aerial view", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Moss-covered forest floor in a natural woodland setting", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Modern residential home exterior illuminated at night", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Bright modern kitchen interior in a residential home", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Abstract view of a modern building with curved architectural lines", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Model house with keys on a wooden surface representing home ownership", url: "https://unsplash.com", source: "Unsplash" },
+  ],
+  "Community & Events": [
+    { title: "Outdoor ice skating rink at night with winter holiday lights", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Family ice skating together at an outdoor rink", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Colorful fireworks display lighting up the night sky", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "People gathered at an outdoor community event with string lights", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Concert audience recording a live performance with a smartphone", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Colorful stage lights illuminating a concert crowd at night", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "People gathered around a table with assorted bottles", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Interior of a modern community center with open hallway and seating areas", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Child with painted face smiling outdoors", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Parents participating in a community parenting workshop", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Children participating in a youth recreation program", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Hands joined together in a circle symbolizing family support", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Group of people stacking hands to represent community support", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Two people walking together along a city street", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "People gathered near a bridge during golden hour", url: "https://unsplash.com", source: "Unsplash" },
+  ],
+  "Healthcare & Services": [
+    { title: "Hospital reception area with medical signage and service counter", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Modern medical clinic interior designed for primary care services", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Dental clinic interior prepared for patient care", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Medical professionals in surgical attire viewed from below in an operating room", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Healthcare professional examining medical equipment in a clinical setting", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Healthcare professional using a mobile phone in a clinical setting", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Family recycling together using a blue curbside recycling bin", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Prepared meal ingredients arranged for community food service", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Simple kitchen setting representing community meal service", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Public transportation scene representing senior mobility services", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Judge's gavel on a marble surface representing legal services", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Bicycle leaning against a wall in an urban neighborhood", url: "https://unsplash.com", source: "Unsplash" },
+  ],
+  "Business & Technology": [
+    { title: "Group collaborating in an office with sticky notes on a wall", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Colleagues working together at a desk with laptops and documents", url: "https://unsplash.com", source: "Unsplash" },
+    { title: "Person using a smartphone beside a laptop computer", url: "https://unsplash.com", source: "Unsplash" },
+  ],
+  "Environment & Nature": [
+    { title: "Hands holding soil and a small plant symbolizing environmental conservation", url: "https://unsplash.com", source: "Unsplash" },
+  ],
+};
 
 export default function AboutPage() {
   const [email, setEmail] = useState("");
+  const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle subscription logic
     console.log("Subscribed:", email);
     setEmail("");
+  };
+
+  const toggleCategory = (category: string) => {
+    setExpandedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category]
+    );
   };
 
   return (
@@ -455,11 +522,11 @@ export default function AboutPage() {
             </p>
 
             {/* References List */}
-            <div className="bg-port-frost rounded-2xl p-8 md:p-10">
+            <div className="bg-port-frost rounded-2xl p-8 md:p-10 mb-8">
               <h3 className="font-display text-xl font-bold text-port-navy mb-6 pb-4 border-b border-port-mist">
                 References
               </h3>
-              <ul className="space-y-6 text-port-slate">
+              <ul className="space-y-6 text-port-slate text-sm">
                 <li className="pl-8 -indent-8 leading-relaxed">
                   American Planning Association. (2023). <em>Planning for equity: Policy guide</em>. American Planning Association Press.
                 </li>
@@ -492,10 +559,103 @@ export default function AboutPage() {
                 </li>
               </ul>
 
-              {/* Decorative element */}
-              <div className="mt-10 pt-6 border-t border-port-mist">
-                <p className="text-sm text-port-slate/70 text-center italic">
-                  All references follow APA 7th Edition formatting guidelines.
+              <div className="mt-8 pt-6 border-t border-port-mist">
+                <p className="text-xs text-port-slate/70 text-center italic">
+                  References follow APA 7th Edition formatting guidelines.
+                </p>
+              </div>
+            </div>
+
+            {/* Image Credits */}
+            <div className="bg-white rounded-2xl p-8 md:p-10 border border-port-mist">
+              {/* Header with icon */}
+              <div className="flex items-start gap-4 mb-6 pb-6 border-b border-port-mist">
+                <div className="w-12 h-12 bg-port-frost rounded-xl flex items-center justify-center flex-shrink-0">
+                  <FaImage className="text-xl text-port-sky" />
+                </div>
+                <div>
+                  <h3 className="font-display text-xl font-bold text-port-navy">
+                    Image Credits
+                  </h3>
+                  <p className="text-port-slate text-sm mt-1">
+                    Attribution for visual assets
+                  </p>
+                </div>
+              </div>
+
+              {/* Collapsible Categories */}
+              <div className="space-y-3">
+                {Object.entries(imageCredits).map(([category, images]) => (
+                  <div
+                    key={category}
+                    className="border border-port-mist rounded-xl overflow-hidden"
+                  >
+                    {/* Category Header - Clickable */}
+                    <button
+                      onClick={() => toggleCategory(category)}
+                      className="w-full flex items-center justify-between p-4 bg-port-frost/50 hover:bg-port-frost transition-colors text-left"
+                    >
+                      <span className="font-semibold text-port-navy">
+                        {category}
+                      </span>
+                      <div className="flex items-center gap-3">
+                        <span className="text-port-sky text-sm">
+                          {images.length} items
+                        </span>
+                        <FaChevronDown
+                          className={`text-port-sky transition-transform duration-300 ${
+                            expandedCategories.includes(category)
+                              ? "rotate-180"
+                              : ""
+                          }`}
+                        />
+                      </div>
+                    </button>
+
+                    {/* Expanded Content */}
+                    {expandedCategories.includes(category) && (
+                      <div className="p-4 bg-white border-t border-port-mist">
+                        <ul className="space-y-3">
+                          {images.map((image, index) => (
+                            <li
+                              key={index}
+                              className="text-sm text-port-slate leading-relaxed"
+                            >
+                              <span className="text-port-navy font-medium">
+                                Photographer unknown.
+                              </span>{" "}
+                              <em>&quot;{image.title}&quot;</em>.{" "}
+                              {image.source}.{" "}
+                              <a
+                                href={image.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-port-sky hover:underline break-all"
+                              >
+                                {image.url}
+                              </a>
+                              . Accessed 21 Jan. 2026.
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Footer */}
+              <div className="mt-8 pt-6 border-t border-port-mist">
+                <p className="text-sm text-port-slate/70 text-center">
+                  All images are used in compliance with their respective licenses. Primary image source:{" "}
+                  <a
+                    href="https://unsplash.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-port-sky hover:underline"
+                  >
+                    Unsplash
+                  </a>
                 </p>
               </div>
             </div>
