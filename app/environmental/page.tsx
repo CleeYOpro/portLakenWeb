@@ -2,40 +2,82 @@
 
 import { useState } from "react";
 import RevealOnScroll from "@/components/RevealOnScroll";
-import { FaRecycle, FaSolarPanel, FaWater, FaSeedling, FaLeaf, FaTree, FaArrowRight, FaTimes } from "react-icons/fa";
+import {
+  FaRecycle,
+  FaSolarPanel,
+  FaWater,
+  FaSeedling,
+  FaLeaf,
+  FaTree,
+  FaArrowRight,
+  FaTimes,
+  FaCalendarAlt,
+} from "react-icons/fa";
 import { GiTreeGrowth, GiWaterDrop, GiWindmill } from "react-icons/gi";
-import { IoEarth } from "react-icons/io5";
+import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import Link from "next/link";
 import Image from "next/image";
 
 const programs = [
   {
     title: "Recycling & Waste",
-    description: "Collection schedules, composting programs, and our zero-waste initiative reducing landfill impact by 40%.",
+    description:
+      "Learn about collection schedules, accepted materials, and our goals for reducing landfill waste.",
     icon: FaRecycle,
-    stat: "40%",
-    statLabel: "Waste Reduced"
+    color: "from-emerald-500 to-teal-600",
+    lightColor: "bg-emerald-50",
+    iconColor: "text-emerald-600",
   },
   {
     title: "Green Energy",
-    description: "Solar installations, wind power partnerships, and our commitment to 100% renewable energy by 2030.",
+    description:
+      "Explore our initiatives for solar power, energy conservation, and shifting to renewable sources.",
     icon: FaSolarPanel,
-    stat: "75%",
-    statLabel: "Clean Energy"
+    color: "from-amber-500 to-orange-600",
+    lightColor: "bg-amber-50",
+    iconColor: "text-amber-600",
   },
   {
-    title: "Water Conservation",
-    description: "Smart irrigation systems, stormwater management, and rainwater harvesting for a sustainable water future.",
+    title: "Water & Stormwater",
+    description:
+      "Find tips on water conservation, rain garden programs, and managing stormwater runoff.",
     icon: GiWaterDrop,
-    stat: "2M",
-    statLabel: "Gallons Saved"
+    color: "from-sky-500 to-blue-600",
+    lightColor: "bg-sky-50",
+    iconColor: "text-sky-600",
   },
   {
-    title: "Community Gardens",
-    description: "12 neighborhood gardens, urban farming workshops, and farm-to-table programs for local schools.",
+    title: "Sustainability Programs",
+    description:
+      "Get involved with community gardens, educational workshops, and local green initiatives.",
     icon: FaSeedling,
-    stat: "12",
-    statLabel: "Active Gardens"
+    color: "from-lime-500 to-green-600",
+    lightColor: "bg-lime-50",
+    iconColor: "text-lime-600",
+  },
+];
+
+const latestNews = [
+  {
+    date: "October 26, 2023",
+    title: "Community Garden Harvest Sets New Record",
+    description:
+      "Volunteers and residents celebrated a bountiful harvest, donating over 500 pounds of produce to local food banks.",
+    link: "/news",
+  },
+  {
+    date: "September 15, 2023",
+    title: "City Awarded Grant for Solar Panel Installation on Public Buildings",
+    description:
+      "A new federal grant will accelerate our transition to clean energy, starting with the public library and city hall.",
+    link: "/news",
+  },
+  {
+    date: "August 02, 2023",
+    title: "New E-Waste Recycling Program Launches This Month",
+    description:
+      "Residents can now safely dispose of old electronics at designated drop-off points city-wide.",
+    link: "/news",
   },
 ];
 
@@ -43,8 +85,10 @@ const initiatives = [
   {
     id: "tree-planting",
     title: "Tree Planting Initiative",
-    description: "Over 5,000 new trees planted this year alone, creating urban forests and improving air quality across Port Laken.",
-    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80",
+    description:
+      "Over 5,000 new trees planted this year alone, creating urban forests and improving air quality across Port Laken.",
+    image:
+      "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80",
     icon: FaTree,
     fullDescription: `The Tree Planting Initiative is one of Port Laken's most impactful environmental programs. Since launching in 2020, we've planted over 15,000 trees across neighborhoods, parks, and public spaces.
 
@@ -63,8 +107,10 @@ Join us at our next planting event on the first Saturday of each month at Rivers
   {
     id: "clean-harbor",
     title: "Clean Harbor Project",
-    description: "Restoring our waterways through wetland preservation, marine habitat protection, and community cleanup events.",
-    image: "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=800&q=80",
+    description:
+      "Restoring our waterways through wetland preservation, marine habitat protection, and community cleanup events.",
+    image:
+      "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=800&q=80",
     icon: FaWater,
     fullDescription: `The Clean Harbor Project is our comprehensive initiative to restore and protect Port Laken's waterways, including the harbor, local streams, and wetland areas.
 
@@ -85,8 +131,10 @@ The harbor is the heart of our community, and we're committed to keeping it clea
   {
     id: "green-building",
     title: "Green Building Standards",
-    description: "All new municipal buildings meet LEED Gold certification, setting the standard for sustainable construction.",
-    image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=800&q=80",
+    description:
+      "All new municipal buildings meet LEED Gold certification, setting the standard for sustainable construction.",
+    image:
+      "https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=800&q=80",
     icon: GiWindmill,
     fullDescription: `Port Laken's Green Building Standards program ensures that all new construction and major renovations meet the highest environmental standards, reducing energy consumption and carbon emissions.
 
@@ -113,15 +161,15 @@ export default function EnvironmentalPage() {
 
   const openModal = (id: string) => {
     setActiveModal(id);
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
   };
 
   const closeModal = () => {
     setActiveModal(null);
-    document.body.style.overflow = 'unset';
+    document.body.style.overflow = "unset";
   };
 
-  const activeInitiative = initiatives.find(i => i.id === activeModal);
+  const activeInitiative = initiatives.find((i) => i.id === activeModal);
 
   return (
     <>
@@ -140,7 +188,7 @@ export default function EnvironmentalPage() {
               onClick={closeModal}
               className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/90 hover:bg-gray-100 rounded-full flex items-center justify-center shadow-lg transition-colors"
             >
-              <FaTimes className="text-[#244C5C] text-lg" />
+              <FaTimes className="text-port-navy text-lg" />
             </button>
 
             {/* Modal Header Image */}
@@ -152,12 +200,12 @@ export default function EnvironmentalPage() {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#244C5C]/80 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-port-navy/80 to-transparent"></div>
               <div className="absolute bottom-4 left-6 flex items-center gap-3">
                 <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
-                  <activeInitiative.icon className="text-xl text-[#708AA3]" />
+                  <activeInitiative.icon className="text-xl text-port-sky" />
                 </div>
-                <h3 className="font-playfair text-2xl font-bold text-white">
+                <h3 className="font-display text-2xl font-bold text-white">
                   {activeInitiative.title}
                 </h3>
               </div>
@@ -166,24 +214,29 @@ export default function EnvironmentalPage() {
             {/* Modal Content */}
             <div className="p-6 overflow-y-auto max-h-[calc(85vh-12rem)]">
               <div className="prose prose-sm max-w-none">
-                {activeInitiative.fullDescription.split('\n\n').map((paragraph, index) => (
-                  <p key={index} className="font-nunito text-gray-600 leading-relaxed mb-4 whitespace-pre-line">
-                    {paragraph}
-                  </p>
-                ))}
+                {activeInitiative.fullDescription
+                  .split("\n\n")
+                  .map((paragraph, index) => (
+                    <p
+                      key={index}
+                      className="text-port-slate leading-relaxed mb-4 whitespace-pre-line"
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
               </div>
 
               {/* Modal Footer */}
               <div className="mt-6 pt-6 border-t border-gray-100 flex flex-col sm:flex-row gap-3">
                 <Link
                   href="/environmental/get-involved"
-                  className="flex-1 bg-[#244C5C] text-white px-6 py-3 rounded-full font-nunito font-semibold text-center hover:bg-[#708AA3] transition-colors"
+                  className="flex-1 bg-port-navy text-white px-6 py-3 rounded-full font-semibold text-center hover:bg-port-sky transition-colors"
                 >
                   Get Involved
                 </Link>
                 <button
                   onClick={closeModal}
-                  className="flex-1 bg-gray-100 text-[#244C5C] px-6 py-3 rounded-full font-nunito font-semibold hover:bg-gray-200 transition-colors"
+                  className="flex-1 bg-gray-100 text-port-navy px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors"
                 >
                   Close
                 </button>
@@ -193,232 +246,292 @@ export default function EnvironmentalPage() {
         </div>
       )}
 
-      {/* Hero */}
-      <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+      {/* Hero Section - Full Width Image */}
+      <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=80"
-            alt="Forest"
+            alt="Sunlight streaming through lush green forest"
             fill
             sizes="100vw"
-            className="object-cover scale-105 animate-slow-zoom"
+            className="object-cover"
+            priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#244C5C]/50 via-[#244C5C]/60 to-[#244C5C]/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-port-navy/30 via-port-navy/40 to-port-navy/70"></div>
         </div>
 
-        {/* Floating Leaves Animation */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(6)].map((_, i) => (
-            <FaLeaf
-              key={i}
-              className="absolute text-white/10 animate-float"
-              style={{
-                left: `${15 + i * 15}%`,
-                top: `${20 + (i % 3) * 20}%`,
-                fontSize: `${2 + i * 0.5}rem`,
-                animationDelay: `${i * 0.5}s`,
-                animationDuration: `${4 + i}s`,
-              }}
-            />
-          ))}
-        </div>
-
-        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-6 py-2 rounded-full mb-8 border border-white/20">
-            <IoEarth className="text-[#ABD1E6] text-xl" />
-            <span className="text-white/90 font-nunito text-sm font-medium tracking-wide">Environmental Stewardship</span>
-          </div>
-
-          <h1 className="font-playfair text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
-            Our Commitment to a{" "}
-            <span className="text-[#ABD1E6] italic">
-              Greener Future
-            </span>
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+            Our Commitment to a
+            <br />
+            <span className="italic text-port-sky/90">Greener Future</span>
           </h1>
-
-          <p className="font-nunito text-xl md:text-2xl text-white/80 max-w-3xl mx-auto mb-10 leading-relaxed">
-            Protecting our environment for generations to come through innovation, community action, and sustainable practices.
+          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+            Discover how we are working together to protect and preserve our
+            local environment for generations to come.
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/environmental/programs"
-              className="group bg-white text-[#244C5C] px-8 py-4 rounded-full font-nunito font-semibold text-lg transition-all duration-300 hover:bg-[#708AA3] hover:text-white hover:scale-105 hover:shadow-xl flex items-center gap-2 justify-center"
-            >
-              Explore Programs
-              <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/environmental/get-involved"
-              className="bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-full font-nunito font-semibold text-lg border border-white/30 transition-all duration-300 hover:bg-white/20 hover:scale-105 flex items-center justify-center"
-            >
-              Get Involved
-            </Link>
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-8 h-12 border-2 border-white/40 rounded-full flex justify-center pt-2">
-            <div className="w-1.5 h-3 bg-white/60 rounded-full animate-scroll-down"></div>
-          </div>
         </div>
       </section>
 
-      {/* Stats Bar */}
-      <section className="relative -mt-16 z-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="bg-white rounded-3xl shadow-2xl p-8 grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { value: "100%", label: "Renewable Goal by 2030", icon: GiWindmill },
-              { value: "5,000+", label: "Trees Planted", icon: GiTreeGrowth },
-              { value: "40%", label: "Emissions Reduced", icon: FaLeaf },
-              { value: "12", label: "Community Gardens", icon: FaSeedling },
-            ].map((stat, index) => (
-              <div key={index} className="text-center group">
-                <stat.icon className="text-4xl text-[#708AA3] mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                <p className="font-playfair text-3xl md:text-4xl font-bold text-[#244C5C] mb-1">{stat.value}</p>
-                <p className="font-nunito text-sm text-gray-500">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Overview */}
-      <section className="py-24 lg:py-32 bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* Overview Section */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealOnScroll>
-            <div className="inline-flex items-center gap-2 bg-[#ABD1E6]/30 px-4 py-2 rounded-full mb-6">
-              <FaLeaf className="text-[#708AA3]" />
-              <span className="text-[#244C5C] font-nunito text-sm font-semibold">Our Mission</span>
+            <div className="text-center">
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-port-navy mb-8">
+                Overview
+              </h2>
+              <p className="text-lg text-port-slate leading-relaxed">
+                Our community is dedicated to fostering a sustainable future
+                through proactive environmental stewardship. This page outlines
+                our key initiatives, from comprehensive recycling programs to
+                the adoption of green energy, all designed to reduce our
+                ecological footprint and enhance the quality of life for all
+                residents.
+              </p>
             </div>
-            <h2 className="font-playfair text-4xl md:text-5xl font-bold text-[#244C5C] mb-8">
-              Environmental Excellence
-            </h2>
-            <p className="font-nunito text-xl text-gray-600 leading-relaxed">
-              Port Laken is committed to building a sustainable future through innovative environmental programs,
-              community partnerships, and responsible resource management. Together, we&apos;re creating a cleaner,
-              greener city for everyone.
-            </p>
           </RevealOnScroll>
         </div>
       </section>
 
-      {/* Key Programs */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Key Programs Section */}
+      <section className="py-20 lg:py-28 bg-port-frost/50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="text-center mb-16">
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold text-[#244C5C] mb-4">
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-port-navy mb-4">
                 Key Programs
               </h2>
-              <p className="font-nunito text-lg text-gray-500 max-w-2xl mx-auto">
-                Discover how we&apos;re making Port Laken a model for environmental sustainability.
-              </p>
             </div>
           </RevealOnScroll>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {programs.map((program, index) => (
               <RevealOnScroll key={program.title} className={`delay-${index * 100}`}>
-                <div className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100">
-                  {/* Header with Icon */}
-                  <div className="h-32 bg-gradient-to-br from-[#708AA3] to-[#244C5C] flex items-center justify-center relative overflow-hidden">
-                    <program.icon className="text-6xl text-white/90 group-hover:scale-110 transition-transform duration-500" />
-                    {/* Decorative circles */}
-                    <div className="absolute -top-8 -right-8 w-24 h-24 bg-white/10 rounded-full"></div>
-                    <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-white/10 rounded-full"></div>
+                <Link
+                  href="/environmental/programs"
+                  className="group block bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-port-mist/50"
+                >
+                  {/* Icon */}
+                  <div
+                    className={`w-14 h-14 ${program.lightColor} rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    <program.icon
+                      className={`text-2xl ${program.iconColor}`}
+                    />
                   </div>
 
                   {/* Content */}
-                  <div className="p-6">
-                    {/* Stat Badge */}
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="px-3 py-1 bg-[#708AA3] rounded-full">
-                        <span className="text-white font-nunito text-sm font-bold">{program.stat}</span>
-                      </div>
-                      <span className="font-nunito text-xs text-gray-500">{program.statLabel}</span>
-                    </div>
-
-                    <h3 className="font-playfair font-bold text-xl text-[#244C5C] mb-3 group-hover:text-[#708AA3] transition-colors">
-                      {program.title}
-                    </h3>
-                    <p className="font-nunito text-gray-500 text-sm leading-relaxed">
-                      {program.description}
-                    </p>
-
-                    {/* Learn More Link */}
-                    <div className="mt-4 pt-4 border-t border-gray-100">
-                      <Link
-                        href="/environmental/programs"
-                        className="inline-flex items-center gap-2 text-[#708AA3] font-nunito font-semibold text-sm group-hover:gap-3 transition-all"
-                      >
-                        Learn More
-                        <FaArrowRight className="text-xs" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+                  <h3 className="font-display font-bold text-lg text-port-navy mb-3 group-hover:text-port-sky transition-colors">
+                    {program.title}
+                  </h3>
+                  <p className="text-port-slate text-sm leading-relaxed">
+                    {program.description}
+                  </p>
+                </Link>
               </RevealOnScroll>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Initiatives */}
-      <section className="py-20 bg-gradient-to-b from-white to-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Latest News Section */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="text-center mb-16">
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold text-[#244C5C] mb-4">
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-port-navy mb-4">
+                Latest News
+              </h2>
+            </div>
+          </RevealOnScroll>
+
+          <div className="space-y-0 divide-y divide-port-mist">
+            {latestNews.map((news, index) => (
+              <RevealOnScroll key={index} className={`delay-${index * 100}`}>
+                <Link
+                  href={news.link}
+                  className="group flex items-start justify-between py-8 hover:bg-port-frost/30 -mx-4 px-4 rounded-xl transition-colors"
+                >
+                  <div className="flex-1 pr-8">
+                    {/* Date */}
+                    <div className="flex items-center gap-2 text-port-slate/70 text-sm mb-2">
+                      <FaCalendarAlt className="text-xs" />
+                      <span>{news.date}</span>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="font-display font-bold text-xl text-port-navy mb-2 group-hover:text-port-sky transition-colors">
+                      {news.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-port-slate text-sm leading-relaxed">
+                      {news.description}
+                    </p>
+                  </div>
+
+                  {/* Arrow */}
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-port-frost flex items-center justify-center group-hover:bg-port-navy group-hover:text-white transition-all">
+                    <HiOutlineArrowNarrowRight className="text-lg text-port-slate group-hover:text-white transition-colors" />
+                  </div>
+                </Link>
+              </RevealOnScroll>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Initiatives - Bento Grid */}
+      <section className="py-20 lg:py-28 bg-port-frost/50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <RevealOnScroll>
+            <div className="text-center mb-16">
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-port-navy mb-4">
                 Featured Initiatives
               </h2>
-              <p className="font-nunito text-lg text-gray-500 max-w-2xl mx-auto">
-                Making real impact through dedicated environmental projects.
+              <p className="text-port-slate text-lg max-w-2xl mx-auto">
+                Making real impact through dedicated environmental projects
+                across our community.
               </p>
             </div>
           </RevealOnScroll>
 
-          <div className="space-y-12">
-            {initiatives.map((initiative, index) => (
-              <RevealOnScroll key={initiative.title}>
-                <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}>
-                  {/* Image */}
-                  <div className="flex-1 w-full">
-                    <div className="relative h-[300px] md:h-[400px] rounded-3xl overflow-hidden shadow-xl group">
-                      <Image
-                        src={initiative.image}
-                        alt={initiative.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#244C5C]/60 via-transparent to-transparent"></div>
-                      <div className="absolute bottom-6 left-6">
-                        <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-lg">
-                          <initiative.icon className="text-2xl text-[#708AA3]" />
-                        </div>
-                      </div>
-                    </div>
+          {/* Bento Grid */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Large Card */}
+            <RevealOnScroll className="md:row-span-2">
+              <button
+                onClick={() => openModal(initiatives[0].id)}
+                className="group relative w-full h-full min-h-[400px] rounded-3xl overflow-hidden text-left"
+              >
+                <Image
+                  src={initiatives[0].image}
+                  alt={initiatives[0].title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-port-navy/90 via-port-navy/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-4">
+                    <FaTree className="text-xl text-white" />
                   </div>
+                  <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-3">
+                    {initiatives[0].title}
+                  </h3>
+                  <p className="text-white/80 text-sm leading-relaxed mb-4 max-w-md">
+                    {initiatives[0].description}
+                  </p>
+                  <span className="inline-flex items-center gap-2 text-white font-semibold text-sm group-hover:gap-3 transition-all">
+                    Learn More <FaArrowRight className="text-xs" />
+                  </span>
+                </div>
+              </button>
+            </RevealOnScroll>
 
-                  {/* Content */}
-                  <div className="flex-1 w-full">
-                    <h3 className="font-playfair text-3xl font-bold text-[#244C5C] mb-4">
-                      {initiative.title}
-                    </h3>
-                    <p className="font-nunito text-lg text-gray-500 leading-relaxed mb-6">
-                      {initiative.description}
-                    </p>
-                    <button
-                      onClick={() => openModal(initiative.id)}
-                      className="inline-flex items-center gap-2 bg-[#244C5C] text-white px-6 py-3 rounded-full font-nunito font-semibold transition-all duration-300 hover:bg-[#708AA3] hover:gap-3"
-                    >
-                      Learn More
-                      <FaArrowRight />
-                    </button>
-                  </div>
+            {/* Top Right Card */}
+            <RevealOnScroll className="delay-100">
+              <button
+                onClick={() => openModal(initiatives[1].id)}
+                className="group relative w-full h-[200px] md:h-full min-h-[200px] rounded-3xl overflow-hidden text-left"
+              >
+                <Image
+                  src={initiatives[1].image}
+                  alt={initiatives[1].title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-port-navy/90 via-port-navy/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 className="font-display text-xl font-bold text-white mb-2">
+                    {initiatives[1].title}
+                  </h3>
+                  <span className="inline-flex items-center gap-2 text-white/80 font-medium text-sm group-hover:gap-3 group-hover:text-white transition-all">
+                    Learn More <FaArrowRight className="text-xs" />
+                  </span>
+                </div>
+              </button>
+            </RevealOnScroll>
+
+            {/* Bottom Right Card */}
+            <RevealOnScroll className="delay-200">
+              <button
+                onClick={() => openModal(initiatives[2].id)}
+                className="group relative w-full h-[200px] md:h-full min-h-[200px] rounded-3xl overflow-hidden text-left"
+              >
+                <Image
+                  src={initiatives[2].image}
+                  alt={initiatives[2].title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-port-navy/90 via-port-navy/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 className="font-display text-xl font-bold text-white mb-2">
+                    {initiatives[2].title}
+                  </h3>
+                  <span className="inline-flex items-center gap-2 text-white/80 font-medium text-sm group-hover:gap-3 group-hover:text-white transition-all">
+                    Learn More <FaArrowRight className="text-xs" />
+                  </span>
+                </div>
+              </button>
+            </RevealOnScroll>
+          </div>
+        </div>
+      </section>
+
+      {/* Impact Stats */}
+      <section className="py-20 lg:py-24 bg-port-navy">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <RevealOnScroll>
+            <div className="text-center mb-16">
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
+                Our Impact
+              </h2>
+              <p className="text-white/70 text-lg max-w-2xl mx-auto">
+                Measurable progress toward a sustainable Port Laken.
+              </p>
+            </div>
+          </RevealOnScroll>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+            {[
+              {
+                value: "100%",
+                label: "Renewable Energy Goal",
+                sublabel: "by 2030",
+                icon: GiWindmill,
+              },
+              {
+                value: "5,000+",
+                label: "Trees Planted",
+                sublabel: "this year",
+                icon: GiTreeGrowth,
+              },
+              {
+                value: "40%",
+                label: "Emissions Reduced",
+                sublabel: "since 2018",
+                icon: FaLeaf,
+              },
+              {
+                value: "12",
+                label: "Community Gardens",
+                sublabel: "city-wide",
+                icon: FaSeedling,
+              },
+            ].map((stat, index) => (
+              <RevealOnScroll key={index} className={`delay-${index * 100}`}>
+                <div className="text-center">
+                  <stat.icon className="text-4xl text-port-sky mx-auto mb-4" />
+                  <p className="font-display text-4xl md:text-5xl font-bold text-white mb-2">
+                    {stat.value}
+                  </p>
+                  <p className="text-white/90 font-medium">{stat.label}</p>
+                  <p className="text-white/50 text-sm">{stat.sublabel}</p>
                 </div>
               </RevealOnScroll>
             ))}
@@ -426,34 +539,35 @@ export default function EnvironmentalPage() {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-br from-[#708AA3] to-[#244C5C] relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10"><FaLeaf className="text-8xl text-white" /></div>
-          <div className="absolute bottom-10 right-10"><GiTreeGrowth className="text-9xl text-white" /></div>
-          <div className="absolute top-1/2 left-1/4"><FaSeedling className="text-6xl text-white" /></div>
-        </div>
-
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      {/* Get Involved CTA */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <RevealOnScroll>
-            <h2 className="font-playfair text-4xl md:text-5xl font-bold text-white mb-6">
-              Join Our Green Movement
-            </h2>
-            <p className="font-nunito text-xl text-white/90 mb-10 leading-relaxed">
-              Every action counts. Volunteer, participate in community cleanups, or simply make sustainable choices.
-              Together, we can make Port Laken a beacon of environmental responsibility.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/environmental/get-involved"
-                className="bg-white text-[#244C5C] px-8 py-4 rounded-full font-nunito font-bold text-lg transition-all duration-300 hover:bg-[#ABD1E6] hover:scale-105 shadow-xl"
-              >
-                Volunteer Today
-              </Link>
-              <button className="bg-transparent text-white px-8 py-4 rounded-full font-nunito font-bold text-lg border-2 border-white transition-all duration-300 hover:bg-white hover:text-[#244C5C] hover:scale-105">
-                Contact Us
-              </button>
+            <div className="bg-gradient-to-br from-port-frost to-port-mist/30 rounded-3xl p-10 md:p-16">
+              <FaLeaf className="text-5xl text-port-sky mx-auto mb-6" />
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-4">
+                Join Our Green Movement
+              </h2>
+              <p className="text-port-slate text-lg mb-8 max-w-xl mx-auto leading-relaxed">
+                Every action counts. Volunteer, participate in community
+                cleanups, or simply make sustainable choices. Together, we can
+                make Port Laken a beacon of environmental responsibility.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/environmental/get-involved"
+                  className="inline-flex items-center justify-center gap-2 bg-port-navy text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:bg-port-sky hover:shadow-lg hover:-translate-y-0.5"
+                >
+                  Volunteer Today
+                  <FaArrowRight className="text-sm" />
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 bg-white text-port-navy px-8 py-4 rounded-full font-semibold border border-port-mist transition-all duration-300 hover:bg-port-frost hover:shadow-lg hover:-translate-y-0.5"
+                >
+                  Contact Us
+                </Link>
+              </div>
             </div>
           </RevealOnScroll>
         </div>
@@ -461,23 +575,15 @@ export default function EnvironmentalPage() {
 
       {/* Custom Styles */}
       <style jsx>{`
-        @keyframes slow-zoom {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.05); }
-        }
-        .animate-slow-zoom {
-          animation: slow-zoom 20s ease-in-out infinite;
-        }
-        @keyframes scroll-down {
-          0% { transform: translateY(0); opacity: 1; }
-          100% { transform: translateY(8px); opacity: 0; }
-        }
-        .animate-scroll-down {
-          animation: scroll-down 1.5s ease-in-out infinite;
-        }
         @keyframes modal-in {
-          0% { opacity: 0; transform: scale(0.95) translateY(20px); }
-          100% { opacity: 1; transform: scale(1) translateY(0); }
+          0% {
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
         }
         .animate-modal-in {
           animation: modal-in 0.3s ease-out forwards;
