@@ -9,6 +9,7 @@ import { FaBus } from "react-icons/fa";
 import { Footer } from "./components/Footer";
 import Masonry from "@/components/ui/Masonry";
 import { FaArrowRight } from 'react-icons/fa6';
+import InvertButton from "../components/ui/InvertButton";
 
 // Gallery Images
 const galleryImages = [
@@ -207,15 +208,16 @@ export default function Home() {
                         </p>
 
                         {slide.buttonText && (
-                          <a
-                            href={slide.buttonLink}
-                            className="bg-white hover:bg-primary/90 hover:text-white text-primary transition-all px-6 py-3 rounded-full font-medium text-base shadow-lg flex items-center gap-2 whitespace-nowrap border border-white/20"
-                            onMouseEnter={() => setPaused(true)}
-                            onMouseLeave={() => setPaused(false)}
-                          >
-                            {slide.buttonText}
-                            <FaArrowRight className="text-sm" />
-                          </a>
+                          <InvertButton
+                            text={slide.buttonText}
+                            icon={<FaArrowRight className="text-sm" />}
+                            size="text-base"
+                            padding="px-6 py-3"
+                            curvature="rounded-full"
+                            invertDirection="dark-to-light"
+                            className="bg-white text-primary hover:bg-primary hover:text-white transition-all shadow-lg border border-white/20 whitespace-nowrap"
+                            onClick={() => window.location.href = slide.buttonLink}
+                          />
                         )}
                       </div>
                     </div>
@@ -313,13 +315,17 @@ export default function Home() {
               <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
                 Port Laken is a city where community meets innovation. From scenic parks to thriving neighborhoods, it’s a place where families, businesses, and visitors all feel at home. Discover how tradition and progress come together to make our city unique.
               </p>
-              <a
-                href="/about"
-                className="inline-flex items-center gap-2 bg-primary text-white font-medium px-6 py-3 rounded-full hover:bg-primary/90 hover:shadow-lg transition-all duration-300 hover:scale-105"
-              >
-                Learn More About Us
-                <FaArrowRight className="text-sm" />
-              </a>
+              <InvertButton
+                text="Learn More About Us"
+                icon={<FaArrowRight className="text-sm" />}
+                size="text-base"
+                padding="px-6 py-3"
+                curvature="rounded-full"
+                bgColor="bg-primary"
+                textColor="text-white"
+                invertDirection="light-to-dark"
+                className="hover:shadow-lg hover:scale-105 transition-transform"
+              />
             </div>
 
             {/* Right: Parallax Image */}
@@ -444,13 +450,16 @@ export default function Home() {
                     <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-3">
                       {item.desc}
                     </p>
-                    <a
-                      href="#"
-                      className="inline-flex items-center gap-1.5 text-primary text-sm font-semibold transition group-hover:translate-x-1"
-                    >
-                      Read Story
-                      <FaArrowRight className="text-xs" />
-                    </a>
+                    <InvertButton
+                      text="Read Story"
+                      icon={<FaArrowRight className="text-xs" />}
+                      size="text-sm"
+                      padding="pl-0 pr-1"
+                      curvature="rounded-none"
+                      bgColor="transparent"
+                      textColor="text-primary"
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
                   </div>
                 </div>
 
@@ -540,7 +549,7 @@ export default function Home() {
 
             {/* Spotlight Slideshow - now much more prominent */}
             <div className="lg:sticky lg:top-8">
-              <SpotlightSlideshow />
+              <SpotlightSlideshow galleryImages={galleryImages} />
             </div>
           </div>
         </div>
@@ -1009,7 +1018,7 @@ function PortLakenServicesSection({ galleryImages }) {
 }
 
 // Spotlight Slideshow Component
-function SpotlightSlideshow() {
+function SpotlightSlideshow({ galleryImages }) {
   const spotlightData = [
     {
       image: galleryImages[11],
@@ -1250,23 +1259,16 @@ function ServicesCarousel({ services }: { services: ServiceItem[] }) {
                   </div>
 
                   {/* Learn More Button */}
-                  <a
-                    href="#"
-                    className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-300 hover:bg-[#708AA3]/30 hover:border-[#708AA3] hover:scale-110"
-                  >
-                    <svg
-                      className="w-5 h-5 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeWidth={2.5}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </a>
+                  <InvertButton
+                    text="→"
+                    size="text-lg"
+                    padding="p-0"
+                    curvature="rounded-full"
+                    bgColor="bg-white/10"
+                    textColor="text-white"
+                    className="absolute bottom-4 right-4 w-10 h-10 backdrop-blur-md border border-white/20 transition-all duration-300 hover:bg-[#708AA3]/30 hover:border-[#708AA3] hover:scale-110"
+                    onClick={() => console.log('Button clicked')}
+                  />
                 </div>
               </div>
             );
