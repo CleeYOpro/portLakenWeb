@@ -749,7 +749,7 @@ export default function Home() {
               <h3 className="font-playfair text-4xl md:text-5xl font-bold text-primary-shade leading-tight tracking-tight">
                 <span className="italic">Stay in the loop.</span> Port Laken’s latest stories, creative highlights, and the people shaping our city’s future.</h3>
               <p className="text-primary-shade/70 text-sm font-light tracking-wide hover:text-primary-shade/90 transition-colors duration-300">
-                Subscribe for weekly updates on events and news in Port Laken
+                Unsubscribe anytime. We respect your privacy and never share your information.
               </p>
             </div>
 
