@@ -6,7 +6,7 @@ import { IoMdAlert } from "react-icons/io";
 import { HiDocumentText } from "react-icons/hi";
 import { MdPayment } from "react-icons/md";
 import { FaBus } from "react-icons/fa";
-import { Footer } from "./components/Footer";
+
 import { motion } from "framer-motion";
 import { FaArrowRight } from 'react-icons/fa6';
 import InvertButton from "../components/ui/InvertButton";
@@ -25,10 +25,7 @@ const galleryImages = [
   "https://cdn.pixabay.com/photo/2021/11/01/11/31/taiwan-6760128_1280.jpg",
   "https://cdn.pixabay.com/photo/2022/10/13/07/54/crane-houses-7518536_960_720.jpg",
   "https://cdn.pixabay.com/photo/2019/08/26/10/10/dockland-4431309_960_720.jpg",
-  "https://cdn.pixabay.com/photo/2014/10/22/17/59/couple-498457_960_720.jpg",
-  "https://cdn.pixabay.com/photo/2018/08/10/18/34/fireworks-3597389_1280.jpg",
-  "https://cdn.pixabay.com/photo/2021/12/28/10/57/couple-6898971_640.jpg",
-  "https://cdn.pixabay.com/photo/2021/12/28/10/57/couple-6898971_640.jpg",
+
 ];
 const upcomingEvents = [
   {
@@ -114,7 +111,7 @@ const quickActions = [
   },
   {
     title: "Submit Resource",
-    link: "#submit",
+    link: "/resource-directory/submit",
     icon: <HiDocumentText className="text-3xl text-primary" />,
   },
   {
@@ -724,11 +721,8 @@ export default function Home() {
           {/* Header */}
           <div className="text-center mb-16">
             <h2 className="font-playfair text-4xl md:text-6xl font-extrabold text-white mb-4">
-              LOVE, <span className="italic">PORT LAKEN</span>
+              love, <span className="italic">port laken</span>
             </h2>
-            <p className="text-white/90 text-lg md:text-xl max-w-3xl mx-auto">
-              &quot;it&apos;s in the details&quot;
-            </p>
           </div>
 
           {/* Masonry Grid */}
@@ -820,23 +814,20 @@ function PortLakenServicesSection({ galleryImages }) {
     },
     {
       image: galleryImages[2],
-      title: "Mountains to Sound Greenway",
-      description:
-        "Protected trails, restoration projects, and outdoor access connecting people to nature.",
+      title: "Discovery Park",
+      description: "Largest city park with beaches and forest trails.",
       resourceId: "32",
     },
     {
       image: galleryImages[3],
-      title: "Crisis Support Network",
-      description:
-        "24/7 crisis line, recovery support, and outreach services for all ages.",
+      title: "Port Laken Mental Health Services",
+      description: "Counseling and therapy for all ages.",
       resourceId: "5",
     },
     {
       image: galleryImages[4],
-      title: "BrightSteps Childcare",
-      description:
-        "Safe, nurturing early education spaces supporting families and young learners.",
+      title: "Little Stars Daycare",
+      description: "Licensed childcare and early learning.",
       resourceId: "7",
     },
   ];

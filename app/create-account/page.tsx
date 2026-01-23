@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
+const inputClass =
+  "mt-2 h-[46px] w-full rounded-full border border-[#6e8ea4] bg-white px-6 text-[13px] text-[#2f3f4a] placeholder:text-[#9aa9b4] outline-none focus:border-[#5a819a]";
+
 export default function Page() {
   return (
     <main className="min-h-screen bg-white pt-[96px]">
-        <section className="h-[calc(100vh-96px)] w-full overflow-hidden">
+      <section className="h-[calc(100vh-96px)] w-full overflow-hidden">
         <div className="grid h-full w-full grid-cols-1 md:grid-cols-[55%_45%]">
           {/* Left hero */}
           <div className="relative h-full w-full">
@@ -49,6 +52,7 @@ export default function Page() {
                   </label>
                   <input
                     type="text"
+                    name="firstName"
                     placeholder="First name"
                     className={inputClass}
                     autoComplete="given-name"
@@ -61,6 +65,7 @@ export default function Page() {
                   </label>
                   <input
                     type="text"
+                    name="lastName"
                     placeholder="Last name"
                     className={inputClass}
                     autoComplete="family-name"
@@ -75,6 +80,7 @@ export default function Page() {
                 </label>
                 <input
                   type="date"
+                  name="dob"
                   className={inputClass}
                   autoComplete="bday"
                 />
@@ -87,6 +93,7 @@ export default function Page() {
                 </label>
                 <input
                   type="email"
+                  name="email"
                   placeholder="you@example.com"
                   className={inputClass}
                   autoComplete="email"
@@ -100,6 +107,7 @@ export default function Page() {
                 </label>
                 <input
                   type="password"
+                  name="password"
                   placeholder="Create a password"
                   className={inputClass}
                   autoComplete="new-password"
@@ -112,6 +120,7 @@ export default function Page() {
                 </label>
                 <input
                   type="password"
+                  name="confirmPassword"
                   placeholder="Confirm your password"
                   className={inputClass}
                   autoComplete="new-password"
@@ -125,14 +134,13 @@ export default function Page() {
               <div className="mt-8 flex items-center gap-3">
                 <div className="h-px flex-1 bg-[#e2e7ec]" />
                 <Link
-                    href="/sign-in"
-                    className="text-[11px] font-semibold text-[#5a819a] hover:underline"
+                  href="/sign-in"
+                  className="text-[11px] font-semibold text-[#5a819a] hover:underline"
                 >
-                    or sign in
+                  or sign in
                 </Link>
                 <div className="h-px flex-1 bg-[#e2e7ec]" />
-            </div>
-
+              </div>
 
               <p className="mt-7 text-center text-[12px] text-[#6f7f8a]">
                 Already have an account?{" "}
@@ -148,30 +156,3 @@ export default function Page() {
   );
 }
 
-const inputClass =
-  "mt-2 h-[46px] w-full rounded-full border border-[#6e8ea4] bg-white px-6 text-[13px] text-[#2f3f4a] placeholder:text-[#9aa9b4] outline-none focus:border-[#5a819a]";
-
-function GoogleG() {
-  return (
-    <span className="grid h-5 w-5 place-items-center rounded-full">
-      <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
-        <path
-          fill="#FFC107"
-          d="M43.6 20.5H42V20H24v8h11.3C33.7 32.1 29.2 35 24 35c-6.1 0-11-4.9-11-11s4.9-11 11-11c2.8 0 5.3 1 7.2 2.7l5.7-5.7C33.7 6.7 29.1 5 24 5 13.4 5 5 13.4 5 24s8.4 19 19 19 19-8.4 19-19c0-1.2-.1-2.3-.4-3.5z"
-        />
-        <path
-          fill="#FF3D00"
-          d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c2.8 0 5.3 1 7.2 2.7l5.7-5.7C33.7 6.7 29.1 5 24 5c-7.3 0-13.7 4.1-17.7 9.7z"
-        />
-        <path
-          fill="#4CAF50"
-          d="M24 43c5.1 0 9.8-2 13.3-5.2l-6.1-5.2C29.4 34.3 26.9 35 24 35c-5.2 0-9.6-3-11.7-7.3l-6.6 5.1C9.6 39 16.3 43 24 43z"
-        />
-        <path
-          fill="#1976D2"
-          d="M43.6 20.5H42V20H24v8h11.3c-1 2.8-3 5-5.7 6.6l6.1 5.2C38.2 37.7 43 33 43 24c0-1.2-.1-2.3-.4-3.5z"
-        />
-      </svg>
-    </span>
-  );
-}
