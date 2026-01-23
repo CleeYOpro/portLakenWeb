@@ -1,4 +1,4 @@
-﻿/** @type {import('next').NextConfig} */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   // Avoid Next's recursive delete hitting OneDrive reparse points.
@@ -10,6 +10,7 @@ const nextConfig = {
       { protocol: "https", hostname: "encrypted-tbn0.gstatic.com" },
       { protocol: "https", hostname: "res.cloudinary.com" },
       { protocol: "https", hostname: "upload.wikimedia.org" },
+      { protocol: "https", hostname: "i.redd.it" }, // Added to allow images from i.redd.it
     ],
   },
 }

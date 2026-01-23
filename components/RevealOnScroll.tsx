@@ -5,9 +5,10 @@ import { useEffect, useRef, ReactNode } from "react";
 interface RevealOnScrollProps {
   children: ReactNode;
   className?: string;
+  delay?: number;
 }
 
-export default function RevealOnScroll({ children, className = "" }: RevealOnScrollProps) {
+export default function RevealOnScroll({ children, className = "", delay = 0 }: RevealOnScrollProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -15,6 +16,8 @@ export default function RevealOnScroll({ children, className = "" }: RevealOnScr
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // 应用延迟效果
+            entry.target.style.transitionDelay = `${delay}ms`;
             entry.target.classList.add("active");
           }
         });
@@ -27,7 +30,7 @@ export default function RevealOnScroll({ children, className = "" }: RevealOnScr
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [delay]);
 
   return (
     <div ref={ref} className={`reveal ${className}`}>
