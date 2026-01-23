@@ -25,6 +25,7 @@ const CATEGORIES: { label: string; value: ResourceCategory | "All" }[] = [
   { label: "Education", value: "Education" },
   { label: "Community", value: "Community" },
   { label: "Recreation", value: "Recreation" },
+  { label: "Service Stars", value: "Service Stars" },
 ];
 
 function ResourceDirectoryContent() {
@@ -160,7 +161,7 @@ function ResourceDirectoryContent() {
                 <div>
                   <h3 className="text-xs font-bold text-port-slate uppercase tracking-wider mb-4">Popular Tags</h3>
                   <div className="flex flex-wrap gap-2">
-                    {["Legal Aid", "Counseling", "Food Bank", "Housing", "Youth", "Mental Health"].map(tag => (
+                    {["Legal Aid", "Counseling", "Food Bank", "Housing", "Youth", "Mental Health", "Service Stars"].map(tag => (
                       <button key={tag} className="px-3 py-1.5 bg-gray-50 rounded-lg text-xs font-semibold text-port-slate hover:text-port-navy hover:bg-gray-100 border border-port-mist transition-colors flex items-center gap-1">
                         <span className="w-1.5 h-1.5 rounded-full bg-port-sky/50"></span>
                         {tag}

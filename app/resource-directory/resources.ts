@@ -1,3 +1,4 @@
+
 export type ResourceCategory =
     | "Healthcare"
     | "Family"
@@ -7,7 +8,8 @@ export type ResourceCategory =
     | "Emergency"
     | "Education"
     | "Community"
-    | "Recreation";
+    | "Recreation"
+    | "Service Stars";
 
 export interface Resource {
     id: string;
@@ -27,6 +29,7 @@ export interface Resource {
     };
     tags: string[];
     image: string;
+    rating: number; // 1-5
 }
 
 export const RESOURCES: Resource[] = [
@@ -44,7 +47,8 @@ export const RESOURCES: Resource[] = [
         email: "info@harborview.org",
         socialLinks: { facebook: "fb.com/harborview", twitter: "@harborview" },
         tags: ["hospital", "emergency", "trauma", "medical"],
-        image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80",
+        rating: 4.8
     },
     {
         id: "2",
@@ -58,7 +62,8 @@ export const RESOURCES: Resource[] = [
         website: "https://plcommunityclinic.org",
         email: "contact@plclinic.org",
         tags: ["clinic", "primary care", "affordable"],
-        image: "https://images.unsplash.com/photo-1538108149393-fbbd81897560?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1538108149393-fbbd81897560?w=800&q=80",
+        rating: 4.5
     },
     {
         id: "3",
@@ -72,7 +77,8 @@ export const RESOURCES: Resource[] = [
         website: "https://lakendental.com",
         email: "appt@lakendental.com",
         tags: ["dentist", "dental", "oral health"],
-        image: "https://images.unsplash.com/photo-1588776814546-1ffcf4722e12?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1588776814546-1ffcf4722e12?w=800&q=80",
+        rating: 4.7
     },
     {
         id: "4",
@@ -86,7 +92,8 @@ export const RESOURCES: Resource[] = [
         website: "https://visionpluspl.com",
         email: "see@visionpluspl.com",
         tags: ["vision", "optometry", "glasses"],
-        image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80",
+        rating: 4.6
     },
     {
         id: "5",
@@ -100,7 +107,8 @@ export const RESOURCES: Resource[] = [
         website: "https://plmentalhealth.org",
         email: "help@plmentalhealth.org",
         tags: ["mental health", "therapy", "counseling"],
-        image: "https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&q=80",
+        rating: 4.9
     },
 
     // Family
@@ -117,7 +125,8 @@ export const RESOURCES: Resource[] = [
         email: "info@eastlakencc.org",
         socialLinks: { instagram: "@eastlaken_cc" },
         tags: ["community center", "youth", "family", "activities"],
-        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
+        rating: 4.8
     },
     {
         id: "7",
@@ -131,7 +140,8 @@ export const RESOURCES: Resource[] = [
         website: "https://littlestarspl.com",
         email: "enroll@littlestarspl.com",
         tags: ["childcare", "daycare", "preschool"],
-        image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80",
+        rating: 4.7
     },
     {
         id: "8",
@@ -145,7 +155,8 @@ export const RESOURCES: Resource[] = [
         website: "https://plparenting.org",
         email: "support@plparenting.org",
         tags: ["parenting", "support", "workshops"],
-        image: "https://images.unsplash.com/photo-1544280596-fddce524fa82?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1544280596-fddce524fa82?w=800&q=80",
+        rating: 4.6
     },
     {
         id: "9",
@@ -159,7 +170,8 @@ export const RESOURCES: Resource[] = [
         website: "https://bgcpl.org",
         email: "contact@bgcpl.org",
         tags: ["youth", "mentorship", "recreation"],
-        image: "https://images.unsplash.com/photo-1529390003875-57486910983d?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1529390003875-57486910983d?w=800&q=80",
+        rating: 4.9
     },
     {
         id: "10",
@@ -173,7 +185,8 @@ export const RESOURCES: Resource[] = [
         website: "https://familyfirstpl.org",
         email: "help@familyfirstpl.org",
         tags: ["resource center", "social services", "advocacy"],
-        image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80",
+        rating: 4.5
     },
 
     // Food
@@ -190,7 +203,8 @@ export const RESOURCES: Resource[] = [
         email: "volunteer@plfoodbank.org",
         socialLinks: { facebook: "fb.com/plfoodbank" },
         tags: ["food bank", "groceries", "assistance"],
-        image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80",
+        rating: 4.8
     },
     {
         id: "12",
@@ -204,7 +218,8 @@ export const RESOURCES: Resource[] = [
         website: "https://mowpl.org",
         email: "signup@mowpl.org",
         tags: ["seniors", "delivery", "nutrition"],
-        image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&q=80",
+        rating: 4.9
     },
     {
         id: "13",
@@ -218,7 +233,8 @@ export const RESOURCES: Resource[] = [
         website: "https://urbanharvestpl.org",
         email: "grow@urbanharvestpl.org",
         tags: ["garden", "fresh food", "community"],
-        image: "https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=800&q=80",
+        rating: 4.7
     },
     {
         id: "14",
@@ -232,7 +248,8 @@ export const RESOURCES: Resource[] = [
         website: "https://thesoupkitchenpl.org",
         email: "info@thesoupkitchenpl.org",
         tags: ["meals", "homeless", "hot food"],
-        image: "https://images.unsplash.com/photo-1547592180-85f173990054?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1547592180-85f173990054?w=800&q=80",
+        rating: 4.6
     },
 
     // Seniors
@@ -248,7 +265,8 @@ export const RESOURCES: Resource[] = [
         website: "https://gyscpl.org",
         email: "programs@gyscpl.org",
         tags: ["seniors", "activities", "social"],
-        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
+        rating: 4.7
     },
     {
         id: "16",
@@ -262,7 +280,8 @@ export const RESOURCES: Resource[] = [
         website: "https://seniortransportpl.org",
         email: "ride@seniortransportpl.org",
         tags: ["transportation", "seniors", "mobility"],
-        image: "https://images.unsplash.com/photo-1508350176840-08166c30e7fa?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1508350176840-08166c30e7fa?w=800&q=80",
+        rating: 4.8
     },
     {
         id: "17",
@@ -276,7 +295,8 @@ export const RESOURCES: Resource[] = [
         website: "https://lakenviewretirement.com",
         email: "welcome@lakenview.com",
         tags: ["housing", "assisted living", "retirement"],
-        image: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=800&q=80",
+        rating: 4.5
     },
 
     // Legal
@@ -292,7 +312,8 @@ export const RESOURCES: Resource[] = [
         website: "https://clspl.org",
         email: "intake@clspl.org",
         tags: ["legal aid", "pro bono", "lawyer"],
-        image: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=800&q=80",
+        rating: 4.8
     },
     {
         id: "19",
@@ -306,7 +327,8 @@ export const RESOURCES: Resource[] = [
         website: "https://tenantrightspl.org",
         email: "help@tenantrightspl.org",
         tags: ["housing", "tenants", "legal"],
-        image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80",
+        rating: 4.6
     },
 
     // Emergency
@@ -322,7 +344,8 @@ export const RESOURCES: Resource[] = [
         website: "https://police.portlaken.gov",
         email: "police@portlaken.gov",
         tags: ["police", "safety", "emergency"],
-        image: "https://images.unsplash.com/photo-1596558151525-451bc0489627?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1596558151525-451bc0489627?w=800&q=80",
+        rating: 4.2
     },
     {
         id: "21",
@@ -336,7 +359,8 @@ export const RESOURCES: Resource[] = [
         website: "https://fire.portlaken.gov",
         email: "fireinfo@portlaken.gov",
         tags: ["fire", "ems", "emergency"],
-        image: "https://images.unsplash.com/photo-1550974415-p002c0b561b36?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1550974415-p002c0b561b36?w=800&q=80",
+        rating: 4.8
     },
     {
         id: "22",
@@ -350,7 +374,8 @@ export const RESOURCES: Resource[] = [
         website: "https://dvhopepl.org",
         email: "safe@dvhopepl.org",
         tags: ["crisis", "support", "hotline"],
-        image: "https://images.unsplash.com/photo-1520315342629-6ea920342047?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1520315342629-6ea920342047?w=800&q=80",
+        rating: 4.9
     },
 
     // Education
@@ -366,7 +391,8 @@ export const RESOURCES: Resource[] = [
         website: "https://spl.org",
         email: "librarian@spl.org",
         tags: ["library", "books", "internet"],
-        image: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&q=80",
+        rating: 4.9
     },
     {
         id: "24",
@@ -380,7 +406,8 @@ export const RESOURCES: Resource[] = [
         website: "https://lakefronths.portlaken.k12.wa.us",
         email: "office@lakefronths.k12.wa.us",
         tags: ["school", "high school", "education"],
-        image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80",
+        rating: 4.4
     },
     {
         id: "25",
@@ -394,7 +421,8 @@ export const RESOURCES: Resource[] = [
         website: "https://seattlecentral.edu",
         email: "info@seattlecentral.edu",
         tags: ["college", "education", "training"],
-        image: "https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80",
+        rating: 4.6
     },
     {
         id: "26",
@@ -408,7 +436,8 @@ export const RESOURCES: Resource[] = [
         website: "https://elcpl.org",
         email: "enroll@elcpl.org",
         tags: ["preschool", "head start", "education"],
-        image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800&q=80",
+        rating: 4.8
     },
 
     // Community
@@ -424,7 +453,8 @@ export const RESOURCES: Resource[] = [
         website: "https://portlaken.gov",
         email: "mayor@portlaken.gov",
         tags: ["government", "city", "services"],
-        image: "https://images.unsplash.com/photo-1569949381149-d9dfc448d2a5?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1569949381149-d9dfc448d2a5?w=800&q=80",
+        rating: 4.3
     },
     {
         id: "28",
@@ -438,7 +468,8 @@ export const RESOURCES: Resource[] = [
         website: "https://dnapl.org",
         email: "board@dnapl.org",
         tags: ["neighborhood", "community", "advocacy"],
-        image: "https://images.unsplash.com/photo-1549487779-7a710207865c?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1549487779-7a710207865c?w=800&q=80",
+        rating: 4.5
     },
     {
         id: "29",
@@ -452,7 +483,8 @@ export const RESOURCES: Resource[] = [
         website: "https://plhumane.org",
         email: "adopt@plhumane.org",
         tags: ["animals", "pets", "adoption"],
-        image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=80",
+        rating: 4.8
     },
 
     // Recreation
@@ -468,7 +500,8 @@ export const RESOURCES: Resource[] = [
         website: "https://seattle.gov/parks",
         email: "parks@portlaken.gov",
         tags: ["park", "nature", "sports"],
-        image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80",
+        rating: 4.9
     },
     {
         id: "31",
@@ -482,7 +515,8 @@ export const RESOURCES: Resource[] = [
         website: "https://seattleaquarium.org",
         email: "info@seattleaquarium.org",
         tags: ["aquarium", "family", "fun"],
-        image: "https://images.unsplash.com/photo-1535591273668-578e3118d040?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1535591273668-578e3118d040?w=800&q=80",
+        rating: 4.6
     },
     {
         id: "32",
@@ -496,7 +530,8 @@ export const RESOURCES: Resource[] = [
         website: "https://seattle.gov/parks",
         email: "parks@portlaken.gov",
         tags: ["hiking", "beach", "nature"],
-        image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
+        rating: 4.9
     },
 
     // More Health/Wellness
@@ -512,7 +547,8 @@ export const RESOURCES: Resource[] = [
         website: "https://yogabylakepl.com",
         email: "namaste@yogabylakepl.com",
         tags: ["yoga", "fitness", "wellness"],
-        image: "https://images.unsplash.com/photo-1544367563-12123d8965cd?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1544367563-12123d8965cd?w=800&q=80",
+        rating: 4.8
     },
     {
         id: "34",
@@ -526,7 +562,8 @@ export const RESOURCES: Resource[] = [
         website: "https://performcrossfit.com",
         email: "train@performcrossfit.com",
         tags: ["gym", "fitness", "workout"],
-        image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
+        rating: 4.7
     },
 
     // More Education
@@ -542,7 +579,8 @@ export const RESOURCES: Resource[] = [
         website: "https://codebuilderspl.com",
         email: "admissions@codebuilderspl.com",
         tags: ["tech", "coding", "education"],
-        image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=800&q=80",
+        rating: 4.9
     },
 
     // More Community
@@ -558,7 +596,8 @@ export const RESOURCES: Resource[] = [
         website: "https://seattleartmuseum.org",
         email: "visit@portlakenart.org",
         tags: ["art", "culture", "museum"],
-        image: "https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800&q=80",
+        rating: 4.7
     },
     {
         id: "37",
@@ -572,7 +611,8 @@ export const RESOURCES: Resource[] = [
         website: "https://volunteerpl.org",
         email: "helpout@volunteerpl.org",
         tags: ["volunteer", "service", "non-profit"],
-        image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=80",
+        rating: 4.8
     },
 
     // More Food
@@ -588,7 +628,8 @@ export const RESOURCES: Resource[] = [
         website: "https://centralcoop.coop",
         email: "info@centralcoop.coop",
         tags: ["grocery", "organic", "local"],
-        image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800&q=80",
+        rating: 4.5
     },
 
     // More Seniors
@@ -604,7 +645,8 @@ export const RESOURCES: Resource[] = [
         website: "https://silversneakers.com",
         email: "support@silversneakers.com",
         tags: ["fitness", "seniors", "health"],
-        image: "https://images.unsplash.com/photo-1552674605-46d99a72010c?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1552674605-46d99a72010c?w=800&q=80",
+        rating: 4.6
     },
 
     // More Housing
@@ -620,6 +662,7 @@ export const RESOURCES: Resource[] = [
         website: "https://seattlehousing.org",
         email: "info@seattlehousing.org",
         tags: ["housing", "affordable", "government"],
-        image: "https://images.unsplash.com/photo-1460317442991-0ec2aaefcb88?w=800&q=80"
+        image: "https://images.unsplash.com/photo-1460317442991-0ec2aaefcb88?w=800&q=80",
+        rating: 4.4
     }
 ];

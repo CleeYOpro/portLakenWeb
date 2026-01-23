@@ -1,6 +1,6 @@
 import DepartmentCard from "@/components/DepartmentCard";
 import RevealOnScroll from "@/components/RevealOnScroll";
-import Masonry from "@/components/ui/Masonry";
+
 
 const departments = [
   { title: "City Clerk", description: "Official records, elections, and public information.", icon: "edit_document", imageUrl: "/huron.png" },
@@ -43,7 +43,7 @@ export default function DepartmentsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-display font-bold mb-8 text-center">Highlights on PortLaken Govt Departments in Action!</h2>
           <div className="h-96">
-            <Masonry items={highlightImages} animateFrom="center" stagger={0.1} />
+
           </div>
         </div>
       </section>
