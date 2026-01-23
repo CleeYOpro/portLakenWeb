@@ -7,9 +7,10 @@ import { HiDocumentText } from "react-icons/hi";
 import { MdPayment } from "react-icons/md";
 import { FaBus } from "react-icons/fa";
 import { Footer } from "./components/Footer";
-import Masonry from "@/components/ui/Masonry";
+import { motion } from "framer-motion";
 import { FaArrowRight } from 'react-icons/fa6';
 import InvertButton from "../components/ui/InvertButton";
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Gallery Images
 const galleryImages = [
@@ -214,8 +215,13 @@ export default function Home() {
                             size="text-base"
                             padding="px-6 py-3"
                             curvature="rounded-full"
-                            invertDirection="dark-to-light"
-                            className="bg-white text-primary hover:bg-primary hover:text-white transition-all shadow-lg border border-white/20 whitespace-nowrap"
+                            invertDirection="light-to-dark"
+                            bgColor="bg-primary"
+                            textColor="text-primary"
+                            borderColor="border-white/20"
+                            lightStateBg="bg-white"
+                            darkStateText="text-white"
+                            className="transition-all shadow-lg whitespace-nowrap"
                             onClick={() => window.location.href = slide.buttonLink}
                           />
                         )}
@@ -322,7 +328,8 @@ export default function Home() {
                 padding="px-6 py-3"
                 curvature="rounded-full"
                 bgColor="bg-primary"
-                textColor="text-white"
+                textColor="text-primary"
+                borderColor="border-primary"
                 invertDirection="light-to-dark"
                 className="hover:shadow-lg hover:scale-105 transition-transform"
               />
@@ -405,18 +412,21 @@ export default function Home() {
           <div className="space-y-8">
             {[
               {
+                slug: "mlk-day-service",
                 date: "JAN 19, 2026",
                 title: "MLK Day Service & Community Glow",
                 desc: "Port Laken honors the legacy with a special MLK Day event at the waterfront park, featuring community service, live music, and glowing lantern displays.",
                 image: "https://images.unsplash.com/photo-1540979388789-7cee28a1cdc9?auto=format&fit=crop&q=80",
               },
               {
+                slug: "winter-market",
                 date: "JAN 25, 2026",
                 title: "Coastal Winter Market Lights Up Harbor",
                 desc: "The Winter Market returns to Harbor Plaza with local artisans, warm food trucks, craft drinks, and waterfront lights.",
                 image: "https://images.unsplash.com/photo-1519167758481-83f269a90c33?auto=format&fit=crop&q=80",
               },
               {
+                slug: "sustainability-vision-2026",
                 date: "FEB 10, 2026",
                 title: "City Unveils 2026 Sustainability Vision",
                 desc: "Mayor Johnson outlines new green spaces, waterfront upgrades, and eco-friendly public projects.",
@@ -454,11 +464,16 @@ export default function Home() {
                       text="Read Story"
                       icon={<FaArrowRight className="text-xs" />}
                       size="text-sm"
-                      padding="pl-0 pr-1"
-                      curvature="rounded-none"
-                      bgColor="transparent"
+                      padding="px-4 py-2"
+                      curvature="rounded-full"
+                      bgColor="bg-primary"
                       textColor="text-primary"
-                      className="group-hover:translate-x-1 transition-transform"
+                      lightStateBg="bg-transparent"
+                      darkStateText="text-white"
+                      borderColor="border-2 border-primary"
+                      invertDirection="light-to-dark"
+                      className="transition-transform md:w-auto w-full"
+                      onClick={() => window.location.href = `/news/${item.slug}`}
                     />
                   </div>
                 </div>
@@ -531,18 +546,21 @@ export default function Home() {
 
               {/* CTA Button */}
               <div className="flex justify-end pt-2">
-                <a
-                  href="/calendar"
-                  className="
-        inline-flex items-center gap-2 px-5 py-2 text-white font-semibold 
-        rounded-full border-2 border-white shadow-sm
-        hover:bg-white hover:text-primary
-        transition-all duration-200
-      "
-                >
-                  View Full Calendar
-                  <FaArrowRight className="text-sm" />
-                </a>
+                <InvertButton
+                  text="View Full Calendar"
+                  icon={<FaArrowRight className="text-sm" />}
+                  size="text-base"
+                  padding="px-24 py-2"
+                  curvature="rounded-full"
+                  bgColor="bg-transparent"
+                  textColor="text-primary"
+                  borderColor="border-white"
+                  lightStateBg="bg-white"
+                  darkStateText="text-white"
+                  invertDirection="dark-to-light"
+                  className="mt-2 font-semibold shadow-sm transition-all duration-200"
+                  onClick={() => window.location.href = '/events'}
+                />
               </div>
             </div>
 
@@ -714,24 +732,7 @@ export default function Home() {
           </div>
 
           {/* Masonry Grid */}
-          <div className="w-full" style={{ height: 'auto', minHeight: '1000px' }}>
-            <Masonry
-              items={galleryImages.map((img, index) => ({
-                id: `${index + 1}`,
-                img: img,
-                url: img,
-                height: [600, 450, 700, 500, 650, 550, 600, 480, 700, 520, 580, 650, 720, 500, 400][index] || 600,
-              }))}
-              ease="power3.out"
-              duration={0.6}
-              stagger={0.05}
-              animateFrom="bottom"
-              scaleOnHover={true}
-              hoverScale={0.95}
-              blurToFocus={true}
-              colorShiftOnHover={false}
-            />
-          </div>
+          <GallerySection />
         </div>
       </section>
 
@@ -974,28 +975,18 @@ function PortLakenServicesSection({ galleryImages }) {
           {/* Navigation Arrows - Overlapping on Side Cards */}
           <button
             onClick={prev}
-            className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 md:left-6 h-11 w-11 md:h-13 md:w-13 rounded-full text-white font-bold text-lg md:text-xl transition flex items-center justify-center pointer-events-auto z-50 shadow-lg"
-            style={{
-              backgroundColor: 'var(--color-primary)',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-primary-shade)')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-primary)')}
+            className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 md:left-6 h-12 w-12 rounded-full bg-white/70 text-primary flex items-center justify-center shadow-xl transition-all duration-300 hover:bg-primary hover:text-white border-2 border-transparent hover:border-white z-50 backdrop-blur-sm"
             aria-label="Previous service"
           >
-            ‹
+            <ChevronLeft className="h-7 w-7 stroke-[2.5]" />
           </button>
 
           <button
             onClick={next}
-            className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-4 md:right-6 h-11 w-11 md:h-13 md:w-13 rounded-full text-white font-bold text-lg md:text-xl transition flex items-center justify-center pointer-events-auto z-50 shadow-lg"
-            style={{
-              backgroundColor: 'var(--color-primary)',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-primary-shade)')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-primary)')}
+            className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-4 md:right-6 h-12 w-12 rounded-full bg-white/70 text-primary flex items-center justify-center shadow-xl transition-all duration-300 hover:bg-primary hover:text-white border-2 border-transparent hover:border-white z-50 backdrop-blur-sm"
             aria-label="Next service"
           >
-            ›
+            <ChevronRight className="h-7 w-7 stroke-[2.5]" />
           </button>
 
           {/* Indicator Dots */}
@@ -1332,6 +1323,60 @@ function ServicesCarousel({ services }: { services: ServiceItem[] }) {
           />
         ))}
       </div>
+    </div>
+  );
+}
+
+function GallerySection() {
+  // Pattern of grid spans from the design
+  const gridPatterns = [
+    "col-span-2 row-span-1 md:col-span-2 lg:col-span-2",
+    "col-span-1 row-span-1 md:col-span-1 lg:col-span-1",
+    "col-span-2 row-span-1 md:col-span-2 lg:col-span-2",
+    "col-span-1 row-span-1 md:col-span-1 lg:col-span-1",
+    "col-span-2 row-span-1 md:col-span-2 lg:col-span-2",
+    "col-span-1 row-span-1 md:col-span-1 lg:col-span-1",
+    "col-span-1 row-span-1 md:col-span-1 lg:col-span-1",
+    "col-span-1 row-span-1 md:col-span-1 lg:col-span-1",
+    "col-span-1 row-span-1 md:col-span-1 lg:col-span-1",
+    "col-span-2 row-span-1 md:col-span-2 lg:col-span-2",
+    "col-span-1 row-span-1 md:col-span-1 lg:col-span-1",
+  ];
+
+  // Map existing valid images to the pattern
+  const images = galleryImages.map((src, index) => ({
+    src,
+    alt: `Gallery Image ${index + 1}`,
+    className: gridPatterns[index % gridPatterns.length]
+  }));
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.3 } }
+  };
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.9 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring" as const, stiffness: 120, damping: 12 } }
+  };
+
+  return (
+    <div className="w-full">
+      <motion.div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+      >
+        {images.map((img, idx) => (
+          <motion.div key={idx}
+            className={`overflow-hidden rounded-2xl shadow-lg bg-[#181818] flex items-center justify-center h-[150px] sm:h-[180px] md:h-[200px] ${img.className}`}
+            variants={itemVariants}
+            custom={idx}
+          >
+            <Image src={img.src} alt={img.alt} width={400} height={400} className="object-cover w-full h-full transition-transform duration-300 hover:scale-105" style={{ fontFamily: 'Inter, sans-serif' }} />
+          </motion.div>
+        ))}
+      </motion.div>
     </div>
   );
 }

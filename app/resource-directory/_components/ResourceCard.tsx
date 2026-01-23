@@ -2,7 +2,7 @@
 
 import { Resource } from "../resources";
 import { motion } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Star } from "lucide-react";
 
 interface ResourceCardProps extends Resource {
     onClick: () => void;
@@ -13,20 +13,17 @@ export default function ResourceCard({
     category,
     shortDescription,
     image,
+    rating,
     onClick,
 }: ResourceCardProps) {
     return (
         <motion.div
             layoutId={`card-${name}`}
-            className="bg-white rounded-[20px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer group h-full flex flex-col border border-transparent hover:border-port-mist"
+            className="bg-white rounded-[20px] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer group h-full flex flex-col border border-transparent hover:border-port-mist"
             onClick={onClick}
             whileHover={{ y: -4 }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            drag
-            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-            dragElastic={0.1}
-            whileDrag={{ scale: 1.03, zIndex: 10 }}
         >
             {/* Image Header */}
             <div className="relative h-48 w-full overflow-hidden">
@@ -49,7 +46,19 @@ export default function ResourceCard({
 
             {/* Content */}
             <div className="p-6 flex-1 flex flex-col">
-                {/* Short Description */}
+                {/* Rating & Short Description */}
+                <div className="flex items-center gap-1 mb-2">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                        <Star
+                            key={i}
+                            size={14}
+                            className={`${i < Math.round(rating || 0) ? "text-yellow-400 fill-yellow-400" : "text-gray-200"
+                                }`}
+                        />
+                    ))}
+                    <span className="text-xs text-port-slate ml-1 pt-0.5">({rating})</span>
+                </div>
+
                 <p className="text-port-slate text-[15px] leading-relaxed mb-6 line-clamp-3 flex-grow">
                     {shortDescription}
                 </p>
