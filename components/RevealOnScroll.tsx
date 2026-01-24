@@ -17,8 +17,9 @@ export default function RevealOnScroll({ children, className = "", delay = 0 }: 
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             // 应用延迟效果
-            entry.target.style.transitionDelay = `${delay}ms`;
-            entry.target.classList.add("active");
+            const target = entry.target as HTMLElement;
+            target.style.transitionDelay = `${delay}ms`;
+            target.classList.add("active");
           }
         });
       },

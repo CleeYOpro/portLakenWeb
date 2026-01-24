@@ -14,7 +14,6 @@ interface ExternalLink {
     title: string;
     url: string;
 }
-
 export default function AIOverview({ aiQuery, contextResources }: AIOverviewProps) {
     const [summary, setSummary] = useState<string>("");
     const [externalLinks, setExternalLinks] = useState<ExternalLink[]>([]);
@@ -65,7 +64,7 @@ export default function AIOverview({ aiQuery, contextResources }: AIOverviewProp
         };
 
         fetchSummary();
-    }, [aiQuery]); // Only re-run when the trigger query changes
+    }, [aiQuery, contextResources]); // Fixed: Added contextResources as dependency
 
     if (!aiQuery) return null;
 

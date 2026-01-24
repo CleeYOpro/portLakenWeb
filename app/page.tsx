@@ -986,7 +986,7 @@ function PortLakenServicesSection({ galleryImages }) {
               <button
                 key={i}
                 onClick={() => setActive(i)}
-                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${i === active ? 'bg-white w-6' : 'bg-white/40 w-2.5 hover:bg-white/60'
+                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${i === active ? 'bg-white w-6' : 'bg-white/50 w-2.5 hover:bg-white/60'
                   }`}
                 aria-label={`Go to service ${i + 1}`}
                 aria-current={i === active ? 'true' : 'false'}
@@ -1001,29 +1001,35 @@ function PortLakenServicesSection({ galleryImages }) {
 
 // Spotlight Slideshow Component
 function SpotlightSlideshow({ galleryImages }) {
-  const spotlightData = [
-    {
-      image: galleryImages[11],
-      title: "Winter Film Festival",
-      description: "Catch indie films and documentaries at the downtown theater from 6 PM nightly. Tickets available online.",
-    },
-    {
-      image: galleryImages[12],
-      title: "Valentine’s Craft Fair",
-      description: "Local artisans showcase handmade gifts, flowers, and sweets at the city hall plaza all weekend.",
-    },
-    {
-      image: galleryImages[13],
-      title: "Community Charity Run",
-      description: "5K run through the park to raise funds for local shelters. Registration starts at 8 AM.",
-    },
-  ];
+  const [spotlightData, setSpotlightData] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/spotlight-data');
+        const data = await response.json();
+        setSpotlightData(data);
+      } catch (error) {
+        console.error('Error fetching spotlight data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (spotlightData.length > 0) {
+      console.log(`Spotlight data updated with ${spotlightData.length} items`);
+    }
+  }, [spotlightData.length]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
+    // Only run the interval if we have data
+    if (spotlightData.length === 0) return;
+
     const interval = setInterval(() => {
       setIsAnimating(true);
       setTimeout(() => {
@@ -1033,9 +1039,20 @@ function SpotlightSlideshow({ galleryImages }) {
     }, 5200);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [spotlightData.length]); // Fixed: Added spotlightData.length as dependency
 
-  const { image, title, description } = spotlightData[currentIndex];
+  // Safely access spotlight data with fallback
+  const currentSpotlight = spotlightData[currentIndex] || { image: '', title: '', description: '' };
+  const { image, title, description } = currentSpotlight;
+
+  // Don't render if no data yet
+  if (spotlightData.length === 0) {
+    return (
+      <div className="relative w-full aspect-[4/3] sm:aspect-[5/4] md:aspect-[4/5] lg:aspect-[3/4] max-h-[580px] rounded-3xl overflow-hidden shadow-2xl bg-gray-200 flex items-center justify-center">
+        <div className="text-gray-400">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative w-full aspect-[4/3] sm:aspect-[5/4] md:aspect-[4/5] lg:aspect-[3/4] max-h-[580px] rounded-3xl overflow-hidden shadow-2xl">

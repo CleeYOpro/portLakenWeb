@@ -19,6 +19,16 @@ export default function AboutPage() {
     setEmail("");
   };
 
+  const scrollToOverview = () => {
+    const overviewSection = document.getElementById('overview');
+    if (overviewSection) {
+      overviewSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
     <>
       {/* Hero - Full Screen Image */}
@@ -36,14 +46,17 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        <div className="absolute bottom-32 left-6 md:left-12 z-10">
-          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white">
-            About <span className="italic">Port Laken</span>
-          </h1>
+        <div className="absolute z-10 bottom-32 w-full">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
+            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white">
+              About <span className="italic">Port Laken</span>
+            </h1>
+          </div>
         </div>
 
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-          <ArrowDown className="w-10 h-10 text-white/60" />
+
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce cursor-pointer" onClick={scrollToOverview}>
+          <ArrowDown className="w-10 h-10 text-white/60 hover:text-white transition-colors" />
         </div>
       </section>
       <section id="overview" className="relative py-20 md:py-32 bg-white overflow-hidden">
@@ -61,12 +74,12 @@ export default function AboutPage() {
         <div className="relative z-10 flex flex-col gap-12 md:gap-20">
           <RevealOnScroll>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-port-navy max-w-7xl mx-auto px-5 md:px-8 leading-tight">
-              Hi, I’m Port Laken. I am a city where history and innovation grow side by side. I sit along the shores of northern Washington, stretching from the pristine waters of the San Juan Strait to the Olympic Mountains. Here are a few things about me.
+              Hi, I&rsquo;m Port Laken. I am a city where history and innovation grow side by side. I sit along the shores of northern Washington, stretching from the pristine waters of the San Juan Strait to the Olympic Mountains. Here are a few things about me.
             </h2>
           </RevealOnScroll>
           <RevealOnScroll>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-port-navy max-w-7xl mx-auto px-5 md:px-8 pt-12 md:pt-20">
-              Numerically, I'm...
+              Numerically, I&apos;m...
             </h2>
           </RevealOnScroll>
         </div>
