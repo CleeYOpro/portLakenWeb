@@ -62,7 +62,16 @@ const departments = [
    FLIP CARD
 ===================== */
 
-function DepartmentCard({ dept }) {
+interface DepartmentCardProps {
+  dept: {
+    title: string;
+    icon: string;
+    description: string;
+    url: string;
+  };
+}
+
+function DepartmentCard({ dept }: DepartmentCardProps) {
   const [flipped, setFlipped] = useState(false);
 
   return (
@@ -128,7 +137,7 @@ export default function DepartmentsPage() {
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100,
         damping: 12
       }
@@ -142,7 +151,7 @@ export default function DepartmentsPage() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   };
@@ -154,7 +163,7 @@ export default function DepartmentsPage() {
       x: 0,
       transition: {
         duration: 0.7,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   };
@@ -166,7 +175,7 @@ export default function DepartmentsPage() {
       x: 0,
       transition: {
         duration: 0.7,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   };
@@ -174,7 +183,7 @@ export default function DepartmentsPage() {
   return (
     <>
       {/* HERO */}
-      <section className="pt-32 pb-20 bg-gradient-to-b from-port-mist to-port-cream overflow-hidden">
+      <section className="pt-32 bg-gradient-to-b from-port-mist to-port-cream overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h1
             initial={{ opacity: 0, y: -30 }}
@@ -198,15 +207,6 @@ export default function DepartmentsPage() {
       {/* DEPARTMENTS */}
       <section className="py-20 bg-port-cream overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeInUp}
-            className="text-3xl font-display font-bold text-port-navy mb-10"
-          >
-            Our Departments
-          </motion.h2>
 
           <motion.div
             initial="hidden"
