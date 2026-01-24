@@ -70,6 +70,22 @@ body {
   width: 8px;
 }
 
+.perspective {
+  perspective: 1200px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
 ::-webkit-scrollbar-track {
   background: var(--color-fog-white);
 }
@@ -130,12 +146,10 @@ body {
 }
 
 .hero-gradient {
-  background: linear-gradient(
-    135deg,
-    rgba(30, 58, 95, 0.7) 0%,
-    rgba(45, 74, 111, 0.5) 50%,
-    rgba(74, 109, 140, 0.3) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(30, 58, 95, 0.7) 0%,
+      rgba(45, 74, 111, 0.5) 50%,
+      rgba(74, 109, 140, 0.3) 100%);
 }
 
 /* =========================
@@ -204,7 +218,18 @@ body {
 /* =========================
    Delays
 ========================= */
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
+}

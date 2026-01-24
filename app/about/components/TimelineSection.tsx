@@ -1,7 +1,7 @@
 "use client";
-
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+
 
 interface TimelineData {
     year: number;
@@ -139,7 +139,6 @@ const timelineData: TimelineData[] = [
         ]
     }
 ];
-
 
 export default function TimelineSection() {
     const [activeYear, setActiveYear] = useState(1846);

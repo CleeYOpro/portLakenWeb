@@ -4,6 +4,7 @@ import { Resource } from "../resources";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, MapPin, Phone, Globe, Mail, Facebook, Twitter, Instagram, Star } from "lucide-react";
 import { useEffect } from "react";
+import Image from 'next/image';
 
 interface ResourcePopupProps {
     resource: Resource | null;
@@ -66,10 +67,12 @@ export default function ResourcePopup({ resource, onClose }: ResourcePopupProps)
 
                         {/* Left Column: Image & Quick Info */}
                         <div className="w-full md:w-2/5 relative h-64 md:h-auto bg-port-mist/10">
-                            <img
+                            <Image
                                 src={resource.image}
                                 alt={resource.name}
                                 className="w-full h-full object-cover"
+                                fill
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-port-navy/60 to-transparent flex items-end p-6 md:p-8">
                                 <div className="text-white">
