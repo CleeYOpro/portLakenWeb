@@ -39,6 +39,13 @@
   --color-deep-navy: #32424f;
 }
 
+/* Glass effect for dropdown menus */
+.glass {
+  background: rgba(241, 245, 249, 0.75); /* same as navbar */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
 /* =========================
    Global Layout
 ========================= */

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import { GiWaves } from 'react-icons/gi';
-import { Search, LogIn, ChevronDown, Menu, X } from 'lucide-react';
+import { Search, LogIn, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -40,16 +40,14 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 z-50 w-full transition-all duration-300 ease-in-out border border-white/20 backdrop-blur-3xl shadow-md ${scrolled ? 'rounded-b-3xl' : 'rounded-b-3xl'}`}
         style={{
-          backgroundColor: scrolled
-            ? 'rgba(241, 245, 249, 0.75)'  // Slightly less white, lower opacity
-            : 'rgba(241, 245, 249, 0.75)',  // Slightly less white, lower opacity
+          backgroundColor: 'rgba(241, 245, 249, 0.75)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
         }}
       >
         <div className="px-6 max-w-[80rem] mx-auto">
           <div className="flex items-center justify-center h-20 relative">
-            {/* Left: Logo - Positioned on the far left */}
+            {/* Left: Logo */}
             <div className="absolute left-6">
               <Link href="/" className="flex items-center gap-2.5 group">
                 <GiWaves className="text-primary text-3xl transition-transform group-hover:scale-110 group-hover:rotate-12" />
@@ -57,11 +55,21 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Center: Desktop Navigation - Now truly centered */}
+            {/* Center: Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-6">
               <NavLink href="/about" label="About" />
-              <NavLink href="/news" label="News" />
-              <NavLink href="/departments" label="Departments" />
+              <NavLink href="/resource-directory" label="Resources" />
+              <NavLink href="/events" label="Events" />
+              <NavDropdown
+                label="Departments"
+                isActive={activeDropdown === 'departments'}
+                onMouseEnter={() => handleMouseEnter('departments')}
+                onMouseLeave={handleMouseLeave}
+              >
+                <DropdownLink href="/departments/fire" label="Fire" />
+                <DropdownLink href="/departments/police" label="Police" />
+                {/* Add more department pages here */}
+              </NavDropdown>
               <NavDropdown
                 label="Government"
                 isActive={activeDropdown === 'government'}
@@ -72,6 +80,7 @@ export default function Navbar() {
                 <DropdownLink href="/ordinances" label="Ordinances" />
                 <DropdownLink href="/boards-committees" label="Boards & Committees" />
                 <DropdownLink href="/environmental" label="Environment" />
+                <DropdownLink href="/careers" label="Employment" />
               </NavDropdown>
               <NavDropdown
                 label="Residents"
@@ -80,25 +89,15 @@ export default function Navbar() {
                 onMouseLeave={handleMouseLeave}
               >
                 <DropdownLink href="/living-in-portlaken" label="Life" />
+                <DropdownLink href="/news" label="News" />
                 <DropdownLink href="/forms" label="Forms & Applications" />
-                <DropdownLink href="/careers" label="Employment" />
-              </NavDropdown>
-              <NavDropdown
-                label="Community Hub"
-                isActive={activeDropdown === 'community'}
-                onMouseEnter={() => handleMouseEnter('community')}
-                onMouseLeave={handleMouseLeave}
-              >
-                <DropdownLink href="/resource-directory" label="Resource Directory" />
-                <DropdownLink href="/events" label="Events" />
                 <DropdownLink href="/map" label="Map" />
-                <DropdownLink href="/submit-resource" label="Submit a Resource" />
                 <DropdownLink href="/community-stories" label="Community Stories" />
               </NavDropdown>
               <NavLink href="/references" label="References" />
             </div>
 
-            {/* Right: Quick Actions - Positioned on the far right */}
+            {/* Right: Quick Actions */}
             <div className="absolute right-6 flex items-center gap-3">
               <button
                 onClick={() => setSearchOpen(true)}
@@ -123,12 +122,9 @@ export default function Navbar() {
                 aria-label="Menu"
               >
                 <div className="w-6 h-5 flex flex-col justify-between">
-                  <span className={`block h-0.5 w-full bg-current transform transition-all duration-300 ease-out ${mobileMenuOpen ? 'rotate-45 translate-y-2' : 'rotate-0 translate-y-0'
-                    }`} />
-                  <span className={`block h-0.5 w-full bg-current transition-all duration-300 ease-out ${mobileMenuOpen ? 'opacity-0' : 'opacity-100'
-                    }`} />
-                  <span className={`block h-0.5 w-full bg-current transform transition-all duration-300 ease-out ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : 'rotate-0 translate-y-0'
-                    }`} />
+                  <span className={`block h-0.5 w-full bg-current transform transition-all duration-300 ease-out ${mobileMenuOpen ? 'rotate-45 translate-y-2' : 'rotate-0 translate-y-0'}`} />
+                  <span className={`block h-0.5 w-full bg-current transition-all duration-300 ease-out ${mobileMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
+                  <span className={`block h-0.5 w-full bg-current transform transition-all duration-300 ease-out ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : 'rotate-0 translate-y-0'}`} />
                 </div>
               </button>
             </div>
@@ -137,66 +133,10 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Slide-out Menu */}
-      <div
-        className={`fixed inset-0 bg-white/80 backdrop-blur-xl shadow-2xl z-[60] transform transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          } lg:hidden`}
-      >
-        <div className="p-6 h-full overflow-y-auto">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-2.5">
-              <GiWaves className="text-primary text-2xl" />
-              <span className="font-nunito font-bold text-xl text-deep-navy">Port Laken</span>
-            </div>
-            <button
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2 text-deep-navy hover:text-primary relative w-10 h-10 flex items-center justify-center"
-              aria-label="Close Menu"
-            >
-              <div className="w-6 h-5 flex flex-col justify-between">
-                <span className="block h-0.5 w-full bg-current transform rotate-45 translate-y-2" />
-                <span className="block h-0.5 w-full bg-current opacity-0" />
-                <span className="block h-0.5 w-full bg-current transform -rotate-45 -translate-y-2" />
-              </div>
-            </button>
-          </div>
-
-          <div className="space-y-2">
-            <MobileNavLink href="/about" label="About" onClick={() => setMobileMenuOpen(false)} />
-            <MobileNavLink href="/news" label="News" onClick={() => setMobileMenuOpen(false)} />
-            <MobileNavLink href="/departments" label="Departments" onClick={() => setMobileMenuOpen(false)} />
-            <MobileDropdown label="Government">
-              <MobileLink href="/mayor-council" label="Council" onClick={() => setMobileMenuOpen(false)} />
-              <MobileLink href="/ordinances" label="Ordinances" onClick={() => setMobileMenuOpen(false)} />
-              <MobileLink href="/boards-committees" label="Boards & Committees" onClick={() => setMobileMenuOpen(false)} />
-              <MobileLink href="/environmental" label="Environment" onClick={() => setMobileMenuOpen(false)} />
-            </MobileDropdown>
-            <MobileDropdown label="Residents">
-              <MobileLink href="/living-in-portlaken" label="Life" onClick={() => setMobileMenuOpen(false)} />
-              <MobileLink href="/forms" label="Forms & Applications" onClick={() => setMobileMenuOpen(false)} />
-              <MobileLink href="/careers" label="Employment" onClick={() => setMobileMenuOpen(false)} />
-            </MobileDropdown>
-            <MobileDropdown label="Community Hub">
-              <MobileLink href="/resource-directory" label="Resource Directory" onClick={() => setMobileMenuOpen(false)} />
-              <MobileLink href="/events" label="Events" onClick={() => setMobileMenuOpen(false)} />
-              <MobileLink href="/map" label="Map" onClick={() => setMobileMenuOpen(false)} />
-              <MobileLink href="/submit-resource" label="Submit a Resource" onClick={() => setMobileMenuOpen(false)} />
-              <MobileLink href="/community-stories" label="Community Stories" onClick={() => setMobileMenuOpen(false)} />
-            </MobileDropdown>
-            <MobileNavLink href="/references" label="References" onClick={() => setMobileMenuOpen(false)} />
-          </div>
-
-          <div className="mt-8 pt-6 border-t border-gray-200">
-            <Link
-              href="/sign-in"
-              className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-primary text-white rounded-full font-nunito font-semibold hover:bg-primary/80 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <LogIn className="w-4 h-4" />
-              Sign In
-            </Link>
-          </div>
-        </div>
-      </div>
+      <MobileMenu
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
+      />
 
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
@@ -270,10 +210,19 @@ function NavDropdown({
       </button>
 
       {isActive && (
-        <div className="absolute top-full left-0 mt-6 bg-white/90 backdrop-blur-2xl rounded-2xl shadow-lg border border-white/20 py-3 min-w-[240px] animate-fadeIn">
+        <div
+          className="absolute top-full left-0 mt-2 rounded-2xl border  shadow-sm min-w-[240px] animate-fadeIn"
+          style={{
+            zIndex: 60,
+            backgroundColor: 'rgba(241, 245, 249, 0.75)', // same as navbar
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+          }}
+        >
           {children}
         </div>
       )}
+
     </div>
   );
 }
@@ -289,12 +238,77 @@ function DropdownLink({ href, label }: { href: string; label: string }) {
   );
 }
 
-// Mobile Components
-function MobileNavLink({ href, label, onClick }: { href: string; label: string; onClick: () => void }) {
+// Mobile Menu Components
+function MobileMenu({ mobileMenuOpen, setMobileMenuOpen }: { mobileMenuOpen: boolean; setMobileMenuOpen: (open: boolean) => void }) {
+  return (
+    <div
+      className={`fixed inset-0 bg-white/80 backdrop-blur-xl shadow-2xl z-[60] transform transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} lg:hidden`}
+    >
+      <div className="p-6 h-full overflow-y-auto">
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-2.5">
+            <GiWaves className="text-primary text-2xl" />
+            <span className="font-nunito font-bold text-xl text-deep-navy">Port Laken</span>
+          </div>
+          <button
+            onClick={() => setMobileMenuOpen(false)}
+            className="p-2 text-deep-navy hover:text-primary relative w-10 h-10 flex items-center justify-center"
+            aria-label="Close Menu"
+          >
+            <div className="w-6 h-5 flex flex-col justify-between">
+              <span className="block h-0.5 w-full bg-current transform rotate-45 translate-y-2" />
+              <span className="block h-0.5 w-full bg-current opacity-0" />
+              <span className="block h-0.5 w-full bg-current transform -rotate-45 -translate-y-2" />
+            </div>
+          </button>
+        </div>
+
+        <div className="space-y-2">
+          <MobileNavLink href="/about" label="About" setMobileMenuOpen={setMobileMenuOpen} />
+          <MobileNavLink href="/resource-directory" label="Resources" setMobileMenuOpen={setMobileMenuOpen} />
+          <MobileNavLink href="/events" label="Events" setMobileMenuOpen={setMobileMenuOpen} />
+          <MobileDropdown label="Departments" setMobileMenuOpen={setMobileMenuOpen}>
+            <MobileLink href="/departments/fire" label="Fire" setMobileMenuOpen={setMobileMenuOpen} />
+            <MobileLink href="/departments/police" label="Police" setMobileMenuOpen={setMobileMenuOpen} />
+            {/* More department pages */}
+          </MobileDropdown>
+          <MobileDropdown label="Government" setMobileMenuOpen={setMobileMenuOpen}>
+            <MobileLink href="/mayor-council" label="Council" setMobileMenuOpen={setMobileMenuOpen} />
+            <MobileLink href="/ordinances" label="Ordinances" setMobileMenuOpen={setMobileMenuOpen} />
+            <MobileLink href="/boards-committees" label="Boards & Committees" setMobileMenuOpen={setMobileMenuOpen} />
+            <MobileLink href="/environmental" label="Environment" setMobileMenuOpen={setMobileMenuOpen} />
+            <MobileLink href="/careers" label="Employment" setMobileMenuOpen={setMobileMenuOpen} />
+          </MobileDropdown>
+          <MobileDropdown label="Residents" setMobileMenuOpen={setMobileMenuOpen}>
+            <MobileLink href="/living-in-portlaken" label="Life" setMobileMenuOpen={setMobileMenuOpen} />
+            <MobileLink href="/news" label="News" setMobileMenuOpen={setMobileMenuOpen} />
+            <MobileLink href="/forms" label="Forms & Applications" setMobileMenuOpen={setMobileMenuOpen} />
+            <MobileLink href="/map" label="Map" setMobileMenuOpen={setMobileMenuOpen} />
+            <MobileLink href="/community-stories" label="Community Stories" setMobileMenuOpen={setMobileMenuOpen} />
+          </MobileDropdown>
+          <MobileNavLink href="/references" label="References" setMobileMenuOpen={setMobileMenuOpen} />
+        </div>
+
+        <div className="mt-8 pt-6 border-t border-gray-200">
+          <Link
+            href="/sign-in"
+            className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-primary text-white rounded-full font-nunito font-semibold hover:bg-primary/80 transition-colors"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <LogIn className="w-4 h-4" />
+            Sign
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MobileNavLink({ href, label, setMobileMenuOpen }: { href: string; label: string; setMobileMenuOpen: (open: boolean) => void }) {
   return (
     <Link
       href={href}
-      onClick={onClick}
+      onClick={() => setMobileMenuOpen(false)}
       className="block px-4 py-3 font-nunito font-semibold text-deep-navy hover:bg-primary/10 hover:text-primary rounded-xl transition-colors"
     >
       {label}
@@ -302,9 +316,8 @@ function MobileNavLink({ href, label, onClick }: { href: string; label: string; 
   );
 }
 
-function MobileDropdown({ label, children }: { label: string; children: React.ReactNode }) {
+function MobileDropdown({ label, children, setMobileMenuOpen }: { label: string; children: React.ReactNode; setMobileMenuOpen: (open: boolean) => void }) {
   const [isOpen, setIsOpen] = useState(false);
-
   return (
     <div className="border-b border-gray-100 pb-2">
       <button
@@ -314,20 +327,16 @@ function MobileDropdown({ label, children }: { label: string; children: React.Re
         {label}
         <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
-      {isOpen && (
-        <div className="mt-1 ml-4 space-y-1 animate-fadeIn">
-          {children}
-        </div>
-      )}
+      {isOpen && <div className="mt-1 ml-4 space-y-1">{children}</div>}
     </div>
   );
 }
 
-function MobileLink({ href, label, onClick }: { href: string; label: string; onClick: () => void }) {
+function MobileLink({ href, label, setMobileMenuOpen }: { href: string; label: string; setMobileMenuOpen: (open: boolean) => void }) {
   return (
     <Link
       href={href}
-      onClick={onClick}
+      onClick={() => setMobileMenuOpen(false)}
       className="block px-4 py-2.5 font-nunito font-semibold text-deep-navy hover:text-primary transition-colors"
     >
       {label}
