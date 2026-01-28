@@ -14,17 +14,17 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Gallery Images
 const galleryImages = [
-  "https://cdn.pixabay.com/photo/2018/10/22/20/34/hamburg-3766309_960_720.jpg",
-  "https://cdn.pixabay.com/photo/2023/04/16/15/00/port-7930392_640.jpg",
-  "https://cdn.pixabay.com/photo/2020/03/22/10/19/fog-4956588_960_720.jpg",
-  "https://cdn.pixabay.com/photo/2016/02/26/13/38/england-1224050_1280.jpg",
-  "https://cdn.pixabay.com/photo/2023/05/03/12/25/boats-7967544_1280.jpg",
-  "https://cdn.pixabay.com/photo/2020/05/01/11/31/grey-geese-5116582_640.jpg",
-  "https://cdn.pixabay.com/photo/2016/11/07/09/07/river-1805188_640.jpg",
-  "https://cdn.pixabay.com/photo/2019/10/04/10/56/father-4525302_640.jpg",
-  "https://cdn.pixabay.com/photo/2021/11/01/11/31/taiwan-6760128_1280.jpg",
-  "https://cdn.pixabay.com/photo/2022/10/13/07/54/crane-houses-7518536_960_720.jpg",
-  "https://cdn.pixabay.com/photo/2019/08/26/10/10/dockland-4431309_960_720.jpg",
+  "https://pixabay.com/images/download/image-2935360_1920.png",
+  "https://pixabay.com/images/download/image-2935360_1920.png",
+  "https://pixabay.com/images/download/image-2935360_1920.png",
+  "https://pixabay.com/images/download/image-2935360_1920.png",
+  "https://pixabay.com/images/download/image-2935360_1920.png",
+  "https://pixabay.com/images/download/image-2935360_1920.png",
+  "https://pixabay.com/images/download/image-2935360_1920.png",
+  "https://pixabay.com/images/download/image-2935360_1920.png",
+  "https://pixabay.com/images/download/image-2935360_1920.png",
+  "https://pixabay.com/images/download/image-2935360_1920.png",
+  "https://pixabay.com/images/download/image-2935360_1920.png",
 
 ];
 const upcomingEvents = [

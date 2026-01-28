@@ -7,6 +7,7 @@ const nextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "cdn.pixabay.com" },
+      { protocol: "https", hostname: "pixabay.com" },
       { protocol: "https", hostname: "encrypted-tbn0.gstatic.com" },
       { protocol: "https", hostname: "res.cloudinary.com" },
       { protocol: "https", hostname: "upload.wikimedia.org" },
