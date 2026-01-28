@@ -2,7 +2,6 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { Reorder, motion } from "framer-motion";
 import { RESOURCES, Resource, ResourceCategory } from "./resources";
 import ResourceCard from "./_components/ResourceCard";
 import ResourcePopup from "./_components/ResourcePopup";
@@ -159,18 +158,7 @@ function ResourceDirectoryContent() {
                   </div>
                 </div>
 
-                {/* Tag Badges */}
-                <div>
-                  <h3 className="text-xs font-bold text-port-slate uppercase tracking-wider mb-4">Popular Tags</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {["Legal Aid", "Counseling", "Food Bank", "Housing", "Youth", "Mental Health", "Service Stars"].map(tag => (
-                      <button key={tag} className="px-3 py-1.5 bg-gray-50 rounded-lg text-xs font-semibold text-port-slate hover:text-port-navy hover:bg-gray-100 border border-port-mist transition-colors flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-port-sky/50"></span>
-                        {tag}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+
 
                 {/* Dropdown Selector */}
                 <div>
@@ -210,29 +198,21 @@ function ResourceDirectoryContent() {
             </div>
 
             {/* Grid - Changed to 1 column on mobile, 3 on desktop */}
-            <Reorder.Group
-              axis="y"
-              onReorder={setFilteredResources}
-              values={filteredResources}
+            <div
               className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 bg-white p-4 md:p-6 rounded-3xl"
-              as="ul"
             >
               {filteredResources.map((resource) => (
-                <Reorder.Item
+                <div
                   key={resource.id}
-                  value={resource}
-                  as="li"
-                  className="h-full relative z-0 touch-none list-none"
-                  dragListener={true}
-                  whileDrag={{ scale: 1.02, zIndex: 10, cursor: "grabbing" }}
+                  className="h-full relative z-0 touch-none"
                 >
                   <ResourceCard
                     {...resource}
                     onClick={() => setSelectedResource(resource)}
                   />
-                </Reorder.Item>
+                </div>
               ))}
-            </Reorder.Group>
+            </div>
 
             {/* Empty State */}
             {filteredResources.length === 0 && (
