@@ -60,16 +60,8 @@ export default function Navbar() {
               <NavLink href="/about" label="About" />
               <NavLink href="/resource-directory" label="Resources" />
               <NavLink href="/events" label="Events" />
-              <NavDropdown
-                label="Departments"
-                isActive={activeDropdown === 'departments'}
-                onMouseEnter={() => handleMouseEnter('departments')}
-                onMouseLeave={handleMouseLeave}
-              >
-                <DropdownLink href="/departments/fire" label="Fire" />
-                <DropdownLink href="/departments/police" label="Police" />
-                {/* Add more department pages here */}
-              </NavDropdown>
+              <NavLink href="/departments" label="Departments" />
+
               <NavDropdown
                 label="Government"
                 isActive={activeDropdown === 'government'}
@@ -211,12 +203,12 @@ function NavDropdown({
 
       {isActive && (
         <div
-          className="absolute top-full left-0 mt-2 rounded-2xl border  shadow-sm min-w-[240px] animate-fadeIn"
+          className="absolute top-full left-0 mt-8 rounded-2xl border  shadow-sm min-w-[240px] animate-fadeIn"
           style={{
             zIndex: 60,
-            backgroundColor: 'rgba(241, 245, 249, 0.75)', // same as navbar
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
+            backgroundColor: 'rgba(241, 245, 249, 0.7)', // increased transparency for more blur effect
+            backdropFilter: 'blur(100px)', // increased blur amount
+            WebkitBackdropFilter: 'blur(100px)', // increased blur amount
           }}
         >
           {children}
@@ -231,9 +223,10 @@ function DropdownLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="block px-6 py-2.5 font-nunito font-semibold text-deep-navy hover:bg-primary/10 hover:text-primary transition-colors rounded-lg"
+      className="block px-6 py-2.5 font-nunito font-semibold text-deep-navy hover:bg-primary/10 hover:text-primary transition-colors rounded-lg group relative"
     >
       {label}
+      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
     </Link>
   );
 }
