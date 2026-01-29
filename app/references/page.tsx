@@ -14,6 +14,8 @@ import {
   FaServer,
   FaChevronDown,
   FaChevronUp,
+  FaClipboardList,
+  FaUsers,
 } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss, SiVercel, SiTypescript } from "react-icons/si";
 
@@ -164,6 +166,63 @@ const copyrightChecklist = [
   { item: "WCAG 2.2 AA accessibility compliance maintained", status: true },
 ];
 
+const workLogEntries = [
+  { date: "10/13", task: "Starting landing page", time: "1 hour", member: "C.B", comments: "Started working on the landing page and getting an idea on how I wanted it to look" },
+  { date: "10/13", task: "Created general navigation bar for all pages", time: "30 min", member: "C.B", comments: "Created a general nav bar that all pages will use" },
+  { date: "10/13", task: "Finished first section of landing page", time: "1 hour", member: "C.B", comments: "Finished designing the first section of the landing page which shows the city highlights" },
+  { date: "10/14", task: "Started resource directory", time: "1 hour", member: "O.V", comments: "Started resource directory based on the vision I had in mind" },
+  { date: "10/14", task: "Finished resource directory", time: "2 hours", member: "C.B", comments: "Finished full resource directory for the city" },
+  { date: "10/14", task: "Created snapshot design of resource detail", time: "1 hour", member: "O.V", comments: "Created a snapshot page that shows an example of what it looks like when you click on one of the resources" },
+  { date: "10/15", task: "Started sign-in page", time: "1 hour", member: "S.J", comments: "Created V1 of our sign-in page" },
+  { date: "10/15", task: "Started events and calendar page", time: "1 hour", member: "I.B", comments: "Created V1 of the calendar design" },
+  { date: "10/15", task: "Started about page", time: "1 hour", member: "A.N", comments: "Created V1 for the first few sections of the about page" },
+  { date: "10/16", task: "Finished timeline", time: "1 hour", member: "A.N", comments: "Created V1 of the city timeline" },
+  { date: "10/18", task: "Finished sign in page", time: "2 hours", member: "S.J", comments: "Finished final version of the sign-in page" },
+  { date: "10/18", task: "Worked on maps page", time: "1 hour", member: "I.B", comments: "Started working on maps page" },
+  { date: "10/19", task: "Created V1 for Boards and Committee page", time: "2 hours", member: "C.B", comments: "Had the idea to create a boards and committee page for citizens to get involved" },
+  { date: "10/20", task: "Started environment page", time: "1 hour", member: "O.V", comments: "Created an environment page to highlight the advances our city makes in sustainability" },
+  { date: "10/20", task: "Finished environment page", time: "2 hours", member: "O.V", comments: "Finished the whole page" },
+  { date: "10/21", task: "Finish Boards and Committee page", time: "3 hours", member: "C.B", comments: "Finished the boards and committee page" },
+  { date: "10/21", task: "Started departments page", time: "2 hours", member: "A.N", comments: "Started working on a departments page that shows all the departments in Port Laken" },
+  { date: "10/22", task: "Finished calendar and events page", time: "2 hours", member: "I.B", comments: "Finished the page that shows the event calendar and upcoming events" },
+  { date: "10/23", task: "Finished maps page", time: "1 hour", member: "I.B", comments: "Finalized the maps page" },
+  { date: "10/24", task: "Started life page", time: "1 hour", member: "S.J", comments: "Started working on the life page which highlights life in Port Laken" },
+  { date: "10/25", task: "Finished departments page", time: "2 hours", member: "A.N", comments: "Finished the departments page showing all the different departments and the work they do" },
+  { date: "10/25", task: "Started news page", time: "1 hour", member: "O.V", comments: "Started the first few sections of the news page" },
+  { date: "10/26", task: "Continued working on about page", time: "2 hours", member: "A.N", comments: "Had about page almost done except for timeline" },
+  { date: "10/26", task: "Continued the work on the news page", time: "1 hour", member: "C.B", comments: "Continued working on the news page and added spotlight section" },
+  { date: "10/27", task: "Finished the news page", time: "2 hours", member: "C.B", comments: "Finished news page" },
+  { date: "10/29", task: "Finished life page", time: "2 hours", member: "A.M", comments: "Finished the life in Port Laken page" },
+  { date: "11/2", task: "Finished about page", time: "1 hour", member: "A.N", comments: "Finished everything for about page" },
+  { date: "11/2", task: "Started city ordinances page", time: "2 hours", member: "A.M", comments: "Created V1 for city ordinances page with rules and regulations in the city" },
+  { date: "11/3", task: "Started forms page", time: "2 hours", member: "O.V", comments: "Started and almost finished the forms page" },
+  { date: "11/4", task: "Finished forms page", time: "1 hour", member: "I.B", comments: "Finished the forms page where citizens can submit applications" },
+  { date: "11/4", task: "Finished city ordinances page", time: "2 hours", member: "A.N", comments: "Finished the ordinances page" },
+  { date: "11/5", task: "Started city council page", time: "2 hours", member: "S.J", comments: "Started city council page" },
+  { date: "11/6", task: "Finished city council page", time: "1 hour", member: "C.B", comments: "Finished city council page" },
+  { date: "11/7", task: "Started employment page", time: "2 hours", member: "I.B", comments: "Started the employment page where people can see their benefits and open jobs" },
+  { date: "11/8", task: "Finished employment page", time: "1 hour", member: "A.M", comments: "Finished employment page" },
+  { date: "11/10", task: "Organized all the pages", time: "20 min", member: "C.B", comments: "Arranged all the pages neatly" },
+  { date: "11/20", task: "Created base website on localhost", time: "3 hours", member: "C.B", comments: "Created a base website showing our landing page" },
+  { date: "1/4", task: "Updated github and started project organization", time: "1 hour", member: "A.M", comments: "Created the github and organized all files and projects on VS code so everyone could start working on the actual website" },
+  { date: "1/5", task: "Sign-in page", time: "2 hours", member: "S.J", comments: "Started and finished the sign in page for our website" },
+  { date: "1/6", task: "References", time: "2 hours", member: "A.N", comments: "Started the references page and updated it with our citations" },
+  { date: "1/10", task: "About, Board & Committees, Careers, Council, Departments, Environmental", time: "6 hours", member: "O.V", comments: "Finished all of these pages" },
+  { date: "1/14", task: "Ordinances, News", time: "3 hours", member: "I.B", comments: "Finished these pages" },
+  { date: "1/18", task: "Resource Directory, Residences, Landing Page, Forms", time: "5 hours", member: "C.B", comments: "Finished these pages" },
+  { date: "1/19", task: "Events", time: "1 hour", member: "A.N", comments: "Finished these pages" },
+  { date: "1/25", task: "Submit a resource", time: "1 hour", member: "O.V", comments: "Finished these pages" },
+];
+
+const teamMembers = [
+  { initials: "C.B", name: "Team Lead", color: "bg-port-sky" },
+  { initials: "O.V", name: "Developer", color: "bg-emerald-500" },
+  { initials: "A.N", name: "Developer", color: "bg-purple-500" },
+  { initials: "I.B", name: "Developer", color: "bg-amber-500" },
+  { initials: "S.J", name: "Developer", color: "bg-rose-500" },
+  { initials: "A.M", name: "Developer", color: "bg-cyan-500" },
+];
+
 export default function ReferencesPage() {
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
 
@@ -191,6 +250,9 @@ export default function ReferencesPage() {
       <section className="py-8 bg-white border-b border-port-mist sticky top-20 z-40">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap gap-3">
+            <a href="#work-log" className="px-4 py-2 bg-port-navy text-white rounded-lg text-sm font-medium hover:bg-port-navy/80 transition-colors">
+              Work Log
+            </a>
             <a href="#code-stack" className="px-4 py-2 bg-port-frost text-port-navy rounded-lg text-sm font-medium hover:bg-port-mist transition-colors">
               Code Stack
             </a>
@@ -207,6 +269,111 @@ export default function ReferencesPage() {
               Copyright
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* Work Log Section */}
+      <section id="work-log" className="py-16 bg-port-navy">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <RevealOnScroll>
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-port-sky/20 rounded-2xl mb-6">
+                <FaClipboardList className="text-port-sky text-2xl" />
+              </div>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+                Technology Student Association Work Log
+              </h2>
+              <p className="text-white/70 max-w-2xl mx-auto">
+                A comprehensive record of our team&apos;s development progress throughout the project lifecycle.
+              </p>
+            </div>
+          </RevealOnScroll>
+
+          {/* Team Legend */}
+          <RevealOnScroll className="delay-100">
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              {teamMembers.map((member) => (
+                <div key={member.initials} className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
+                  <div className={`w-6 h-6 ${member.color} rounded-full flex items-center justify-center text-white text-xs font-bold`}>
+                    {member.initials.charAt(0)}
+                  </div>
+                  <span className="text-white/90 text-sm font-medium">{member.initials}</span>
+                </div>
+              ))}
+            </div>
+          </RevealOnScroll>
+
+          {/* Work Log Table */}
+          <RevealOnScroll className="delay-200">
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden">
+              {/* Table Header */}
+              <div className="grid grid-cols-12 bg-port-sky/20 border-b border-white/10">
+                <div className="col-span-2 md:col-span-1 px-4 py-4 text-port-sky font-bold text-sm">Date</div>
+                <div className="col-span-4 md:col-span-3 px-4 py-4 text-port-sky font-bold text-sm">Task</div>
+                <div className="col-span-2 md:col-span-1 px-4 py-4 text-port-sky font-bold text-sm text-center">Time</div>
+                <div className="col-span-2 md:col-span-1 px-4 py-4 text-port-sky font-bold text-sm text-center">Member</div>
+                <div className="hidden md:block col-span-6 px-4 py-4 text-port-sky font-bold text-sm">Comments</div>
+              </div>
+
+              {/* Table Body */}
+              <div className="max-h-[600px] overflow-y-auto">
+                {workLogEntries.map((entry, index) => {
+                  const memberInfo = teamMembers.find(m => m.initials === entry.member);
+                  return (
+                    <div
+                      key={index}
+                      className={`grid grid-cols-12 border-b border-white/5 hover:bg-white/5 transition-colors ${
+                        index % 2 === 0 ? "bg-white/[0.02]" : ""
+                      }`}
+                    >
+                      <div className="col-span-2 md:col-span-1 px-4 py-3 text-white/80 text-sm font-medium">
+                        {entry.date}
+                      </div>
+                      <div className="col-span-4 md:col-span-3 px-4 py-3 text-white text-sm">
+                        {entry.task}
+                      </div>
+                      <div className="col-span-2 md:col-span-1 px-4 py-3 text-white/70 text-sm text-center">
+                        {entry.time}
+                      </div>
+                      <div className="col-span-2 md:col-span-1 px-4 py-3 flex justify-center">
+                        <div
+                          className={`w-8 h-8 ${memberInfo?.color || "bg-gray-500"} rounded-full flex items-center justify-center text-white text-xs font-bold`}
+                          title={entry.member}
+                        >
+                          {entry.member}
+                        </div>
+                      </div>
+                      <div className="hidden md:block col-span-6 px-4 py-3 text-white/60 text-sm">
+                        {entry.comments}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </RevealOnScroll>
+
+          {/* Summary Stats */}
+          <RevealOnScroll className="delay-300">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+              <div className="bg-white/10 rounded-xl p-5 text-center">
+                <div className="text-3xl font-bold text-port-sky mb-1">{workLogEntries.length}</div>
+                <div className="text-white/70 text-sm">Total Tasks</div>
+              </div>
+              <div className="bg-white/10 rounded-xl p-5 text-center">
+                <div className="text-3xl font-bold text-port-sky mb-1">{teamMembers.length}</div>
+                <div className="text-white/70 text-sm">Team Members</div>
+              </div>
+              <div className="bg-white/10 rounded-xl p-5 text-center">
+                <div className="text-3xl font-bold text-port-sky mb-1">70+</div>
+                <div className="text-white/70 text-sm">Hours Invested</div>
+              </div>
+              <div className="bg-white/10 rounded-xl p-5 text-center">
+                <div className="text-3xl font-bold text-port-sky mb-1">20+</div>
+                <div className="text-white/70 text-sm">Pages Created</div>
+              </div>
+            </div>
+          </RevealOnScroll>
         </div>
       </section>
 
