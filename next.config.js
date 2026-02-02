@@ -13,6 +13,8 @@ const nextConfig = {
       { protocol: "https", hostname: "upload.wikimedia.org" },
       { protocol: "https", hostname: "i.redd.it" }, // Added to allow images from i.redd.it
     ],
+    domains: ['www.visitportangeles.com', '*'], // Allow all external domains including visitportangeles.com
+    unoptimized: true // This allows any external image to be used without optimization
   },
 }
 
