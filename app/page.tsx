@@ -12,21 +12,8 @@ import { FaArrowRight } from 'react-icons/fa6';
 import InvertButton from "../components/ui/InvertButton";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Gallery Images
-const galleryImages = [
-  "https://pixabay.com/images/download/image-2935360_1920.png",
-  "https://pixabay.com/images/download/image-2935360_1920.png",
-  "https://pixabay.com/images/download/image-2935360_1920.png",
-  "https://pixabay.com/images/download/image-2935360_1920.png",
-  "https://pixabay.com/images/download/image-2935360_1920.png",
-  "https://pixabay.com/images/download/image-2935360_1920.png",
-  "https://pixabay.com/images/download/image-2935360_1920.png",
-  "https://pixabay.com/images/download/image-2935360_1920.png",
-  "https://pixabay.com/images/download/image-2935360_1920.png",
-  "https://pixabay.com/images/download/image-2935360_1920.png",
-  "https://pixabay.com/images/download/image-2935360_1920.png",
 
-];
+
 const upcomingEvents = [
   {
     month: 'FEB',
@@ -115,8 +102,8 @@ const quickActions = [
     icon: <HiDocumentText className="text-3xl text-primary" />,
   },
   {
-    title: "Pay Utilities",
-    link: "#utilities",
+    title: "Access Regulatory Forms",
+    link: "/forms",
     icon: <MdPayment className="text-3xl text-primary" />,
   },
   {
@@ -185,7 +172,7 @@ export default function Home() {
                 />
 
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none" />
+                <div className="absolute inset-0 bg-black/40 pointer-events-none" />
 
                 {/* Content */}
                 <div className="relative flex items-end min-h-screen px-6 md:px-20 pb-20 pt-24">
@@ -255,7 +242,6 @@ export default function Home() {
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
-
           {/* Responsive Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {quickActions.map((action, idx) => {
@@ -266,14 +252,36 @@ export default function Home() {
                 <a
                   key={idx}
                   href={action.link}
-                  className="group relative block transition-all duration-300 hover:scale-[1.03] hover:shadow-lg active:scale-[0.98] touch-manipulation"
-                // Removed: p-[2px] gradient border
+                  className={`
+              group relative block 
+              transition-all duration-500 ease-out
+              hover:-translate-y-2 hover:scale-[1.04]
+              active:scale-[0.97] touch-manipulation
+            `}
                 >
-                  {/* Inner Pill - No outer border, just background */}
-                  <div className="flex items-center gap-3 sm:gap-4 bg-white rounded-full px-4 py-3.5 sm:px-6 sm:py-5 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-primary/5 group-hover:to-primary/10">
-
+                  {/* Main pill content */}
+                  <div
+                    className={`
+                flex items-center gap-3 sm:gap-4 
+                bg-white rounded-full 
+                px-4 py-3.5 sm:px-6 sm:py-5 
+                transition-all duration-400
+                group-hover:bg-gradient-to-r group-hover:from-primary/5 group-hover:to-primary/10
+                group-hover:shadow-[0_20px_40px_-10px_rgba(30,64,175,0.25)]
+                relative
+              `}
+                  >
                     {/* Icon Circle */}
-                    <div className="flex-shrink-0 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-primary to-primary/80 p-2.5 sm:p-3 text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                    <div
+                      className={`
+                  flex-shrink-0 w-11 h-11 sm:w-14 sm:h-14 
+                  rounded-full bg-gradient-to-br from-primary to-primary/80 
+                  p-2.5 sm:p-3 text-white 
+                  flex items-center justify-center 
+                  transition-all duration-500
+                  group-hover:scale-110 group-hover:rotate-3
+                `}
+                    >
                       {action.icon}
                     </div>
 
@@ -290,21 +298,25 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Subtle Glow on Hover */}
-                  <div className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 [@media(hover:hover)]:block hidden sm:block">
-                    <div
-                      className="absolute inset-0 rounded-full"
-                      style={{
-                        boxShadow: '0 0 20px rgba(30, 64, 175, 0.3)',
-                      }}
-                    />
-                  </div>
+                  {/* Beautiful soft floating glow – no hard edges */}
+                  <div
+                    className={`
+                pointer-events-none absolute inset-0 rounded-full 
+                opacity-0 group-hover:opacity-100 
+                transition-opacity duration-700
+                bg-gradient-to-br from-primary/20 via-primary/10 to-transparent
+                blur-xl -z-10
+                scale-110 group-hover:scale-125
+                [@media(hover:hover)]:block hidden
+              `}
+                  />
                 </a>
               );
             })}
           </div>
         </div>
       </section>
+
       {/* About Section */}
       <section className="relative py-16 md:py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
@@ -339,7 +351,7 @@ export default function Home() {
 
               {/* Parallax Image */}
               <Image
-                src={galleryImages[0]}
+                src="https://www.visitportangeles.com/visit_port_angeles_uploads/2025/12/port-angeles-wa-aerial-view.jpg"
                 alt="Port Laken Skyline"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -384,7 +396,7 @@ export default function Home() {
 
 
       {/* Services – Clean & Curved */}
-      <PortLakenServicesSection galleryImages={galleryImages} />
+      <PortLakenServicesSection />
 
       {/* News Section */}
       <section className="relative py-16 px-6 md:px-12 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
@@ -413,21 +425,21 @@ export default function Home() {
                 date: "JAN 19, 2026",
                 title: "MLK Day Service & Community Glow",
                 desc: "Port Laken honors the legacy with a special MLK Day event at the waterfront park, featuring community service, live music, and glowing lantern displays.",
-                image: "https://images.unsplash.com/photo-1540979388789-7cee28a1cdc9?auto=format&fit=crop&q=80",
+                image: "https://riverheadlocal.com/wp-content/uploads/2025/01/2025_0120_Martin-Luther-King-Lincoln-Memorial-28-Aug-1963-681x516.jpg",
               },
               {
                 slug: "winter-market",
                 date: "JAN 25, 2026",
-                title: "Coastal Winter Market Lights Up Harbor",
+                title: "Winter Market Lights Up Harbor",
                 desc: "The Winter Market returns to Harbor Plaza with local artisans, warm food trucks, craft drinks, and waterfront lights.",
-                image: "https://images.unsplash.com/photo-1519167758481-83f269a90c33?auto=format&fit=crop&q=80",
+                image: "https://foxbaltimore.com/resources/media2/16x9/3851/986/0x361/90/63423fb2-22ce-4454-aed0-68d5eab9dc17-1TOP5_ChristmasVillageinBaltimore2022_heatedtent5_creditChristinaKalff.jpg",
               },
               {
                 slug: "sustainability-vision-2026",
                 date: "FEB 10, 2026",
                 title: "City Unveils 2026 Sustainability Vision",
                 desc: "Mayor Johnson outlines new green spaces, waterfront upgrades, and eco-friendly public projects.",
-                image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&q=80",
+                image: "https://www.hkinteriors.com/wp-content/uploads/2018/11/bg-useful-links.jpg",
               },
             ].map((item, i) => (
               <div key={i} className="group cursor-pointer">
@@ -564,7 +576,7 @@ export default function Home() {
 
             {/* Spotlight Slideshow - now much more prominent */}
             <div className="lg:sticky lg:top-8">
-              <SpotlightSlideshow galleryImages={galleryImages} />
+              <SpotlightSlideshow />
             </div>
           </div>
         </div>
@@ -587,105 +599,139 @@ export default function Home() {
                 {[
                   {
                     id: 1,
-                    award: "#1 Best Family-Friendly Place to Live in the U.S.",
-                    source: "U.S. News & World Report, 2025",
-                    description: "Safe neighborhoods, top-rated schools, and a community built on connection and care.",
-                    image: "/awards/family-friendly.jpg"
+                    award: "Best Town in America",
+                    source: "Outside Magazine, 2025",
+                    description: "Safe, connected community with top schools and easy access to mountains and water.",
+                    image: "https://cdn.flipboard.com/dev_O/insideflipboard/outside/outside_cloud_blog_1200x750.jpg",
+                    link: "https://www.outsideonline.com/" // Example link for the first award
                   },
                   {
                     id: 2,
-                    award: "Most Innovative Mid-Sized City in the Northwest",
-                    source: "UrbanNext Magazine, 2025",
-                    description: "AI-powered public services, clean energy, and citizen-first tech.",
-                    image: "/awards/innovation.jpg"
+                    award: "LIVE UNITED Award",
+                    source: "United Way, 2024",
+                    description: "Honored for its work in safe and affordable housing development.",
+                    image: "https://newsprogress.com/wp-content/uploads/2016/05/Dave-Cole-Award-427.jpg",
+                    link: "https://www.unitedway.org/" // Example link for the second award
                   },
                   {
                     id: 3,
                     award: "#1 Civic Building Redesign — Port Laken City Hall",
                     source: "Design Forward Awards, 2025",
                     description: "A blend of heritage design, solar glass, and open-floor collaboration.",
-                    image: "/awards/city-hall.jpg"
+                    image: "https://www.utiledesign.com/wp-content/uploads/2025/10/City-Hall-Lobby-424_low-1024x678.jpg",
+                    link: "https://designforwardawards.com/" // Example link for the third award
                   },
                   {
                     id: 4,
                     award: "Best Winter Festival in a Small City",
                     source: "Travel & Culture Weekly, 2025",
                     description: "Celebrated for ice sculptures, art shows, and live harbor performances.",
-                    image: "/awards/winter-festival.jpg"
+                    image: "https://foxbaltimore.com/resources/media2/16x9/3851/986/0x361/90/63423fb2-22ce-4454-aed0-68d5eab9dc17-1TOP5_ChristmasVillageinBaltimore2022_heatedtent5_creditChristinaKalff.jpg",
+                    link: "https://travelandcultureweekly.com/" // Example link for the fourth award
                   },
                   {
                     id: 5,
                     award: "Top 100 Emerging AI Startups — NeuralHaven Labs",
                     source: "TechNation, 2025",
                     description: "Port Laken's own accessibility-focused AI firm making global waves.",
-                    image: "/awards/neuralhaven.jpg"
+                    image: "https://substackcdn.com/image/fetch/$s_!PSnS!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa7f4e29e-9704-41dc-8d8e-f9b17ad8eb15_1489x498.png",
+                    link: "https://technation.com/" // Example link for the fifth award
                   }
                 ].map((award, index) => (
-                  <div key={award.id} className="flex-none w-80 sm:w-96 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all border group/card" style={{ borderColor: 'var(--color-primary-shade)' }}>
+                  <a href={award.link} target="_blank" rel="noopener noreferrer" key={award.id} className="flex-none w-80 sm:w-96 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all border group/card" style={{ borderColor: 'var(--color-primary-shade)' }}>
                     <div className="h-48 overflow-hidden relative" style={{ backgroundColor: 'var(--color-primary-shade)' }}>
-                      <div className="absolute inset-0 flex items-center justify-center" style={{ color: 'var(--color-primary)' }}>
-                        <span className="text-sm font-medium">Award Image</span>
-                      </div>
+                      {award.image.startsWith('http') ? (
+                        <Image
+                          src={award.image}
+                          alt={award.award}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                          <div className="absolute inset-0 flex items-center justify-center" style={{ color: 'var(--color-primary)' }}>
+                            <span className="text-sm font-medium">Award Image</span>
+                          </div>
+                      )}
                       <div className="absolute bottom-0 left-0 right-0 h-1" style={{ backgroundColor: 'var(--color-primary)' }}></div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-gray-900 font-bold text-xl mb-2 transition-colors" style={{ color: '' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-primary)'} onMouseLeave={(e) => e.currentTarget.style.color = '#111827'}>{award.award}</h3>
+                      <h3 className="text-gray-900 font-bold text-xl mb-2 transition-colors relative group/title" style={{ color: '' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-primary)'} onMouseLeave={(e) => e.currentTarget.style.color = '#111827'}>
+                        {award.award}
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover/title:w-full"></span>
+                      </h3>
                       <p className="text-sm text-gray-500 mb-3">{award.source}</p>
                       <p className="text-gray-600">{award.description}</p>
                     </div>
-                  </div>
+                  </a>
                 ))}
                 {/* Duplicate items for infinite scroll effect */}
                 {[
                   {
                     id: 1,
-                    award: "#1 Best Family-Friendly Place to Live in the U.S.",
-                    source: "U.S. News & World Report, 2025",
-                    description: "Safe neighborhoods, top-rated schools, and a community built on connection and care.",
-                    image: "/awards/family-friendly.jpg"
+                    award: "Best Town in America",
+                    source: "Outside Magazine, 2025",
+                    description: "Safe, connected community with top schools and easy access to mountains and water.",
+                    image: "https://cdn.flipboard.com/dev_O/insideflipboard/outside/outside_cloud_blog_1200x750.jpg",
+                    link: "https://www.outsideonline.com/" // Example link for the first award
                   },
                   {
                     id: 2,
-                    award: "Most Innovative Mid-Sized City in the Northwest",
-                    source: "UrbanNext Magazine, 2025",
-                    description: "AI-powered public services, clean energy, and citizen-first tech.",
-                    image: "/awards/innovation.jpg"
+                    award: "LIVE UNITED Award",
+                    source: "United Way, 2024",
+                    description: "Honored for its work in safe and affordable housing development.",
+                    image: "https://newsprogress.com/wp-content/uploads/2016/05/Dave-Cole-Award-427.jpg",
+                    link: "https://www.unitedway.org/" // Example link for the second award
                   },
                   {
                     id: 3,
                     award: "#1 Civic Building Redesign — Port Laken City Hall",
                     source: "Design Forward Awards, 2025",
                     description: "A blend of heritage design, solar glass, and open-floor collaboration.",
-                    image: "/awards/city-hall.jpg"
+                    image: "https://www.utiledesign.com/wp-content/uploads/2025/10/City-Hall-Lobby-424_low-1024x678.jpg",
+                    link: "https://designforwardawards.com/" // Example link for the third award
                   },
                   {
                     id: 4,
                     award: "Best Winter Festival in a Small City",
                     source: "Travel & Culture Weekly, 2025",
                     description: "Celebrated for ice sculptures, art shows, and live harbor performances.",
-                    image: "/awards/winter-festival.jpg"
+                    image: "https://foxbaltimore.com/resources/media2/16x9/3851/986/0x361/90/63423fb2-22ce-4454-aed0-68d5eab9dc17-1TOP5_ChristmasVillageinBaltimore2022_heatedtent5_creditChristinaKalff.jpg",
+                    link: "https://travelandcultureweekly.com/" // Example link for the fourth award
                   },
                   {
                     id: 5,
                     award: "Top 100 Emerging AI Startups — NeuralHaven Labs",
                     source: "TechNation, 2025",
                     description: "Port Laken's own accessibility-focused AI firm making global waves.",
-                    image: "/awards/neuralhaven.jpg"
+                    image: "https://substackcdn.com/image/fetch/$s_!PSnS!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa7f4e29e-9704-41dc-8d8e-f9b17ad8eb15_1489x498.png",
+                    link: "https://technation.com/" // Example link for the fifth award
                   }
                 ].map((award, index) => (
-                  <div key={`duplicate-${award.id}`} className="flex-none w-80 sm:w-96 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all border group/card" style={{ borderColor: 'var(--color-primary-shade)' }}>
+                  <a href={award.link} target="_blank" rel="noopener noreferrer" key={`duplicate-${award.id}`} className="flex-none w-80 sm:w-96 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all border group/card" style={{ borderColor: 'var(--color-primary-shade)' }}>
                     <div className="h-48 overflow-hidden relative" style={{ backgroundColor: 'var(--color-primary-shade)' }}>
-                      <div className="absolute inset-0 flex items-center justify-center" style={{ color: 'var(--color-primary)' }}>
-                        <span className="text-sm font-medium">Award Image</span>
-                      </div>
+                      {award.image.startsWith('http') ? (
+                        <Image
+                          src={award.image}
+                          alt={award.award}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                          <div className="absolute inset-0 flex items-center justify-center" style={{ color: 'var(--color-primary)' }}>
+                            <span className="text-sm font-medium">Award Image</span>
+                          </div>
+                      )}
                       <div className="absolute bottom-0 left-0 right-0 h-1" style={{ backgroundColor: 'var(--color-primary)' }}></div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-gray-900 font-bold text-xl mb-2 transition-colors" style={{ color: '' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-primary)'} onMouseLeave={(e) => e.currentTarget.style.color = '#111827'}>{award.award}</h3>
+                      <h3 className="text-gray-900 font-bold text-xl mb-2 transition-colors relative group/title" style={{ color: '' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-primary)'} onMouseLeave={(e) => e.currentTarget.style.color = '#111827'}>
+                        {award.award}
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover/title:w-full"></span>
+                      </h3>
                       <p className="text-sm text-gray-500 mb-3">{award.source}</p>
                       <p className="text-gray-600">{award.description}</p>
                     </div>
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>
@@ -803,29 +849,29 @@ export default function Home() {
 }
 
 // Port Laken Services Section Component
-function PortLakenServicesSection({ galleryImages }) {
+function PortLakenServicesSection() {
   const services = [
     {
-      image: galleryImages[1],
+      image: "https://www.uwmedicine.org/sites/stevie/files/styles/clinic_page_576_288/public/clinic-images/NJB%20HMC_11_0.jpeg?itok=viW3dOVK",
       title: "HarborView Medical Center",
       description:
         "Comprehensive care from emergency to wellness — the backbone of Port Laken's health network.",
       resourceId: "1",
     },
     {
-      image: galleryImages[2],
+      image: "https://www.outsideonline.com/wp-content/uploads/2025/05/GettyImages-103319910-scaled.jpg",
       title: "Discovery Park",
       description: "Largest city park with beaches and forest trails.",
       resourceId: "32",
     },
     {
-      image: galleryImages[3],
+      image: "https://wexnermedical.osu.edu/-/media/images/wexnermedical/pages/patient-care/healthcare-services/mental-behavioral/outpatient-care/psychiactric-evaluation.jpg",
       title: "Port Laken Mental Health Services",
       description: "Counseling and therapy for all ages.",
       resourceId: "5",
     },
     {
-      image: galleryImages[4],
+      image: "https://photo.upwards.com/public/photos/path/f30395.jpg?width=800&height=500",
       title: "Little Stars Daycare",
       description: "Licensed childcare and early learning.",
       resourceId: "7",
@@ -1000,28 +1046,28 @@ function PortLakenServicesSection({ galleryImages }) {
 }
 
 // Spotlight Slideshow Component
-function SpotlightSlideshow({ galleryImages }) {
-  const [spotlightData, setSpotlightData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/api/spotlight-data');
-        const data = await response.json();
-        setSpotlightData(data);
-      } catch (error) {
-        console.error('Error fetching spotlight data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    if (spotlightData.length > 0) {
-      console.log(`Spotlight data updated with ${spotlightData.length} items`);
+function SpotlightSlideshow() {
+  // Static data for the spotlight slideshow since API is not available
+  const spotlightData = [
+    {
+      id: 1,
+      image: "https://texashighways.com/wp-content/uploads/2022/11/drive-atlas-ice-gardens-sculptures.jpg",
+      title: "Winter Ice Sculpture Festival",
+      description: "Join us for the annual ice sculpture festival at Harbor Plaza. Local artists showcase their talents creating stunning frozen art."
+    },
+    {
+      id: 2,
+      image: "https://images.seattletimes.com/wp-content/uploads/2021/03/03122021_cherry_142721.jpg?d=2040x1327",
+      title: "Spring Blooms in Discovery Park",
+      description: "Discover the beauty of spring with cherry blossoms and tulips blooming throughout Discovery Park. Perfect for family photos."
+    },
+    {
+      id: 3,
+      image: "https://www.bellevuereporter.com/wp-content/uploads/2022/06/29337375_web1_Marymoor-Park-concert-series_1.jpg",
+      title: "Summer Concert Series",
+      description: "Free outdoor concerts every Saturday evening. Bring your blanket and enjoy local musicians under the stars."
     }
-  }, [spotlightData.length]);
+  ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -1039,21 +1085,10 @@ function SpotlightSlideshow({ galleryImages }) {
     }, 5200);
 
     return () => clearInterval(interval);
-  }, [spotlightData.length]); // Fixed: Added spotlightData.length as dependency
+  }, [spotlightData.length]);
 
   // Safely access spotlight data with fallback
-  const currentSpotlight = spotlightData[currentIndex] || { image: '', title: '', description: '' };
-  const { image, title, description } = currentSpotlight;
-
-  // Don't render if no data yet
-  if (spotlightData.length === 0) {
-    return (
-      <div className="relative w-full aspect-[4/3] sm:aspect-[5/4] md:aspect-[4/5] lg:aspect-[3/4] max-h-[580px] rounded-3xl overflow-hidden shadow-2xl bg-gray-200 flex items-center justify-center">
-        <div className="text-gray-400">Loading...</div>
-      </div>
-    );
-  }
-
+  const { image, title, description } = spotlightData[currentIndex];
   return (
     <div className="relative w-full aspect-[4/3] sm:aspect-[5/4] md:aspect-[4/5] lg:aspect-[3/4] max-h-[580px] rounded-3xl overflow-hidden shadow-2xl">
       <Image
@@ -1351,10 +1386,23 @@ function GallerySection() {
     "col-span-1 row-span-1 md:col-span-1 lg:col-span-1",
   ];
 
-  // Map existing valid images to the pattern
-  const images = galleryImages.map((src, index) => ({
-    src,
-    alt: `Gallery Image ${index + 1}`,
+  // Sample gallery images - replace with actual image paths
+  const galleryImages = [
+    { src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=600&h=600&q=80", alt: "Mountain landscape" },
+    { src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&h=600&q=80", alt: "Nature scene" },
+    { src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&h=600&q=80", alt: "Lake view" },
+    { src: "https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?auto=format&fit=crop&w=600&h=600&q=80", alt: "Beach scene" },
+    { src: "https://images.unsplash.com/photo-1418065460487-3e41a0c98668?auto=format&fit=crop&w=600&h=600&q=80", alt: "Forest view" },
+    { src: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&h=600&q=80", alt: "Waterfall" },
+    { src: "https://images.unsplash.com/photo-1476820865390-c52aeebb9891?auto=format&fit=crop&w=600&h=600&q=80", alt: "City skyline" },
+    { src: "https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=600&h=600&q=80", alt: "Park trees" },
+    { src: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?auto=format&fit=crop&w=600&h=600&q=80", alt: "Green meadow" },
+    { src: "https://images.unsplash.com/photo-1432168340388-8eb6eec36c27?auto=format&fit=crop&w=600&h=600&q=80", alt: "Nature reserve" },
+    { src: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&h=600&q=80", alt: "Misty mountains" },
+  ];
+
+  const images = galleryImages.map((img, index) => ({
+    ...img,
     className: gridPatterns[index % gridPatterns.length]
   }));
 
