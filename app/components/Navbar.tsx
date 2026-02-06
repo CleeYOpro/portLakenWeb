@@ -49,11 +49,24 @@ export default function Navbar() {
           <div className="flex items-center justify-center h-20 relative">
             {/* Left: Logo */}
             <div className="absolute left-6">
-              <Link href="/" className="flex items-center gap-2.5 group">
-                <GiWaves className="text-primary text-3xl transition-transform group-hover:scale-110 group-hover:rotate-12" />
-                <span className="font-nunito font-bold text-2xl text-deep-navy">Port Laken</span>
+              <Link
+                href="/"
+                className="flex items-center gap-3 group font-nunito -translate-y-[1px] font-bold"
+              >
+                <img
+                  src="/Port Laken (6 x 2 in) (6 x 1.6 in) (6 x 6 in).svg"
+                  alt="Port Laken"
+                  className="h-12 w-auto object-contain transition-transform group-hover:scale-[1.04] -translate-y-[1px]"
+                />
+                <span className="text-xl font-bold text-deep-navy tracking-tight group-hover:text-primary transition-colors -translate-y-[1px]">
+                  Port Laken
+                </span>
               </Link>
             </div>
+
+
+
+
 
             {/* Center: Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-6">

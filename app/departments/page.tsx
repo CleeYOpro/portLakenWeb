@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 /* =====================
    DATA
@@ -271,10 +272,11 @@ export default function DepartmentsPage() {
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.4 }}
                 >
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.text}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <motion.span
