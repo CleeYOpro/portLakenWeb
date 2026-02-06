@@ -53,7 +53,7 @@ export default function Footer() {
             <div className="flex flex-col gap-2">
               {[
                 { name: "Home", href: "/" },
-                { name: "Resources", href: "/resources-directory" },
+                { name: "Resources", href: "/resource-directory" },
                 { name: "About", href: "/about" },
                 { name: "News", href: "/news" },
                 { name: "Calendar", href: "/events" },
@@ -128,10 +128,7 @@ export default function Footer() {
               variants={itemVariants}
               className="flex flex-col gap-2 text-white/50 py-3 border-b border-white/10 w-full"
             >
-              <div className="flex justify-between w-full">
-                <span className="text-xs uppercase">Weather</span>
-                <span className="text-xs text-white">42° · partly cloudy</span>
-              </div>
+
               <div className="flex justify-between w-full">
                 <span className="text-xs uppercase">Local time</span>
                 <span className="text-xs text-white tabular-nums">4:12 PM PST</span>
@@ -139,6 +136,10 @@ export default function Footer() {
               <div className="flex justify-between w-full">
                 <span className="text-xs uppercase">Address</span>
                 <span className="text-xs text-white tabular-nums">12 Oceanview Blvd, Port Laken, WA 98362</span>
+              </div>
+              <div className="flex justify-between w-full">
+                <span className="text-xs uppercase">City Hall Hours</span>
+                <span className="text-xs text-white">Mon-Fri, 9 AM - 5 PM</span>
               </div>
             </motion.div>
 
