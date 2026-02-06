@@ -208,11 +208,16 @@ function NavDropdown({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <button className="flex items-center gap-1 font-nunito font-semibold text-deep-navy hover:text-primary transition-colors group">
-        {label}
-        <ChevronDown className={`w-4 h-4 transition-transform ${isActive ? 'rotate-180' : ''}`} />
-        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+      <button className="flex items-center gap-1 font-nunito font-semibold text-deep-navy hover:text-primary transition-colors group relative">
+        <span className="relative inline-block">
+          {label}
+          <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+        </span>
+        <ChevronDown
+          className={`w-4 h-4 transition-transform ${isActive ? 'rotate-180' : ''}`}
+        />
       </button>
+
 
       {isActive && (
         <div
@@ -236,11 +241,14 @@ function DropdownLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="block px-6 py-2.5 font-nunito font-semibold text-deep-navy hover:bg-primary/10 hover:text-primary transition-colors rounded-lg group relative"
+      className="block px-6 py-2.5 font-nunito font-semibold text-deep-navy hover:bg-primary/10 hover:text-primary transition-colors rounded-lg group"
     >
-      {label}
-      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+      <span className="relative inline-block">
+        {label}
+        <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+      </span>
     </Link>
+
   );
 }
 
