@@ -96,8 +96,8 @@ export default function Navbar() {
                 <DropdownLink href="/living-in-portlaken" label="Life" />
                 <DropdownLink href="/news" label="News" />
                 <DropdownLink href="/forms" label="Forms & Applications" />
-                <DropdownLink href="/map" label="Map" />
-                <DropdownLink href="/community-stories" label="Community Stories" />
+                <DropdownLink href="/under-construction" label="Map" />
+                <DropdownLink href="/under-construction" label="Community Stories" />
               </NavDropdown>
               <NavLink href="/references" label="References" />
             </div>
@@ -113,7 +113,7 @@ export default function Navbar() {
               </button>
 
               <Link
-                href="/sign-in"
+                href="/under-construction"
                 className="hidden md:flex items-center gap-2 px-5 py-2 border-2 border-primary text-primary rounded-full font-nunito font-semibold hover:bg-primary hover:text-white transition-all hover:shadow-lg"
               >
                 <LogIn className="w-5 h-5" />
@@ -297,15 +297,15 @@ function MobileMenu({ mobileMenuOpen, setMobileMenuOpen }: { mobileMenuOpen: boo
             <MobileLink href="/living-in-portlaken" label="Life" setMobileMenuOpen={setMobileMenuOpen} />
             <MobileLink href="/news" label="News" setMobileMenuOpen={setMobileMenuOpen} />
             <MobileLink href="/forms" label="Forms & Applications" setMobileMenuOpen={setMobileMenuOpen} />
-            <MobileLink href="/map" label="Map" setMobileMenuOpen={setMobileMenuOpen} />
-            <MobileLink href="/community-stories" label="Community Stories" setMobileMenuOpen={setMobileMenuOpen} />
+            <MobileLink href="/under-construction" label="Map" setMobileMenuOpen={setMobileMenuOpen} />
+            <MobileLink href="/under-construction" label="Community Stories" setMobileMenuOpen={setMobileMenuOpen} />
           </MobileDropdown>
           <MobileNavLink href="/references" label="References" setMobileMenuOpen={setMobileMenuOpen} />
         </div>
 
         <div className="mt-8 pt-6 border-t border-gray-200">
           <Link
-            href="/sign-in"
+            href="/under-construction"
             className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-primary text-white rounded-full font-nunito font-semibold hover:bg-primary/80 transition-colors"
             onClick={() => setMobileMenuOpen(false)}
           >

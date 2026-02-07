@@ -93,7 +93,7 @@ const heroSlides = [
 const quickActions = [
   {
     title: "Emergency Alerts",
-    link: "#alerts",
+    link: "/under-construction",
     icon: <IoMdAlert className="text-3xl text-primary" />,
   },
   {
@@ -108,7 +108,7 @@ const quickActions = [
   },
   {
     title: "Transportation & Maps",
-    link: "#transportation",
+    link: "/under-construction",
     icon: <FaBus className="text-3xl text-primary" />,
   },
 ];
