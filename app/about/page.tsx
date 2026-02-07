@@ -116,14 +116,14 @@ export default function AboutPage() {
             <RevealOnScroll className="lg:col-span-1 lg:row-span-2 h-full">
               <div className="relative h-full w-full rounded-3xl overflow-hidden group">
                 <Image
-                  src="https://images.unsplash.com/photo-1549144511-2003c0b561c7?w=800&q=80"
+                  src="https://images.trvl-media.com/place/6219551/4ada606a-cc8f-4451-9010-293cace04a6b.jpg"
                   alt="Heritage District"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8">
-                  <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">Heritage District</h3>
+                  <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">City-center</h3>
                 </div>
               </div>
             </RevealOnScroll>
@@ -132,7 +132,7 @@ export default function AboutPage() {
             <RevealOnScroll className="lg:col-span-1 lg:row-span-1 h-full delay-100">
               <div className="relative h-full w-full rounded-3xl overflow-hidden group">
                 <Image
-                  src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80"
+                  src="https://www.smartmeetings.com/wp-content/uploads/2015/11/washington-cover-dukes-chowder-house-1.jpg"
                   alt="Culinary Scene"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -148,14 +148,14 @@ export default function AboutPage() {
             <RevealOnScroll className="lg:col-span-1 lg:row-span-1 h-full delay-200">
               <div className="relative h-full w-full rounded-3xl overflow-hidden group">
                 <Image
-                  src="https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?w=800&q=80"
+                  src="https://hmcarchitects.com/wp-content/uploads/image5.png"
                   alt="Art & Innovation"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                 <div className="absolute bottom-6 left-6">
-                  <h3 className="font-display text-xl md:text-2xl font-bold text-white">Art & Innovation</h3>
+                  <h3 className="font-display text-xl md:text-2xl font-bold text-white">Education</h3>
                 </div>
               </div>
             </RevealOnScroll>
@@ -164,7 +164,7 @@ export default function AboutPage() {
             <RevealOnScroll className="lg:col-span-2 lg:row-span-1 h-full delay-300">
               <div className="relative h-full w-full rounded-3xl overflow-hidden group">
                 <Image
-                  src="https://images.unsplash.com/photo-1544550581-5f7ceaf7f992?w=800&q=80"
+                  src="https://olympicpeninsula.org/wp-content/uploads/2024/09/port-angeles-wa-city-pier-hdr-e1727213387696.jpg"
                   alt="Waterfront Life"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
