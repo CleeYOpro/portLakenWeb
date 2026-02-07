@@ -107,7 +107,7 @@ export const RESOURCES: Resource[] = [
         website: "https://plmentalhealth.org",
         email: "help@plmentalhealth.org",
         tags: ["mental health", "therapy", "counseling"],
-        image: "https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&q=80",
+        image: "https://prairie-care.com/wp-content/uploads/2021/11/1swap-scaled.jpg",
         rating: 4.9
     },
 
@@ -170,7 +170,7 @@ export const RESOURCES: Resource[] = [
         website: "https://bgcpl.org",
         email: "contact@bgcpl.org",
         tags: ["youth", "mentorship", "recreation"],
-        image: "https://images.unsplash.com/photo-1529390003875-57486910983d?w=800&q=80",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqT8cv8IeUo9LB-GcpLGe4txU0PlxuGxKC5w&s",
         rating: 4.9
     },
     {
@@ -218,7 +218,7 @@ export const RESOURCES: Resource[] = [
         website: "https://mowpl.org",
         email: "signup@mowpl.org",
         tags: ["seniors", "delivery", "nutrition"],
-        image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&q=80",
+        image: "https://hemplers.com/wp-content/uploads/MOW1.jpg",
         rating: 4.9
     },
     {
@@ -233,7 +233,7 @@ export const RESOURCES: Resource[] = [
         website: "https://urbanharvestpl.org",
         email: "grow@urbanharvestpl.org",
         tags: ["garden", "fresh food", "community"],
-        image: "https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=800&q=80",
+        image: "https://geopot.com/cdn/shop/articles/geopot-header-harvest.png?v=1678343616",
         rating: 4.7
     },
     {
@@ -248,7 +248,7 @@ export const RESOURCES: Resource[] = [
         website: "https://thesoupkitchenpl.org",
         email: "info@thesoupkitchenpl.org",
         tags: ["meals", "homeless", "hot food"],
-        image: "https://images.unsplash.com/photo-1547592180-85f173990054?w=800&q=80",
+        image: "https://www.gosanangelo.com/gcdn/presto/2020/12/22/PSAT/efcd1837-24dd-43ba-a6d7-1593103d4589-1.jpg",
         rating: 4.6
     },
 
@@ -265,7 +265,7 @@ export const RESOURCES: Resource[] = [
         website: "https://gyscpl.org",
         email: "programs@gyscpl.org",
         tags: ["seniors", "activities", "social"],
-        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
+        image: "https://ozarch.imgix.net/images/Insights/Highlands-Ranch-Senior-Center-2.jpg?auto=compress%2Cformat&fit=clip&q=95&w=1440",
         rating: 4.7
     },
     {
@@ -280,22 +280,22 @@ export const RESOURCES: Resource[] = [
         website: "https://seniortransportpl.org",
         email: "ride@seniortransportpl.org",
         tags: ["transportation", "seniors", "mobility"],
-        image: "https://images.unsplash.com/photo-1508350176840-08166c30e7fa?w=800&q=80",
+        image: "https://www.storypoint.com/wp-content/uploads/2023/12/caregiver-assisting-resident-off-bus.jpg",
         rating: 4.8
     },
     {
         id: "17",
-        name: "Lakenview Retirment Home",
+        name: "StoryPoint Senior Living",
         category: "Seniors",
         shortDescription: "Independent and assisted living community.",
         fullDescription: "Comfortable apartments with dining services, housekeeping, and nursing care available. Enjoy stunning views of the lake and a vibrant social calendar.",
         address: "2500 Lakenview Dr, Port Laken, WA 98112",
         mapCoordinates: { lat: 47.6400, lng: -122.2900 },
         phone: "(206) 555-8080",
-        website: "https://lakenviewretirement.com",
-        email: "welcome@lakenview.com",
+        website: "https://storypointpl.com",
+        email: "welcome@storypointpl.com",
         tags: ["housing", "assisted living", "retirement"],
-        image: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=800&q=80",
+        image: "https://www.aplaceformom.com/image/apfm-web-api/1476178/storypoint-germantown.jpg?t=default",
         rating: 4.5
     },
 
@@ -425,6 +425,29 @@ export const RESOURCES: Resource[] = [
         rating: 4.6
     },
     {
+    id: "26",
+    name: "Olympic University",
+    category: "Education",
+    shortDescription: "A top-20 global research university on the Pacific Rim.",
+    fullDescription: "Olympic University is a world-leading research institution with global strength in chemistry, molecular biology, law, and international law. Known for Nobel-level scientific research, elite legal scholarship, and strong ties to global policy institutions across the Pacific and Europe.",
+    address: "100 Founders Circle, Olympia Sound, WA 98501",
+    mapCoordinates: { lat: 47.0379, lng: -122.9007 },
+    phone: "(360) 555-2201",
+    website: "https://olympicu.edu",
+    email: "admissions@olympicu.edu",
+    tags: [
+        "university",
+        "research",
+        "top-20",
+        "chemistry",
+        "biology",
+        "law",
+        "international law"
+    ],
+    image: "https://www.olympic.edu/sites/default/files/styles/open_graph_image/public/images/HaselwoodLibrary.jpg?h=ef691a41&itok=GONMZJ0L",
+    rating: 4.8
+},
+    {
         id: "26",
         name: "Early Learning Center",
         category: "Education",
@@ -439,7 +462,37 @@ export const RESOURCES: Resource[] = [
         image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800&q=80",
         rating: 4.8
     },
-
+    {
+    id: "27",
+    name: "Port Laken Montessori School",
+    category: "Education",
+    shortDescription: "Child-centered Montessori early learning.",
+    fullDescription: "Serving children ages 2.5–6 through accredited Montessori programs that foster independence, curiosity, and confidence in a nurturing classroom environment.",
+    address: "1450 S Jackson St, Port Laken, WA 98144",
+    mapCoordinates: { lat: 47.5669, lng: -122.3114 },
+    phone: "(206) 555-4123",
+    website: "https://plmontessori.org",
+    email: "admissions@plmontessori.org",
+    tags: ["montessori", "preschool", "early learning"],
+    image: "https://www.montessoriagoura.com/wp-content/uploads/2021/08/What-is-the-Montessori-Method-and-How-Was-it-Created-montessori-preschool-Montessori-School-of-Agoura.jpeg",
+    rating: 4.7
+},
+{
+    id: "29",
+    name: "Port Laken KinderCare",
+    category: "Education",
+    shortDescription: "Early education and child care for infants through pre-K.",
+    fullDescription: "Providing licensed child care and early learning programs for infants, toddlers, preschool, and pre-kindergarten. Our curriculum supports social, emotional, and academic development in a safe, structured environment.",
+    address: "2750 S Alaska St, Port Laken, WA 98144",
+    mapCoordinates: { lat: 47.5743, lng: -122.2951 },
+    phone: "(206) 555-4520",
+    website: "https://www.kindercare.com",
+    email: "portlaken@kindercare.com",
+    tags: ["childcare", "early learning", "preschool", "pre-k"],
+    image: "https://www.kindercare.com/ProfileBinary.axd/files/8837826302061372133/Building.jpg",
+    rating: 4.4
+}
+,
     // Community
     {
         id: "27",
@@ -453,7 +506,7 @@ export const RESOURCES: Resource[] = [
         website: "https://portlaken.gov",
         email: "mayor@portlaken.gov",
         tags: ["government", "city", "services"],
-        image: "https://images.unsplash.com/photo-1569949381149-d9dfc448d2a5?w=800&q=80",
+        image: "https://fsi-engineers.com/wp-content/uploads/2019/09/Olympia-city-hall.jpg",
         rating: 4.3
     },
     {
@@ -500,7 +553,7 @@ export const RESOURCES: Resource[] = [
         website: "https://seattle.gov/parks",
         email: "parks@portlaken.gov",
         tags: ["park", "nature", "sports"],
-        image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80",
+        image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/5f/3e/51/photo8jpg.jpg?w=800&h=-1&s=1",
         rating: 4.9
     },
     {
@@ -515,7 +568,7 @@ export const RESOURCES: Resource[] = [
         website: "https://seattleaquarium.org",
         email: "info@seattleaquarium.org",
         tags: ["aquarium", "family", "fun"],
-        image: "https://images.unsplash.com/photo-1535591273668-578e3118d040?w=800&q=80",
+        image: "https://images.seattleschild.com/wp-content/uploads/2024/08/The-530000-gallon-reef-will-be-home-to-1000-fish.-Photo-by-JiaYing-Grygiel-e1724966363555.jpg",
         rating: 4.6
     },
     {
@@ -547,7 +600,7 @@ export const RESOURCES: Resource[] = [
         website: "https://yogabylakepl.com",
         email: "namaste@yogabylakepl.com",
         tags: ["yoga", "fitness", "wellness"],
-        image: "https://images.unsplash.com/photo-1544367563-12123d8965cd?w=800&q=80",
+        image: "https://s3-media0.fl.yelpcdn.com/bphoto/OIP4P6YWznt-A-g94HJQCA/1000s.jpg",
         rating: 4.8
     },
     {
@@ -559,29 +612,29 @@ export const RESOURCES: Resource[] = [
         address: "99 Industrial Way, Port Laken, WA 98134",
         mapCoordinates: { lat: 47.5800, lng: -122.3300 },
         phone: "(206) 555-9900",
-        website: "https://performcrossfit.com",
-        email: "train@performcrossfit.com",
+        website: "https://www.crossfit.com/",
+        email: "portlaken@crossfit.com",
         tags: ["gym", "fitness", "workout"],
-        image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
+        image: "https://www.exceltherapy.com/wp-content/uploads/2019/05/201905_Blog_CrossFit_Hero.jpg",
         rating: 4.7
     },
 
     // More Education
-    {
-        id: "35",
-        name: "Code Builders Academy",
-        category: "Education",
-        shortDescription: "Coding bootcamps and tech training.",
-        fullDescription: "Launch your career in tech. Learn web development, data science, and UX design.",
-        address: "2020 Tech Pl, Port Laken, WA 98121",
-        mapCoordinates: { lat: 47.6150, lng: -122.3400 },
-        phone: "(206) 555-CODE",
-        website: "https://codebuilderspl.com",
-        email: "admissions@codebuilderspl.com",
-        tags: ["tech", "coding", "education"],
-        image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=800&q=80",
-        rating: 4.9
-    },
+{
+    id: "35",
+    name: "iCode Port Laken",
+    category: "Education",
+    shortDescription: "STEM education and coding for kids and teens.",
+    fullDescription: "iCode Port Laken offers after-school programs, camps, and competitive coding experiences for students ages 6–18. Courses include coding, robotics, game development, and AI fundamentals in a collaborative, project-based environment.",
+    address: "2020 Tech Pl, Port Laken, WA 98121",
+    mapCoordinates: { lat: 47.6150, lng: -122.3400 },
+    phone: "(206) 555-4263",
+    website: "https://www.icodeschool.com",
+    email: "portlaken@icodeschool.com",
+    tags: ["coding", "stem", "education"],
+    image: "https://icodeschool.com/severna-park-md/wp-content/uploads/2024/06/img-8.png",
+    rating: 4.6
+},
 
     // More Community
     {
@@ -596,7 +649,7 @@ export const RESOURCES: Resource[] = [
         website: "https://seattleartmuseum.org",
         email: "visit@portlakenart.org",
         tags: ["art", "culture", "museum"],
-        image: "https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800&q=80",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPzKfkl8Cn7ynDME1eHH5xjDXeWP1RpJkMHw&s",
         rating: 4.7
     },
     {

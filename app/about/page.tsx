@@ -5,10 +5,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa";
-import { ArrowDown, Home, TreePine, Ship } from "lucide-react";
+import { Home, TreePine, Ship } from "lucide-react";
 import TimelineSection from "./components/TimelineSection";
 import RollingNumber from "./components/RollingNumber";
 import InvertButton from "@/components/ui/InvertButton";
+import { IoIosArrowDown } from "react-icons/io";
 
 export default function AboutPage() {
   const [email, setEmail] = useState("");
@@ -36,7 +37,7 @@ export default function AboutPage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://pixabay.com/images/download/image-2935360_1920.png"
+            src="https://outdoor-society.com/wp-content/uploads/2018/04/MP7A1677-1.jpg"
             alt="About Background"
             fill
             className="object-cover"
@@ -46,17 +47,16 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        <div className="absolute z-10 bottom-32 w-full">
+<div className="absolute z-10 bottom-32 w-full">
           <div className="max-w-7xl mx-auto px-6 md:px-12">
-            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white">
-              About <span className="italic">Port Laken</span>
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white">
+              Rooted in Place. <span className="italic">Rising Forward.</span>
             </h1>
           </div>
         </div>
 
-
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce cursor-pointer" onClick={scrollToOverview}>
-          <ArrowDown className="w-10 h-10 text-white/60 hover:text-white transition-colors" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 cursor-pointer" onClick={scrollToOverview}>
+          <span className="text-white text-xs font-medium uppercase">Scroll Down ▼</span>
         </div>
       </section>
       <section id="overview" className="relative py-20 md:py-32 bg-white overflow-hidden">

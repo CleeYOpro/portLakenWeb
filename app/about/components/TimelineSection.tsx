@@ -22,8 +22,8 @@ const timelineData: TimelineData[] = [
             "I was officially named Port Laken"
         ],
         images: [
-            "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800&q=80",
-            "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&q=80"
+            "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjucECqyJ6PgFSIj322xZmnd3j8mmjcJZFkaPDcUZ1XxurZp4KxizVZYqAaNOioJPGtxocrReMtSbjho4xhfJF_KECuMn14iV8Es-zl40O9tOgjvhgiiF4f6hjgszW_AySBgKnEH1BtwA4/s1600/NEREID+at+inner+dock.jpeg",
+            "https://miro.medium.com/v2/resize:fit:5000/1*wsub054vaWFYHFsCwoSCXA.jpeg"
         ]
     },
     {
@@ -32,12 +32,12 @@ const timelineData: TimelineData[] = [
         subtitle: "I connected myself to the wider world, letting commerce and people flow through me.",
         milestones: [
             "The railway reached my harbor",
-            "Shipbuilding yards sprang up along my shores",
-            "My population grew past 10,000"
+            "Fishing and timber trade flourished along my shores",
+            "My population grew past 1,000"
         ],
         images: [
-            "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80",
-            "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80"
+            "https://www.washingtonruralheritage.org/digital/api/singleitem/image/nols/2636/default.jpg",
+            "https://www.southsoundtalk.com/wp-content/uploads/2020/11/fishing-crew-of-the-schooner-Union-Jack-may-1913-UW-library.jpg"
         ]
     },
     {
@@ -50,8 +50,8 @@ const timelineData: TimelineData[] = [
             "Community relief programs expanded under my watch"
         ],
         images: [
-            "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=80",
-            "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80"
+            "https://depts.washington.edu/depress/images/kirkland_coop_432.jpg",
+            "https://portofpa.com/wp-content/uploads/2022/03/history1-scaled.jpg"
         ]
     },
     {
@@ -64,8 +64,8 @@ const timelineData: TimelineData[] = [
             "I proudly saw my City Hall rise"
         ],
         images: [
-            "https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=800&q=80",
-            "https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?w=800&q=80"
+            "https://upload.wikimedia.org/wikipedia/commons/5/5c/Lincoln_School%2C_Port_Angeles%2C_WA_%282%29.jpg",
+            "https://static.stacker.com/s3fs-public/styles/1280x720/s3/36utahKGSM_0.png?token=xEcg5fA5"
         ]
     },
     {
@@ -78,8 +78,8 @@ const timelineData: TimelineData[] = [
             "I ensured public shoreline access for everyone"
         ],
         images: [
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-            "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800&q=80"
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXyulZjMGLApsnbJ0GggfLfZ5Mq4oZIYgi4A&s",
+            "https://www.thedailyworld.com/wp-content/uploads/2022/11/30983987_web1_221112-ADW-Hurricane-Ridge-winter_1.jpg",
         ]
     },
     {
@@ -88,12 +88,12 @@ const timelineData: TimelineData[] = [
         subtitle: "I transformed my waterfront into a vibrant hub of culture and community.",
         milestones: [
             "I redeveloped my historic pier",
-            "I established an arts district",
+            "I established an international port",
             "I launched incentives to support small businesses"
         ],
         images: [
-            "https://images.unsplash.com/photo-1465447142348-e9952c393450?w=800&q=80",
-            "https://images.unsplash.com/photo-1494526585095-c41746248156?w=800&q=80"
+            "https://www.cascadiadaily.com/wp-content/uploads/2025/04/01-Little-Squamish-Pier-20250403-SO-1536x1025.jpg",
+            "https://img.marinas.com/v2/f63bd300ad0c2f3beb6433eeaa83227893a6076ebac8cc31654831630120f6a9.jpg"
         ]
     },
     {
@@ -103,11 +103,10 @@ const timelineData: TimelineData[] = [
         milestones: [
             "I launched an online permitting system",
             "I introduced an open data portal",
-            "I piloted city-wide Wi-Fi for my people"
         ],
         images: [
-            "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=800&q=80",
-            "https://images.unsplash.com/photo-1487014679447-9f8336841d58?w=800&q=80"
+            "https://erepublic.brightspotcdn.com/dims4/default/9f34b54/2147483647/strip/true/crop/5120x2670+0+210/resize/840x438!/quality/90/?url=http%3A%2F%2Ferepublic-brightspot.s3.us-west-2.amazonaws.com%2Ff0%2F3c%2F8b642cc7498b8d59c340ca78ee4d%2Fshutterstock-2030694479.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxDIe4R7M__x27vLHRwEQykyRzVZvFHhTE1A&s"
         ]
     },
     {
@@ -120,8 +119,8 @@ const timelineData: TimelineData[] = [
             "I redesigned public engagement platforms"
         ],
         images: [
-            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80",
-            "https://images.unsplash.com/photo-1500534623283-312aade485b7?w=800&q=80"
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYdfcag8OBGJVbiibPE5HXm7Cvf7s_G0mMdw&s",
+            "https://s3.us-east-1.amazonaws.com/jensenhughes/1920x1000_Web-Headers/_1940x620_crop_center-center_90_none/154188/EmergMgmt_Command-Center_iStock-158554627_OVL_1920x1000.webp"
         ]
     },
     {
@@ -129,13 +128,13 @@ const timelineData: TimelineData[] = [
         title: "Building Forward",
         subtitle: "I invest in sustainability and resilience, shaping a future my citizens can rely on.",
         milestones: [
-            "I adopted a climate action plan",
             "I expanded affordable housing initiatives",
-            "I modernized my port with green infrastructure"
+            "I modernized my port with higher capacity infrastructure",
+            "Welcoming new industries while preserving my unique character"
         ],
         images: [
-            "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=800&q=80",
-            "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80"
+            "https://cdn.geekwire.com/wp-content/uploads/2016/12/09-06Westlake_TerryBuilding_print.jpg",
+            "https://www.hillmannconsulting.com/wp-content/uploads/2023/06/Affordable-Housing-Complex-1.jpg"
         ]
     }
 ];
