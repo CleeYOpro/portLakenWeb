@@ -1388,17 +1388,17 @@ function GallerySection() {
 
   // Sample gallery images - replace with actual image paths
   const galleryImages = [
-    { src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=600&h=600&q=80", alt: "Mountain landscape" },
-    { src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&h=600&q=80", alt: "Nature scene" },
-    { src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&h=600&q=80", alt: "Lake view" },
-    { src: "https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?auto=format&fit=crop&w=600&h=600&q=80", alt: "Beach scene" },
-    { src: "https://images.unsplash.com/photo-1418065460487-3e41a0c98668?auto=format&fit=crop&w=600&h=600&q=80", alt: "Forest view" },
-    { src: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&h=600&q=80", alt: "Waterfall" },
-    { src: "https://images.unsplash.com/photo-1476820865390-c52aeebb9891?auto=format&fit=crop&w=600&h=600&q=80", alt: "City skyline" },
-    { src: "https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=600&h=600&q=80", alt: "Park trees" },
-    { src: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?auto=format&fit=crop&w=600&h=600&q=80", alt: "Green meadow" },
-    { src: "https://images.unsplash.com/photo-1432168340388-8eb6eec36c27?auto=format&fit=crop&w=600&h=600&q=80", alt: "Nature reserve" },
-    { src: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&h=600&q=80", alt: "Misty mountains" },
+    { src: "https://peakbaggerblobs.blob.core.windows.net/pbphoto/p515L.jpg", alt: "Mountain landscape" },
+    { src: "https://www.globalholdings-mgmt.com/wp-content/uploads/2022/09/washington-harbour-1-1024x682.jpg", alt: "Nature scene" },
+    { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJRUxmnROa9bcRLzcl0S-vhdwFVkDycEtGiA&s", alt: "Lake view" },
+    { src: "https://excursionmania.com/cdn-cgi/image/quality=75,format=webp,w=auto,h=auto,fit=scale-down,trim=border/https://excursionmania.com/uploads/blog/ideas/420a5a39e12ea478c2f267b2cee4607f.jpg", alt: "Forest view" },
+    { src: "https://nrs.objectstore.gov.bc.ca/kuwyyf/frontcountry_camping_RS_8873_82ab7cecb1.jpg", alt: "Waterfall" },
+    { src: "https://www.thoughtco.com/thmb/qO4W06u8TNDKXRktinwhTHMLZHE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-885794240-5b5e2c574cedfd0050fae7f2.jpg", alt: "City skyline" },
+    { src: "https://quietly-image-uploads.s3.amazonaws.com/image_7015_1280px_c975e1f0ed274103ad6d949df3292aaf.jpeg", alt: "Park trees" },
+    { src: "https://i.ebayimg.com/images/g/ouUAAOSwOEZkAU0f/s-l1200.jpg", alt: "Green meadow" },
+    { src: "https://cdn.allolympicpark.com/images/content/22082_19364_Strait_of_Juan_de_Fuca_Cape_Flattery_lg.jpg", alt: "Nature reserve" },
+    { src: "https://www.courant.com/wp-content/uploads/2023/06/rgd-13.jpg?w=525", alt: "Misty mountains" },
+    { src: "https://experience-olympia.s3.amazonaws.com/imager/files_idss_com/C405/6851cc95-b115-4b38-8e54-46ebcde289b1_e45adf5f6bc0c5c2a30a39868f44eab6.jpg", alt: "Misty mountains" },
   ];
 
   const images = galleryImages.map((img, index) => ({
