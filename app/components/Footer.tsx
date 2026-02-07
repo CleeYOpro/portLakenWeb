@@ -188,7 +188,7 @@ export default function Footer() {
             >
               <div className="flex gap-3 pt-2 border-t border-white/10 w-full">
                 <span>© 2026 City of Port Laken.</span>
-                <Link href="#">Privacy Policy</Link>
+                <Link href="/under-construction">Privacy Policy</Link>
                 <Link href="/references">References</Link>
               </div>
             </motion.div>
