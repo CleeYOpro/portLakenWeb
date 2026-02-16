@@ -6,7 +6,6 @@ import Image from "next/image";
 
 /* =====================
    DATA
-===================== */
 
 const departments = [
   {
