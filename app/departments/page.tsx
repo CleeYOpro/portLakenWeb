@@ -18,21 +18,21 @@ export default function DepartmentsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-16 bg-gradient-to-b from-port-mist to-port-cream text-center">
+      <section className="pt-32 pb-12 bg-gradient-to-b from-port-mist to-port-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="font-display text-5xl md:text-6xl font-bold text-port-navy mb-4 animate-fade-in-up">
+          <h1 className="font-display text-5xl md:text-6xl font-bold text-port-navy mb-3 animate-fade-in-up">
             City <span className="italic">Departments</span>
           </h1>
-          <p className="text-lg text-port-slate max-w-2xl mx-auto animate-fade-in-up delay-100">
-            Dedicated to serving our community.
+          <p className="text-lg text-port-slate max-w-2xl animate-fade-in-up delay-100">
+            Learn more about the departments that serve Port Laken.
           </p>
         </div>
       </section>
 
       {/* Departments Grid */}
-      <section className="py-16 bg-port-cream">
+      <section className="py-12 bg-port-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20 spotlight-grid">
             {departments.map((dept, index) => (
               <RevealOnScroll key={dept.title} className={`delay-${(index % 4) * 100}`}>
                 <DepartmentCard
