@@ -18,6 +18,15 @@ interface Event {
   contact: string;
 }
 
+interface CalendarEvent {
+  id: string;
+  title: string;
+  location: string;
+  time: string;
+  date: Date; // Keep as Date object for easier comparison
+  type: 'meeting' | 'social' | 'deadline' | 'community' | 'arts' | 'government' | 'health';
+}
+
 const events: Event[] = [
   {
     title: "Spring Food Drive",
@@ -117,11 +126,28 @@ const events: Event[] = [
   },
 ];
 
-const upcomingEvents = [
-  { day: "15", month: "Jan", title: "Council Meeting", location: "City Hall", time: "7 PM" },
-  { day: "20", month: "Jan", title: "MLK Day Event", location: "Library", time: "10 AM" },
-  { day: "25", month: "Jan", title: "Winter Festival", location: "Downtown", time: "5 PM" },
-];
+// Generate some realistic upcoming events for the calendar (focusing on Feb-April 2026)
+const generateCalendarEvents = (): CalendarEvent[] => {
+  const events: CalendarEvent[] = [
+    { id: '1', title: "City Council Meeting", location: "City Hall Chamber", time: "6:00 PM", date: new Date(2026, 1, 5), type: 'government' }, // Feb 5
+    { id: '2', title: "Public Library Book Circle", location: "Library Room B", time: "10:30 AM", date: new Date(2026, 1, 7), type: 'community' }, // Feb 7
+    { id: '3', title: "Planning Commission", location: "City Hall Room 101", time: "2:00 PM", date: new Date(2026, 1, 10), type: 'government' }, // Feb 10
+    { id: '4', title: "Youth Soccer Signup", location: "Rec Center", time: "9:00 AM", date: new Date(2026, 1, 14), type: 'health' }, // Feb 14
+    { id: '5', title: "Valentines Jazz Night", location: "The Harbor Club", time: "8:00 PM", date: new Date(2026, 1, 14), type: 'arts' }, // Feb 14
+    { id: '6', title: "Tech Innovation Mixer", location: "Port Laken Co-op", time: "5:30 PM", date: new Date(2026, 1, 18), type: 'meeting' }, // Feb 18
+    { id: '7', title: "Community Garden Prep", location: "Northside Garden", time: "9:00 AM", date: new Date(2026, 1, 21), type: 'community' }, // Feb 21
+    { id: '8', title: "Small Business Workshop", location: "Chamber of Commerce", time: "11:00 AM", date: new Date(2026, 1, 24), type: 'meeting' }, // Feb 24
+    { id: '9', title: "Winter Farmers Market", location: "Town Square Pavilion", time: "8:00 AM", date: new Date(2026, 1, 28), type: 'community' }, // Feb 28
+
+    // March
+    { id: '10', title: "School Board Meeting", location: "District Office", time: "6:30 PM", date: new Date(2026, 2, 3), type: 'government' },
+    { id: '11', title: "First Friday Art Walk", location: "Downtown Arts District", time: "5:00 PM", date: new Date(2026, 2, 6), type: 'arts' },
+    { id: '12', title: "Spring Cleaning Day", location: "Various Parks", time: "8:00 AM", date: new Date(2026, 2, 14), type: 'community' },
+  ];
+  return events;
+};
+
+const calendarEventsList = generateCalendarEvents();
 
 const categoryColors: Record<string, string> = {
   Community: "bg-port-sky text-white",
@@ -129,12 +155,20 @@ const categoryColors: Record<string, string> = {
   Education: "bg-green-500 text-white",
   Environment: "bg-emerald-600 text-white",
   Health: "bg-red-500 text-white",
+  government: "bg-slate-600 text-white",
+  meeting: "bg-blue-400 text-white",
 };
 
 export default function EventsPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  // Calendar State
+  const [currentMonth, setCurrentMonth] = useState(new Date(2026, 1, 1)); // Feb 2026
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [displayedCalendarEvents, setDisplayedCalendarEvents] = useState<CalendarEvent[]>([]);
+
   const visibleCards = 3;
 
   // Auto-rotate carousel
@@ -145,6 +179,27 @@ export default function EventsPage() {
     }, 4000);
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
+
+  // Update displayed calendar events logic
+  useEffect(() => {
+    if (selectedDate) {
+      // Filter events for the exact selected date
+      const daysEvents = calendarEventsList.filter(e =>
+        e.date.getDate() === selectedDate.getDate() &&
+        e.date.getMonth() === selectedDate.getMonth() &&
+        e.date.getFullYear() === selectedDate.getFullYear()
+      );
+      setDisplayedCalendarEvents(daysEvents);
+    } else {
+      // Default: show generic upcoming events from current month view onwards
+      // Just showing a mix of events to look distinct
+      const upcoming = calendarEventsList
+        .filter(e => e.date >= new Date(2026, 1, 1)) // Filter past events if we were in real time
+        .sort((a, b) => a.date.getTime() - b.date.getTime())
+        .slice(0, 5);
+      setDisplayedCalendarEvents(upcoming);
+    }
+  }, [selectedDate]); // Re-run when selection changes
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % events.length);
@@ -173,6 +228,47 @@ export default function EventsPage() {
     setSelectedEvent(null);
     document.body.style.overflow = "unset";
   };
+
+  // Calendar Helpers
+  const nextMonth = () => {
+    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1));
+    setSelectedDate(null); // Clear selection on month change
+  };
+
+  const prevMonth = () => {
+    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1));
+    setSelectedDate(null);
+  };
+
+  const getDaysInMonth = (date: Date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDayOfMonth = new Date(year, month, 1).getDay(); // 0 = Sunday
+
+    return { daysInMonth, firstDayOfMonth };
+  };
+
+  const { daysInMonth, firstDayOfMonth } = getDaysInMonth(currentMonth);
+  const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+  const paddingDays = Array.from({ length: firstDayOfMonth }, (_, i) => i);
+
+  // Check if a day has events
+  const hasEvents = (day: number) => {
+    return calendarEventsList.some(e =>
+      e.date.getDate() === day &&
+      e.date.getMonth() === currentMonth.getMonth() &&
+      e.date.getFullYear() === currentMonth.getFullYear()
+    );
+  };
+
+  const isSelected = (day: number) => {
+    return selectedDate?.getDate() === day &&
+      selectedDate?.getMonth() === currentMonth.getMonth() &&
+      selectedDate?.getFullYear() === currentMonth.getFullYear();
+  };
+
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   return (
     <>
@@ -394,58 +490,153 @@ export default function EventsPage() {
                 <h2 className="text-2xl font-display font-bold text-port-navy">
                   Calendar
                 </h2>
-                <span className="font-medium text-port-navy">January 2026</span>
+                <div className="flex items-center gap-4">
+                  <button onClick={prevMonth} className="text-port-navy hover:text-port-sky transition-colors p-2">
+                    <FaChevronLeft />
+                  </button>
+                  <span className="font-medium text-port-navy min-w-[140px] text-center text-lg">
+                    {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
+                  </span>
+                  <button onClick={nextMonth} className="text-port-navy hover:text-port-sky transition-colors p-2">
+                    <FaChevronRight />
+                  </button>
+                </div>
               </div>
+
               <div className="bg-white rounded-2xl shadow-lg border border-port-mist overflow-hidden">
-                <div className="calendar-grid border-b border-port-mist text-xs font-bold uppercase tracking-wider text-port-slate py-4">
+                <div className="grid grid-cols-7 border-b border-port-mist text-xs font-bold uppercase tracking-wider text-port-slate py-4 bg-gray-50/50">
                   {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
                     <div key={day} className="text-center">{day}</div>
                   ))}
                 </div>
-                <div className="calendar-grid text-port-slate">
-                  {[28, 29, 30, 31].map((d) => (
-                    <div key={`prev-${d}`} className="calendar-day text-port-ice">{d}</div>
+                <div className="grid grid-cols-7 text-port-slate">
+                  {/* Padding for previous month's days */}
+                  {paddingDays.map((_, index) => (
+                    <div key={`padding-${index}`} className="h-24 sm:h-32 bg-gray-50/30 border-r border-b border-gray-100 last:border-r-0"></div>
                   ))}
-                  {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
-                    <div
-                      key={d}
-                      className={`calendar-day ${
-                        d === 10
-                          ? "bg-port-navy text-white font-bold rounded-lg"
-                          : d === 15
-                          ? "bg-port-sky text-white font-bold rounded-lg"
-                          : ""
-                      }`}
-                    >
-                      {d}
-                    </div>
-                  ))}
+
+                  {/* Calendar Days */}
+                  {days.map((day, index) => {
+                    const isToday = day === new Date().getDate() &&
+                      currentMonth.getMonth() === new Date().getMonth() &&
+                      currentMonth.getFullYear() === new Date().getFullYear();
+                    const hasEvent = hasEvents(day);
+                    const selected = isSelected(day);
+                    const dayDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+                    const isPast = dayDate < new Date(new Date().setHours(0, 0, 0, 0));
+
+                    return (
+                      <div
+                        key={day}
+                        onClick={() => setSelectedDate(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day))}
+                        className={`
+                          relative h-24 sm:h-32 border-b border-r border-gray-100 p-2 cursor-pointer transition-all duration-200
+                          ${hasEvent ? 'hover:bg-port-sky/5' : ''}
+                          ${selected ? 'bg-port-sky/10 ring-2 ring-inset ring-port-sky' : 'hover:bg-gray-50'}
+                          ${(index + paddingDays.length + 1) % 7 === 0 ? 'border-r-0' : ''}
+                        `}
+                      >
+                        <div className="flex justify-between items-start">
+                          <span className={`
+                            w-7 h-7 flex items-center justify-center rounded-full text-sm font-medium
+                            ${isToday ? 'bg-port-navy text-white' : ''} 
+                            ${selected && !isToday ? 'text-port-sky font-bold' : ''}
+                            ${isPast && !selected && !isToday ? 'text-gray-400' : ''}
+                          `}>
+                            {day}
+                          </span>
+                          {hasEvent && (
+                            <div className="flex gap-1 flex-wrap justify-end max-w-[60%]">
+                              <span className={`w-2 h-2 rounded-full hidden sm:block ${selected ? 'bg-port-sky' : 'bg-port-navy'}`}></span>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Mobile dot indicator */}
+                        {hasEvent && (
+                          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 sm:hidden">
+                            <div className="w-1.5 h-1.5 rounded-full bg-port-navy"></div>
+                          </div>
+                        )}
+
+                        {/* Desktop event previews (optional, simple indicators for now) */}
+                        <div className="hidden sm:flex flex-col gap-1 mt-1">
+                          {calendarEventsList
+                            .filter(e => e.date.getDate() === day && e.date.getMonth() === currentMonth.getMonth())
+                            .slice(0, 2)
+                            .map(e => (
+                              <div key={e.id} className="text-[10px] truncate px-1 rounded bg-slate-100 text-slate-700 font-medium">
+                                {e.time}
+                              </div>
+                            ))
+                          }
+                          {calendarEventsList.filter(e => e.date.getDate() === day && e.date.getMonth() === currentMonth.getMonth()).length > 2 && (
+                            <div className="text-[9px] text-gray-400 px-1">+ more</div>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </RevealOnScroll>
 
-            <RevealOnScroll className="delay-200">
-              <h2 className="text-2xl font-display font-bold text-port-navy mb-6">
-                Upcoming
-              </h2>
-              <div className="space-y-4">
-                {upcomingEvents.map((event) => (
-                  <div
-                    key={event.title}
-                    className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-                  >
-                    <div className="w-14 h-14 bg-port-navy rounded-lg flex flex-col items-center justify-center text-white flex-shrink-0">
-                      <span className="text-lg font-bold leading-none">{event.day}</span>
-                      <span className="text-xs uppercase">{event.month}</span>
+            <RevealOnScroll className="delay-200 h-fit sticky top-24">
+              <div className="flex flex-col h-full">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-display font-bold text-port-navy">
+                    {selectedDate ? (
+                      <span className="flex items-center gap-2">
+                        <span className="text-port-sky">{selectedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                        <span>Events</span>
+                      </span>
+                    ) : "Upcoming"}
+                  </h2>
+                  {selectedDate && (
+                    <button
+                      onClick={() => setSelectedDate(null)}
+                      className="text-xs font-semibold text-port-slate hover:text-port-navy transition-colors bg-gray-100 px-3 py-1 rounded-full"
+                    >
+                      Clear Filter
+                    </button>
+                  )}
+                </div>
+
+                <div className="space-y-4 min-h-[300px]">
+                  {displayedCalendarEvents.length > 0 ? (
+                    displayedCalendarEvents.map((event) => (
+                      <div
+                        key={event.id}
+                        className="flex items-start gap-4 p-4 bg-white rounded-xl shadow-sm hover:shadow-md hover:translate-x-1 transition-all cursor-pointer group border border-transparent hover:border-port-mist"
+                      >
+                        <div className="w-16 h-16 bg-gradient-to-br from-port-navy to-port-slate rounded-xl flex flex-col items-center justify-center text-white flex-shrink-0 shadow-lg group-hover:scale-105 transition-transform">
+                          <span className="text-xl font-bold leading-none">{event.date.getDate()}</span>
+                          <span className="text-[10px] uppercase font-medium tracking-wide opacity-80">{monthNames[event.date.getMonth()].substring(0, 3)}</span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-bold text-port-navy text-base leading-tight mb-1 truncate group-hover:text-port-sky transition-colors">{event.title}</p>
+                          <div className="flex items-center gap-2 text-xs text-port-slate mb-1">
+                            <FaClock className="text-gray-400" size={10} />
+                            <span>{event.time}</span>
+                          </div>
+                          <div className="flex items-center gap-2 text-xs text-port-slate">
+                            <FaMapMarkerAlt className="text-gray-400" size={10} />
+                            <span className="truncate">{event.location}</span>
+                          </div>
+                          <span className={`inline-block mt-2 px-2 py-0.5 rounded text-[10px] uppercase tracking-wider font-bold ${categoryColors[event.type] || "bg-gray-200 text-gray-600"}`}>
+                            {event.type}
+                          </span>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="flex flex-col items-center justify-center h-48 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 text-port-slate">
+                      <FaCalendar className="text-3xl mb-2 opacity-20" />
+                      <p className="font-medium">No events scheduled</p>
+                      <p className="text-sm opacity-60">Try selecting another date</p>
                     </div>
-                    <div>
-                      <p className="font-semibold text-port-navy text-sm">{event.title}</p>
-                      <p className="text-xs text-port-slate">
-                        {event.location} • {event.time}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                  )}
+                </div>
               </div>
             </RevealOnScroll>
           </div>

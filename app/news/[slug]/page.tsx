@@ -214,6 +214,57 @@ const articles: Record<string, Article> = {
       "Funding will come from multiple sources including city reserves, state and federal grants, tax increment financing, and private investment. The first projects are expected to break ground in late 2026.",
       "A full presentation of the plan is available on the city website. Public comment is welcome through February 28."
     ]
+  },
+  "mlk-day-service": {
+    slug: "mlk-day-service",
+    title: "MLK Day Service & Community Glow",
+    subtitle: "Port Laken honors the legacy with a special MLK Day event at the waterfront park, featuring community service, live music, and glowing lantern displays.",
+    category: "Community Events",
+    author: "Port Laken News",
+    date: "January 19, 2026",
+    readTime: "3 min read",
+    image: "https://images.unsplash.com/photo-1540979388789-7cee28a1cdc9?auto=format&fit=crop&q=80",
+    content: [
+      "Port Laken came together on Monday to honor the legacy of Dr. Martin Luther King Jr. with a day of service and celebration. The event, held at the Waterfront Park, began with a community cleanup initiated by local high school students.",
+      "\"Dr. King's message was about action,\" said organizer Marcus Thorne. \"We wanted to start the day by giving back to the city we love.\" Over 500 volunteers participated in various service projects across the city, from park restoration to packing meals for the food bank.",
+      "As the sun set, the tone shifted from work to reflection. The annual 'Community Glow' ceremony illuminated the harbor with thousands of biodegradable lanterns, each bearing a written hope for the future.",
+      "Mayor Patricia Williams addressed the crowd, emphasizing the importance of unity in diverse times. \"Port Laken is a tapestry of cultures, and today we celebrate the threads that bind us together,\" she stated.",
+      "Live music filled the air as local choirs and jazz bands performed songs of freedom and resilience. The evening concluded with a spectacular light show reflecting off the water, a symbol of the enduring light Dr. King brought to the world."
+    ]
+  },
+  "winter-market": {
+    slug: "winter-market",
+    title: "Coastal Winter Market Lights Up Harbor",
+    subtitle: "The Winter Market returns to Harbor Plaza with local artisans, warm food trucks, craft drinks, and waterfront lights.",
+    category: "Lifestyle",
+    author: "Port Laken Lifestyle",
+    date: "January 25, 2026",
+    readTime: "4 min read",
+    image: "https://images.unsplash.com/photo-1519167758481-83f269a90c33?auto=format&fit=crop&q=80",
+    content: [
+      "The chill in the air didn't keep crowds away from the opening weekend of the Coastal Winter Market at Harbor Plaza. The annual tradition has returned, transforming the waterfront into a cozy village of lights, scents, and flavors.",
+      "Over 50 local artisans set up shop in wooden chalets, offering everything from hand-knit scarves to driftwood sculptures. \"It's our best season yet,\" says potter Elena Rodriguez. \"People are really looking for unique, locally made gifts this year.\"",
+      "Foodies delighted in the expanded food truck rally, which this year features winter specials like clam chowder in sourdough bread bowls, gourmet hot chocolate with homemade marshmallows, and roasted chestnuts.",
+      "The highlight for many was the new 'Tunnel of Lights' installation, a 200-foot walkway adorned with thousands of twinkling LEDs that synchronizes to music every hour. It has already become the season's most Instagrammable spot.",
+      "The market runs every weekend through February, providing a warm gathering place for the community during the colder months. Live acoustic music is scheduled for every Saturday evening."
+    ]
+  },
+  "sustainability-vision-2026": {
+    slug: "sustainability-vision-2026",
+    title: "City Unveils 2026 Sustainability Vision",
+    subtitle: "Mayor Johnson outlines new green spaces, waterfront upgrades, and eco-friendly public projects.",
+    category: "City News",
+    author: "Port Laken News",
+    date: "February 10, 2026",
+    readTime: "5 min read",
+    image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&q=80",
+    content: [
+      "In a press conference held at the new Eco-Center, Mayor Johnson unveiled the 'Green Port 2026' initiative, a comprehensive sustainability plan aimed at making Port Laken a leader in environmental stewardship.",
+      "The ambitious plan includes the creation of three new urban pocket parks in the downtown area, designed to reduce heat islands and provide accessible green space for residents and workers.",
+      "\"Sustainability isn't just about solar panels,\" Mayor Johnson explained. \"It's about creating a livable city for future generations. That means cleaner air, more trees, and walkable neighborhoods.\"",
+      "A major component of the vision is the Waterfront Resilience Project, which will upgrade the harbor's seawalls with natural 'living shorelines' to combat rising sea levels while improving marine habitat.",
+      "The city also announced incentives for businesses to transition to zero-waste practices and a new municipal composting program set to launch in the spring. \"We're asking everyone to pitch in,\" said Environmental Director Dr. Alice Green. \"Small changes, when done by thousands, make a huge impact.\""
+    ]
   }
 };
 
@@ -296,11 +347,10 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             {article.content.map((paragraph, index) => (
               <p
                 key={index}
-                className={`font-nunito text-gray-700 leading-relaxed mb-6 ${
-                  paragraph === paragraph.toUpperCase() && paragraph.includes(':')
+                className={`font-nunito text-gray-700 leading-relaxed mb-6 ${paragraph === paragraph.toUpperCase() && paragraph.includes(':')
                     ? 'font-bold text-[#1e3a5f] text-lg mt-8'
                     : ''
-                }`}
+                  }`}
               >
                 {paragraph}
               </p>

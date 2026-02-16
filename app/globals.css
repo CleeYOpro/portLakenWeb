@@ -6,14 +6,17 @@
    Fonts
 ========================= */
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1");
 
 /* =========================
    CSS Variables (old)
+   # comment
 ========================= */
 :root {
   --font-playfair: "Playfair Display", serif;
   --font-inter: "Inter", sans-serif;
+  --font-nunito: "Nunito Sans", sans-serif;
 
   /* Coastal palette */
   --color-primary: #708aa3;
@@ -36,6 +39,13 @@
   --color-deep-navy: #32424f;
 }
 
+/* Glass effect for dropdown menus */
+.glass {
+  background: rgba(241, 245, 249, 0.75); /* same as navbar */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
 /* =========================
    Global Layout
 ========================= */
@@ -46,7 +56,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--font-nunito-sans, Inter, system-ui, sans-serif);
+  font-family: var(--font-inter), system-ui, sans-serif;
   color: #1e3a5f;
   background-color: #f8fafb;
   overflow-x: hidden;
@@ -65,6 +75,22 @@ body {
 ========================= */
 ::-webkit-scrollbar {
   width: 8px;
+}
+
+.perspective {
+  perspective: 1200px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
 }
 
 ::-webkit-scrollbar-track {
@@ -127,12 +153,10 @@ body {
 }
 
 .hero-gradient {
-  background: linear-gradient(
-    135deg,
-    rgba(30, 58, 95, 0.7) 0%,
-    rgba(45, 74, 111, 0.5) 50%,
-    rgba(74, 109, 140, 0.3) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(30, 58, 95, 0.85) 0%,
+      rgba(45, 74, 111, 0.65) 50%,
+      rgba(74, 109, 140, 0.45) 100%);
 }
 
 /* =========================
@@ -201,14 +225,6 @@ body {
 /* =========================
    Delays
 ========================= */
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
-
-/* =========================
-   Spotlight Grid (Departments)
-========================= */
 .spotlight-grid:hover .department-card {
   opacity: 0.45;
   filter: brightness(0.7);
@@ -222,4 +238,19 @@ body {
 .spotlight-grid:hover .department-card:hover {
   opacity: 1;
   filter: brightness(1.05);
+}
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
 }
