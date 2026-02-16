@@ -205,3 +205,21 @@ body {
 .delay-200 { animation-delay: 0.2s; }
 .delay-300 { animation-delay: 0.3s; }
 .delay-400 { animation-delay: 0.4s; }
+
+/* =========================
+   Spotlight Grid (Departments)
+========================= */
+.spotlight-grid:hover .department-card {
+  opacity: 0.45;
+  filter: brightness(0.7);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.spotlight-grid .department-card {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.spotlight-grid:hover .department-card:hover {
+  opacity: 1;
+  filter: brightness(1.05);
+}
