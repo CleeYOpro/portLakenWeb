@@ -4,22 +4,15 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import {
-  FaChevronDown,
-  FaHeartbeat,
-  FaDollarSign,
-  FaBalanceScale,
   FaGlobe,
   FaChartLine,
-  FaUsers,
-  FaBriefcase,
+  FaHeartbeat,
   FaArrowRight,
-  FaPenFancy,
-  FaClipboardCheck,
-  FaUserTie,
-  FaGift,
+  FaBriefcase,
+  FaCheck,
 } from "react-icons/fa";
 
-const benefits = [
+const highlights = [
   {
     title: "Community Impact",
     description:
@@ -33,119 +26,23 @@ const benefits = [
     icon: FaChartLine,
   },
   {
-    title: "Diverse & Inclusive",
+    title: "Stability & Benefits",
     description:
-      "We are committed to building a workforce that reflects the diversity of our city.",
-    icon: FaUsers,
-  },
-];
-
-const employeeBenefits = [
-  {
+      "Enjoy comprehensive health coverage, pension plans, and job stability.",
     icon: FaHeartbeat,
-    title: "Health & Wellness",
-    description:
-      "Medical, dental, and vision plans, plus wellness programs and gym memberships.",
-    stat: "100%",
-    statLabel: "Coverage",
-  },
-  {
-    icon: FaDollarSign,
-    title: "Financial Security",
-    description:
-      "Competitive salaries, pension plans, and retirement savings matching contributions.",
-    stat: "6%",
-    statLabel: "401k Match",
-  },
-  {
-    icon: FaBalanceScale,
-    title: "Work-Life Balance",
-    description:
-      "Generous vacation time, paid holidays, and flexible work arrangements.",
-    stat: "25",
-    statLabel: "PTO Days",
   },
 ];
 
-const hiringSteps = [
-  {
-    step: 1,
-    title: "Apply Online",
-    description:
-      "Submit your application through our online portal. Highlight your skills and experience relevant to the role.",
-    icon: FaPenFancy,
-  },
-  {
-    step: 2,
-    title: "Application Review",
-    description:
-      "Our hiring team reviews applications to identify candidates whose qualifications best match the position.",
-    icon: FaClipboardCheck,
-  },
-  {
-    step: 3,
-    title: "Interviews",
-    description:
-      "Selected candidates are invited for interviews to discuss experience and assess fit for the role.",
-    icon: FaUserTie,
-  },
-  {
-    step: 4,
-    title: "Offer & Onboarding",
-    description:
-      "Successful candidates receive an offer. Once accepted, we guide you through the onboarding process.",
-    icon: FaGift,
-  },
+const benefitPoints = [
+  "Comprehensive Health, Dental & Vision",
+  "Generous Retirement & Pension Plans",
+  "Paid Time Off & Holidays",
+  "Long-term Job Stability",
 ];
 
-const faqs = [
-  {
-    question: "Do I have to be a resident of Port Laken to apply?",
-    answer:
-      "No, you do not need to be a current resident to apply for most positions. However, some roles may have residency requirements that are noted in the job posting.",
-  },
-  {
-    question: "How long does the hiring process take?",
-    answer:
-      "The timeline varies depending on the position and number of applicants. Generally, you can expect the process to take 4-8 weeks from application to offer.",
-  },
-  {
-    question: "Can I apply for multiple jobs at once?",
-    answer:
-      "Yes, you are welcome to apply for multiple positions that match your qualifications. Each application is reviewed independently.",
-  },
-];
-
-const openPositions = [
-  {
-    title: "Civil Engineer",
-    dept: "Public Works",
-    type: "Full-time",
-    posted: "Feb 10, 2026",
-  },
-  {
-    title: "Recreation Program Coordinator",
-    dept: "Recreation & Parks",
-    type: "Full-time",
-    posted: "Feb 8, 2026",
-  },
-  {
-    title: "IT Support Specialist",
-    dept: "City Clerk",
-    type: "Full-time",
-    posted: "Feb 5, 2026",
-  },
-  {
-    title: "Firefighter/Paramedic",
-    dept: "Fire Department",
-    type: "Full-time",
-    posted: "Feb 1, 2026",
-  },
-];
+const indeedLink = "https://www.indeed.com/jobs?q=Port+Laken+City";
 
 export default function CareersPage() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [activeStep, setActiveStep] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -156,460 +53,289 @@ export default function CareersPage() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Auto-advance hiring steps
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % hiringSteps.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const toggleFaq = (index: number) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
-
   return (
     <>
-      {/* Hero - Immersive dark section with animated gradients */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-port-navy">
-        {/* Animated gradient orbs */}
-        <div
-          className="absolute w-[600px] h-[600px] rounded-full opacity-20 blur-3xl transition-transform duration-[3000ms]"
-          style={{
-            background:
-              "radial-gradient(circle, #6b9bc3 0%, transparent 70%)",
-            left: `${mousePos.x * 0.03}px`,
-            top: `${mousePos.y * 0.03}px`,
-          }}
-        />
-        <div
-          className="absolute w-[400px] h-[400px] rounded-full opacity-10 blur-3xl transition-transform duration-[3000ms]"
-          style={{
-            background:
-              "radial-gradient(circle, #a8c5db 0%, transparent 70%)",
-            right: `${mousePos.x * 0.02}px`,
-            bottom: `${mousePos.y * 0.02}px`,
-          }}
-        />
+      <section className="relative bg-white pt-32 pb-24 overflow-hidden">
+        {/* Subtle Background Accent */}
+        <div className="absolute right-[-200px] top-24 w-[600px] h-[600px] bg-port-sky/5 rounded-full blur-3xl" />
 
-        {/* Grid overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-          }}
-        />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-16 items-center">
 
-        {/* Floating particles */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 bg-port-sky/40 rounded-full"
-              style={{
-                left: `${15 + i * 15}%`,
-                top: `${20 + (i * 37) % 60}%`,
-                animation: `float ${6 + i * 2}s ease-in-out infinite`,
-                animationDelay: `${i * 0.5}s`,
-              }}
-            />
-          ))}
-        </div>
-
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-8 border border-white/10 animate-fade-in-up">
-            <FaBriefcase className="text-port-sky text-sm" />
-            <span className="text-white/80 text-sm font-medium">
-              {openPositions.length} Open Positions
-            </span>
-          </div>
-
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] mb-8 animate-fade-in-up">
-            Build Your{" "}
-            <span className="italic text-port-sky">Future.</span>
-            <br />
-            Serve Your{" "}
-            <span className="italic text-port-ice">City.</span>
-          </h1>
-
-          <p className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto mb-12 animate-fade-in-up delay-100">
-            Join a team dedicated to improving the lives of our community.
-            Your work will have a direct and meaningful impact.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-200">
-            <Link
-              href="/careers/positions"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-port-navy rounded-2xl font-bold text-lg hover:scale-105 transition-all hover:shadow-xl hover:shadow-white/10"
-            >
-              View Open Positions
-              <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/careers/benefits"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-white/10 text-white rounded-2xl font-bold text-lg border border-white/20 hover:bg-white/20 transition-all backdrop-blur-sm"
-            >
-              Explore Benefits
-            </Link>
-          </div>
-        </div>
-
-      </section>
-
-      {/* Open Positions Ticker */}
-      <section className="py-6 bg-port-frost border-b border-port-mist overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-8 overflow-x-auto scrollbar-hide">
-            <span className="text-port-navy font-bold text-sm whitespace-nowrap flex-shrink-0">
-              NOW HIRING
-            </span>
-            {openPositions.map((pos, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-3 bg-white px-5 py-3 rounded-xl border border-port-mist flex-shrink-0 hover:shadow-md transition-shadow cursor-pointer group"
-              >
-                <div>
-                  <div className="font-bold text-port-navy text-sm group-hover:text-port-sky transition-colors">
-                    {pos.title}
-                  </div>
-                  <div className="text-port-slate text-xs">
-                    {pos.dept} &middot; {pos.type}
-                  </div>
-                </div>
-                <FaArrowRight className="text-port-slate text-xs group-hover:text-port-sky transition-colors" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Work That Matters - Reimagined */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        {/* Subtle background decoration */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-port-frost rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-50" />
-
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <RevealOnScroll>
-            <div className="text-center mb-20">
-              <span className="text-port-sky font-medium text-sm tracking-widest uppercase mb-4 block">
-                Why Port Laken
+          {/* TEXT BLOCK – now on top (stacked) */}
+          <div 
+            className="rounded-3xl w-full h-[200px] overflow-hidden shadow-lg border border-port-mist/40 p-8 
+                 flex flex-col justify-center animate-fade-in-up"
+          >
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-port-navy leading-tight mb-6">
+              Build Your Future.
+              <span className="block italic text-port-sky">
+                Serve Your City.
               </span>
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-port-navy mb-6">
-                Work That <span className="italic">Matters</span>
+            </h1>
+
+            <a
+              href={indeedLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-4 px-6 py-3
+                   bg-gray-900 text-white rounded-xl
+                   hover:bg-black transition-all duration-300
+                   animate-fade-in-up"
+              style={{ animationDelay: "300ms" }}
+            >
+              <FaArrowRight className="text-white text-md -rotate-45 group-hover:rotate-0 transition-all duration-300" />
+              <span className="text-sm uppercase tracking-wider text-white">
+                Find us on
+              </span>
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Indeed_logo.svg/512px-Indeed_logo.svg.png"
+                alt="Indeed"
+                className="h-5 w-auto flex-shrink-0 brightness-0 invert -translate-y-[3px]"
+              />
+            </a>
+          </div>
+
+          {/* IMAGE BLOCK – now below text (stacked) */}
+          <div className="relative w-full animate-fade-in-up" style={{ animationDelay: "500ms" }}>
+            <div className="rounded-3xl overflow-hidden shadow-lg border border-port-mist/40">
+              <img
+                src="https://www.beecreekphoto.com/images/xl/austin-skyline-auditorium-shores-twilight-DR50215.jpg"
+                alt="City skyline"
+                className="w-full h-[200px] object-cover animate-slow-pan"
+              />
+            </div>
+          </div>
+        </div>
+
+        <style jsx>{`
+    @keyframes slowPan {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-3%); }
+      100% { transform: translateX(0); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-slow-pan {
+      animation: slowPan 60s ease-in-out infinite;
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.9s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    }
+  `}</style>
+      </section>
+
+
+      {/* 2. Why Work Here (3 cards) */}
+      < section className="py-24 bg-port-frost relative" >
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <RevealOnScroll>
+            <div className="text-center mb-16">
+              <h2 className="font-display text-4xl font-bold text-port-navy mb-4">
+                Why Port Laken?
               </h2>
-              <p className="text-port-slate max-w-xl mx-auto text-lg">
-                Your work will have a direct and meaningful impact on the
-                people of Port Laken.
+              <p className="text-port-slate text-lg max-w-3xl mx-auto">
+                We offer more than just a job. We offer a career with meaning, stability, and connection.
               </p>
             </div>
           </RevealOnScroll>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => (
-              <RevealOnScroll
-                key={benefit.title}
-                className={`delay-${index * 100}`}
-              >
-                <div className="group relative bg-port-frost p-8 rounded-3xl hover:bg-port-navy transition-all duration-500 cursor-default overflow-hidden">
-                  {/* Hover glow effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-port-sky/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
-
-                  <div className="relative">
-                    <div className="w-14 h-14 bg-white group-hover:bg-white/10 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 shadow-sm group-hover:shadow-none">
-                      <benefit.icon className="text-port-sky text-xl group-hover:text-port-ice transition-colors duration-500" />
-                    </div>
-                    <h3 className="font-bold text-xl text-port-navy group-hover:text-white mb-3 transition-colors duration-500">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-port-slate group-hover:text-white/70 text-sm leading-relaxed transition-colors duration-500">
-                      {benefit.description}
-                    </p>
+            {highlights.map((item, index) => (
+              <RevealOnScroll key={item.title} className={`delay-${index * 100} h-full`}>
+                <div className="group h-full bg-white p-8 rounded-3xl hover:bg-port-navy transition-all duration-300 border border-port-mist/50 hover:border-port-navy flex flex-col items-start text-left">
+                  <div className="w-14 h-14 bg-port-frost rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-white/10 transition-colors">
+                    <item.icon className="text-port-sky text-xl group-hover:text-port-ice" />
                   </div>
+                  <h3 className="font-bold text-xl text-port-navy group-hover:text-white mb-3 transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-port-slate group-hover:text-white/80 leading-relaxed transition-colors">
+                    {item.description}
+                  </p>
                 </div>
               </RevealOnScroll>
             ))}
           </div>
         </div>
       </section>
-
-      {/* Benefits - Bold stat cards */}
-      <section className="py-24 bg-port-navy relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.03]">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-              backgroundSize: "40px 40px",
-            }}
-          />
-        </div>
-
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <RevealOnScroll>
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <span className="text-port-sky font-medium text-sm tracking-widest uppercase mb-4 block">
-                  Benefits
-                </span>
-                <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
-                  We Take Care of{" "}
-                  <span className="italic text-port-ice">Our People</span>
-                </h2>
-                <p className="text-white/60 text-lg mb-10 leading-relaxed">
-                  A comprehensive employee benefits package designed to
-                  support you and your family.
-                </p>
-                <Link
-                  href="/careers/benefits"
-                  className="group inline-flex items-center gap-2 px-6 py-3 bg-white text-port-navy rounded-xl font-medium hover:bg-port-frost transition-colors"
-                >
-                  Full Benefits Guide
-                  <FaArrowRight className="text-sm group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-
-              <div className="space-y-6">
-                {employeeBenefits.map((benefit, index) => (
-                  <RevealOnScroll
-                    key={index}
-                    className={`delay-${index * 100}`}
-                  >
-                    <div className="group flex gap-5 bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10 hover:bg-white/10 transition-all">
-                      <div className="w-14 h-14 bg-port-sky/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <benefit.icon className="text-port-sky text-xl" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-1">
-                          <h4 className="font-bold text-white">
-                            {benefit.title}
-                          </h4>
-                          <div className="text-right">
-                            <span className="text-2xl font-bold text-port-sky">
-                              {benefit.stat}
-                            </span>
-                            <span className="text-white/40 text-xs block">
-                              {benefit.statLabel}
-                            </span>
-                          </div>
-                        </div>
-                        <p className="text-white/50 text-sm">
-                          {benefit.description}
-                        </p>
-                      </div>
-                    </div>
-                  </RevealOnScroll>
-                ))}
-              </div>
-            </div>
-          </RevealOnScroll>
-        </div>
-      </section>
-
-      {/* Hiring Process - Interactive timeline */}
-      <section className="py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <RevealOnScroll>
-            <div className="text-center mb-16">
-              <span className="text-port-sky font-medium text-sm tracking-widest uppercase mb-4 block">
-                How It Works
-              </span>
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-port-navy">
-                Our Hiring <span className="italic">Process</span>
-              </h2>
-            </div>
-          </RevealOnScroll>
-
-          <RevealOnScroll className="delay-100">
-            <div className="grid md:grid-cols-4 gap-6">
-              {hiringSteps.map((step, index) => (
-                <button
-                  key={step.step}
-                  onClick={() => setActiveStep(index)}
-                  className={`relative p-6 rounded-2xl text-left transition-all duration-500 ${
-                    activeStep === index
-                      ? "bg-port-navy text-white shadow-xl shadow-port-navy/20 scale-105"
-                      : "bg-port-frost text-port-navy hover:bg-port-mist"
-                  }`}
-                >
-                  {/* Step connector line */}
-                  {index < hiringSteps.length - 1 && (
-                    <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-port-mist z-10" />
-                  )}
-
-                  <div
-                    className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
-                      activeStep === index
-                        ? "bg-white/10"
-                        : "bg-white shadow-sm"
-                    }`}
-                  >
-                    <step.icon
-                      className={`text-xl ${
-                        activeStep === index ? "text-port-ice" : "text-port-sky"
-                      }`}
-                    />
-                  </div>
-
-                  <div
-                    className={`text-xs font-bold mb-2 ${
-                      activeStep === index ? "text-port-sky" : "text-port-sky"
-                    }`}
-                  >
-                    STEP {step.step}
-                  </div>
-
-                  <h3
-                    className={`font-bold text-lg mb-2 ${
-                      activeStep === index ? "text-white" : "text-port-navy"
-                    }`}
-                  >
-                    {step.title}
-                  </h3>
-
-                  <p
-                    className={`text-sm leading-relaxed ${
-                      activeStep === index ? "text-white/70" : "text-port-slate"
-                    }`}
-                  >
-                    {step.description}
-                  </p>
-
-                  {/* Progress bar at bottom */}
-                  {activeStep === index && (
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10 rounded-b-2xl overflow-hidden">
-                      <div className="h-full bg-port-sky rounded-full animate-progress" />
-                    </div>
-                  )}
-                </button>
-              ))}
-            </div>
-          </RevealOnScroll>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-24 bg-port-frost">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Life at Port Laken - Balanced, tighter Nukta-style grid */}
+      < section className="py-20 bg-white" >
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="text-center mb-12">
-              <span className="text-port-sky font-medium text-sm tracking-widest uppercase mb-4 block">
-                FAQ
-              </span>
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-port-navy">
-                Common <span className="italic">Questions</span>
+              <h1 className="font-display text-4xl md:text-5xl font-bold text-port-navy mb-4">
+                We do more than serve
+              </h1>
+              <h2 className="text-port-slate text-large max-w-4xl mx-auto leading-relaxed">
+                We grow together, celebrate wins, and create real connections.
+
               </h2>
+              <h3 className="text-port-slate text-large max-w-4xl mx-auto leading-relaxed">
+                Every day brings energy, collaboration, and the satisfaction of improving our community.
+              </h3>
             </div>
           </RevealOnScroll>
 
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
-              <RevealOnScroll
-                key={index}
-                className={`delay-${index * 100}`}
-              >
-                <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-port-mist">
-                  <button
-                    onClick={() => toggleFaq(index)}
-                    className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 hover:bg-port-cream transition-colors"
-                  >
-                    <span className="font-bold text-port-navy">
-                      {faq.question}
-                    </span>
-                    <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-                        openFaq === index
-                          ? "bg-port-navy text-white rotate-180"
-                          : "bg-port-frost text-port-slate"
-                      }`}
-                    >
-                      <FaChevronDown className="text-xs" />
-                    </div>
-                  </button>
-                  <div
-                    className={`overflow-hidden transition-all duration-300 ${
-                      openFaq === index ? "max-h-40" : "max-h-0"
-                    }`}
-                  >
-                    <div className="px-6 pb-5">
-                      <p className="text-port-slate text-sm leading-relaxed">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Quote 1 */}
+            <div className="bg-port-frost rounded-3xl p-6 shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col h-full">
+              <p className="text-2xl leading-tight italic text-port-navy mb-6">
+                “More than a job — I learned and grew every day making a difference here.”
+              </p>
+              <div className="flex items-center gap-3 mt-auto">
+                <img
+                  src="https://i.pravatar.cc/96?u=almas"
+                  alt="Almas Rivera"
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div>
+                  <div className="font-semibold text-port-navy text-sm">Almas Rivera</div>
+                  <div className="text-xs text-port-slate">Civil Engineer</div>
                 </div>
-              </RevealOnScroll>
-            ))}
+              </div>
+            </div>
+
+            {/* Image 1: Hands stacking */}
+            <div className="aspect-square rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group">
+              <img
+                src="https://thumbs.dreamstime.com/b/diverse-business-team-stacking-hands-showing-unity-group-people-their-together-symbolizing-teamwork-collaboration-support-434215192.jpg"
+                alt="Diverse team stacking hands in unity"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Quote 2 */}
+            <div className="bg-port-frost rounded-3xl p-6 shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col h-full">
+              <p className="text-2xl leading-tight italic text-port-navy mb-6">
+                “Every day is a journey of learning and growth while serving our neighbors.”
+              </p>
+              <div className="flex items-center gap-3 mt-auto">
+                <img
+                  src="https://i.pravatar.cc/96?u=arsalan"
+                  alt="Arsalan Khan"
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div>
+                  <div className="font-semibold text-port-navy text-sm">Arsalan Khan</div>
+                  <div className="text-xs text-port-slate">Recreation Coordinator</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Image 2: Collaboration meeting */}
+            <div className="aspect-square rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group">
+              <img
+                src="https://thediversitymovement.com/wp-content/uploads/2024/01/iStock-1481369283-1024x576.jpg"
+                alt="Diverse team collaborating in discussion"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Quote 3 */}
+            <div className="bg-port-frost rounded-3xl p-6 shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col h-full">
+              <p className="text-2xl leading-tight italic text-port-navy mb-6">
+                “An opportunity every day for growth, connection, and meaningful impact.”
+              </p>
+              <div className="flex items-center gap-3 mt-auto">
+                <img
+                  src="https://i.pravatar.cc/96?u=john"
+                  alt="John Patel"
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div>
+                  <div className="font-semibold text-port-navy text-sm">John Patel</div>
+                  <div className="text-xs text-port-slate">IT Support Specialist</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Image 3: Coffee break fun */}
+            <div className="aspect-square rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group">
+              <img
+                src="https://thumbs.dreamstime.com/b/colleagues-laugh-chat-modern-office-cafe-coffee-break-group-coworkers-share-joyful-moment-bright-connect-424644392.jpg"
+                alt="Team enjoying coffee break and laughs"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
           </div>
         </div>
       </section>
-
-      {/* CTA */}
-      <section className="relative py-24 bg-port-navy overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-port-sky/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-port-sky/5 rounded-full blur-3xl" />
-        </div>
-
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* 4. Benefits (Condensed) */}
+      <section className="py-24 bg-port-frost">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <RevealOnScroll>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
-              We&apos;re Here to{" "}
-              <span className="italic text-port-ice">Help</span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-12">
+              Benefits That Support You
             </h2>
-            <p className="text-white/60 text-lg mb-10 max-w-xl mx-auto">
-              Have questions? Our Human Resources team is ready to assist
-              you with applications and inquiries about working for Port
-              Laken.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/careers/contact"
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-port-navy rounded-2xl font-bold hover:scale-105 transition-all hover:shadow-xl hover:shadow-white/10"
-              >
-                Contact HR
-                <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                href="/careers/positions"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-white/10 text-white rounded-2xl font-bold border border-white/20 hover:bg-white/20 transition-all backdrop-blur-sm"
-              >
-                Browse All Positions
-              </Link>
+
+            <div className="grid sm:grid-cols-2 gap-x-8 gap-y-4 mb-12 text-left max-w-2xl mx-auto">
+              {benefitPoints.map((point, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-port-sky/10 flex items-center justify-center flex-shrink-0">
+                    <FaCheck className="text-port-sky text-xs" />
+                  </div>
+                  <span className="text-port-navy font-medium text-lg">
+                    {point}
+                  </span>
+                </div>
+              ))}
             </div>
+
+            <Link
+              href="/careers/benefits"
+              className="inline-flex items-center gap-2 text-port-sky font-bold text-lg hover:text-port-navy transition-colors border-b-2 border-transparent hover:border-port-navy pb-1"
+            >
+              View Full Benefits Guide <FaArrowRight className="text-sm" />
+            </Link>
           </RevealOnScroll>
+        </div>
+      </section >
+
+      <section className="bg-white py-12 border-t border-gray-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <a
+            href={indeedLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-center sm:text-left group transition-all"
+          >
+            {/* Left Text */}
+            <span className="text-gray-600 font-medium">
+              Securely apply for all positions on
+            </span>
+
+            {/* Indeed Logo */}
+            <img
+              src="https://wp.bibbeo.com/wp-content/uploads/2025/04/indeed-logo.webp"
+              alt="Indeed"
+              className="h-6 opacity-80 group-hover:opacity-100 transition-opacity"
+            />
+
+            {/* Divider (Desktop Only) */}
+            <span className="hidden sm:block w-px h-6 bg-gray-300" />
+
+            {/* CTA */}
+            <div className="flex items-center gap-2 text-gray-900 font-semibold group-hover:translate-x-1 transition-transform">
+              View Openings
+              <FaArrowRight className="transition-transform group-hover:translate-x-1" />
+            </div>
+          </a>
         </div>
       </section>
 
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0) scale(1);
-          }
-          50% {
-            transform: translateY(-20px) scale(1.5);
-          }
-        }
-        @keyframes progress {
-          from {
-            width: 0;
-          }
-          to {
-            width: 100%;
-          }
-        }
-        .animate-progress {
-          animation: progress 4s linear;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
+
+
     </>
   );
 }
