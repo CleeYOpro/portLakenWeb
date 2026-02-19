@@ -1,49 +1,88 @@
-import RevealOnScroll from "@/components/RevealOnScroll";
+import Image from "next/image";
 import Link from "next/link";
-import { IconType } from "react-icons";
-import { FaWrench, FaTint, FaTrashAlt, FaTree, FaLightbulb, FaWater } from "react-icons/fa";
+import RevealOnScroll from "@/components/RevealOnScroll";
+import { FaWrench, FaTint, FaTrashAlt, FaTree, FaLightbulb, FaWater, FaArrowLeft } from "react-icons/fa";
 
-const services: { icon: IconType; title: string; description: string }[] = [
-  { icon: FaWrench, title: "Street Maintenance", description: "Repairing and maintaining city roads, sidewalks, and bridges for safe travel." },
-  { icon: FaTint, title: "Water & Sewer", description: "Managing the city's clean water supply and wastewater treatment systems." },
-  { icon: FaTrashAlt, title: "Waste Management", description: "Coordinating residential and commercial waste collection and recycling programs." },
-  { icon: FaTree, title: "Urban Forestry", description: "Maintaining street trees, medians, and public landscaping throughout the city." },
-  { icon: FaLightbulb, title: "Street Lighting", description: "Installing and maintaining streetlights to keep neighborhoods well-lit and safe." },
-  { icon: FaWater, title: "Stormwater Management", description: "Preventing flooding through drainage systems, retention ponds, and green infrastructure." },
+const services = [
+  { icon: FaWrench, title: "Road Maintenance", description: "Repaving, pothole repair, and infrastructure upkeep across hundreds of miles of city streets." },
+  { icon: FaTint, title: "Water & Sewer", description: "Operating and maintaining Port Laken's water treatment, distribution, and wastewater systems." },
+  { icon: FaTrashAlt, title: "Solid Waste", description: "Residential and commercial waste collection, recycling programs, and hazardous material disposal." },
+  { icon: FaTree, title: "Urban Forestry", description: "Planting, pruning, and protecting the city's tree canopy for environmental and community benefit." },
+  { icon: FaLightbulb, title: "Street Lighting", description: "Installing and maintaining LED street lights to improve safety and energy efficiency citywide." },
+  { icon: FaWater, title: "Stormwater", description: "Managing drainage systems and green infrastructure to prevent flooding and protect the harbor." },
 ];
 
 const stats = [
-  { value: "180mi", label: "Roads Maintained" },
-  { value: "12M gal", label: "Daily Water Treated" },
-  { value: "95%", label: "Recycling Diverted" },
-  { value: "8,000+", label: "Street Trees" },
+  { value: "280mi", label: "Roads Maintained" },
+  { value: "4,500", label: "Storm Drains" },
+  { value: "12K+", label: "Street Lights" },
+  { value: "7 days", label: "Weekly Operations" },
 ];
 
 export default function PublicWorksPage() {
   return (
     <>
-      <section className="pt-32 pb-16 bg-gradient-to-b from-port-mist to-port-cream text-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link href="/departments" className="text-port-sky text-sm font-medium hover:underline mb-4 inline-block animate-fade-in-up">
-            &larr; All Departments
+      {/* HERO */}
+      <section className="relative h-[80vh] min-h-[560px] flex items-end overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1600"
+          alt="Public Works"
+          fill
+          className="object-cover object-center"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#111]/95 via-[#111]/55 to-transparent" />
+        <div className="absolute inset-0 opacity-15 bg-[#ea580c]" style={{ mixBlendMode: "color" }} />
+        <div className="absolute top-0 left-0 right-0 h-2 bg-[#ea580c]" />
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pb-16">
+          <Link href="/departments" className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm font-medium transition-colors mb-8">
+            <FaArrowLeft className="text-xs" /> All Departments
           </Link>
-          <h1 className="font-display text-5xl md:text-6xl font-bold text-port-navy mb-4 animate-fade-in-up">
-            Public <span className="italic">Works</span>
+          <div className="flex items-center gap-2 mb-5">
+            <div className="w-6 h-6 rounded bg-[#ea580c] flex items-center justify-center">
+              <FaWrench className="text-white text-xs" />
+            </div>
+            <span className="text-[#fb923c] text-sm font-bold uppercase tracking-widest">Infrastructure & Operations</span>
+          </div>
+          <h1 className="font-display text-6xl md:text-8xl font-bold text-white mb-4 leading-none">
+            Public<br /><em className="text-[#fb923c]">Works</em>
           </h1>
-          <p className="text-lg text-port-slate max-w-2xl mx-auto animate-fade-in-up delay-100">
-            Building and maintaining the infrastructure that keeps Port Laken running every day.
+          <p className="text-white/65 text-lg max-w-xl leading-relaxed">
+            The backbone of Port Laken — keeping roads safe, water clean, and the city running around the clock.
           </p>
         </div>
       </section>
 
-      <section className="py-12 bg-white border-b border-port-mist">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat) => (
-              <RevealOnScroll key={stat.label}>
-                <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-port-navy">{stat.value}</div>
-                  <div className="text-port-slate text-sm mt-1">{stat.label}</div>
+      {/* STATS — industrial gray */}
+      <section className="bg-[#1c1917] py-10 border-b border-white/5">
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+          {stats.map((s) => (
+            <div key={s.label} className="text-center">
+              <div className="text-4xl font-bold text-[#fb923c] mb-1">{s.value}</div>
+              <div className="text-white/40 text-sm uppercase tracking-wide">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SERVICES */}
+      <section className="py-20 bg-[#1c1917]">
+        <div className="max-w-6xl mx-auto px-6">
+          <RevealOnScroll>
+            <p className="text-[#fb923c] text-xs font-bold uppercase tracking-[0.25em] mb-3">What We Maintain</p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-2">
+              Core <em>Services</em>
+            </h2>
+            <div className="w-12 h-[3px] bg-[#ea580c] mb-14" />
+          </RevealOnScroll>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {services.map((svc, i) => (
+              <RevealOnScroll key={svc.title} className={`delay-${(i % 3) * 100}`}>
+                <div className="group bg-white/5 border border-white/10 hover:border-[#ea580c]/50 hover:bg-[#ea580c]/10 p-7 rounded-2xl transition-all duration-500">
+                  <svc.icon className="text-[#fb923c] text-3xl mb-5 group-hover:scale-110 transition-transform duration-300" />
+                  <h3 className="font-bold text-lg text-white mb-2">{svc.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">{svc.description}</p>
                 </div>
               </RevealOnScroll>
             ))}
@@ -51,41 +90,47 @@ export default function PublicWorksPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* PHOTO SPLIT */}
+      <section className="py-20 bg-[#0c0a09]">
+        <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
           <RevealOnScroll>
-            <div className="text-center mb-16">
-              <span className="text-port-sky font-medium text-sm tracking-widest uppercase mb-4 block">What We Do</span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-port-navy">
-                Our <span className="italic">Services</span>
-              </h2>
+            <div className="relative h-80 lg:h-[440px] rounded-2xl overflow-hidden">
+              <Image
+                src="https://images.unsplash.com/photo-1541802645635-11f2286a7482?auto=format&fit=crop&q=80&w=900"
+                alt="Infrastructure workers"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#ea580c]/20 to-transparent" />
             </div>
           </RevealOnScroll>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, index) => (
-              <RevealOnScroll key={service.title} className={`delay-${(index % 3) * 100}`}>
-                <div className="group bg-port-frost p-7 rounded-2xl hover:bg-port-navy transition-all duration-500">
-                  <service.icon className="text-port-sky text-3xl mb-4 group-hover:text-port-ice transition-colors duration-500" />
-                  <h3 className="font-bold text-lg text-port-navy mb-2 group-hover:text-white transition-colors duration-500">{service.title}</h3>
-                  <p className="text-port-slate text-sm leading-relaxed group-hover:text-white/70 transition-colors duration-500">{service.description}</p>
-                </div>
-              </RevealOnScroll>
-            ))}
-          </div>
+          <RevealOnScroll className="delay-100">
+            <p className="text-[#fb923c] text-xs font-bold uppercase tracking-[0.25em] mb-4">Built to Last</p>
+            <h3 className="font-display text-3xl md:text-4xl font-bold text-white mb-6">
+              The Crew Behind <em>Every Road</em>
+            </h3>
+            <p className="text-white/60 leading-relaxed mb-4">
+              Our Public Works crew works days, nights, and weekends to ensure that Port Laken&apos;s infrastructure never stops. From emergency water main breaks to routine pothole patching, we&apos;re there.
+            </p>
+            <p className="text-white/60 leading-relaxed">
+              Long-term investments in green infrastructure and sustainable systems ensure the city is built to last for generations.
+            </p>
+          </RevealOnScroll>
         </div>
       </section>
 
-      <section className="py-20 bg-port-navy">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* CTA */}
+      <section className="py-20 bg-[#ea580c]">
+        <div className="max-w-4xl mx-auto px-6 text-center">
           <RevealOnScroll>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              Report an <span className="italic text-port-ice">Issue</span>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
+              Report an <em>Issue</em>
             </h2>
-            <p className="text-white/60 text-lg mb-8 max-w-xl mx-auto">
-              Pothole? Broken streetlight? Let us know and we&apos;ll get it fixed.
+            <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
+              Pothole? Broken streetlight? Report infrastructure issues and our team will respond promptly.
             </p>
-            <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-port-navy rounded-2xl font-bold hover:scale-105 transition-all">
-              Submit a Service Request
+            <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#ea580c] rounded-2xl font-bold hover:scale-105 transition-all">
+              Submit a Report
             </Link>
           </RevealOnScroll>
         </div>

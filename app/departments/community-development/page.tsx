@@ -1,49 +1,85 @@
-import RevealOnScroll from "@/components/RevealOnScroll";
+import Image from "next/image";
 import Link from "next/link";
-import { IconType } from "react-icons";
-import { FaBuilding, FaHardHat, FaMap, FaHome, FaLeaf, FaCity } from "react-icons/fa";
+import RevealOnScroll from "@/components/RevealOnScroll";
+import { FaBuilding, FaHardHat, FaMap, FaHome, FaLeaf, FaCity, FaArrowLeft } from "react-icons/fa";
 
-const services: { icon: IconType; title: string; description: string }[] = [
-  { icon: FaBuilding, title: "Planning & Zoning", description: "Guiding responsible land use and development to shape the city's future growth." },
-  { icon: FaHardHat, title: "Building Permits", description: "Reviewing and issuing permits to ensure safe, code-compliant construction projects." },
-  { icon: FaMap, title: "Long-Range Planning", description: "Developing comprehensive plans for sustainable community growth over the next decades." },
-  { icon: FaHome, title: "Housing Programs", description: "Promoting affordable housing initiatives and homeowner assistance programs." },
-  { icon: FaLeaf, title: "Environmental Review", description: "Assessing environmental impacts of proposed developments to protect natural resources." },
-  { icon: FaCity, title: "Economic Development", description: "Attracting businesses and investment to strengthen the local economy." },
+const services = [
+  { icon: FaBuilding, title: "Zoning & Land Use", description: "Managing zoning applications, variances, and land use decisions to shape how Port Laken grows." },
+  { icon: FaHardHat, title: "Building Permits", description: "Streamlined permitting for residential and commercial construction projects across the city." },
+  { icon: FaMap, title: "Urban Planning", description: "Long-range planning for neighborhoods, transportation corridors, and community development." },
+  { icon: FaHome, title: "Housing Programs", description: "Affordable housing initiatives and homeowner assistance programs for Port Laken residents." },
+  { icon: FaLeaf, title: "Environmental Review", description: "Ensuring all development projects meet environmental standards and sustainability goals." },
+  { icon: FaCity, title: "Economic Development", description: "Attracting investment and supporting local businesses to drive sustainable economic growth." },
 ];
 
 const stats = [
-  { value: "340+", label: "Permits Issued Yearly" },
-  { value: "15", label: "Active Projects" },
-  { value: "$2.1B", label: "Development Value" },
-  { value: "98%", label: "Approval Rate" },
+  { value: "1,400+", label: "Permits Issued" },
+  { value: "48hr", label: "Permit Review" },
+  { value: "24", label: "Active Projects" },
+  { value: "15yr", label: "General Plan Horizon" },
 ];
 
 export default function CommunityDevelopmentPage() {
   return (
     <>
-      <section className="pt-32 pb-16 bg-gradient-to-b from-port-mist to-port-cream text-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link href="/departments" className="text-port-sky text-sm font-medium hover:underline mb-4 inline-block animate-fade-in-up">
-            &larr; All Departments
+      {/* HERO */}
+      <section className="relative h-[80vh] min-h-[560px] flex items-end overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=1600"
+          alt="Community Development"
+          fill
+          className="object-cover object-bottom"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1c0d00]/90 via-[#1c0d00]/50 to-transparent" />
+        <div className="absolute inset-0 opacity-20 bg-[#d97706]" style={{ mixBlendMode: "multiply" }} />
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97706] to-[#f59e0b]" />
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pb-16">
+          <Link href="/departments" className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm font-medium transition-colors mb-8">
+            <FaArrowLeft className="text-xs" /> All Departments
           </Link>
-          <h1 className="font-display text-5xl md:text-6xl font-bold text-port-navy mb-4 animate-fade-in-up">
-            Community <span className="italic">Development</span>
+          <div className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-white mb-5 bg-[#d97706]/40 border border-[#d97706]/60">
+            Planning & Growth
+          </div>
+          <h1 className="font-display text-5xl md:text-7xl font-bold text-white mb-4 leading-tight">
+            Community<br /><em className="text-[#fbbf24]">Development</em>
           </h1>
-          <p className="text-lg text-port-slate max-w-2xl mx-auto animate-fade-in-up delay-100">
-            Planning, building, and shaping a vibrant, sustainable future for Port Laken.
+          <p className="text-white/65 text-lg max-w-xl leading-relaxed">
+            Shaping the future of Port Laken through thoughtful planning, smart zoning, and vibrant economic development.
           </p>
         </div>
       </section>
 
-      <section className="py-12 bg-white border-b border-port-mist">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat) => (
-              <RevealOnScroll key={stat.label}>
-                <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-port-navy">{stat.value}</div>
-                  <div className="text-port-slate text-sm mt-1">{stat.label}</div>
+      {/* STATS — warm amber strip */}
+      <section className="bg-[#92400e] py-10">
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+          {stats.map((s) => (
+            <div key={s.label} className="text-center">
+              <div className="text-4xl font-bold text-[#fbbf24] mb-1">{s.value}</div>
+              <div className="text-white/50 text-sm uppercase tracking-wide">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SERVICES */}
+      <section className="py-20 bg-[#fef3c7]">
+        <div className="max-w-6xl mx-auto px-6">
+          <RevealOnScroll>
+            <p className="text-[#d97706] text-xs font-bold uppercase tracking-[0.25em] mb-3">What We Do</p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-[#1c0d00] mb-2">
+              Our <em>Services</em>
+            </h2>
+            <div className="w-12 h-[3px] bg-[#d97706] mb-14" />
+          </RevealOnScroll>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {services.map((svc, i) => (
+              <RevealOnScroll key={svc.title} className={`delay-${(i % 3) * 100}`}>
+                <div className="group bg-white border border-amber-200 hover:bg-[#d97706] p-7 rounded-2xl transition-all duration-500 shadow-sm">
+                  <svc.icon className="text-[#d97706] text-3xl mb-5 group-hover:text-white group-hover:scale-110 transition-all duration-300" />
+                  <h3 className="font-bold text-lg text-[#1c0d00] mb-2 group-hover:text-white transition-colors duration-500">{svc.title}</h3>
+                  <p className="text-amber-900/70 text-sm leading-relaxed group-hover:text-white/75 transition-colors duration-500">{svc.description}</p>
                 </div>
               </RevealOnScroll>
             ))}
@@ -51,41 +87,46 @@ export default function CommunityDevelopmentPage() {
         </div>
       </section>
 
+      {/* PHOTO + TEXT */}
       <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
           <RevealOnScroll>
-            <div className="text-center mb-16">
-              <span className="text-port-sky font-medium text-sm tracking-widest uppercase mb-4 block">What We Do</span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-port-navy">
-                Our <span className="italic">Services</span>
-              </h2>
+            <div className="relative h-80 lg:h-[440px] rounded-2xl overflow-hidden">
+              <Image
+                src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=900"
+                alt="Urban planning"
+                fill
+                className="object-cover"
+              />
             </div>
           </RevealOnScroll>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, index) => (
-              <RevealOnScroll key={service.title} className={`delay-${(index % 3) * 100}`}>
-                <div className="group bg-port-frost p-7 rounded-2xl hover:bg-port-navy transition-all duration-500">
-                  <service.icon className="text-port-sky text-3xl mb-4 group-hover:text-port-ice transition-colors duration-500" />
-                  <h3 className="font-bold text-lg text-port-navy mb-2 group-hover:text-white transition-colors duration-500">{service.title}</h3>
-                  <p className="text-port-slate text-sm leading-relaxed group-hover:text-white/70 transition-colors duration-500">{service.description}</p>
-                </div>
-              </RevealOnScroll>
-            ))}
-          </div>
+          <RevealOnScroll className="delay-100">
+            <p className="text-[#d97706] text-xs font-bold uppercase tracking-[0.25em] mb-4">Building Tomorrow</p>
+            <h3 className="font-display text-3xl md:text-4xl font-bold text-[#1c0d00] mb-6">
+              A City That <em>Grows With Purpose</em>
+            </h3>
+            <p className="text-amber-900/70 leading-relaxed mb-4">
+              Every permit issued, every zoning decision made, and every neighborhood plan adopted is a step toward the Port Laken we want to be. Our team balances growth with quality of life.
+            </p>
+            <p className="text-amber-900/70 leading-relaxed">
+              We engage residents at every stage — from early planning to final approval — to ensure development reflects the community&apos;s vision.
+            </p>
+          </RevealOnScroll>
         </div>
       </section>
 
-      <section className="py-20 bg-port-navy">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* CTA */}
+      <section className="py-20 bg-[#d97706]">
+        <div className="max-w-4xl mx-auto px-6 text-center">
           <RevealOnScroll>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              Planning a <span className="italic text-port-ice">Project?</span>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
+              Start Your <em>Project</em>
             </h2>
-            <p className="text-white/60 text-lg mb-8 max-w-xl mx-auto">
-              Start your permit application or schedule a pre-application meeting with our planning team.
+            <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
+              Apply for permits, check zoning requirements, or schedule a pre-application meeting with our planning team.
             </p>
-            <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-port-navy rounded-2xl font-bold hover:scale-105 transition-all">
-              Get Started
+            <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#d97706] rounded-2xl font-bold hover:scale-105 transition-all">
+              Contact Planning Division
             </Link>
           </RevealOnScroll>
         </div>
