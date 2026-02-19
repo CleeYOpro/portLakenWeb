@@ -411,7 +411,7 @@ const articles: Record<string, Article> = {
       "\"Small changes, when done by thousands, make a real impact,\" Dr. Green said. \"If half of Port Laken households compost their food scraps, we divert an estimated 4,200 tons of organic material from landfill annually. That's a choice the city is making possible.\"",
       "Information on the composting pilot will be posted to the city website by March 1. The full Green Port 2026 plan is available for review and public comment at portlakencity.gov/greenport."
     ]
-  }
+  },
 };
 
 export function generateStaticParams() {
@@ -612,6 +612,20 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
                 </div>
               </div>
             </aside>
+          {/* Article Body */}
+          <div className="prose prose-lg max-w-none">
+            {article.content.map((paragraph, index) => (
+              <p
+                key={index}
+                className={`font-nunito text-gray-700 leading-relaxed mb-6 ${paragraph === paragraph.toUpperCase() && paragraph.includes(':')
+                    ? 'font-bold text-[#1e3a5f] text-lg mt-8'
+                    : ''
+                  }`}
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
 
           </div>
         </div>
