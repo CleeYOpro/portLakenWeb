@@ -3,58 +3,60 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 /* =====================
    DATA
+===================== */
 
 const departments = [
   {
     title: "City Clerk",
     icon: "edit_document",
     description: "Official records, elections, and public information.",
-    url: "/under-construction",
+    url: "/departments/city-clerk",
   },
   {
     title: "Community Development",
     icon: "apartment",
     description: "Planning, zoning, and building permits.",
-    url: "/under-construction",
+    url: "/departments/community-development",
   },
   {
     title: "Fire Department",
     icon: "local_fire_department",
     description: "Emergency response and fire prevention services.",
-    url: "/under-construction",
+    url: "/departments/fire-department",
   },
   {
     title: "Police Department",
     icon: "policy",
     description: "Public safety and law enforcement.",
-    url: "/under-construction",
+    url: "/departments/police-department",
   },
   {
     title: "Public Works",
     icon: "build",
     description: "Infrastructure, streets, and sanitation.",
-    url: "/under-construction",
+    url: "/departments/public-works",
   },
   {
     title: "Recreation & Parks",
     icon: "park",
     description: "Parks, trails, and community programs.",
-    url: "/environmental",
+    url: "/departments/recreation-parks",
   },
   {
     title: "Finance",
     icon: "payments",
     description: "Budgeting, accounting, and financial services.",
-    url: "/under-construction",
+    url: "/departments/finance",
   },
   {
     title: "Human Resources",
     icon: "groups",
     description: "Employment, benefits, and workforce support.",
-    url: "/under-construction",
+    url: "/careers",
   },
 ];
 
@@ -99,15 +101,13 @@ function DepartmentCard({ dept }: DepartmentCardProps) {
           <p className="text-sm text-port-cream/80 mb-6">
             {dept.description}
           </p>
-          <a
+          <Link
             href={dept.url}
-            target="_blank"
-            rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
             className="inline-flex items-center justify-center rounded-full bg-port-cream text-port-navy font-medium px-5 py-2 text-sm hover:bg-white transition"
           >
             Visit Department
-          </a>
+          </Link>
         </div>
       </motion.div>
     </div>
