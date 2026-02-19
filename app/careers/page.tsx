@@ -137,7 +137,7 @@ export default function CareersPage() {
 
 
       {/* 2. Why Work Here (3 cards) */}
-      < section className="py-24 bg-port-frost relative" >
+      <section className="py-24 bg-port-frost relative">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="text-center mb-16">
@@ -170,7 +170,7 @@ export default function CareersPage() {
         </div>
       </section>
       {/* Life at Port Laken - Balanced, tighter Nukta-style grid */}
-      < section className="py-20 bg-white" >
+      <section className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="text-center mb-12">
