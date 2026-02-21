@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1");
 @tailwind base;
 @tailwind components;
@@ -9,8 +9,8 @@
 =========================*/
 :root {
   --font-playfair: "Playfair Display", serif;
-  --font-inter: "Nunito Sans", sans-serif;
-  --font-nunito: "Nunito Sans", sans-serif;
+  --font-inter: "Nunito", sans-serif;
+  --font-nunito: "Nunito", sans-serif;
 
   /* Coastal palette */
   --color-primary: #708aa3;

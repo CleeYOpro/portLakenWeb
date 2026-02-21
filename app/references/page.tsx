@@ -1,6 +1,7 @@
 "use client";
 
 import RevealOnScroll from "@/components/RevealOnScroll";
+import Image from "next/image";
 import {
   FaClipboardList,
   FaCheckCircle,
@@ -156,10 +157,11 @@ export default function ReferencesPage() {
               {/* Image Card 1 */}
               <div className="group relative rounded-2xl overflow-hidden border border-port-mist/30 shadow-sm hover:shadow-md transition-shadow duration-300 bg-white">
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img
+                  <Image
                     src="/images/reference/port-angeles-harbor.jpg"
                     alt="Port Angeles harbor with mountains in background"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-4">
@@ -171,10 +173,11 @@ export default function ReferencesPage() {
               {/* Image Card 2 */}
               <div className="group relative rounded-2xl overflow-hidden border border-port-mist/30 shadow-sm hover:shadow-md transition-shadow duration-300 bg-white">
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img
+                  <Image
                     src="/images/reference/bellingham-waterfront.jpg"
                     alt="Bellingham waterfront with calm water and distant islands"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-4">
@@ -186,10 +189,11 @@ export default function ReferencesPage() {
               {/* Image Card 3 */}
               <div className="group relative rounded-2xl overflow-hidden border border-port-mist/30 shadow-sm hover:shadow-md transition-shadow duration-300 bg-white">
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img
+                  <Image
                     src="/images/reference/sequim-dungeness.jpg"
                     alt="Dungeness Spit and misty shoreline near Sequim"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-4">
@@ -201,10 +205,11 @@ export default function ReferencesPage() {
               {/* Image Card 4 */}
               <div className="group relative rounded-2xl overflow-hidden border border-port-mist/30 shadow-sm hover:shadow-md transition-shadow duration-300 bg-white">
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img
+                  <Image
                     src="/images/reference/anacortes-deception-pass.jpg"
                     alt="Deception Pass bridge and coastal scenery near Anacortes"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-4">

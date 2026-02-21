@@ -1,190 +1,243 @@
 "use client";
 
 import { useState } from "react";
-import { CloudUpload, ChevronDown } from "lucide-react";
-import Link from "next/link";
-import InvertButton from "../../../components/ui/InvertButton";
-
-// Categories matching the resource directory
-const CATEGORIES = [
-    "Healthcare",
-    "Family",
-    "Food",
-    "Seniors",
-    "Legal",
-    "Emergency",
-    "Education",
-    "Community",
-    "Recreation",
-    "Service Stars",
-];
-
-const LOCATIONS = [
-    "Port Laken Center",
-    "North District",
-    "South Harbor",
-    "West End",
-    "East Village",
-];
+import { useAuth } from "@/context/AuthContext"; // Using Firebase Auth Context instead of next-auth
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 
 export default function SubmitResourcePage() {
-    const [formData, setFormData] = useState({
-        name: "",
-        category: "",
-        location: "",
-        description: "",
-        contact: "",
-        website: "",
-        image: null as File | null,
-    });
+  const { user } = useAuth(); // Using Firebase user instead of next-auth session
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Logic to submit would go here
-        alert("Resource submitted for review!");
-    };
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    category: "",
+    address: "",
+    phone: "",
+    email: "",
+    website: "",
+    hours: ""
+  });
 
-    return (
-        <div className="min-h-screen bg-white flex items-center justify-center py-24 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-2xl w-full">
-                <div className="text-center mb-10">
-                    <h1 className="font-playfair text-4xl font-bold text-port-navy mb-3">
-                        Submit a Resource
-                    </h1>
-                    <p className="text-port-slate/80 text-lg">
-                        Help our community grow by sharing a new resource.
-                    </p>
-                </div>
+  // Check if user is authenticated
+  if (!user) {
+    // Redirect to login if not authenticated
+    if (typeof window !== 'undefined') {
+      router.push("/sign-in");
+    }
+    return null;
+  }
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                    {/* Resource Name */}
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="Resource Name"
-                            className="w-full px-5 py-4 rounded-2xl bg-port-frost border border-transparent focus:bg-white focus:border-port-sky/50 focus:ring-4 focus:ring-port-sky/10 outline-none transition-all placeholder:text-port-slate/50 text-port-navy font-medium"
-                            value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            required
-                        />
-                    </div>
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
-                    {/* Category Dropdown */}
-                    <div className="relative">
-                        <select
-                            className={`w-full px-5 py-4 rounded-2xl bg-port-frost border border-transparent focus:bg-white focus:border-port-sky/50 focus:ring-4 focus:ring-port-sky/10 outline-none transition-all appearance-none cursor-pointer font-medium ${formData.category ? "text-port-navy" : "text-port-slate/50"
-                                }`}
-                            value={formData.category}
-                            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                            required
-                        >
-                            <option value="" disabled hidden>
-                                Category
-                            </option>
-                            {CATEGORIES.map((cat) => (
-                                <option key={cat} value={cat} className="text-port-navy">
-                                    {cat}
-                                </option>
-                            ))}
-                        </select>
-                        <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 text-port-slate/50 pointer-events-none" size={20} />
-                    </div>
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
 
-                    {/* Location Dropdown */}
-                    <div className="relative">
-                        <select
-                            className={`w-full px-5 py-4 rounded-2xl bg-port-frost border border-transparent focus:bg-white focus:border-port-sky/50 focus:ring-4 focus:ring-port-sky/10 outline-none transition-all appearance-none cursor-pointer font-medium ${formData.location ? "text-port-navy" : "text-port-slate/50"
-                                }`}
-                            value={formData.location}
-                            onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                            required
-                        >
-                            <option value="" disabled hidden>
-                                Location
-                            </option>
-                            {LOCATIONS.map((loc) => (
-                                <option key={loc} value={loc} className="text-port-navy">
-                                    {loc}
-                                </option>
-                            ))}
-                        </select>
-                        <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 text-port-slate/50 pointer-events-none" size={20} />
-                    </div>
+    if (!user?.uid) {
+      setError("You must be logged in to submit a resource.");
+      setLoading(false);
+      return;
+    }
 
-                    {/* Description */}
-                    <div>
-                        <textarea
-                            placeholder="Description"
-                            rows={5}
-                            className="w-full px-5 py-4 rounded-2xl bg-port-frost border border-transparent focus:bg-white focus:border-port-sky/50 focus:ring-4 focus:ring-port-sky/10 outline-none transition-all placeholder:text-port-slate/50 text-port-navy font-medium resize-none"
-                            value={formData.description}
-                            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                            required
-                        />
-                    </div>
+    try {
+      // Add the resource to Firestore with the user ID
+      await addDoc(collection(db, "resources"), {
+        ...formData,
+        userId: user.uid, // Connect resource to user
+        status: "pending", // Default status is pending
+        createdAt: serverTimestamp(),
+        approvedAt: null,
+        approvedBy: null
+      });
 
-                    {/* Contact Info */}
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="Contact Info"
-                            className="w-full px-5 py-4 rounded-2xl bg-port-frost border border-transparent focus:bg-white focus:border-port-sky/50 focus:ring-4 focus:ring-port-sky/10 outline-none transition-all placeholder:text-port-slate/50 text-port-navy font-medium"
-                            value={formData.contact}
-                            onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
-                            required
-                        />
-                    </div>
+      // Redirect to dashboard after successful submission
+      router.push("/dashboard");
+      router.refresh(); // Refresh to show the new resource in the list
+    } catch (err) {
+      console.error("Error submitting resource:", err);
+      setError("Failed to submit resource. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-                    {/* Website */}
-                    <div>
-                        <input
-                            type="url"
-                            placeholder="Website (Optional)"
-                            className="w-full px-5 py-4 rounded-2xl bg-port-frost border border-transparent focus:bg-white focus:border-port-sky/50 focus:ring-4 focus:ring-port-sky/10 outline-none transition-all placeholder:text-port-slate/50 text-port-navy font-medium"
-                            value={formData.website}
-                            onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                        />
-                    </div>
-
-                    {/* File Upload */}
-                    <div className="space-y-2">
-                        <label className="block text-sm font-semibold text-port-navy ml-1">
-                            Logo/Image <span className="text-port-slate/60 font-medium">(Optional)</span>
-                        </label>
-                        <div className="relative border-2 border-dashed border-port-mist rounded-2xl p-10 hover:bg-port-frost/50 transition-colors text-center cursor-pointer group">
-                            <input
-                                type="file"
-                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                accept="image/png, image/jpeg, image/gif"
-                                onChange={(e) => setFormData({ ...formData, image: e.target.files ? e.target.files[0] : null })}
-                            />
-                            <div className="flex flex-col items-center gap-3">
-                                <div className="w-12 h-12 rounded-full bg-port-frost flex items-center justify-center group-hover:bg-white transition-colors">
-                                    <CloudUpload className="text-port-slate group-hover:text-port-sky transition-colors" size={24} />
-                                </div>
-                                <div>
-                                    <p className="text-port-sky font-semibold">
-                                        Upload a file <span className="text-port-slate font-medium">or drag and drop</span>
-                                    </p>
-                                    <p className="text-xs text-port-slate/60 mt-1">
-                                        PNG, JPG, GIF up to 10MB
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Submit Button */}
-                    <div className="flex justify-end pt-4">
-                        <button
-                            type="submit"
-                            className="bg-[#0ea5e9] hover:bg-[#0284c7] text-white px-8 py-3.5 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
-                        >
-                            Submit Resource
-                        </button>
-                    </div>
-                </form>
-            </div>
+  return (
+    <div className="min-h-screen bg-gray-50 py-12">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Submit a Resource</h1>
+          <p className="text-gray-600">
+            Share valuable resources with the Port Laken community
+          </p>
         </div>
-    );
+
+        {error && (
+          <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-lg">
+            {error}
+          </div>
+        )}
+
+        <div className="bg-white shadow rounded-lg p-6 md:p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+                Resource Title *
+              </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                placeholder="e.g., HarborView Medical Center"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+                Description *
+              </label>
+              <textarea
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                required
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Describe the resource and what services it offers..."
+              />
+            </div>
+
+            <div>
+              <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
+                Category *
+              </label>
+              <select
+                id="category"
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="">Select a category</option>
+                <option value="healthcare">Healthcare</option>
+                <option value="education">Education</option>
+                <option value="housing">Housing</option>
+                <option value="food-assistance">Food Assistance</option>
+                <option value="transportation">Transportation</option>
+                <option value="legal">Legal Services</option>
+                <option value="mental-health">Mental Health</option>
+                <option value="employment">Employment</option>
+                <option value="community">Community</option>
+                <option value="recreation">Recreation</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+                Address
+              </label>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Street address, city, state, zip"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="(123) 456-7890"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="contact@organization.com"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="website" className="block text-sm font-medium text-gray-700 mb-1">
+                  Website
+                </label>
+                <input
+                  type="url"
+                  id="website"
+                  name="website"
+                  value={formData.website}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="https://www.organization.com"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="hours" className="block text-sm font-medium text-gray-700 mb-1">
+                  Hours of Operation
+                </label>
+                <input
+                  type="text"
+                  id="hours"
+                  name="hours"
+                  value={formData.hours}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="e.g., Mon-Fri 9am-5pm"
+                />
+              </div>
+            </div>
+
+            <div className="pt-4">
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full px-6 py-3 bg-primary text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+              >
+                {loading ? "Submitting..." : "Submit Resource"}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 }
