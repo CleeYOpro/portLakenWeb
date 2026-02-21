@@ -2,9 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { GiWaves } from 'react-icons/gi';
-import { Search, LogIn, ChevronDown } from 'lucide-react';
+import { Search, LogIn, ChevronDown, User, LogOut } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 
 export default function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -12,6 +14,8 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(null);
+  const { user, logout } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,6 +38,16 @@ export default function Navbar() {
     setDropdownTimeout(timeout);
   };
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+      router.push('/');
+      router.refresh();
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
+
   return (
     <>
       {/* Sticky Navbar */}
@@ -53,9 +67,11 @@ export default function Navbar() {
                 href="/"
                 className="flex items-center gap-3 group font-nunito -translate-y-[1px] font-bold"
               >
-                <img
+                <Image
                   src="/Port Laken (6 x 2 in) (6 x 1.6 in) (6 x 6 in).svg"
                   alt="Port Laken"
+                  width={160}
+                  height={48}
                   className="h-12 w-auto object-contain transition-transform group-hover:scale-[1.04] -translate-y-[1px]"
                 />
                 <span className="text-xl font-bold text-deep-navy tracking-tight group-hover:text-primary transition-colors -translate-y-[1px]">
@@ -63,8 +79,6 @@ export default function Navbar() {
                 </span>
               </Link>
             </div>
-
-
 
 
 
@@ -112,13 +126,49 @@ export default function Navbar() {
                 <Search className="w-6 h-6" />
               </button>
 
-              <Link
-                href="/under-construction"
-                className="hidden md:flex items-center gap-2 px-5 py-2 border-2 border-primary text-primary rounded-full font-nunito font-semibold hover:bg-primary hover:text-white transition-all hover:shadow-lg"
-              >
-                <LogIn className="w-5 h-5" />
-                Sign In
-              </Link>
+              {user ? (
+                // User is logged in - show profile menu
+                <div className="relative group">
+                  <button
+                    className="flex items-center gap-2 px-5 py-2 border-2 border-primary text-primary rounded-full font-nunito font-semibold hover:bg-primary hover:text-white transition-all hover:shadow-lg"
+                  >
+                    <User className="w-5 h-5" />
+                    <span className="hidden md:inline">Account</span>
+                  </button>
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-gray-100">
+                    <Link
+                      href="/dashboard"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white flex items-center gap-2"
+                    >
+                      <User className="w-4 h-4" />
+                      Dashboard
+                    </Link>
+                    <Link
+                      href="/alerts"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white flex items-center gap-2"
+                    >
+                      <span className="material-symbols-outlined text-base">notifications</span>
+                      Alerts Settings
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white flex items-center gap-2"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                // User is not logged in - show sign in button
+                <Link
+                  href="/sign-in"
+                  className="hidden md:flex items-center gap-2 px-5 py-2 border-2 border-primary text-primary rounded-full font-nunito font-semibold hover:bg-primary hover:text-white transition-all hover:shadow-lg"
+                >
+                  <LogIn className="w-5 h-5" />
+                  Sign In
+                </Link>
+              )}
 
               {/* Mobile Menu Button */}
               <button
@@ -141,6 +191,8 @@ export default function Navbar() {
       <MobileMenu
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
+        user={user}
+        onLogout={handleLogout}
       />
 
       {/* Mobile Menu Overlay */}
@@ -253,7 +305,7 @@ function DropdownLink({ href, label }: { href: string; label: string }) {
 }
 
 // Mobile Menu Components
-function MobileMenu({ mobileMenuOpen, setMobileMenuOpen }: { mobileMenuOpen: boolean; setMobileMenuOpen: (open: boolean) => void }) {
+function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, onLogout }: { mobileMenuOpen: boolean; setMobileMenuOpen: (open: boolean) => void, user: any, onLogout: () => void }) {
   return (
     <div
       className={`fixed inset-0 bg-white/80 backdrop-blur-xl shadow-2xl z-[60] transform transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} lg:hidden`}
@@ -304,14 +356,48 @@ function MobileMenu({ mobileMenuOpen, setMobileMenuOpen }: { mobileMenuOpen: boo
         </div>
 
         <div className="mt-8 pt-6 border-t border-gray-200">
-          <Link
-            href="/under-construction"
-            className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-primary text-white rounded-full font-nunito font-semibold hover:bg-primary/80 transition-colors"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <LogIn className="w-4 h-4" />
-            Sign
-          </Link>
+          {user ? (
+            <div className="space-y-2">
+              <div className="px-4 py-3 font-nunito font-semibold text-deep-navy truncate">
+                Signed in as: {user.email}
+              </div>
+              <Link
+                href="/dashboard"
+                className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-primary text-white rounded-full font-nunito font-semibold hover:bg-primary/80 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <User className="w-4 h-4" />
+                Dashboard
+              </Link>
+              <Link
+                href="/alerts"
+                className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-primary text-white rounded-full font-nunito font-semibold hover:bg-primary/80 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="material-symbols-outlined text-base">notifications</span>
+                Alerts Settings
+              </Link>
+              <button
+                onClick={() => {
+                  onLogout();
+                  setMobileMenuOpen(false);
+                }}
+                className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-red-500 text-white rounded-full font-nunito font-semibold hover:bg-red-600 transition-colors"
+              >
+                <LogOut className="w-4 h-4" />
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link
+              href="/sign-in"
+              className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-primary text-white rounded-full font-nunito font-semibold hover:bg-primary/80 transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <LogIn className="w-4 h-4" />
+                Sign In
+              </Link>
+          )}
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import {
   FaGlobe,
@@ -87,9 +88,11 @@ export default function CareersPage() {
               <span className="text-sm uppercase tracking-wider text-white">
                 Find us on
               </span>
-              <img
+              <Image
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Indeed_logo.svg/512px-Indeed_logo.svg.png"
                 alt="Indeed"
+                width={80}
+                height={20}
                 className="h-5 w-auto flex-shrink-0 brightness-0 invert -translate-y-[3px]"
               />
             </a>
@@ -98,10 +101,11 @@ export default function CareersPage() {
           {/* IMAGE BLOCK – now below text (stacked) */}
           <div className="relative w-full animate-fade-in-up" style={{ animationDelay: "500ms" }}>
             <div className="rounded-3xl overflow-hidden shadow-lg border border-port-mist/40">
-              <img
+              <Image
                 src="https://www.beecreekphoto.com/images/xl/austin-skyline-auditorium-shores-twilight-DR50215.jpg"
                 alt="City skyline"
-                className="w-full h-[200px] object-cover animate-slow-pan"
+                fill
+                className="object-cover animate-slow-pan"
               />
             </div>
           </div>
@@ -194,9 +198,11 @@ export default function CareersPage() {
                 “More than a job — I learned and grew every day making a difference here.”
               </p>
               <div className="flex items-center gap-3 mt-auto">
-                <img
+                <Image
                   src="https://i.pravatar.cc/96?u=almas"
                   alt="Almas Rivera"
+                  width={48}
+                  height={48}
                   className="w-12 h-12 rounded-full object-cover"
                 />
                 <div>
@@ -208,10 +214,11 @@ export default function CareersPage() {
 
             {/* Image 1: Hands stacking */}
             <div className="aspect-square rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group">
-              <img
+              <Image
                 src="https://thumbs.dreamstime.com/b/diverse-business-team-stacking-hands-showing-unity-group-people-their-together-symbolizing-teamwork-collaboration-support-434215192.jpg"
                 alt="Diverse team stacking hands in unity"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
 
@@ -221,9 +228,11 @@ export default function CareersPage() {
                 “Every day is a journey of learning and growth while serving our neighbors.”
               </p>
               <div className="flex items-center gap-3 mt-auto">
-                <img
+                <Image
                   src="https://i.pravatar.cc/96?u=arsalan"
                   alt="Arsalan Khan"
+                  width={48}
+                  height={48}
                   className="w-12 h-12 rounded-full object-cover"
                 />
                 <div>
@@ -235,10 +244,11 @@ export default function CareersPage() {
 
             {/* Image 2: Collaboration meeting */}
             <div className="aspect-square rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group">
-              <img
+              <Image
                 src="https://thediversitymovement.com/wp-content/uploads/2024/01/iStock-1481369283-1024x576.jpg"
                 alt="Diverse team collaborating in discussion"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
 
@@ -248,9 +258,11 @@ export default function CareersPage() {
                 “An opportunity every day for growth, connection, and meaningful impact.”
               </p>
               <div className="flex items-center gap-3 mt-auto">
-                <img
+                <Image
                   src="https://i.pravatar.cc/96?u=john"
                   alt="John Patel"
+                  width={48}
+                  height={48}
                   className="w-12 h-12 rounded-full object-cover"
                 />
                 <div>
@@ -262,10 +274,11 @@ export default function CareersPage() {
 
             {/* Image 3: Coffee break fun */}
             <div className="aspect-square rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group">
-              <img
+              <Image
                 src="https://thumbs.dreamstime.com/b/colleagues-laugh-chat-modern-office-cafe-coffee-break-group-coworkers-share-joyful-moment-bright-connect-424644392.jpg"
                 alt="Team enjoying coffee break and laughs"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
@@ -316,9 +329,11 @@ export default function CareersPage() {
             </span>
 
             {/* Indeed Logo */}
-            <img
+            <Image
               src="https://wp.bibbeo.com/wp-content/uploads/2025/04/indeed-logo.webp"
               alt="Indeed"
+              width={80}
+              height={24}
               className="h-6 opacity-80 group-hover:opacity-100 transition-opacity"
             />
 
