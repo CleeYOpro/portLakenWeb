@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   title: "Port Laken - Community First",
   description: "For over a century, connecting residents, honoring our heritage, and embracing innovation to build a community where everyone belongs and thrives.",
   icons: {
-    icon: '/icon.svg',
+    icon: '/pl.svg',
   },
 };
 
