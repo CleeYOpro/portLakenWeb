@@ -173,13 +173,39 @@ export default function Navbar() {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 text-deep-navy hover:text-primary transition-colors relative w-10 h-10 flex items-center justify-center"
+                className="lg:hidden p-2 text-deep-navy hover:text-primary relative w-10 h-10 flex items-center justify-center"
                 aria-label="Menu"
+                style={{ transition: 'color 0.3s ease' }}
               >
-                <div className="w-6 h-5 flex flex-col justify-between">
-                  <span className={`block h-0.5 w-full bg-current transform transition-all duration-300 ease-out ${mobileMenuOpen ? 'rotate-45 translate-y-2' : 'rotate-0 translate-y-0'}`} />
-                  <span className={`block h-0.5 w-full bg-current transition-all duration-300 ease-out ${mobileMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
-                  <span className={`block h-0.5 w-full bg-current transform transition-all duration-300 ease-out ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : 'rotate-0 translate-y-0'}`} />
+                <div
+                  className="w-6 h-5 flex flex-col justify-between"
+                  style={{
+                    transform: mobileMenuOpen ? 'scale(1.08)' : 'scale(1)',
+                    transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  }}
+                >
+                  <span
+                    className="block h-0.5 w-full bg-current"
+                    style={{
+                      transform: mobileMenuOpen ? 'rotate(45deg) translate(3px, 3px)' : 'none',
+                      transition: 'transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                    }}
+                  />
+                  <span
+                    className="block h-0.5 w-full bg-current"
+                    style={{
+                      opacity: mobileMenuOpen ? 0 : 1,
+                      transform: mobileMenuOpen ? 'scaleX(0)' : 'scaleX(1)',
+                      transition: 'opacity 0.25s ease, transform 0.3s ease',
+                    }}
+                  />
+                  <span
+                    className="block h-0.5 w-full bg-current"
+                    style={{
+                      transform: mobileMenuOpen ? 'rotate(-45deg) translate(3px, -3px)' : 'none',
+                      transition: 'transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                    }}
+                  />
                 </div>
               </button>
             </div>
@@ -187,7 +213,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Slide-out Menu */}
+      {/* Mobile Slide-down Menu */}
       <MobileMenu
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
@@ -196,12 +222,17 @@ export default function Navbar() {
       />
 
       {/* Mobile Menu Overlay */}
-      {mobileMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black/30 z-[55] lg:hidden"
-          onClick={() => setMobileMenuOpen(false)}
-        />
-      )}
+      <div
+        className="fixed inset-0 z-[55] lg:hidden"
+        style={{
+          backgroundColor: 'rgba(0,0,0,0.3)',
+          backdropFilter: mobileMenuOpen ? 'blur(2px)' : 'none',
+          opacity: mobileMenuOpen ? 1 : 0,
+          pointerEvents: mobileMenuOpen ? 'auto' : 'none',
+          transition: 'opacity 0.4s ease, backdrop-filter 0.4s ease',
+        }}
+        onClick={() => setMobileMenuOpen(false)}
+      />
 
       {/* Search Overlay */}
       {searchOpen && (
@@ -306,97 +337,161 @@ function DropdownLink({ href, label }: { href: string; label: string }) {
 
 // Mobile Menu Components
 function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, onLogout }: { mobileMenuOpen: boolean; setMobileMenuOpen: (open: boolean) => void, user: any, onLogout: () => void }) {
+  const navItems = [
+    { type: 'link', href: '/about', label: 'About' },
+    { type: 'link', href: '/resource-directory', label: 'Resources' },
+    { type: 'link', href: '/events', label: 'Events' },
+    { type: 'link', href: '/departments', label: 'Departments' },
+    { type: 'dropdown', label: 'Government' },
+    { type: 'dropdown', label: 'Residents' },
+    { type: 'link', href: '/references', label: 'References' },
+  ];
+
   return (
-    <div
-      className={`fixed inset-0 bg-white/80 backdrop-blur-xl shadow-2xl z-[60] transform transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} lg:hidden`}
-    >
-      <div className="p-6 h-full overflow-y-auto">
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-2.5">
-            <Image src="/Port Laken (6 x 2 in) (6 x 1.6 in) (6 x 6 in).svg" alt="Port Laken" width={120} height={36} className="h-9 w-auto object-contain" />
-            <span className="font-nunito font-bold text-xl text-deep-navy">Port Laken</span>
-          </div>
-          <button
-            onClick={() => setMobileMenuOpen(false)}
-            className="p-2 text-deep-navy hover:text-primary relative w-10 h-10 flex items-center justify-center"
-            aria-label="Close Menu"
-          >
-            <div className="w-6 h-5 flex flex-col justify-between">
-              <span className="block h-0.5 w-full bg-current transform rotate-45 translate-y-2" />
-              <span className="block h-0.5 w-full bg-current opacity-0" />
-              <span className="block h-0.5 w-full bg-current transform -rotate-45 -translate-y-2" />
-            </div>
-          </button>
-        </div>
+    <>
+      <style>{`
+        @keyframes mobileMenuSlideDown {
+          from { opacity: 0; transform: translateY(-100%); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes mobileMenuSlideUp {
+          from { opacity: 1; transform: translateY(0); }
+          to   { opacity: 0; transform: translateY(-100%); }
+        }
+        @keyframes linkFloat {
+          from { opacity: 0; transform: translateY(-18px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .mobile-menu-panel {
+          animation-fill-mode: both;
+          animation-duration: 0.42s;
+          animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .mobile-menu-panel.open  { animation-name: mobileMenuSlideDown; }
+        .mobile-menu-panel.close { animation-name: mobileMenuSlideUp; }
+        .mobile-link-item {
+          opacity: 0;
+          animation: linkFloat 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+          animation-delay: var(--link-delay, 0ms);
+        }
+      `}</style>
 
-        <div className="space-y-2">
-          <MobileNavLink href="/about" label="About" setMobileMenuOpen={setMobileMenuOpen} />
-          <MobileNavLink href="/resource-directory" label="Resources" setMobileMenuOpen={setMobileMenuOpen} />
-          <MobileNavLink href="/events" label="Events" setMobileMenuOpen={setMobileMenuOpen} />
-          <MobileNavLink href="/departments" label="Departments" setMobileMenuOpen={setMobileMenuOpen} />
-          <MobileDropdown label="Government" setMobileMenuOpen={setMobileMenuOpen}>
-            <MobileLink href="/mayor-council" label="Council" setMobileMenuOpen={setMobileMenuOpen} />
-            <MobileLink href="/ordinances" label="Ordinances" setMobileMenuOpen={setMobileMenuOpen} />
-            <MobileLink href="/boards-committees" label="Boards & Committees" setMobileMenuOpen={setMobileMenuOpen} />
-            <MobileLink href="/environmental" label="Environment" setMobileMenuOpen={setMobileMenuOpen} />
-            <MobileLink href="/careers" label="Careers" setMobileMenuOpen={setMobileMenuOpen} />
-          </MobileDropdown>
-          <MobileDropdown label="Residents" setMobileMenuOpen={setMobileMenuOpen}>
-            <MobileLink href="/living-in-portlaken" label="Life" setMobileMenuOpen={setMobileMenuOpen} />
-            <MobileLink href="/news" label="News" setMobileMenuOpen={setMobileMenuOpen} />
-            <MobileLink href="/forms" label="Forms & Applications" setMobileMenuOpen={setMobileMenuOpen} />
-            <MobileLink href="/under-construction" label="Map" setMobileMenuOpen={setMobileMenuOpen} />
-            <MobileLink href="/under-construction" label="Community Stories" setMobileMenuOpen={setMobileMenuOpen} />
-          </MobileDropdown>
-          <MobileNavLink href="/references" label="References" setMobileMenuOpen={setMobileMenuOpen} />
-        </div>
-
-        <div className="mt-8 pt-6 border-t border-gray-200">
-          {user ? (
-            <div className="space-y-2">
-              <div className="px-4 py-3 font-nunito font-semibold text-deep-navy truncate">
-                Signed in as: {user.email}
+      {mobileMenuOpen && (
+        <div
+          key={mobileMenuOpen ? 'open' : 'closed'}
+          className="fixed inset-x-0 top-0 bg-white/90 backdrop-blur-2xl shadow-2xl z-[60] lg:hidden mobile-menu-panel open"
+          style={{ maxHeight: '100dvh', overflowY: 'auto' }}
+        >
+          <div className="p-6">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center gap-2.5">
+                <Image src="/Port Laken (6 x 2 in) (6 x 1.6 in) (6 x 6 in).svg" alt="Port Laken" width={120} height={36} className="h-9 w-auto object-contain" />
+                <span className="font-nunito font-bold text-xl text-deep-navy">Port Laken</span>
               </div>
-              <Link
-                href="/dashboard"
-                className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-primary text-white rounded-full font-nunito font-semibold hover:bg-primary/80 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <User className="w-4 h-4" />
-                Dashboard
-              </Link>
-              <Link
-                href="/alerts"
-                className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-primary text-white rounded-full font-nunito font-semibold hover:bg-primary/80 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <span className="material-symbols-outlined text-base">notifications</span>
-                Alerts Settings
-              </Link>
               <button
-                onClick={() => {
-                  onLogout();
-                  setMobileMenuOpen(false);
-                }}
-                className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-red-500 text-white rounded-full font-nunito font-semibold hover:bg-red-600 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 text-deep-navy hover:text-primary relative w-10 h-10 flex items-center justify-center"
+                aria-label="Close Menu"
+                style={{ transition: 'color 0.3s ease' }}
               >
-                <LogOut className="w-4 h-4" />
-                Logout
+                <div className="w-6 h-5 flex flex-col justify-between">
+                  <span
+                    className="block h-0.5 w-full bg-current"
+                    style={{ transform: 'rotate(45deg) translate(3px, 3px)', transition: 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1)' }}
+                  />
+                  <span className="block h-0.5 w-full bg-current" style={{ opacity: 0 }} />
+                  <span
+                    className="block h-0.5 w-full bg-current"
+                    style={{ transform: 'rotate(-45deg) translate(3px, -3px)', transition: 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1)' }}
+                  />
+                </div>
               </button>
             </div>
-          ) : (
-            <Link
-              href="/sign-in"
-              className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-primary text-white rounded-full font-nunito font-semibold hover:bg-primary/80 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <LogIn className="w-4 h-4" />
-                Sign In
-              </Link>
-          )}
+
+            {/* Nav Links */}
+            <div className="space-y-2">
+              <div className="mobile-link-item" style={{ '--link-delay': '60ms' } as React.CSSProperties}>
+                <MobileNavLink href="/about" label="About" setMobileMenuOpen={setMobileMenuOpen} />
+              </div>
+              <div className="mobile-link-item" style={{ '--link-delay': '110ms' } as React.CSSProperties}>
+                <MobileNavLink href="/resource-directory" label="Resources" setMobileMenuOpen={setMobileMenuOpen} />
+              </div>
+              <div className="mobile-link-item" style={{ '--link-delay': '160ms' } as React.CSSProperties}>
+                <MobileNavLink href="/events" label="Events" setMobileMenuOpen={setMobileMenuOpen} />
+              </div>
+              <div className="mobile-link-item" style={{ '--link-delay': '210ms' } as React.CSSProperties}>
+                <MobileNavLink href="/departments" label="Departments" setMobileMenuOpen={setMobileMenuOpen} />
+              </div>
+              <div className="mobile-link-item" style={{ '--link-delay': '260ms' } as React.CSSProperties}>
+                <MobileDropdown label="Government" setMobileMenuOpen={setMobileMenuOpen}>
+                  <MobileLink href="/mayor-council" label="Council" setMobileMenuOpen={setMobileMenuOpen} />
+                  <MobileLink href="/ordinances" label="Ordinances" setMobileMenuOpen={setMobileMenuOpen} />
+                  <MobileLink href="/boards-committees" label="Boards & Committees" setMobileMenuOpen={setMobileMenuOpen} />
+                  <MobileLink href="/environmental" label="Environment" setMobileMenuOpen={setMobileMenuOpen} />
+                  <MobileLink href="/careers" label="Careers" setMobileMenuOpen={setMobileMenuOpen} />
+                </MobileDropdown>
+              </div>
+              <div className="mobile-link-item" style={{ '--link-delay': '310ms' } as React.CSSProperties}>
+                <MobileDropdown label="Residents" setMobileMenuOpen={setMobileMenuOpen}>
+                  <MobileLink href="/living-in-portlaken" label="Life" setMobileMenuOpen={setMobileMenuOpen} />
+                  <MobileLink href="/news" label="News" setMobileMenuOpen={setMobileMenuOpen} />
+                  <MobileLink href="/forms" label="Forms & Applications" setMobileMenuOpen={setMobileMenuOpen} />
+                  <MobileLink href="/under-construction" label="Map" setMobileMenuOpen={setMobileMenuOpen} />
+                  <MobileLink href="/under-construction" label="Community Stories" setMobileMenuOpen={setMobileMenuOpen} />
+                </MobileDropdown>
+              </div>
+              <div className="mobile-link-item" style={{ '--link-delay': '360ms' } as React.CSSProperties}>
+                <MobileNavLink href="/references" label="References" setMobileMenuOpen={setMobileMenuOpen} />
+              </div>
+            </div>
+
+            {/* Auth Section */}
+            <div className="mobile-link-item mt-8 pt-6 border-t border-gray-200" style={{ '--link-delay': '410ms' } as React.CSSProperties}>
+              {user ? (
+                <div className="space-y-2">
+                  <div className="px-4 py-3 font-nunito font-semibold text-deep-navy truncate">
+                    Signed in as: {user.email}
+                  </div>
+                  <Link
+                    href="/dashboard"
+                    className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-primary text-white rounded-full font-nunito font-semibold hover:bg-primary/80 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <User className="w-4 h-4" />
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="/alerts"
+                    className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-primary text-white rounded-full font-nunito font-semibold hover:bg-primary/80 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="material-symbols-outlined text-base">notifications</span>
+                    Alerts Settings
+                  </Link>
+                  <button
+                    onClick={() => { onLogout(); setMobileMenuOpen(false); }}
+                    className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-red-500 text-white rounded-full font-nunito font-semibold hover:bg-red-600 transition-colors"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  href="/sign-in"
+                  className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-primary text-white rounded-full font-nunito font-semibold hover:bg-primary/80 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <LogIn className="w-4 h-4" />
+                  Sign In
+                </Link>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 

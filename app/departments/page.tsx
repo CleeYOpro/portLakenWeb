@@ -53,8 +53,8 @@ const departments = [
     url: "/departments/finance",
   },
   {
-    title: "Human Resources",
-    icon: "groups",
+    title: "Career Resources",
+    icon: "work",
     description: "Employment, benefits, and workforce support.",
     url: "/careers",
   },
