@@ -7,7 +7,8 @@
 .env
 # testing
 /coverage
-
+/.vscode
+/.claude
 # next.js
 /.next/
 /out/

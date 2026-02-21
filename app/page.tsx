@@ -997,7 +997,7 @@ function PortLakenServicesSection() {
                         </p>
                         <a
                           href={`/resource-directory?resourceId=${service.resourceId}`}
-                          className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition pointer-events-auto"
+                          className="inline-flex items-center gap-2 text-primary font-semibold hover:text-ice transition pointer-events-auto text-sm"
                         >
                           More Info →
                         </a>

@@ -74,7 +74,7 @@ export default function Navbar() {
                   height={48}
                   className="h-12 w-auto object-contain transition-transform group-hover:scale-[1.04] -translate-y-[1px]"
                 />
-                <span className="text-xl font-bold text-deep-navy tracking-tight group-hover:text-primary transition-colors -translate-y-[1px]">
+                <span className="text-2xl font-steel text-slate tracking-tight group-hover:text-primary transition-colors translate-y-[1px]">
                   Port Laken
                 </span>
               </Link>
@@ -99,7 +99,7 @@ export default function Navbar() {
                 <DropdownLink href="/ordinances" label="Ordinances" />
                 <DropdownLink href="/boards-committees" label="Boards & Committees" />
                 <DropdownLink href="/environmental" label="Environment" />
-                <DropdownLink href="/careers" label="Employment" />
+                <DropdownLink href="/careers" label="Careers" />
               </NavDropdown>
               <NavDropdown
                 label="Residents"
@@ -313,7 +313,7 @@ function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, onLogout }: { mob
       <div className="p-6 h-full overflow-y-auto">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-2.5">
-            <GiWaves className="text-primary text-2xl" />
+            <Image src="/Port Laken (6 x 2 in) (6 x 1.6 in) (6 x 6 in).svg" alt="Port Laken" width={120} height={36} className="h-9 w-auto object-contain" />
             <span className="font-nunito font-bold text-xl text-deep-navy">Port Laken</span>
           </div>
           <button
@@ -333,17 +333,13 @@ function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, onLogout }: { mob
           <MobileNavLink href="/about" label="About" setMobileMenuOpen={setMobileMenuOpen} />
           <MobileNavLink href="/resource-directory" label="Resources" setMobileMenuOpen={setMobileMenuOpen} />
           <MobileNavLink href="/events" label="Events" setMobileMenuOpen={setMobileMenuOpen} />
-          <MobileDropdown label="Departments" setMobileMenuOpen={setMobileMenuOpen}>
-            <MobileLink href="/departments/fire" label="Fire" setMobileMenuOpen={setMobileMenuOpen} />
-            <MobileLink href="/departments/police" label="Police" setMobileMenuOpen={setMobileMenuOpen} />
-            {/* More department pages */}
-          </MobileDropdown>
+          <MobileNavLink href="/departments" label="Departments" setMobileMenuOpen={setMobileMenuOpen} />
           <MobileDropdown label="Government" setMobileMenuOpen={setMobileMenuOpen}>
             <MobileLink href="/mayor-council" label="Council" setMobileMenuOpen={setMobileMenuOpen} />
             <MobileLink href="/ordinances" label="Ordinances" setMobileMenuOpen={setMobileMenuOpen} />
             <MobileLink href="/boards-committees" label="Boards & Committees" setMobileMenuOpen={setMobileMenuOpen} />
             <MobileLink href="/environmental" label="Environment" setMobileMenuOpen={setMobileMenuOpen} />
-            <MobileLink href="/careers" label="Employment" setMobileMenuOpen={setMobileMenuOpen} />
+            <MobileLink href="/careers" label="Careers" setMobileMenuOpen={setMobileMenuOpen} />
           </MobileDropdown>
           <MobileDropdown label="Residents" setMobileMenuOpen={setMobileMenuOpen}>
             <MobileLink href="/living-in-portlaken" label="Life" setMobileMenuOpen={setMobileMenuOpen} />
