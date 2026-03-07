@@ -110,7 +110,7 @@ export default function Navbar() {
                 <DropdownLink href="/living-in-portlaken" label="Life" />
                 <DropdownLink href="/news" label="News" />
                 <DropdownLink href="/forms" label="Forms & Applications" />
-                <DropdownLink href="/under-construction" label="Map" />
+                <DropdownLink href="/maps-transport" label="Map" />
                 <DropdownLink href="/under-construction" label="Community Stories" />
               </NavDropdown>
               <NavLink href="/references" label="References" />
@@ -437,7 +437,7 @@ function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, onLogout }: { mob
                   <MobileLink href="/living-in-portlaken" label="Life" setMobileMenuOpen={setMobileMenuOpen} />
                   <MobileLink href="/news" label="News" setMobileMenuOpen={setMobileMenuOpen} />
                   <MobileLink href="/forms" label="Forms & Applications" setMobileMenuOpen={setMobileMenuOpen} />
-                  <MobileLink href="/under-construction" label="Map" setMobileMenuOpen={setMobileMenuOpen} />
+                  <MobileLink href="/maps-transport" label="Map" setMobileMenuOpen={setMobileMenuOpen} />
                   <MobileLink href="/under-construction" label="Community Stories" setMobileMenuOpen={setMobileMenuOpen} />
                 </MobileDropdown>
               </div>
