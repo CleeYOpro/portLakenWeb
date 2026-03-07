@@ -46,7 +46,7 @@ export default function Footer() {
           className="flex flex-col lg:flex-row justify-between items-stretch gap-8 lg:gap-24"
         >
 
-          {/* Left udhwkj;dua: Logo & Main Nav */}
+          {/* Left Column: Logo & Main Nav */}
           <div className="flex flex-col items-start gap-10 lg:w-1/2">
           
 
