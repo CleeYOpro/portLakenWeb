@@ -167,7 +167,7 @@ export default function MapsTransportPage() {
         {/* Bus Routes */}
         <div>
           <h3 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-            <span className="w-6 h-6 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg mr-3 flex items-center justify-center text-white text-xs font-bold">🚌</span>
+            <span className="w-6 h-6 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg mr-3 flex items-center justify-center text-white text-xs font-bold">B</span>
             Bus Lines
           </h3>
           <div className="space-y-4">
@@ -201,7 +201,7 @@ export default function MapsTransportPage() {
         {/* Intercity Train Routes */}
         <div>
           <h3 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-            <span className="w-6 h-6 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg mr-3 flex items-center justify-center text-white text-xs font-bold">🚆</span>
+            <span className="w-6 h-6 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg mr-3 flex items-center justify-center text-white text-xs font-bold">T</span>
             Intercity Rail
           </h3>
           <div className="space-y-4">
