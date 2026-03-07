@@ -66,13 +66,19 @@ function ResourceDirectoryContent() {
 
     // 2. Filter by Search Query
     if (query) {
-      const lowerQ = query.toLowerCase();
-      result = result.filter(
-        (r) =>
-          r.name.toLowerCase().includes(lowerQ) ||
-          r.shortDescription.toLowerCase().includes(lowerQ) ||
-          r.tags.some((t) => t.toLowerCase().includes(lowerQ))
-      );
+      const lowerQuery = query.toLowerCase();
+      result = result.filter((r) => {
+        const searchableText = [
+          r.name,
+          r.shortDescription,
+          r.fullDescription,
+          r.address,
+          r.phone,
+          ...r.tags,
+        ].join(" ").toLowerCase();
+
+        return searchableText.includes(lowerQuery);
+      });
     }
 
     setFilteredResources(result);

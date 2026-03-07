@@ -111,7 +111,6 @@ export default function Navbar() {
                 <DropdownLink href="/news" label="News" />
                 <DropdownLink href="/forms" label="Forms & Applications" />
                 <DropdownLink href="/maps-transport" label="Map" />
-                <DropdownLink href="/under-construction" label="Community Stories" />
               </NavDropdown>
               <NavLink href="/references" label="References" />
             </div>
@@ -438,7 +437,6 @@ function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, onLogout }: { mob
                   <MobileLink href="/news" label="News" setMobileMenuOpen={setMobileMenuOpen} />
                   <MobileLink href="/forms" label="Forms & Applications" setMobileMenuOpen={setMobileMenuOpen} />
                   <MobileLink href="/maps-transport" label="Map" setMobileMenuOpen={setMobileMenuOpen} />
-                  <MobileLink href="/under-construction" label="Community Stories" setMobileMenuOpen={setMobileMenuOpen} />
                 </MobileDropdown>
               </div>
               <div className="mobile-link-item" style={{ '--link-delay': '360ms' } as React.CSSProperties}>

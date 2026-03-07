@@ -448,7 +448,7 @@ export const RESOURCES: Resource[] = [
     rating: 4.8
 },
     {
-        id: "26",
+        id: "41",
         name: "Early Learning Center",
         category: "Education",
         shortDescription: "Head Start and ECEAP programs.",
@@ -495,7 +495,7 @@ export const RESOURCES: Resource[] = [
 ,
     // Community
     {
-        id: "27",
+        id: "42",
         name: "Port Laken City Hall",
         category: "Community",
         shortDescription: "Municipal government services.",
@@ -525,7 +525,7 @@ export const RESOURCES: Resource[] = [
         rating: 4.5
     },
     {
-        id: "29",
+        id: "43",
         name: "Port Laken Humane Society",
         category: "Community",
         shortDescription: "Animal shelter and adoption center.",
