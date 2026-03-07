@@ -175,7 +175,7 @@ export default function MapsTransportPage() {
               <div className="flex justify-between items-start">
                 <div>
                   <h4 className="font-semibold text-lg text-blue-700">Route 120</h4>
-                  <p className="text-gray-600">Downtown Loop → Harbor District → Tech Park → University</p>
+                  <p className="text-gray-600">Downtown Loop → Harbor District → Tech Park → Olympic University</p>
                   <p className="text-sm text-gray-500">Every 15 minutes, 24/7 service</p>
                 </div>
               </div>
