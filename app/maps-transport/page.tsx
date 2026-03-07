@@ -167,59 +167,61 @@ export default function MapsTransportPage() {
         {/* Bus Routes */}
         <div>
           <h3 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-            <span className="w-4 h-4 bg-blue-500 rounded-full mr-3"></span>
+            <span className="w-6 h-6 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg mr-3 flex items-center justify-center text-white text-xs font-bold">🚌</span>
             Bus Lines
           </h3>
           <div className="space-y-4">
-            <div className="border-l-4 border-blue-500 pl-4">
-              <h4 className="font-semibold text-lg text-blue-700">Blue Line Express</h4>
-              <p className="text-gray-600">Downtown Loop → Harbor District → Tech Park → University</p>
-              <p className="text-sm text-gray-500">Every 15 minutes, 24/7 service</p>
+            <div className="border-l-4 border-blue-500 pl-4 bg-blue-50 -ml-4 pl-4 py-3 rounded-r">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h4 className="font-semibold text-lg text-blue-700">Route 120</h4>
+                  <p className="text-gray-600">Downtown Loop → Harbor District → Tech Park → University</p>
+                  <p className="text-sm text-gray-500">Every 15 minutes, 24/7 service</p>
+                </div>
+              </div>
             </div>
-            <div className="border-l-4 border-green-500 pl-4">
-              <h4 className="font-semibold text-lg text-green-700">Green Valley Route</h4>
+            <div className="border-l-4 border-green-500 pl-4 bg-green-50 -ml-4 pl-4 py-3 rounded-r">
+              <h4 className="font-semibold text-lg text-green-700">Route 240</h4>
               <p className="text-gray-600">Central Station → Riverside Park → Valley Heights → Mountain View</p>
               <p className="text-sm text-gray-500">Every 20 minutes, scenic route with park views</p>
             </div>
-            <div className="border-l-4 border-red-500 pl-4">
-              <h4 className="font-semibold text-lg text-red-700">Red River Line</h4>
+            <div className="border-l-4 border-red-500 pl-4 bg-red-50 -ml-4 pl-4 py-3 rounded-r">
+              <h4 className="font-semibold text-lg text-red-700">Route 480</h4>
               <p className="text-gray-600">North End → Riverwalk → Industrial Zone → Airport</p>
-              <p className="text-sm text-gray-500">Every 30 minutes, connects to regional flights</p>
+              <p className="text-sm text-gray-500">Every 30 minutes, connects to international flights</p>
             </div>
-            <div className="border-l-4 border-purple-500 pl-4">
-              <h4 className="font-semibold text-lg text-purple-700">Purple Peak Connector</h4>
+            <div className="border-l-4 border-purple-500 pl-4 bg-purple-50 -ml-4 pl-4 py-3 rounded-r">
+              <h4 className="font-semibold text-lg text-purple-700">Route 960</h4>
               <p className="text-gray-600">City Center → Arts District → Cultural Center → Peak Summit</p>
-              <p className="text-sm text-gray-500">Every 25 minutes, premium service with WiFi</p>
+              <p className="text-sm text-gray-500">Every 25 minutes, premium express service</p>
             </div>
           </div>
         </div>
 
-        {/* Train Routes */}
+        {/* Intercity Train Routes */}
         <div>
           <h3 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-            <span className="w-4 h-4 bg-orange-500 rounded-full mr-3"></span>
-            Train Routes
+            <span className="w-6 h-6 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg mr-3 flex items-center justify-center text-white text-xs font-bold">🚆</span>
+            Intercity Rail
           </h3>
           <div className="space-y-4">
-            <div className="border-l-4 border-orange-500 pl-4">
-              <h4 className="font-semibold text-lg text-orange-700">Coastal Rail</h4>
-              <p className="text-gray-600">Port Laken Central → Beachfront → Marina → Coastal Towns</p>
-              <p className="text-sm text-gray-500">Every hour, ocean views and dining car</p>
+            <div className="border-l-4 border-orange-500 pl-4 bg-orange-50 -ml-4 pl-4 py-3 rounded-r">
+              <h4 className="font-semibold text-lg text-orange-700">West/South Peninsula Line</h4>
+              <p className="text-gray-600 text-sm mb-2">Port Laken → Chimacum → Bainbridge Island → Bremerton → Port Orchard → Gig Harbor → Tacoma → Olympia</p>
+              <div className="flex flex-wrap gap-2 mb-2">
+                <span className="text-xs bg-orange-200 text-orange-800 px-2 py-1 rounded">West Peninsula</span>
+                <span className="text-xs bg-orange-200 text-orange-800 px-2 py-1 rounded">Kitsap Region</span>
+              </div>
+              <p className="text-sm text-gray-500">Daily service • Dining & observation cars • 8 major stops</p>
             </div>
-            <div className="border-l-4 border-teal-500 pl-4">
-              <h4 className="font-semibold text-lg text-teal-700">Mountain Express</h4>
-              <p className="text-gray-600">Valley Station → Forest Trail → Summit Lodge → Ski Resort</p>
-              <p className="text-sm text-gray-500">Seasonal service, connects to hiking trails</p>
-            </div>
-            <div className="border-l-4 border-indigo-500 pl-4">
-              <h4 className="font-semibold text-lg text-indigo-700">Metro Link</h4>
-              <p className="text-gray-600">Downtown Hub → Business District → Residential Areas → Suburban Stations</p>
-              <p className="text-sm text-gray-500">Every 10 minutes during peak hours</p>
-            </div>
-            <div className="border-l-4 border-pink-500 pl-4">
-              <h4 className="font-semibold text-lg text-pink-700">Heritage Line</h4>
-              <p className="text-gray-600">Historic District → Museum Row → Cultural Sites → Airport Express</p>
-              <p className="text-sm text-gray-500">Every 45 minutes, connects to international flights</p>
+            <div className="border-l-4 border-teal-500 pl-4 bg-teal-50 -ml-4 pl-4 py-3 rounded-r">
+              <h4 className="font-semibold text-lg text-teal-700">East/North Sound Line</h4>
+              <p className="text-gray-600 text-sm mb-2">Port Laken → Port Townsend → Whidbey Island → Sound Tunnel → Everett → Edmonds → Seattle → Bellevue</p>
+              <div className="flex flex-wrap gap-2 mb-2">
+                <span className="text-xs bg-teal-200 text-teal-800 px-2 py-1 rounded">East Peninsula</span>
+                <span className="text-xs bg-teal-200 text-teal-800 px-2 py-1 rounded">Puget Sound Tunnel</span>
+              </div>
+              <p className="text-sm text-gray-500">Daily service • Premium seating • 9 major stops • Direct Seattle access</p>
             </div>
           </div>
         </div>
