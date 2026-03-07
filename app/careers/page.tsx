@@ -63,8 +63,7 @@ export default function CareersPage() {
 
           {/* TEXT BLOCK – now on top (stacked) */}
           <div 
-            className="rounded-3xl w-full h-[200px] overflow-hidden shadow-lg border border-port-mist/40 p-8 
-                 flex flex-col justify-center animate-fade-in-up"
+            className="rounded-3xl w-full h-[200px] overflow-hidden shadow-lg border border-port-mist/40 p-8 flex flex-col justify-center animate-fade-in-up"
           >
             <h1 className="font-display text-4xl md:text-5xl font-bold text-port-navy leading-tight mb-6">
               Build Your Future.
@@ -77,10 +76,7 @@ export default function CareersPage() {
               href={indeedLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-4 px-6 py-3
-                   bg-gray-900 text-white rounded-xl
-                   hover:bg-black transition-all duration-300
-                   animate-fade-in-up"
+              className="group inline-flex items-center gap-4 px-6 py-3 bg-gray-900 text-white rounded-xl hover:bg-black transition-all duration-300 animate-fade-in-up"
               style={{ animationDelay: "300ms" }}
             >
               <FaArrowRight className="text-white text-md -rotate-45 group-hover:rotate-0 transition-all duration-300" />
