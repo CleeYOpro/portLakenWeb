@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Sparkles, ArrowUpRight, ChevronDown, ChevronUp, Star, Shield, Users } from "lucide-react";
 import { Resource } from "../resources";
 
@@ -67,11 +67,10 @@ export default function AIOverview({ aiQuery, contextResources }: AIOverviewProp
     }, [aiQuery, contextResources]); // Fixed: Added contextResources as dependency
 
     if (!aiQuery) return null;
+    if (!loading && !summary) return null;
 
     return (
-        <AnimatePresence>
-            {(loading || summary) && (
-                <motion.div
+        <motion.div
                     initial={{ opacity: 0, height: 0, marginBottom: 0 }}
                     animate={{ opacity: 1, height: "auto", marginBottom: 32 }}
                     exit={{ opacity: 0, height: 0, marginBottom: 0 }}
@@ -136,8 +135,6 @@ export default function AIOverview({ aiQuery, contextResources }: AIOverviewProp
                             )}
                         </div>
                     </div>
-                </motion.div>
-            )}
-        </AnimatePresence>
+            </motion.div>
     );
 }

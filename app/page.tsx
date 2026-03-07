@@ -108,7 +108,7 @@ const quickActions = [
   },
   {
     title: "Transportation & Maps",
-    link: "/under-construction",
+    link: "/maps-transport",
     icon: <FaBus className="text-3xl text-primary" />,
   },
 ];

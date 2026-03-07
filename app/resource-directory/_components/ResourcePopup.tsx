@@ -1,7 +1,7 @@
 "use client";
 
 import { Resource } from "../resources";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { X, MapPin, Phone, Globe, Mail, Facebook, Twitter, Instagram, Star } from "lucide-react";
 import { useEffect } from "react";
 import Image from 'next/image';
@@ -33,9 +33,9 @@ export default function ResourcePopup({ resource, onClose }: ResourcePopupProps)
         return () => window.removeEventListener("keydown", handleEsc);
     }, [onClose]);
 
+    if (!resource) return null;
+
     return (
-        <AnimatePresence>
-            {resource && (
                 <motion.div
                     className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 pointer-events-none"
                     initial={{ opacity: 1 }}
@@ -190,9 +190,7 @@ export default function ResourcePopup({ resource, onClose }: ResourcePopupProps)
                             )}
 
                         </div>
-                    </motion.div>
                 </motion.div>
-            )}
-        </AnimatePresence>
+            </motion.div>
     );
 }
