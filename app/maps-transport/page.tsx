@@ -78,11 +78,11 @@ export default function MapsTransportPage() {
   }, [showCarousel, isHovering]);
 
   return (
-    <div className="w-full flex flex-col bg-gray-100">
+    <div className="w-full flex flex-col bg-white">
       {/* Map Section - Full Screen */}
       <div className="w-full h-screen flex items-center justify-center p-4 relative">
         {/* Map Container */}
-        <div className="w-full h-full max-w-[98%] bg-white rounded-[40px] overflow-hidden shadow-lg relative">
+        <div className="w-full h-full max-w-[99.5%] max-h-[85%] bg-white rounded-[40px] overflow-hidden shadow-lg relative mt-20">
         <iframe
           src={`https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`}
           width="100%"
