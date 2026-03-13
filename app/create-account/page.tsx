@@ -1,13 +1,72 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
+
+const inputClass =
+  "mt-2 h-[46px] w-full rounded-full border border-[#6e8ea4] bg-white px-6 text-[13px] text-[#2f3f4a] placeholder:text-[#9aa9b4] outline-none focus:border-[#5a819a]";
 
 export default function Page() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const { signUp, signInWithGoogle } = useFirebaseAuth();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+
+    // Basic validation
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters long');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await signUp(email, password);
+      // After successful signup, redirect to dashboard or sign-in
+      router.push('/dashboard');
+      router.refresh();
+    } catch (err: any) {
+      console.error('Sign up error:', err);
+      setError(err.message || 'Failed to create account');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignUp = async () => {
+    try {
+      await signInWithGoogle();
+      router.push('/dashboard');
+      router.refresh();
+    } catch (err: any) {
+      console.error('Google sign up error:', err);
+      setError(err.message || 'Failed to create account with Google');
+    }
+  };
+
   return (
-    <main className="min-h-screen bg-white pt-[96px]">
-        <section className="h-[calc(100vh-96px)] w-full overflow-hidden">
-        <div className="grid h-full w-full grid-cols-1 md:grid-cols-[55%_45%]">
-          {/* Left hero */}
-          <div className="relative h-full w-full">
+    <main className="min-h-screen bg-white">
+      <section className="h-screen w-full overflow-y-auto">
+        <div className="grid min-h-full w-full grid-cols-1 md:grid-cols-[55%_45%]">
+          {/* Left hero - Hidden on mobile */}
+          <div className="relative hidden h-full w-full md:block">
             <div className="absolute inset-0">
               <Image
                 src="/port-laken-bg.jpg"
@@ -24,7 +83,7 @@ export default function Page() {
               <h1 className="max-w-[560px] font-serif text-[52px] leading-[1.05] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]">
                 Create your
                 <br />
-                Port Laken account.
+                PL account.
               </h1>
               <p className="mt-6 max-w-[560px] text-[15px] leading-relaxed text-white/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]">
                 Get access to alerts, resources, forms, and updates
@@ -34,12 +93,26 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Right form */}
-          <div className="flex h-full w-full items-start justify-center bg-white px-10 pt-14 pb-[220px] md:px-16">
-            <div className="w-full max-w-[560px]">
-              <h2 className="mb-6 text-[14px] font-semibold text-[#2f3f4a]">
-                Create Account
-              </h2>
+          {/* Right form - Full width on mobile */}
+          <div className="flex h-full w-full items-start justify-center bg-white px-4 pt-20 pb-10 md:px-16 md:pt-14 md:pb-[220px]">
+            <form
+              onSubmit={handleSubmit}
+              className="w-full max-w-[560px]"
+            >
+              <div className="md:hidden text-center mb-6">
+                <h1 className="font-serif text-3xl font-bold text-[#2f3f4a]">
+                  Create your PL account.
+                </h1>
+                <p className="mt-2 text-sm text-[#6f7f8a]">
+                  Get access to alerts, resources, forms, and updates
+                </p>
+              </div>
+
+              {error && (
+                <div className="mb-4 p-3 bg-red-100 text-red-700 text-sm rounded">
+                  {error}
+                </div>
+              )}
 
               {/* Name row */}
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -49,9 +122,13 @@ export default function Page() {
                   </label>
                   <input
                     type="text"
+                    name="firstName"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     placeholder="First name"
                     className={inputClass}
                     autoComplete="given-name"
+                    required
                   />
                 </div>
 
@@ -61,23 +138,15 @@ export default function Page() {
                   </label>
                   <input
                     type="text"
+                    name="lastName"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                     placeholder="Last name"
                     className={inputClass}
                     autoComplete="family-name"
+                    required
                   />
                 </div>
-              </div>
-
-              {/* DOB */}
-              <div className="mt-6">
-                <label className="block text-[12px] font-semibold text-[#2f3f4a]">
-                  Date of Birth
-                </label>
-                <input
-                  type="date"
-                  className={inputClass}
-                  autoComplete="bday"
-                />
               </div>
 
               {/* Email */}
@@ -87,9 +156,13 @@ export default function Page() {
                 </label>
                 <input
                   type="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   className={inputClass}
                   autoComplete="email"
+                  required
                 />
               </div>
 
@@ -100,9 +173,13 @@ export default function Page() {
                 </label>
                 <input
                   type="password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Create a password"
                   className={inputClass}
                   autoComplete="new-password"
+                  required
                 />
               </div>
 
@@ -112,27 +189,51 @@ export default function Page() {
                 </label>
                 <input
                   type="password"
+                  name="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirm your password"
                   className={inputClass}
                   autoComplete="new-password"
+                  required
                 />
               </div>
 
-              <button className="mt-7 h-[48px] w-full rounded-full bg-[#6d879c] text-[13px] font-semibold text-white shadow-[0_10px_18px_rgba(0,0,0,0.12)] hover:bg-[#637f95]">
-                Create Account
+              <button
+                type="submit"
+                disabled={loading}
+                className={`mt-7 h-[48px] w-full rounded-full text-[13px] font-semibold text-white shadow-[0_10px_18px_rgba(0,0,0,0.12)] ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#6d879c] hover:bg-[#637f95]'
+                  }`}
+              >
+                {loading ? 'Creating Account...' : 'Create Account'}
+              </button>
+
+              {/* Or divider */}
+              <div className="mt-6 flex items-center">
+                <div className="flex-grow border-t border-gray-300"></div>
+                <span className="mx-4 text-xs text-gray-500">or</span>
+                <div className="flex-grow border-t border-gray-300"></div>
+              </div>
+
+              {/* Google Sign Up */}
+              <button
+                type="button"
+                onClick={handleGoogleSignUp}
+                className="mt-6 h-[48px] w-full rounded-full bg-white text-sm font-semibold text-[#2f3f4a] border border-[#6e8ea4] shadow hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#5a819a]/50"
+              >
+                Sign up with Google
               </button>
 
               <div className="mt-8 flex items-center gap-3">
                 <div className="h-px flex-1 bg-[#e2e7ec]" />
                 <Link
-                    href="/sign-in"
-                    className="text-[11px] font-semibold text-[#5a819a] hover:underline"
+                  href="/sign-in"
+                  className="text-[11px] font-semibold text-[#5a819a] hover:underline"
                 >
-                    or sign in
+                  or sign in
                 </Link>
                 <div className="h-px flex-1 bg-[#e2e7ec]" />
-            </div>
-
+              </div>
 
               <p className="mt-7 text-center text-[12px] text-[#6f7f8a]">
                 Already have an account?{" "}
@@ -140,38 +241,10 @@ export default function Page() {
                   Sign in
                 </Link>
               </p>
-            </div>
+            </form>
           </div>
         </div>
       </section>
     </main>
-  );
-}
-
-const inputClass =
-  "mt-2 h-[46px] w-full rounded-full border border-[#6e8ea4] bg-white px-6 text-[13px] text-[#2f3f4a] placeholder:text-[#9aa9b4] outline-none focus:border-[#5a819a]";
-
-function GoogleG() {
-  return (
-    <span className="grid h-5 w-5 place-items-center rounded-full">
-      <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
-        <path
-          fill="#FFC107"
-          d="M43.6 20.5H42V20H24v8h11.3C33.7 32.1 29.2 35 24 35c-6.1 0-11-4.9-11-11s4.9-11 11-11c2.8 0 5.3 1 7.2 2.7l5.7-5.7C33.7 6.7 29.1 5 24 5 13.4 5 5 13.4 5 24s8.4 19 19 19 19-8.4 19-19c0-1.2-.1-2.3-.4-3.5z"
-        />
-        <path
-          fill="#FF3D00"
-          d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c2.8 0 5.3 1 7.2 2.7l5.7-5.7C33.7 6.7 29.1 5 24 5c-7.3 0-13.7 4.1-17.7 9.7z"
-        />
-        <path
-          fill="#4CAF50"
-          d="M24 43c5.1 0 9.8-2 13.3-5.2l-6.1-5.2C29.4 34.3 26.9 35 24 35c-5.2 0-9.6-3-11.7-7.3l-6.6 5.1C9.6 39 16.3 43 24 43z"
-        />
-        <path
-          fill="#1976D2"
-          d="M43.6 20.5H42V20H24v8h11.3c-1 2.8-3 5-5.7 6.6l6.1 5.2C38.2 37.7 43 33 43 24c0-1.2-.1-2.3-.4-3.5z"
-        />
-      </svg>
-    </span>
   );
 }

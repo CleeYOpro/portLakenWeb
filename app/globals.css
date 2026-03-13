@@ -1,20 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* =========================
    Fonts
-========================= */
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1");
-
-/* =========================
-   CSS Variables (old)
-   # comment
-========================= */
+=========================*/
 :root {
   --font-playfair: "Playfair Display", serif;
-  --font-inter: "Inter", sans-serif;
+  --font-inter: "Nunito", sans-serif;
+  --font-nunito: "Nunito", sans-serif;
 
   /* Coastal palette */
   --color-primary: #708aa3;
@@ -37,9 +33,16 @@
   --color-deep-navy: #32424f;
 }
 
+/* Glass effect for dropdown menus */
+.glass {
+  background: rgba(241, 245, 249, 0.75); /* same as navbar */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
 /* =========================
    Global Layout
-========================= */
+=========================*/
 html {
   scroll-behavior: smooth;
 }
@@ -66,6 +69,22 @@ body {
 ========================= */
 ::-webkit-scrollbar {
   width: 8px;
+}
+
+.perspective {
+  perspective: 1200px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
 }
 
 ::-webkit-scrollbar-track {
@@ -128,12 +147,10 @@ body {
 }
 
 .hero-gradient {
-  background: linear-gradient(
-    135deg,
-    rgba(30, 58, 95, 0.7) 0%,
-    rgba(45, 74, 111, 0.5) 50%,
-    rgba(74, 109, 140, 0.3) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(30, 58, 95, 0.85) 0%,
+      rgba(45, 74, 111, 0.65) 50%,
+      rgba(74, 109, 140, 0.45) 100%);
 }
 
 /* =========================
@@ -202,7 +219,32 @@ body {
 /* =========================
    Delays
 ========================= */
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
+.spotlight-grid:hover .department-card {
+  opacity: 0.45;
+  filter: brightness(0.7);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.spotlight-grid .department-card {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.spotlight-grid:hover .department-card:hover {
+  opacity: 1;
+  filter: brightness(1.05);
+}
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
+}

@@ -2,41 +2,49 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import {
-  FaTwitter,
-  FaInstagram,
-  FaEnvelope,
-  FaArrowRight,
-  FaHospital,
-  FaChild,
-  FaHandsHelping,
-} from "react-icons/fa";
-import { GiWaves, GiTreeGrowth } from "react-icons/gi";
 import { IoMdAlert } from "react-icons/io";
 import { HiDocumentText } from "react-icons/hi";
 import { MdPayment } from "react-icons/md";
 import { FaBus } from "react-icons/fa";
-import { Footer } from "./components/Footer";
-import SpotlightCard from "@/components/ui/spotlight-card";
-import Masonry from "@/components/ui/Masonry";
 
-// Gallery Images
-const galleryImages = [
-  "https://cdn.pixabay.com/photo/2018/10/22/20/34/hamburg-3766309_960_720.jpg",
-  "https://cdn.pixabay.com/photo/2023/04/16/15/00/port-7930392_640.jpg",
-  "https://cdn.pixabay.com/photo/2020/03/22/10/19/fog-4956588_960_720.jpg",
-  "https://cdn.pixabay.com/photo/2016/02/26/13/38/england-1224050_1280.jpg",
-  "https://cdn.pixabay.com/photo/2023/05/03/12/25/boats-7967544_1280.jpg",
-  "https://cdn.pixabay.com/photo/2020/05/01/11/31/grey-geese-5116582_640.jpg",
-  "https://cdn.pixabay.com/photo/2016/11/07/09/07/river-1805188_640.jpg",
-  "https://cdn.pixabay.com/photo/2019/10/04/10/56/father-4525302_640.jpg",
-  "https://cdn.pixabay.com/photo/2021/11/01/11/31/taiwan-6760128_1280.jpg",
-  "https://cdn.pixabay.com/photo/2022/10/13/07/54/crane-houses-7518536_960_720.jpg",
-  "https://cdn.pixabay.com/photo/2019/08/26/10/10/dockland-4431309_960_720.jpg",
-  "https://cdn.pixabay.com/photo/2014/10/22/17/59/couple-498457_960_720.jpg",
-  "https://cdn.pixabay.com/photo/2018/08/10/18/34/fireworks-3597389_1280.jpg",
-  "https://cdn.pixabay.com/photo/2021/12/28/10/57/couple-6898971_640.jpg",
-  "https://cdn.pixabay.com/photo/2021/12/28/10/57/couple-6898971_640.jpg",
+import { motion } from "framer-motion";
+import { FaArrowRight } from 'react-icons/fa6';
+import InvertButton from "../components/ui/InvertButton";
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+
+
+const upcomingEvents = [
+  {
+    month: 'FEB',
+    day: '2',
+    title: 'Groundhog Day Celebration',
+    desc: 'Join us at the park for the annual Groundhog Day festivities with local treats and games.',
+  },
+  {
+    month: 'FEB',
+    day: '14',
+    title: 'Valentine’s Day Market',
+    desc: 'Local vendors showcase handmade gifts, flowers, and sweets for everyone to enjoy.',
+  },
+  {
+    month: 'FEB',
+    day: '17',
+    title: 'Winter Arts Workshop',
+    desc: 'Interactive workshops for all ages at the community arts center.',
+  },
+  {
+    month: 'FEB',
+    day: '20',
+    title: 'City Council Town Hall',
+    desc: 'Discuss upcoming projects and community initiatives with local leaders.',
+  },
+  {
+    month: 'FEB',
+    day: '28',
+    title: 'Community Clean-Up Day',
+    desc: 'Volunteer to help keep our parks and streets clean; tools and refreshments provided.',
+  },
 ];
 
 const heroSlides = [
@@ -85,22 +93,22 @@ const heroSlides = [
 const quickActions = [
   {
     title: "Emergency Alerts",
-    link: "#alerts",
+    link: "/under-construction",
     icon: <IoMdAlert className="text-3xl text-primary" />,
   },
   {
     title: "Submit Resource",
-    link: "#submit",
+    link: "/resource-directory/submit",
     icon: <HiDocumentText className="text-3xl text-primary" />,
   },
   {
-    title: "Pay Utilities",
-    link: "#utilities",
+    title: "Access Regulatory Forms",
+    link: "/forms",
     icon: <MdPayment className="text-3xl text-primary" />,
   },
   {
     title: "Transportation & Maps",
-    link: "#transportation",
+    link: "/maps-transport",
     icon: <FaBus className="text-3xl text-primary" />,
   },
 ];
@@ -164,7 +172,7 @@ export default function Home() {
                 />
 
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none" />
+                <div className="absolute inset-0 bg-black/40 pointer-events-none" />
 
                 {/* Content */}
                 <div className="relative flex items-end min-h-screen px-6 md:px-20 pb-20 pt-24">
@@ -185,13 +193,21 @@ export default function Home() {
                         </p>
 
                         {slide.buttonText && (
-                          <a
-                            href={slide.buttonLink}
-                            className="bg-white hover:bg-primary/90 hover:text-white text-primary transition-all px-6 py-3 rounded-full font-medium text-base shadow-lg flex items-center gap-2 whitespace-nowrap border border-white/20"
-                          >
-                            {slide.buttonText}
-                            <FaArrowRight className="text-sm" />
-                          </a>
+                          <InvertButton
+                            text={slide.buttonText}
+                            icon={<FaArrowRight className="text-sm" />}
+                            size="text-base"
+                            padding="px-6 py-3"
+                            curvature="rounded-full"
+                            invertDirection="light-to-dark"
+                            bgColor="bg-primary"
+                            textColor="text-primary"
+                            borderColor="border-white/20"
+                            lightStateBg="bg-white"
+                            darkStateText="text-white"
+                            className="transition-all shadow-lg whitespace-nowrap"
+                            onClick={() => window.location.href = slide.buttonLink}
+                          />
                         )}
                       </div>
                     </div>
@@ -226,7 +242,6 @@ export default function Home() {
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
-
           {/* Responsive Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {quickActions.map((action, idx) => {
@@ -237,14 +252,36 @@ export default function Home() {
                 <a
                   key={idx}
                   href={action.link}
-                  className="group relative block transition-all duration-300 hover:scale-[1.03] hover:shadow-lg active:scale-[0.98] touch-manipulation"
-                // Removed: p-[2px] gradient border
+                  className={`
+              group relative block 
+              transition-all duration-500 ease-out
+              hover:-translate-y-2 hover:scale-[1.04]
+              active:scale-[0.97] touch-manipulation
+            `}
                 >
-                  {/* Inner Pill - No outer border, just background */}
-                  <div className="flex items-center gap-3 sm:gap-4 bg-white rounded-full px-4 py-3.5 sm:px-6 sm:py-5 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-primary/5 group-hover:to-primary/10">
-
+                  {/* Main pill content */}
+                  <div
+                    className={`
+                flex items-center gap-3 sm:gap-4 
+                bg-white rounded-full 
+                px-4 py-3.5 sm:px-6 sm:py-5 
+                transition-all duration-400
+                group-hover:bg-gradient-to-r group-hover:from-primary/5 group-hover:to-primary/10
+                group-hover:shadow-[0_20px_40px_-10px_rgba(30,64,175,0.25)]
+                relative
+              `}
+                  >
                     {/* Icon Circle */}
-                    <div className="flex-shrink-0 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-primary to-primary/80 p-2.5 sm:p-3 text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                    <div
+                      className={`
+                  flex-shrink-0 w-11 h-11 sm:w-14 sm:h-14 
+                  rounded-full bg-gradient-to-br from-primary to-primary/80 
+                  p-2.5 sm:p-3 text-white 
+                  flex items-center justify-center 
+                  transition-all duration-500
+                  group-hover:scale-110 group-hover:rotate-3
+                `}
+                    >
                       {action.icon}
                     </div>
 
@@ -261,21 +298,25 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Subtle Glow on Hover */}
-                  <div className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 [@media(hover:hover)]:block hidden sm:block">
-                    <div
-                      className="absolute inset-0 rounded-full"
-                      style={{
-                        boxShadow: '0 0 20px rgba(30, 64, 175, 0.3)',
-                      }}
-                    />
-                  </div>
+                  {/* Beautiful soft floating glow – no hard edges */}
+                  <div
+                    className={`
+                pointer-events-none absolute inset-0 rounded-full 
+                opacity-0 group-hover:opacity-100 
+                transition-opacity duration-700
+                bg-gradient-to-br from-primary/20 via-primary/10 to-transparent
+                blur-xl -z-10
+                scale-110 group-hover:scale-125
+                [@media(hover:hover)]:block hidden
+              `}
+                  />
                 </a>
               );
             })}
           </div>
         </div>
       </section>
+
       {/* About Section */}
       <section className="relative py-16 md:py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
@@ -289,13 +330,18 @@ export default function Home() {
               <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
                 Port Laken is a city where community meets innovation. From scenic parks to thriving neighborhoods, it’s a place where families, businesses, and visitors all feel at home. Discover how tradition and progress come together to make our city unique.
               </p>
-              <a
-                href="/about"
-                className="inline-flex items-center gap-2 bg-primary text-white font-medium px-6 py-3 rounded-full hover:bg-primary/90 hover:shadow-lg transition-all duration-300 hover:scale-105"
-              >
-                Learn More About Us
-                <FaArrowRight className="text-sm" />
-              </a>
+              <InvertButton
+                text="Learn More About Us"
+                icon={<FaArrowRight className="text-sm" />}
+                size="text-base"
+                padding="px-6 py-3"
+                curvature="rounded-full"
+                bgColor="bg-primary"
+                textColor="text-primary"
+                borderColor="border-primary"
+                invertDirection="light-to-dark"
+                className="hover:shadow-lg hover:scale-105 transition-transform"
+              />
             </div>
 
             {/* Right: Parallax Image */}
@@ -305,7 +351,7 @@ export default function Home() {
 
               {/* Parallax Image */}
               <Image
-                src={galleryImages[0]}
+                src="https://www.visitportangeles.com/visit_port_angeles_uploads/2025/12/port-angeles-wa-aerial-view.jpg"
                 alt="Port Laken Skyline"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -350,174 +396,186 @@ export default function Home() {
 
 
       {/* Services – Clean & Curved */}
-      <PortLakenServicesSection galleryImages={galleryImages} />
+      <PortLakenServicesSection />
 
       {/* News Section */}
-      <section className="relative py-20 px-6 md:px-16 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+      <section className="relative py-16 px-6 md:px-12 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="mb-12">
-            <h2 className="font-playfair text-4xl md:text-6xl font-extrabold text-gray-900 mb-4">
+          <div className="mb-10 text-center md:text-left">
+            <h2 className="font-playfair text-4xl md:text-5xl font-extrabold text-gray-900 mb-3">
               WHAT&apos;S <span className="text-primary italic">HAPPENING</span> IN PORT LAKEN?
             </h2>
-            <p className="text-gray-600 text-lg md:text-xl">
-              Stories and updates from across the city this December.{' '}
+            <p className="text-gray-600 text-lg">
+              Fresh stories and winter updates from around the city this season.{' '}
               <a
                 href="/news"
-                className="text-black border-b-2 border-transparent hover:border-primary hover:text-primary">
+                className="text-black border-b-2 border-transparent hover:border-primary hover:text-primary transition-colors"
+              >
                 Read All News →
               </a>
             </p>
-
           </div>
 
-          {/* News Grid */}
-          <div className="space-y-16">
+          {/* News Grid - Compressed */}
+          <div className="space-y-8">
             {[
               {
-                date: "DEC 1, 2025",
-                title: "Frosty Lane Lights Up Downtown",
-                desc: "Downtown Port Laken kicks off the season with nightly parades, lights, and music. Join us for free skating, hot cocoa, and festive entertainment for the whole family.",
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4zKfRQ2XFUvpJRK9uhsvCOl5bwSBQWJRWPA&s",
+                slug: "mlk-day-service",
+                date: "JAN 19, 2026",
+                title: "MLK Day Service & Community Glow",
+                desc: "Port Laken honors the legacy with a special MLK Day event at the waterfront park, featuring community service, live music, and glowing lantern displays.",
+                image: "https://riverheadlocal.com/wp-content/uploads/2025/01/2025_0120_Martin-Luther-King-Lincoln-Memorial-28-Aug-1963-681x516.jpg",
               },
               {
-                date: "DEC 8, 2025",
-                title: "Winter Market Returns to Harbor Plaza",
-                desc: "Local artisans and food trucks bring festive cheer to Harbor Plaza every weekend. Shop handmade gifts, enjoy live music, and support local businesses.",
-                image: "https://res.cloudinary.com/traveltripperweb/image/upload/c_limit,f_auto,h_2500,q_auto,w_2500/v1736299824/d5qijxqom1kdbx31ie9u.jpg",
+                slug: "winter-market",
+                date: "JAN 25, 2026",
+                title: "Winter Market Lights Up Harbor",
+                desc: "The Winter Market returns to Harbor Plaza with local artisans, warm food trucks, craft drinks, and waterfront lights.",
+                image: "https://foxbaltimore.com/resources/media2/16x9/3851/986/0x361/90/63423fb2-22ce-4454-aed0-68d5eab9dc17-1TOP5_ChristmasVillageinBaltimore2022_heatedtent5_creditChristinaKalff.jpg",
               },
               {
-                date: "DEC 15, 2025",
-                title: "City Hall Announces 2026 Projects",
-                desc: "From green spaces to public safety, see what's ahead for Port Laken's growth. Mayor Johnson unveils ambitious plans for sustainable development and community enhancement.",
-                image: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Colorado_Springs_City_Hall_by_David_Shankbone.jpg",
+                slug: "sustainability-vision-2026",
+                date: "FEB 10, 2026",
+                title: "City Unveils 2026 Sustainability Vision",
+                desc: "Mayor Johnson outlines new green spaces, waterfront upgrades, and eco-friendly public projects.",
+                image: "https://www.hkinteriors.com/wp-content/uploads/2018/11/bg-useful-links.jpg",
               },
             ].map((item, i) => (
-              <div
-                key={i}
-                className="group cursor-pointer"
-              >
-                <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+              <div key={i} className="group cursor-pointer">
+                <div className="grid md:grid-cols-2 gap-4 md:gap-6 items-center">
                   {/* Image */}
                   <div className={`relative ${i % 2 === 0 ? 'md:order-1' : 'md:order-2'}`}>
-                    <div className="relative h-80 rounded-[40px] overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-[1.05] bg-gray-200">
+                    <div className="relative h-44 md:h-52 rounded-2xl overflow-hidden shadow-md group-hover:shadow-lg transition">
                       <Image
                         src={item.image}
                         alt={item.title}
                         fill
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-cover"
-                        onError={(e) => {
-                          console.error('Image failed to load:', item.image);
-                          e.currentTarget.style.display = 'none';
-                        }}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      {/* Decorative gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     </div>
                   </div>
 
                   {/* Content */}
                   <div className={`${i % 2 === 0 ? 'md:order-2' : 'md:order-1'}`}>
-                    <p className="text-primary text-sm font-bold tracking-wider mb-3 group-hover:text-primary/80 transition-colors duration-300">
+                    <p className="text-primary text-xs font-semibold tracking-wide mb-1">
                       {item.date}
                     </p>
-                    <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors duration-300 font-playfair">
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 font-playfair">
                       {item.title}
                     </h3>
-                    <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                    <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-3">
                       {item.desc}
                     </p>
-                    <a
-                      href="#"
-                      className="inline-flex items-center gap-2 text-primary font-semibold text-lg hover:gap-4 transition-all duration-300 group-hover:translate-x-2"
-                    >
-                      Read Full Story
-                      <FaArrowRight className="text-sm" />
-                    </a>
+                    <InvertButton
+                      text="Read Story"
+                      icon={<FaArrowRight className="text-xs" />}
+                      size="text-sm"
+                      padding="px-4 py-2"
+                      curvature="rounded-full"
+                      bgColor="bg-primary"
+                      textColor="text-primary"
+                      lightStateBg="bg-transparent"
+                      darkStateText="text-white"
+                      borderColor="border-2 border-primary"
+                      invertDirection="light-to-dark"
+                      className="transition-transform md:w-auto w-full"
+                      onClick={() => window.location.href = `/news/${item.slug}`}
+                    />
                   </div>
                 </div>
 
-                {/* Divider */}
                 {i < 2 && (
-                  <div className="mt-16 w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+                  <div className="mt-8 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
                 )}
               </div>
             ))}
           </div>
+
         </div>
       </section>
+
       {/* Port Laken Calendar Spotlight - Themed Version */}
       <section
-        className="relative py-16 px-4 md:px-12 lg:px-20 flex justify-center items-center overflow-hidden rounded-b-[40px]"
+        className="relative py-16 md:py-20 lg:py-24 px-5 sm:px-8 md:px-12 lg:px-16 overflow-hidden rounded-b-[40px]"
         style={{
-          backgroundImage: "url('/huron.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundColor: 'var(--color-primary)',
         }}
       >
-        <div className="absolute inset-0 bg-black/40 md:bg-black/50 z-0"></div>
 
-        <div className="max-w-6xl w-full mx-auto relative z-10">
-          {/* Title + Divider */}
-          <div className="mb-10">
-              <h2 className="font-playfair text-5xl md:text-6xl font-extrabold text-white text-left tracking-tight drop-shadow-lg">
-              <span className="text-primary">
-                See What’s <em className="italic">Next</em>
-              </span>
+
+        <div className="relative z-10 max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="max-w-3xl mb-12 md:mb-16">
+            <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight drop-shadow-xl">
+              See What’s <em className="italic font-bold text-white">Next</em>
             </h2>
-            <p className="text-white/90 text-left mt-3 text-lg md:text-xl max-w-2xl">
-              Discover all the events, holidays, and community gatherings happening in Port Laken. Stay connected and never miss out on what’s coming up next!
+
+            <p className="mt-5 text-lg sm:text-xl text-white/90 max-w-2xl leading-relaxed">
+              Discover upcoming events, holidays, markets, and community moments in Port Laken.
+              Stay in the know — never miss what’s happening next!
             </p>
-            <div className="w-full h-1 bg-white rounded-full mt-6"></div>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start justify-between">
-            {/* Event Cards - Improved Design */}
-            <div className="flex-1 flex flex-col gap-5 w-full md:w-auto">
-              {[
-                { month: 'NOV', day: '11', title: 'Veterans Day - City Hall Offices Closed', desc: 'City Hall offices closed' },
-                { month: 'NOV', day: '12', title: 'Meet and Green', desc: 'Community meet-up' },
-                { month: 'NOV', day: '27', title: 'Thanksgiving Day - City Hall Offices Closed', desc: 'City Hall offices closed' },
-              ].map((event, idx) => (
+          {/* Main content - grid layout */}
+          <div className="grid lg:grid-cols-2 gap-10 xl:gap-14 items-start">
+            {/* Events Column */}
+            <div className="space-y-6">
+              {upcomingEvents.slice(0, 4).map((event, idx) => (
                 <div
                   key={idx}
-                  className="group flex items-center bg-white rounded-3xl px-6 py-5 shadow-md border border-primary/20 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:border-primary"
-                  style={{ cursor: 'pointer' }}
+                  className="
+        group flex items-center gap-5 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm
+        hover:shadow-md hover:-translate-y-0.5 transition-all duration-200
+      "
                 >
-                  {/* Date Pill */}
-                  <div className="flex flex-col items-center justify-center mr-5 bg-primary rounded-full w-16 h-16 shadow-sm transition-all duration-300 group-hover:bg-primary/90">
-                    <span className="text-white font-bold text-xs leading-none tracking-wide">
-                      {event.month}
-                    </span>
-                    <span className="text-white text-2xl font-bold leading-none">
-                      {event.day}
-                    </span>
+                  <div
+                    className="
+          flex-shrink-0 flex flex-col items-center justify-center w-16 h-16 
+          rounded-2xl font-bold text-white
+          bg-primary
+        "
+                  >
+                    <span className="text-xs tracking-wider uppercase">{event.month}</span>
+                    <span className="text-2xl">{event.day}</span>
                   </div>
-                  <div>
-                    <h4 className="font-bold text-lg text-black mb-1 group-hover:text-primary transition-colors duration-300">{event.title}</h4>
-                    <p className="text-sm text-gray-700">{event.desc}</p>
+
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-semibold text-lg text-gray-900 group-hover:text-primary transition-colors">
+                      {event.title}
+                    </h4>
+                    <p className="text-gray-600 text-sm mt-1 line-clamp-2">
+                      {event.desc}
+                    </p>
                   </div>
                 </div>
               ))}
 
-              {/* View Full Calendar Button */}
-              <div className="flex justify-end mt-6">
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 bg-primary text-white font-medium px-6 py-3 rounded-full border-2 border-primary 
-               transition-all duration-300 hover:bg-white hover:text-primary hover:border-4 hover:shadow-lg hover:scale-105"
-                >
-                  VIEW FULL CALENDAR
-                  <FaArrowRight className="text-sm transition-colors duration-300 group-hover:text-primary" />
-                </a>
+              {/* CTA Button */}
+              <div className="flex justify-end pt-2">
+                <InvertButton
+                  text="View Full Calendar"
+                  icon={<FaArrowRight className="text-sm" />}
+                  size="text-base"
+                  padding="px-24 py-2"
+                  curvature="rounded-full"
+                  bgColor="bg-transparent"
+                  textColor="text-primary"
+                  borderColor="border-white"
+                  lightStateBg="bg-white"
+                  darkStateText="text-white"
+                  invertDirection="dark-to-light"
+                  className="mt-2 font-semibold shadow-sm transition-all duration-200"
+                  onClick={() => window.location.href = '/events'}
+                />
               </div>
-
             </div>
 
-            {/* Spotlight Slideshow */}
-            <div className="w-full md:w-auto md:flex-1">
+
+            {/* Spotlight Slideshow - now much more prominent */}
+            <div className="lg:sticky lg:top-8">
               <SpotlightSlideshow />
             </div>
           </div>
@@ -541,105 +599,139 @@ export default function Home() {
                 {[
                   {
                     id: 1,
-                    award: "#1 Best Family-Friendly Place to Live in the U.S.",
-                    source: "U.S. News & World Report, 2025",
-                    description: "Safe neighborhoods, top-rated schools, and a community built on connection and care.",
-                    image: "/awards/family-friendly.jpg"
+                    award: "Best Town in America",
+                    source: "Outside Magazine, 2025",
+                    description: "Safe, connected community with top schools and easy access to mountains and water.",
+                    image: "https://cdn.flipboard.com/dev_O/insideflipboard/outside/outside_cloud_blog_1200x750.jpg",
+                    link: "https://www.outsideonline.com/" // Example link for the first award
                   },
                   {
                     id: 2,
-                    award: "Most Innovative Mid-Sized City in the Northwest",
-                    source: "UrbanNext Magazine, 2025",
-                    description: "AI-powered public services, clean energy, and citizen-first tech.",
-                    image: "/awards/innovation.jpg"
+                    award: "LIVE UNITED Award",
+                    source: "United Way, 2024",
+                    description: "Honored for its work in safe and affordable housing development.",
+                    image: "https://newsprogress.com/wp-content/uploads/2016/05/Dave-Cole-Award-427.jpg",
+                    link: "https://www.unitedway.org/" // Example link for the second award
                   },
                   {
                     id: 3,
                     award: "#1 Civic Building Redesign — Port Laken City Hall",
                     source: "Design Forward Awards, 2025",
                     description: "A blend of heritage design, solar glass, and open-floor collaboration.",
-                    image: "/awards/city-hall.jpg"
+                    image: "https://www.utiledesign.com/wp-content/uploads/2025/10/City-Hall-Lobby-424_low-1024x678.jpg",
+                    link: "https://designforwardawards.com/" // Example link for the third award
                   },
                   {
                     id: 4,
                     award: "Best Winter Festival in a Small City",
                     source: "Travel & Culture Weekly, 2025",
                     description: "Celebrated for ice sculptures, art shows, and live harbor performances.",
-                    image: "/awards/winter-festival.jpg"
+                    image: "https://foxbaltimore.com/resources/media2/16x9/3851/986/0x361/90/63423fb2-22ce-4454-aed0-68d5eab9dc17-1TOP5_ChristmasVillageinBaltimore2022_heatedtent5_creditChristinaKalff.jpg",
+                    link: "https://travelandcultureweekly.com/" // Example link for the fourth award
                   },
                   {
                     id: 5,
                     award: "Top 100 Emerging AI Startups — NeuralHaven Labs",
                     source: "TechNation, 2025",
                     description: "Port Laken's own accessibility-focused AI firm making global waves.",
-                    image: "/awards/neuralhaven.jpg"
+                    image: "https://substackcdn.com/image/fetch/$s_!PSnS!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa7f4e29e-9704-41dc-8d8e-f9b17ad8eb15_1489x498.png",
+                    link: "https://technation.com/" // Example link for the fifth award
                   }
                 ].map((award, index) => (
-                  <div key={award.id} className="flex-none w-80 sm:w-96 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all border group/card" style={{ borderColor: 'var(--color-primary-shade)' }}>
+                  <a href={award.link} target="_blank" rel="noopener noreferrer" key={award.id} className="flex-none w-80 sm:w-96 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all border group/card" style={{ borderColor: 'var(--color-primary-shade)' }}>
                     <div className="h-48 overflow-hidden relative" style={{ backgroundColor: 'var(--color-primary-shade)' }}>
-                      <div className="absolute inset-0 flex items-center justify-center" style={{ color: 'var(--color-primary)' }}>
-                        <span className="text-sm font-medium">Award Image</span>
-                      </div>
+                      {award.image.startsWith('http') ? (
+                        <Image
+                          src={award.image}
+                          alt={award.award}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                          <div className="absolute inset-0 flex items-center justify-center" style={{ color: 'var(--color-primary)' }}>
+                            <span className="text-sm font-medium">Award Image</span>
+                          </div>
+                      )}
                       <div className="absolute bottom-0 left-0 right-0 h-1" style={{ backgroundColor: 'var(--color-primary)' }}></div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-gray-900 font-bold text-xl mb-2 transition-colors" style={{ color: '' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-primary)'} onMouseLeave={(e) => e.currentTarget.style.color = '#111827'}>{award.award}</h3>
+                      <h3 className="text-gray-900 font-bold text-xl mb-2 transition-colors relative group/title" style={{ color: '' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-primary)'} onMouseLeave={(e) => e.currentTarget.style.color = '#111827'}>
+                        {award.award}
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover/title:w-full"></span>
+                      </h3>
                       <p className="text-sm text-gray-500 mb-3">{award.source}</p>
                       <p className="text-gray-600">{award.description}</p>
                     </div>
-                  </div>
+                  </a>
                 ))}
                 {/* Duplicate items for infinite scroll effect */}
                 {[
                   {
                     id: 1,
-                    award: "#1 Best Family-Friendly Place to Live in the U.S.",
-                    source: "U.S. News & World Report, 2025",
-                    description: "Safe neighborhoods, top-rated schools, and a community built on connection and care.",
-                    image: "/awards/family-friendly.jpg"
+                    award: "Best Town in America",
+                    source: "Outside Magazine, 2025",
+                    description: "Safe, connected community with top schools and easy access to mountains and water.",
+                    image: "https://cdn.flipboard.com/dev_O/insideflipboard/outside/outside_cloud_blog_1200x750.jpg",
+                    link: "https://www.outsideonline.com/" // Example link for the first award
                   },
                   {
                     id: 2,
-                    award: "Most Innovative Mid-Sized City in the Northwest",
-                    source: "UrbanNext Magazine, 2025",
-                    description: "AI-powered public services, clean energy, and citizen-first tech.",
-                    image: "/awards/innovation.jpg"
+                    award: "LIVE UNITED Award",
+                    source: "United Way, 2024",
+                    description: "Honored for its work in safe and affordable housing development.",
+                    image: "https://newsprogress.com/wp-content/uploads/2016/05/Dave-Cole-Award-427.jpg",
+                    link: "https://www.unitedway.org/" // Example link for the second award
                   },
                   {
                     id: 3,
                     award: "#1 Civic Building Redesign — Port Laken City Hall",
                     source: "Design Forward Awards, 2025",
                     description: "A blend of heritage design, solar glass, and open-floor collaboration.",
-                    image: "/awards/city-hall.jpg"
+                    image: "https://www.utiledesign.com/wp-content/uploads/2025/10/City-Hall-Lobby-424_low-1024x678.jpg",
+                    link: "https://designforwardawards.com/" // Example link for the third award
                   },
                   {
                     id: 4,
                     award: "Best Winter Festival in a Small City",
                     source: "Travel & Culture Weekly, 2025",
                     description: "Celebrated for ice sculptures, art shows, and live harbor performances.",
-                    image: "/awards/winter-festival.jpg"
+                    image: "https://foxbaltimore.com/resources/media2/16x9/3851/986/0x361/90/63423fb2-22ce-4454-aed0-68d5eab9dc17-1TOP5_ChristmasVillageinBaltimore2022_heatedtent5_creditChristinaKalff.jpg",
+                    link: "https://travelandcultureweekly.com/" // Example link for the fourth award
                   },
                   {
                     id: 5,
                     award: "Top 100 Emerging AI Startups — NeuralHaven Labs",
                     source: "TechNation, 2025",
                     description: "Port Laken's own accessibility-focused AI firm making global waves.",
-                    image: "/awards/neuralhaven.jpg"
+                    image: "https://substackcdn.com/image/fetch/$s_!PSnS!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa7f4e29e-9704-41dc-8d8e-f9b17ad8eb15_1489x498.png",
+                    link: "https://technation.com/" // Example link for the fifth award
                   }
                 ].map((award, index) => (
-                  <div key={`duplicate-${award.id}`} className="flex-none w-80 sm:w-96 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all border group/card" style={{ borderColor: 'var(--color-primary-shade)' }}>
+                  <a href={award.link} target="_blank" rel="noopener noreferrer" key={`duplicate-${award.id}`} className="flex-none w-80 sm:w-96 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all border group/card" style={{ borderColor: 'var(--color-primary-shade)' }}>
                     <div className="h-48 overflow-hidden relative" style={{ backgroundColor: 'var(--color-primary-shade)' }}>
-                      <div className="absolute inset-0 flex items-center justify-center" style={{ color: 'var(--color-primary)' }}>
-                        <span className="text-sm font-medium">Award Image</span>
-                      </div>
+                      {award.image.startsWith('http') ? (
+                        <Image
+                          src={award.image}
+                          alt={award.award}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                          <div className="absolute inset-0 flex items-center justify-center" style={{ color: 'var(--color-primary)' }}>
+                            <span className="text-sm font-medium">Award Image</span>
+                          </div>
+                      )}
                       <div className="absolute bottom-0 left-0 right-0 h-1" style={{ backgroundColor: 'var(--color-primary)' }}></div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-gray-900 font-bold text-xl mb-2 transition-colors" style={{ color: '' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-primary)'} onMouseLeave={(e) => e.currentTarget.style.color = '#111827'}>{award.award}</h3>
+                      <h3 className="text-gray-900 font-bold text-xl mb-2 transition-colors relative group/title" style={{ color: '' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-primary)'} onMouseLeave={(e) => e.currentTarget.style.color = '#111827'}>
+                        {award.award}
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover/title:w-full"></span>
+                      </h3>
                       <p className="text-sm text-gray-500 mb-3">{award.source}</p>
                       <p className="text-gray-600">{award.description}</p>
                     </div>
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>
@@ -675,133 +767,114 @@ export default function Home() {
           {/* Header */}
           <div className="text-center mb-16">
             <h2 className="font-playfair text-4xl md:text-6xl font-extrabold text-white mb-4">
-              LOVE, <span className="italic">PORT LAKEN</span>
+              love, <span className="italic">port laken</span>
             </h2>
-            <p className="text-white/90 text-lg md:text-xl max-w-3xl mx-auto">
-              &quot;it&apos;s in the details&quot;
-            </p>
           </div>
 
           {/* Masonry Grid */}
-          <div className="w-full" style={{ height: '1000px' }}>
-            <Masonry
-              items={galleryImages.map((img, index) => ({
-                id: `${index + 1}`,
-                img: img,
-                url: img,
-                height: [600, 450, 700, 500, 650, 550, 600, 480, 700, 520, 580, 650, 720, 500, 400][index] || 600,
-              }))}
-              ease="power3.out"
-              duration={0.6}
-              stagger={0.05}
-              animateFrom="bottom"
-              scaleOnHover={true}
-              hoverScale={0.95}
-              blurToFocus={true}
-              colorShiftOnHover={false}
-            />
-          </div>
+          <GallerySection />
         </div>
       </section>
 
       {/* Newsletter Signup */}
-<section className="relative py-20 px-6 md:px-20 overflow-hidden">
-  {/* Optional subtle background accent */}
-  <div className="absolute inset-0 -z-10">
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-primary-shade/3 rounded-full blur-3xl"></div>
-  </div>
+      <section className="relative py-20 px-6 md:px-20 overflow-hidden">
+        {/* Optional subtle background accent */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-primary-shade/3 rounded-full blur-3xl"></div>
+        </div>
 
-  <div className="max-w-6xl mx-auto">
-    <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
-      {/* Left: Heading */}
-      <div className="space-y-4">
-        <h3 className="font-playfair text-4xl md:text-5xl font-bold text-primary-shade leading-tight tracking-tight">
-          <span className="italic">Stay in the loop.</span> Port Laken’s latest stories, creative highlights, and the people shaping our city’s future.</h3>
-        <p className="text-primary-shade/70 text-sm font-light tracking-wide hover:text-primary-shade/90 transition-colors duration-300">
-          yoooooooooooooooooooooooooooooooooooooooooooo
-        </p>
-      </div>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
+            {/* Left: Heading */}
+            <div className="space-y-4">
+              <h3 className="font-playfair text-4xl md:text-5xl font-bold text-primary-shade leading-tight tracking-tight">
+                <span className="italic">Stay in the loop.</span> Port Laken’s latest stories, creative highlights, and the people shaping our city’s future.</h3>
+              <p className="text-primary-shade/70 text-sm font-light tracking-wide hover:text-primary-shade/90 transition-colors duration-300">
+                Unsubscribe anytime. We respect your privacy and never share your information.
+              </p>
+            </div>
 
-      {/* Right: Form */}
-      <div>
-        <form className="space-y-8">
-          {/* First Name */}
-          <div className="relative group">
-            <input
-              type="text"
-              placeholder="First name*"
-              required
-              className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
-            />
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
+            {/* Right: Form */}
+            <div>
+              <form className="space-y-8" onSubmit={(e) => { e.preventDefault(); alert('Form submitted!'); }}>
+                {/* First Name */}
+                <div className="relative group">
+                  <input
+                    type="text"
+                    placeholder="First name*"
+                    required
+                    className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
+                  />
+                  <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
+                </div>
+
+                {/* Last Name */}
+                <div className="relative group">
+                  <input
+                    type="text"
+                    placeholder="Last name*"
+                    required
+                    className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
+                  />
+                  <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
+                </div>
+
+                {/* Email */}
+                <div className="relative group">
+                  <input
+                    type="email"
+                    placeholder="Email*"
+                    required
+                    className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
+                  />
+                  <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  className="group relative inline-flex items-center justify-center px-10 py-3.5 border-2 border-primary-shade text-primary-shade font-medium rounded-full overflow-hidden transition-all duration-300 hover:text-white hover:shadow-xl hover:-translate-y-0.5 active:scale-95"
+                >
+                  <span className="relative z-10 tracking-wider">Submit</span>
+                  <div className="absolute inset-0 bg-primary-shade translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
+                </button>
+              </form>
+            </div>
           </div>
-
-          {/* Last Name */}
-          <div className="relative group">
-            <input
-              type="text"
-              placeholder="Last name*"
-              required
-              className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
-            />
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
-          </div>
-
-          {/* Email */}
-          <div className="relative group">
-            <input
-              type="email"
-              placeholder="Email*"
-              required
-              className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
-            />
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
-          </div>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="group relative inline-flex items-center justify-center px-10 py-3.5 border-2 border-primary-shade text-primary-shade font-medium rounded-full overflow-hidden transition-all duration-300 hover:text-white hover:shadow-xl hover:-translate-y-0.5 active:scale-95"
-          >
-            <span className="relative z-10 tracking-wider">Submit</span>
-            <div className="absolute inset-0 bg-primary-shade translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
+        </div>
+      </section>
 
     </main>
   );
 }
 
 // Port Laken Services Section Component
-function PortLakenServicesSection({ galleryImages }) {
+function PortLakenServicesSection() {
   const services = [
     {
-      image: galleryImages[1],
+      image: "https://www.uwmedicine.org/sites/stevie/files/styles/clinic_page_576_288/public/clinic-images/NJB%20HMC_11_0.jpeg?itok=viW3dOVK",
       title: "HarborView Medical Center",
       description:
         "Comprehensive care from emergency to wellness — the backbone of Port Laken's health network.",
+      resourceId: "1",
     },
     {
-      image: galleryImages[2],
-      title: "Mountains to Sound Greenway",
-      description:
-        "Protected trails, restoration projects, and outdoor access connecting people to nature.",
+      image: "https://www.outsideonline.com/wp-content/uploads/2025/05/GettyImages-103319910-scaled.jpg",
+      title: "Discovery Park",
+      description: "Largest city park with beaches and forest trails.",
+      resourceId: "32",
     },
     {
-      image: galleryImages[3],
-      title: "Crisis Support Network",
-      description:
-        "24/7 crisis line, recovery support, and outreach services for all ages.",
+      image: "https://wexnermedical.osu.edu/-/media/images/wexnermedical/pages/patient-care/healthcare-services/mental-behavioral/outpatient-care/psychiactric-evaluation.jpg",
+      title: "Port Laken Mental Health Services",
+      description: "Counseling and therapy for all ages.",
+      resourceId: "5",
     },
     {
-      image: galleryImages[4],
-      title: "BrightSteps Childcare",
-      description:
-        "Safe, nurturing early education spaces supporting families and young learners.",
+      image: "https://photo.upwards.com/public/photos/path/f30395.jpg?width=800&height=500",
+      title: "Little Stars Daycare",
+      description: "Licensed childcare and early learning.",
+      resourceId: "7",
     },
   ];
 
@@ -858,7 +931,7 @@ function PortLakenServicesSection({ galleryImages }) {
               {services.map((service, i) => {
                 const offset = (i - active + services.length) % services.length;
                 let position = offset;
-                
+
                 // Convert to -1, 0, 1 (left, center, right)
                 if (position > 1) position -= services.length;
 
@@ -923,8 +996,8 @@ function PortLakenServicesSection({ galleryImages }) {
                           {service.description}
                         </p>
                         <a
-                          href="#"
-                          className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition pointer-events-auto"
+                          href={`/resource-directory?resourceId=${service.resourceId}`}
+                          className="inline-flex items-center gap-2 text-primary font-semibold hover:text-ice transition pointer-events-auto text-sm"
                         >
                           More Info →
                         </a>
@@ -939,28 +1012,18 @@ function PortLakenServicesSection({ galleryImages }) {
           {/* Navigation Arrows - Overlapping on Side Cards */}
           <button
             onClick={prev}
-            className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 md:left-6 h-11 w-11 md:h-13 md:w-13 rounded-full text-white font-bold text-lg md:text-xl transition flex items-center justify-center pointer-events-auto z-50 shadow-lg"
-            style={{
-              backgroundColor: 'var(--color-primary)',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-primary-shade)')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-primary)')}
+            className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 md:left-6 h-12 w-12 rounded-full bg-white/70 text-primary flex items-center justify-center shadow-xl transition-all duration-300 hover:bg-primary hover:text-white border-2 border-transparent hover:border-white z-50 backdrop-blur-sm"
             aria-label="Previous service"
           >
-            ‹
+            <ChevronLeft className="h-7 w-7 stroke-[2.5]" />
           </button>
 
           <button
             onClick={next}
-            className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-4 md:right-6 h-11 w-11 md:h-13 md:w-13 rounded-full text-white font-bold text-lg md:text-xl transition flex items-center justify-center pointer-events-auto z-50 shadow-lg"
-            style={{
-              backgroundColor: 'var(--color-primary)',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-primary-shade)')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-primary)')}
+            className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-4 md:right-6 h-12 w-12 rounded-full bg-white/70 text-primary flex items-center justify-center shadow-xl transition-all duration-300 hover:bg-primary hover:text-white border-2 border-transparent hover:border-white z-50 backdrop-blur-sm"
             aria-label="Next service"
           >
-            ›
+            <ChevronRight className="h-7 w-7 stroke-[2.5]" />
           </button>
 
           {/* Indicator Dots */}
@@ -969,9 +1032,8 @@ function PortLakenServicesSection({ galleryImages }) {
               <button
                 key={i}
                 onClick={() => setActive(i)}
-                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                  i === active ? 'bg-white w-6' : 'bg-white/40 w-2.5 hover:bg-white/60'
-                }`}
+                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${i === active ? 'bg-white w-6' : 'bg-white/50 w-2.5 hover:bg-white/60'
+                  }`}
                 aria-label={`Go to service ${i + 1}`}
                 aria-current={i === active ? 'true' : 'false'}
               />
@@ -985,57 +1047,89 @@ function PortLakenServicesSection({ galleryImages }) {
 
 // Spotlight Slideshow Component
 function SpotlightSlideshow() {
+  // Static data for the spotlight slideshow since API is not available
   const spotlightData = [
     {
-      image: galleryImages[11],
-      title: "Frosty Lane",
-      description:
-        "Enjoy snow, lights, music, and nightly parades at 7 PM. Free parking and fun for everyone.",
+      id: 1,
+      image: "https://texashighways.com/wp-content/uploads/2022/11/drive-atlas-ice-gardens-sculptures.jpg",
+      title: "Winter Ice Sculpture Festival",
+      description: "Join us for the annual ice sculpture festival at Harbor Plaza. Local artists showcase their talents creating stunning frozen art."
     },
     {
-      image: galleryImages[12],
-      title: "Sunny Shores",
-      description:
-        "Relax with live music, beach games, and sunset bonfires every evening.",
+      id: 2,
+      image: "https://images.seattletimes.com/wp-content/uploads/2021/03/03122021_cherry_142721.jpg?d=2040x1327",
+      title: "Spring Blooms in Discovery Park",
+      description: "Discover the beauty of spring with cherry blossoms and tulips blooming throughout Discovery Park. Perfect for family photos."
     },
     {
-      image: galleryImages[13],
-      title: "Mystic Trails",
-      description:
-        "Explore enchanted forests with guided hikes and storytelling under the stars.",
-    },
+      id: 3,
+      image: "https://www.bellevuereporter.com/wp-content/uploads/2022/06/29337375_web1_Marymoor-Park-concert-series_1.jpg",
+      title: "Summer Concert Series",
+      description: "Free outdoor concerts every Saturday evening. Bring your blanket and enjoy local musicians under the stars."
+    }
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
+    // Only run the interval if we have data
+    if (spotlightData.length === 0) return;
+
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % spotlightData.length);
-    }, 5000); // Change every 5 seconds
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % spotlightData.length);
+        setIsAnimating(false);
+      }, 600); // match transition duration
+    }, 5200);
+
     return () => clearInterval(interval);
   }, [spotlightData.length]);
 
+  // Safely access spotlight data with fallback
   const { image, title, description } = spotlightData[currentIndex];
-
   return (
-    <div className="flex-1 flex flex-col items-center md:items-start md:ml-0 w-full md:w-auto h-full">
-      <div className="relative w-full sm:max-w-[480px] aspect-[4/3] md:aspect-auto md:max-h-[640px] rounded-3xl overflow-hidden shadow-xl bg-primary/30 border border-white/30 flex items-end min-h-[220px] md:mx-0 mx-auto transition-all duration-700 ease-in-out h-full">
-        <Image
-          key={image}
-          src={image}
-          alt={title}
-          fill
-          sizes="(max-width: 768px) 100vw, 40vw"
-          className="object-cover transition-opacity duration-700 ease-in-out"
-        />
-        <div className="absolute bottom-0 left-0 w-full bg-white/90 px-6 py-4 rounded-b-3xl">
-          <h3 className="font-bold text-lg text-primary transition-all duration-500">
-            {title}
-          </h3>
-          <p className="text-gray-700 text-sm transition-all duration-500">
-            {description}
-          </p>
-        </div>
+    <div className="relative w-full aspect-[4/3] sm:aspect-[5/4] md:aspect-[4/5] lg:aspect-[3/4] max-h-[580px] rounded-3xl overflow-hidden shadow-2xl">
+      <Image
+        src={image}
+        alt={title}
+        fill
+        className={`object-cover transition-all duration-700 ease-out ${isAnimating ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
+          }`}
+        priority={currentIndex === 0}
+      />
+
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+
+      {/* Content */}
+      <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white z-10 transform transition-all duration-700">
+        <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-2 drop-shadow-md">
+          {title}
+        </h3>
+        <p className="text-base md:text-lg text-white/90 max-w-md drop-shadow-sm">
+          {description}
+        </p>
+      </div>
+
+      {/* Dots indicator */}
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2.5 z-20">
+        {spotlightData.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => {
+              setIsAnimating(true);
+              setTimeout(() => {
+                setCurrentIndex(idx);
+                setIsAnimating(false);
+              }, 400);
+            }}
+            className={`w-2.5 h-2.5 rounded-full transition-all duration-400 ${idx === currentIndex ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/80'
+              }`}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
       </div>
     </div>
   );
@@ -1199,23 +1293,16 @@ function ServicesCarousel({ services }: { services: ServiceItem[] }) {
                   </div>
 
                   {/* Learn More Button */}
-                  <a
-                    href="#"
-                    className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-300 hover:bg-[#708AA3]/30 hover:border-[#708AA3] hover:scale-110"
-                  >
-                    <svg
-                      className="w-5 h-5 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeWidth={2.5}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </a>
+                  <InvertButton
+                    text="→"
+                    size="text-lg"
+                    padding="p-0"
+                    curvature="rounded-full"
+                    bgColor="bg-white/10"
+                    textColor="text-white"
+                    className="absolute bottom-4 right-4 w-10 h-10 backdrop-blur-md border border-white/20 transition-all duration-300 hover:bg-[#708AA3]/30 hover:border-[#708AA3] hover:scale-110"
+                    onClick={() => console.log('Button clicked')}
+                  />
                 </div>
               </div>
             );
@@ -1270,16 +1357,82 @@ function ServicesCarousel({ services }: { services: ServiceItem[] }) {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              index === currentIndex
-                ? "bg-white w-8"
-                : "bg-white/40 w-2 hover:bg-white/60"
-            }`}
+            className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex
+              ? "bg-white w-8"
+              : "bg-white/40 w-2 hover:bg-white/60"
+              }`}
             aria-label={`Go to service ${index + 1}`}
             aria-current={index === currentIndex ? "true" : "false"}
           />
         ))}
       </div>
+    </div>
+  );
+}
+
+function GallerySection() {
+  // Pattern of grid spans from the design
+  const gridPatterns = [
+    "col-span-2 row-span-1 md:col-span-2 lg:col-span-2",
+    "col-span-1 row-span-1 md:col-span-1 lg:col-span-1",
+    "col-span-2 row-span-1 md:col-span-2 lg:col-span-2",
+    "col-span-1 row-span-1 md:col-span-1 lg:col-span-1",
+    "col-span-2 row-span-1 md:col-span-2 lg:col-span-2",
+    "col-span-1 row-span-1 md:col-span-1 lg:col-span-1",
+    "col-span-1 row-span-1 md:col-span-1 lg:col-span-1",
+    "col-span-1 row-span-1 md:col-span-1 lg:col-span-1",
+    "col-span-1 row-span-1 md:col-span-1 lg:col-span-1",
+    "col-span-2 row-span-1 md:col-span-2 lg:col-span-2",
+    "col-span-1 row-span-1 md:col-span-1 lg:col-span-1",
+  ];
+
+  // Sample gallery images - replace with actual image paths
+  const galleryImages = [
+    { src: "https://peakbaggerblobs.blob.core.windows.net/pbphoto/p515L.jpg", alt: "Mountain landscape" },
+    { src: "https://www.globalholdings-mgmt.com/wp-content/uploads/2022/09/washington-harbour-1-1024x682.jpg", alt: "Nature scene" },
+    { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJRUxmnROa9bcRLzcl0S-vhdwFVkDycEtGiA&s", alt: "Lake view" },
+    { src: "https://excursionmania.com/cdn-cgi/image/quality=75,format=webp,w=auto,h=auto,fit=scale-down,trim=border/https://excursionmania.com/uploads/blog/ideas/420a5a39e12ea478c2f267b2cee4607f.jpg", alt: "Forest view" },
+    { src: "https://nrs.objectstore.gov.bc.ca/kuwyyf/frontcountry_camping_RS_8873_82ab7cecb1.jpg", alt: "Waterfall" },
+    { src: "https://www.thoughtco.com/thmb/qO4W06u8TNDKXRktinwhTHMLZHE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-885794240-5b5e2c574cedfd0050fae7f2.jpg", alt: "City skyline" },
+    { src: "https://quietly-image-uploads.s3.amazonaws.com/image_7015_1280px_c975e1f0ed274103ad6d949df3292aaf.jpeg", alt: "Park trees" },
+    { src: "https://i.ebayimg.com/images/g/ouUAAOSwOEZkAU0f/s-l1200.jpg", alt: "Green meadow" },
+    { src: "https://cdn.allolympicpark.com/images/content/22082_19364_Strait_of_Juan_de_Fuca_Cape_Flattery_lg.jpg", alt: "Nature reserve" },
+    { src: "https://www.courant.com/wp-content/uploads/2023/06/rgd-13.jpg?w=525", alt: "Misty mountains" },
+    { src: "https://experience-olympia.s3.amazonaws.com/imager/files_idss_com/C405/6851cc95-b115-4b38-8e54-46ebcde289b1_e45adf5f6bc0c5c2a30a39868f44eab6.jpg", alt: "Misty mountains" },
+  ];
+
+  const images = galleryImages.map((img, index) => ({
+    ...img,
+    className: gridPatterns[index % gridPatterns.length]
+  }));
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.3 } }
+  };
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.9 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring" as const, stiffness: 120, damping: 12 } }
+  };
+
+  return (
+    <div className="w-full">
+      <motion.div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+      >
+        {images.map((img, idx) => (
+          <motion.div key={idx}
+            className={`overflow-hidden rounded-2xl shadow-lg bg-[#181818] flex items-center justify-center h-[150px] sm:h-[180px] md:h-[200px] ${img.className}`}
+            variants={itemVariants}
+            custom={idx}
+          >
+            <Image src={img.src} alt={img.alt} width={400} height={400} className="object-cover w-full h-full transition-transform duration-300 hover:scale-105" style={{ fontFamily: 'Inter, sans-serif' }} />
+          </motion.div>
+        ))}
+      </motion.div>
     </div>
   );
 }
