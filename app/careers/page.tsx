@@ -1,273 +1,337 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import RevealOnScroll from "@/components/RevealOnScroll";
-import { FaChevronDown, FaChevronUp, FaHeartbeat, FaDollarSign, FaBalanceScale, FaGlobe, FaChartLine, FaUsers } from "react-icons/fa";
+import {
+  FaGlobe,
+  FaChartLine,
+  FaHeartbeat,
+  FaArrowRight,
+  FaBriefcase,
+  FaCheck,
+} from "react-icons/fa";
 
-const benefits = [
+const highlights = [
   {
     title: "Community Impact",
-    description: "Shape the future of our city through public service and community-driven projects.",
-    icon: FaGlobe
+    description:
+      "Shape the future of our city through public service and community-driven projects.",
+    icon: FaGlobe,
   },
   {
     title: "Career Growth",
-    description: "Access professional development, training, and opportunities for advancement.",
-    icon: FaChartLine
+    description:
+      "Access professional development, training, and opportunities for advancement.",
+    icon: FaChartLine,
   },
   {
-    title: "Diverse & Inclusive",
-    description: "We are committed to building a workforce that reflects the diversity of our city.",
-    icon: FaUsers
-  },
-];
-
-const employeeBenefits = [
-  {
+    title: "Stability & Benefits",
+    description:
+      "Enjoy comprehensive health coverage, pension plans, and job stability.",
     icon: FaHeartbeat,
-    title: "Health & Wellness",
-    description: "Medical, dental, and vision plans, plus wellness programs and gym memberships."
-  },
-  {
-    icon: FaDollarSign,
-    title: "Financial Security",
-    description: "Competitive salaries, pension plans, and retirement savings matching contributions."
-  },
-  {
-    icon: FaBalanceScale,
-    title: "Work-Life Balance",
-    description: "Generous vacation time, paid holidays, and flexible work arrangements."
   },
 ];
 
-const hiringSteps = [
-  {
-    step: 1,
-    title: "Apply Online",
-    description: "Submit your application through our online portal. Make sure to highlight your skills and experience relevant to the role."
-  },
-  {
-    step: 2,
-    title: "Application Review",
-    description: "Our hiring team reviews applications to identify candidates whose qualifications best match the position requirements."
-  },
-  {
-    step: 3,
-    title: "Interviews",
-    description: "Selected candidates are invited for one or more interviews to discuss their experience and assess their fit for the role."
-  },
-  {
-    step: 4,
-    title: "Offer & Onboarding",
-    description: "Successful candidates will receive a job offer. Once accepted, we'll guide you through the onboarding process."
-  },
+const benefitPoints = [
+  "Comprehensive Health, Dental & Vision",
+  "Generous Retirement & Pension Plans",
+  "Paid Time Off & Holidays",
+  "Long-term Job Stability",
 ];
 
-const faqs = [
-  {
-    question: "Do I have to be a resident of Port Laken to apply?",
-    answer: "No, you do not need to be a current resident to apply for most positions. However, some roles may have residency requirements that are noted in the job posting. We encourage qualified candidates from all locations to apply."
-  },
-  {
-    question: "How long does the hiring process take?",
-    answer: "The timeline varies depending on the position and number of applicants. Generally, you can expect the process to take 4-8 weeks from application to offer. We strive to keep candidates informed throughout the process."
-  },
-  {
-    question: "Can I apply for multiple jobs at once?",
-    answer: "Yes, you are welcome to apply for multiple positions that match your qualifications. Each application is reviewed independently, so make sure to tailor your materials to each specific role."
-  },
-];
+const indeedLink = "https://www.indeed.com/jobs?q=Port+Laken+City";
 
 export default function CareersPage() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  const toggleFaq = (index: number) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative h-[70vh] min-h-[500px] flex items-center pt-20 overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80"
-            alt="City skyline"
-            fill
-            sizes="100vw"
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-port-navy/80 to-port-navy/50"></div>
+      <section className="relative bg-white pt-32 pb-24 overflow-hidden">
+        {/* Subtle Background Accent */}
+        <div className="absolute right-[-200px] top-24 w-[600px] h-[600px] bg-port-sky/5 rounded-full blur-3xl" />
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-16 items-center">
+
+          {/* TEXT BLOCK – now on top (stacked) */}
+          <div 
+            className="rounded-3xl w-full h-[200px] overflow-hidden shadow-lg border border-port-mist/40 p-8 flex flex-col justify-center animate-fade-in-up"
+          >
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-port-navy leading-tight mb-6">
+              Build Your Future.
+              <span className="block italic text-port-sky">
+                Serve Your City.
+              </span>
+            </h1>
+
+            <a
+              href={indeedLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-4 px-6 py-3 bg-gray-900 text-white rounded-xl hover:bg-black transition-all duration-300 animate-fade-in-up"
+              style={{ animationDelay: "300ms" }}
+            >
+              <FaArrowRight className="text-white text-md -rotate-45 group-hover:rotate-0 transition-all duration-300" />
+              <span className="text-sm uppercase tracking-wider text-white">
+                Find us on
+              </span>
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Indeed_logo.svg/512px-Indeed_logo.svg.png"
+                alt="Indeed"
+                className="h-5 w-auto flex-shrink-0 brightness-0 invert -translate-y-[3px]"
+              />
+            </a>
+          </div>
+
+          {/* IMAGE BLOCK – now below text (stacked) */}
+          <div className="relative w-full animate-fade-in-up" style={{ animationDelay: "500ms" }}>
+            <div className="rounded-3xl overflow-hidden shadow-lg border border-port-mist/40">
+              <img
+                src="https://www.beecreekphoto.com/images/xl/austin-skyline-auditorium-shores-twilight-DR50215.jpg"
+                alt="City skyline"
+                className="w-full h-[200px] object-cover animate-slow-pan"
+              />
+            </div>
+          </div>
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="font-display text-4xl md:text-6xl font-bold text-white leading-tight animate-fade-in-up">
-            Build Your <span className="italic">Future.</span>
-            <br />
-            Serve Your <span className="italic">City.</span>
-          </h1>
-        </div>
+
+        <style jsx>{`
+    @keyframes slowPan {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-3%); }
+      100% { transform: translateX(0); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-slow-pan {
+      animation: slowPan 60s ease-in-out infinite;
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.9s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    }
+  `}</style>
       </section>
 
-      {/* Work That Matters */}
-      <section className="py-20 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      {/* 2. Why Work Here (3 cards) */}
+      <section className="py-24 bg-port-frost relative">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="text-center mb-16">
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-4">
-                Work That Matters
+              <h2 className="font-display text-4xl font-bold text-port-navy mb-4">
+                Why Port Laken?
               </h2>
-              <p className="text-port-slate max-w-2xl mx-auto">
-                Join a team dedicated to improving the lives of our community. Your work will have a direct and meaningful impact on the people of Port Laken.
+              <p className="text-port-slate text-lg max-w-3xl mx-auto">
+                We offer more than just a job. We offer a career with meaning, stability, and connection.
               </p>
             </div>
           </RevealOnScroll>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => (
-              <RevealOnScroll key={benefit.title} className={`delay-${index * 100}`}>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-port-frost rounded-full flex items-center justify-center mx-auto mb-5">
-                    <benefit.icon className="text-port-sky text-2xl" />
+            {highlights.map((item, index) => (
+              <RevealOnScroll key={item.title} className={`delay-${index * 100} h-full`}>
+                <div className="group h-full bg-white p-8 rounded-3xl hover:bg-port-navy transition-all duration-300 border border-port-mist/50 hover:border-port-navy flex flex-col items-start text-left">
+                  <div className="w-14 h-14 bg-port-frost rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-white/10 transition-colors">
+                    <item.icon className="text-port-sky text-xl group-hover:text-port-ice" />
                   </div>
-                  <h3 className="font-bold text-lg text-port-navy mb-3">{benefit.title}</h3>
-                  <p className="text-port-slate text-sm leading-relaxed">{benefit.description}</p>
+                  <h3 className="font-bold text-xl text-port-navy group-hover:text-white mb-3 transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-port-slate group-hover:text-white/80 leading-relaxed transition-colors">
+                    {item.description}
+                  </p>
                 </div>
               </RevealOnScroll>
             ))}
           </div>
         </div>
       </section>
-
-      {/* We Take Care of Our People */}
-      <section className="py-20 bg-port-cream">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <RevealOnScroll>
-              <div>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-4">
-                  We Take Care of Our People
-                </h2>
-                <p className="text-port-slate mb-8 leading-relaxed">
-                  We offer a comprehensive employee benefits package designed to support the health, well-being, and financial security of our employees and their families.
-                </p>
-                <Link
-                  href="/careers/benefits"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-port-navy text-white rounded-lg font-medium hover:bg-port-navy/90 transition-colors"
-                >
-                  Explore Benefits
-                  <span className="material-symbols-outlined text-sm"></span>
-                </Link>
-              </div>
-            </RevealOnScroll>
-            
-
-            <RevealOnScroll className="delay-100">
-              <div className="space-y-6">
-                {employeeBenefits.map((benefit, index) => (
-                  <div key={index} className="flex gap-4">
-                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
-                      <benefit.icon className="text-port-sky text-xl" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-port-navy mb-1">{benefit.title}</h4>
-                      <p className="text-port-slate text-sm">{benefit.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </RevealOnScroll>
-          </div>
-        </div>
-      </section>
-
-      {/* Our Hiring Process */}
+      {/* Life at Port Laken - Balanced, tighter Nukta-style grid */}
       <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealOnScroll>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-12 text-center">
-              Our Hiring Process
-            </h2>
+            <div className="text-center mb-12">
+              <h1 className="font-display text-4xl md:text-5xl font-bold text-port-navy mb-4">
+                We do more than serve
+              </h1>
+              <h2 className="text-port-slate text-large max-w-4xl mx-auto leading-relaxed">
+                We grow together, celebrate wins, and create real connections.
+
+              </h2>
+              <h3 className="text-port-slate text-large max-w-4xl mx-auto leading-relaxed">
+                Every day brings energy, collaboration, and the satisfaction of improving our community.
+              </h3>
+            </div>
           </RevealOnScroll>
 
-          <div className="space-y-8">
-            {hiringSteps.map((step, index) => (
-              <RevealOnScroll key={step.step} className={`delay-${index * 100}`}>
-                <div className="flex gap-6">
-                  <div className="flex-shrink-0">
-                    <div className="w-10 h-10 bg-port-navy text-white rounded-full flex items-center justify-center font-bold">
-                      {step.step}
-                    </div>
-                  </div>
-                  <div className="pb-8 border-b border-gray-100 flex-1">
-                    <h3 className="font-bold text-lg text-port-navy mb-2">{step.title}</h3>
-                    <p className="text-port-slate text-sm leading-relaxed">{step.description}</p>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Quote 1 */}
+            <div className="bg-port-frost rounded-3xl p-6 shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col h-full">
+              <p className="text-2xl leading-tight italic text-port-navy mb-6">
+                “More than a job — I learned and grew every day making a difference here.”
+              </p>
+              <div className="flex items-center gap-3 mt-auto">
+                <img
+                  src="https://i.pravatar.cc/96?u=almas"
+                  alt="Almas Rivera"
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div>
+                  <div className="font-semibold text-port-navy text-sm">Almas Rivera</div>
+                  <div className="text-xs text-port-slate">Civil Engineer</div>
                 </div>
-              </RevealOnScroll>
-            ))}
+              </div>
+            </div>
+
+            {/* Image 1: Hands stacking */}
+            <div className="aspect-square rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group">
+              <img
+                src="https://thumbs.dreamstime.com/b/diverse-business-team-stacking-hands-showing-unity-group-people-their-together-symbolizing-teamwork-collaboration-support-434215192.jpg"
+                alt="Diverse team stacking hands in unity"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Quote 2 */}
+            <div className="bg-port-frost rounded-3xl p-6 shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col h-full">
+              <p className="text-2xl leading-tight italic text-port-navy mb-6">
+                “Every day is a journey of learning and growth while serving our neighbors.”
+              </p>
+              <div className="flex items-center gap-3 mt-auto">
+                <img
+                  src="https://i.pravatar.cc/96?u=arsalan"
+                  alt="Arsalan Khan"
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div>
+                  <div className="font-semibold text-port-navy text-sm">Arsalan Khan</div>
+                  <div className="text-xs text-port-slate">Recreation Coordinator</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Image 2: Collaboration meeting */}
+            <div className="aspect-square rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group">
+              <img
+                src="https://thediversitymovement.com/wp-content/uploads/2024/01/iStock-1481369283-1024x576.jpg"
+                alt="Diverse team collaborating in discussion"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Quote 3 */}
+            <div className="bg-port-frost rounded-3xl p-6 shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col h-full">
+              <p className="text-2xl leading-tight italic text-port-navy mb-6">
+                “An opportunity every day for growth, connection, and meaningful impact.”
+              </p>
+              <div className="flex items-center gap-3 mt-auto">
+                <img
+                  src="https://i.pravatar.cc/96?u=john"
+                  alt="John Patel"
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div>
+                  <div className="font-semibold text-port-navy text-sm">John Patel</div>
+                  <div className="text-xs text-port-slate">IT Support Specialist</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Image 3: Coffee break fun */}
+            <div className="aspect-square rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group">
+              <img
+                src="https://thumbs.dreamstime.com/b/colleagues-laugh-chat-modern-office-cafe-coffee-break-group-coworkers-share-joyful-moment-bright-connect-424644392.jpg"
+                alt="Team enjoying coffee break and laughs"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
           </div>
         </div>
       </section>
-
-      {/* Common Questions */}
-      <section className="py-20 bg-port-frost">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <RevealOnScroll>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-10 text-center">
-              Common Questions
-            </h2>
-          </RevealOnScroll>
-
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
-              <RevealOnScroll key={index} className={`delay-${index * 100}`}>
-                <div className="bg-white rounded-xl overflow-hidden shadow-sm">
-                  <button
-                    onClick={() => toggleFaq(index)}
-                    className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 hover:bg-gray-50 transition-colors"
-                  >
-                    <span className="font-medium text-port-navy">{faq.question}</span>
-                    {openFaq === index ? (
-                      <FaChevronUp className="text-port-slate flex-shrink-0" />
-                    ) : (
-                      <FaChevronDown className="text-port-slate flex-shrink-0" />
-                    )}
-                  </button>
-                  {openFaq === index && (
-                    <div className="px-6 pb-5">
-                      <p className="text-port-slate text-sm leading-relaxed">{faq.answer}</p>
-                    </div>
-                  )}
-                </div>
-              </RevealOnScroll>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* We're Here to Help */}
-      <section className="py-20 bg-port-navy">
+      {/* 4. Benefits (Condensed) */}
+      <section className="py-24 bg-port-frost">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <RevealOnScroll>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              We&apos;re Here to Help
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-12">
+              Benefits That Support You
             </h2>
-            <p className="text-white/80 mb-8 max-w-xl mx-auto">
-              Have more questions? Our Human Resources team is ready to assist you. Reach out with any questions about your application or inquiries about working for the City of Port Laken.
-            </p>
+
+            <div className="grid sm:grid-cols-2 gap-x-8 gap-y-4 mb-12 text-left max-w-2xl mx-auto">
+              {benefitPoints.map((point, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-port-sky/10 flex items-center justify-center flex-shrink-0">
+                    <FaCheck className="text-port-sky text-xs" />
+                  </div>
+                  <span className="text-port-navy font-medium text-lg">
+                    {point}
+                  </span>
+                </div>
+              ))}
+            </div>
+
             <Link
-              href="/careers/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-port-navy rounded-lg font-medium hover:bg-gray-100 transition-colors"
+              href="/careers/benefits"
+              className="inline-flex items-center gap-2 text-port-sky font-bold text-lg hover:text-port-navy transition-colors border-b-2 border-transparent hover:border-port-navy pb-1"
             >
-              Contact HR
-              <span className="material-symbols-outlined text-sm">mail</span>
+              View Full Benefits Guide <FaArrowRight className="text-sm" />
             </Link>
           </RevealOnScroll>
         </div>
+      </section >
+
+      <section className="bg-white py-12 border-t border-gray-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <a
+            href={indeedLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-center sm:text-left group transition-all"
+          >
+            {/* Left Text */}
+            <span className="text-gray-600 font-medium">
+              Securely apply for all positions on
+            </span>
+
+            {/* Indeed Logo */}
+            <img
+              src="https://wp.bibbeo.com/wp-content/uploads/2025/04/indeed-logo.webp"
+              alt="Indeed"
+              className="h-6 opacity-80 group-hover:opacity-100 transition-opacity"
+            />
+
+            {/* Divider (Desktop Only) */}
+            <span className="hidden sm:block w-px h-6 bg-gray-300" />
+
+            {/* CTA */}
+            <div className="flex items-center gap-2 text-gray-900 font-semibold group-hover:translate-x-1 transition-transform">
+              View Openings
+              <FaArrowRight className="transition-transform group-hover:translate-x-1" />
+            </div>
+          </a>
+        </div>
       </section>
+
+
+
     </>
   );
 }

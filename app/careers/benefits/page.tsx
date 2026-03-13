@@ -205,33 +205,7 @@ export default function BenefitsPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 bg-port-navy">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <RevealOnScroll>
-            <h2 className="font-display text-3xl font-bold text-white mb-4">
-              Ready to Join Our Team?
-            </h2>
-            <p className="text-white/80 mb-8 max-w-xl mx-auto">
-              Explore current job openings and take the first step toward a rewarding career with the City of Port Laken.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/careers/positions"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-port-navy rounded-lg font-medium hover:bg-gray-100 transition-colors"
-              >
-                View Open Positions
-              </Link>
-              <Link
-                href="/careers/contact"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-white/30 text-white rounded-lg font-medium hover:bg-white/10 transition-colors"
-              >
-                Contact HR
-              </Link>
-            </div>
-          </RevealOnScroll>
-        </div>
-      </section>
+
     </>
   );
 }
