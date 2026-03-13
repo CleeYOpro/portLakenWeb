@@ -249,10 +249,4 @@ function ResourceDirectoryContent() {
   );
 }
 
-export default function ResourceDirectoryPage() {
-  return (
-    <Suspense fallback={<div className="min-h-screen bg-port-cream pt-32 text-center">Loading Directory...</div>}>
-      <ResourceDirectoryContent />
-    </Suspense>
-  )
-}
+// pr samyak
