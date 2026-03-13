@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext"; // Using Firebase Auth Context instead of next-auth
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 
 export default function SubmitResourcePage() {
-  const { user } = useAuth(); // Using Firebase user instead of next-auth session
+  const { user, loading: authLoading } = useAuth(); // Using Firebase user instead of next-auth session
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,13 +23,19 @@ export default function SubmitResourcePage() {
     hours: ""
   });
 
-  // Check if user is authenticated
-  if (!user) {
-    // Redirect to login if not authenticated
-    if (typeof window !== 'undefined') {
+  useEffect(() => {
+    // Check if user is authenticated once auth finishes loading
+    if (!authLoading && !user) {
       router.push("/sign-in");
     }
-    return null;
+  }, [user, authLoading, router]);
+
+  if (authLoading || !user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+      </div>
+    );
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {

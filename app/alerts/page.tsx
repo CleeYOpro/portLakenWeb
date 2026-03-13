@@ -12,10 +12,10 @@ export default function AlertsPage() {
   const [loading, setLoading] = useState(true);
   const [alertSettings, setAlertSettings] = useState({
     emergency: false,
-    news: false,
-    events: false,
     newsletter: false,
   });
+  const [initialNewsletter, setInitialNewsletter] = useState<boolean | null>(null);
+  const [initialEmergency, setInitialEmergency] = useState<boolean | null>(null);
   const [saved, setSaved] = useState(false);
 
   const fetchAlertSettings = useCallback(async () => {
@@ -29,10 +29,10 @@ export default function AlertsPage() {
         const userData = userDocSnap.data();
         setAlertSettings({
           emergency: userData.alerts?.emergency || false,
-          news: userData.alerts?.news || false,
-          events: userData.alerts?.events || false,
           newsletter: userData.newsletterSubscribed || false,
         });
+        setInitialNewsletter(userData.newsletterSubscribed || false);
+        setInitialEmergency(userData.alerts?.emergency || false);
       }
     } catch (error) {
       console.error("Error fetching alert settings:", error);
@@ -57,8 +57,10 @@ export default function AlertsPage() {
     setSaved(false);
   };
 
-  const handleSave = async () => {
+  const handleSave = async (overrideSettings?: typeof alertSettings) => {
     if (!user?.uid) return;
+
+    const settingsToSave = overrideSettings || alertSettings;
 
     try {
       setLoading(true);
@@ -67,13 +69,58 @@ export default function AlertsPage() {
       const userDocRef = doc(db, "users", user.uid);
       await setDoc(userDocRef, {
         alerts: {
-          emergency: alertSettings.emergency,
-          news: alertSettings.news,
-          events: alertSettings.events,
+          emergency: settingsToSave.emergency,
         },
-        newsletterSubscribed: alertSettings.newsletter,
+        newsletterSubscribed: settingsToSave.newsletter,
         updatedAt: new Date(),
       }, { merge: true });
+
+      // Check if they changed emergency alerts
+      if (initialEmergency === false && settingsToSave.emergency === true) {
+        if (user.email) {
+          await fetch('/api/send-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: user.email,
+              subject: "Emergency Alerts Enabled - Port Laken update",
+              html: `<p>Hi there,</p><p>You have successfully enabled Port Laken emergency alerts.</p><br/><p>Best,<br/>The City of Port Laken</p>`
+            })
+          });
+        }
+        setInitialEmergency(true);
+      } else if (initialEmergency === true && settingsToSave.emergency === false) {
+        setInitialEmergency(false);
+      }
+
+      // Check if they just unsubscribed
+      if (initialNewsletter === true && settingsToSave.newsletter === false) {
+        if (user.email) {
+          await fetch('/api/send-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: user.email,
+              subject: "You've been unsubscribed from Port Laken updates",
+              html: `<p>Hi there,</p><p>You have successfully unsubscribed from the Port Laken newsletter.</p><p>You will no longer receive these updates. If you'd like to subscribe again in the future, you can do so from your Port Laken dashboard.</p><br/><p>Best,<br/>The City of Port Laken</p>`
+            })
+          });
+        }
+        setInitialNewsletter(false); // Update so we don't send again
+      } else if (initialNewsletter === false && settingsToSave.newsletter === true) {
+        if (user.email) {
+          await fetch('/api/send-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: user.email,
+              subject: "Welcome back to the Port Laken Newsletter!",
+              html: `<p>Hi there,</p><p>Thank you for resubscribing to the Port Laken newsletter! You'll now receive our latest stories, news, and highlights right here.</p><br/><p>Best,<br/>The City of Port Laken</p>`
+            })
+          });
+        }
+        setInitialNewsletter(true);
+      }
 
       setSaved(true);
     } catch (error) {
@@ -125,38 +172,6 @@ export default function AlertsPage() {
 
                 <div className="flex items-center justify-between p-4 border rounded-lg">
                   <div>
-                    <h3 className="font-medium text-gray-900">News Updates</h3>
-                    <p className="text-sm text-gray-500">Latest news and announcements from Port Laken</p>
-                  </div>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={alertSettings.news}
-                      onChange={() => handleToggle('news')}
-                      className="sr-only peer"
-                    />
-                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600 rounded-full"></div>
-                  </label>
-                </div>
-
-                <div className="flex items-center justify-between p-4 border rounded-lg">
-                  <div>
-                    <h3 className="font-medium text-gray-900">Event Notifications</h3>
-                    <p className="text-sm text-gray-500">Information about upcoming events in Port Laken</p>
-                  </div>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={alertSettings.events}
-                      onChange={() => handleToggle('events')}
-                      className="sr-only peer"
-                    />
-                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600 rounded-full"></div>
-                  </label>
-                </div>
-
-                <div className="flex items-center justify-between p-4 border rounded-lg">
-                  <div>
                     <h3 className="font-medium text-gray-900">Newsletter Subscription</h3>
                     <p className="text-sm text-gray-500">Monthly newsletter with highlights and updates</p>
                   </div>
@@ -174,7 +189,7 @@ export default function AlertsPage() {
 
               <div className="mt-8 flex justify-end">
                 <button
-                  onClick={handleSave}
+                    onClick={() => handleSave()}
                   disabled={loading}
                   className="px-6 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
                 >
@@ -198,8 +213,9 @@ export default function AlertsPage() {
           </p>
           <button
             onClick={() => {
-              handleToggle('newsletter');
-              handleSave();
+              const newSettings = { ...alertSettings, newsletter: false };
+              setAlertSettings(newSettings);
+              handleSave(newSettings);
             }}
             className="px-6 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
           >

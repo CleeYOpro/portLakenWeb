@@ -19,7 +19,7 @@ interface AuthContextType {
   user: User | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string, subscribe?: boolean) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
   sendVerificationEmail: () => Promise<void>;
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     await signInWithEmailAndPassword(auth, email, password);
   };
 
-  const signUp = async (email: string, password: string): Promise<void> => {
+  const signUp = async (email: string, password: string, subscribe: boolean = true): Promise<void> => {
     const result = await createUserWithEmailAndPassword(auth, email, password);
     
     // Send verification email after registration
@@ -53,15 +53,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           createdAt: serverTimestamp(),
           alerts: {
             emergency: true,
-            news: true,
-            events: true,
           },
-          newsletterSubscribed: true,
+          newsletterSubscribed: subscribe,
           preferences: {
             theme: 'light',
             notifications: true
           }
         });
+
+          // Email logic removed
       } catch (error) {
         console.error("Error creating user profile in Firestore:", error);
       }
@@ -85,8 +85,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           createdAt: serverTimestamp(),
           alerts: {
             emergency: true,
-            news: true,
-            events: true,
           },
           newsletterSubscribed: true,
           preferences: {

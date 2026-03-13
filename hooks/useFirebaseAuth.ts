@@ -15,7 +15,7 @@ interface FirebaseAuth {
   user: User | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string, subscribe?: boolean) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
   sendVerificationEmail: () => Promise<void>;
@@ -29,7 +29,7 @@ export const useFirebaseAuth = (): FirebaseAuth => {
     await signInWithEmailAndPassword(auth, email, password);
   };
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = async (email: string, password: string, subscribe: boolean = true) => {
     const result = await createUserWithEmailAndPassword(auth, email, password);
     
     // Send verification email after registration

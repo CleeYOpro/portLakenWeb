@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import {
   FaCheckCircle,
   FaArrowRight,
@@ -69,6 +72,7 @@ interface FormErrors {
 }
 
 export default function SubmitResourcePage() {
+  const { user } = useAuth();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     resourceTitle: "",
@@ -190,10 +194,18 @@ export default function SubmitResourcePage() {
     setIsSubmitting(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await addDoc(collection(db, "resources"), {
+        ...formData,
+        userId: user ? user.uid : null,
+        createdAt: serverTimestamp(),
+        status: "pending",
+        approvedAt: null,
+        approvedBy: null
+      });
       console.log("Form submitted:", formData);
       setSubmitStatus("success");
-    } catch {
+    } catch (error) {
+      console.error("Error saving resource: ", error);
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
