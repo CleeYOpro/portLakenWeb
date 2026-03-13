@@ -22,8 +22,6 @@ export default function DashboardPage() {
   const [resources, setResources] = useState<any[]>([]);
   const [alertSettings, setAlertSettings] = useState({
     emergency: false,
-    news: false,
-    events: false,
     newsletter: false,
   });
 
@@ -48,8 +46,6 @@ export default function DashboardPage() {
 
       const alertData = {
         emergency: false,
-        news: false,
-        events: false,
         newsletter: false,
       };
 
@@ -57,8 +53,6 @@ export default function DashboardPage() {
         const userData = userDocSnap.data();
         if (userData.alerts) {
           alertData.emergency = userData.alerts.emergency || false;
-          alertData.news = userData.alerts.news || false;
-          alertData.events = userData.alerts.events || false;
         }
         if (typeof userData.newsletterSubscribed === 'boolean') {
           alertData.newsletter = userData.newsletterSubscribed;
@@ -195,38 +189,6 @@ export default function DashboardPage() {
                         : 'bg-gray-100 text-gray-800'
                     }`}>
                       {alertSettings.emergency ? 'ON' : 'OFF'}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-4 border rounded-lg">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <h3 className="font-medium text-gray-900">News Updates</h3>
-                      <p className="text-sm text-gray-500">Latest news and announcements from Port Laken</p>
-                    </div>
-                    <span className={`px-3 py-1 rounded-full text-xs ${
-                      alertSettings.news 
-                        ? 'bg-green-100 text-green-800' 
-                        : 'bg-gray-100 text-gray-800'
-                    }`}>
-                      {alertSettings.news ? 'ON' : 'OFF'}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-4 border rounded-lg">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <h3 className="font-medium text-gray-900">Event Notifications</h3>
-                      <p className="text-sm text-gray-500">Information about upcoming events in Port Laken</p>
-                    </div>
-                    <span className={`px-3 py-1 rounded-full text-xs ${
-                      alertSettings.events 
-                        ? 'bg-green-100 text-green-800' 
-                        : 'bg-gray-100 text-gray-800'
-                    }`}>
-                      {alertSettings.events ? 'ON' : 'OFF'}
                     </span>
                   </div>
                 </div>

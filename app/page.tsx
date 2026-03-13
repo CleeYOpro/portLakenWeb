@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { db } from "@/lib/firebase";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import Image from "next/image";
 import { IoMdAlert } from "react-icons/io";
 import { HiDocumentText } from "react-icons/hi";
@@ -796,55 +798,114 @@ export default function Home() {
 
             {/* Right: Form */}
             <div>
-              <form className="space-y-8" onSubmit={(e) => { e.preventDefault(); alert('Form submitted!'); }}>
-                {/* First Name */}
-                <div className="relative group">
-                  <input
-                    type="text"
-                    placeholder="First name*"
-                    required
-                    className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
-                  />
-                  <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
-                </div>
-
-                {/* Last Name */}
-                <div className="relative group">
-                  <input
-                    type="text"
-                    placeholder="Last name*"
-                    required
-                    className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
-                  />
-                  <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
-                </div>
-
-                {/* Email */}
-                <div className="relative group">
-                  <input
-                    type="email"
-                    placeholder="Email*"
-                    required
-                    className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
-                  />
-                  <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="group relative inline-flex items-center justify-center px-10 py-3.5 border-2 border-primary-shade text-primary-shade font-medium rounded-full overflow-hidden transition-all duration-300 hover:text-white hover:shadow-xl hover:-translate-y-0.5 active:scale-95"
-                >
-                  <span className="relative z-10 tracking-wider">Submit</span>
-                  <div className="absolute inset-0 bg-primary-shade translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
-                </button>
-              </form>
+              <NewsletterForm />
             </div>
           </div>
         </div>
       </section>
 
     </main>
+  );
+}
+
+// Custom Newsletter Form Component
+function NewsletterForm() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus("idle");
+
+    try {
+      // 1. Write to firestore (document ID = email)
+      const emailLower = email.toLowerCase().trim();
+      await setDoc(doc(db, "subscribers", emailLower), {
+        firstName,
+        lastName,
+        email: emailLower,
+        subscribedAt: serverTimestamp(),
+      }, { merge: true });
+
+      // Email sending logic removed.
+
+      setStatus("success");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+    } catch (error) {
+      console.error("Subscription Error:", error);
+      setStatus("error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <form className="space-y-8" onSubmit={handleSubscribe}>
+      {status === "success" && (
+        <div className="p-4 bg-green-50/50 border border-green-200 text-green-800 rounded-lg">
+          Thanks for subscribing! Check your email for a welcome message.
+        </div>
+      )}
+      {status === "error" && (
+        <div className="p-4 bg-red-50/50 border border-red-200 text-red-800 rounded-lg">
+          We encountered an error subscribing you. Please try again.
+        </div>
+      )}
+      {/* First Name */}
+      <div className="relative group">
+        <input
+          type="text"
+          placeholder="First name*"
+          required
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
+        />
+        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
+      </div>
+
+      {/* Last Name */}
+      <div className="relative group">
+        <input
+          type="text"
+          placeholder="Last name*"
+          required
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
+        />
+        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
+      </div>
+
+      {/* Email */}
+      <div className="relative group">
+        <input
+          type="email"
+          placeholder="Email*"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
+        />
+        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
+      </div>
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        disabled={loading}
+        className="group relative inline-flex items-center justify-center px-10 py-3.5 border-2 border-primary-shade text-primary-shade font-medium rounded-full overflow-hidden transition-all duration-300 hover:text-white hover:shadow-xl hover:-translate-y-0.5 active:scale-95 disabled:opacity-50 disabled:hover:text-primary-shade disabled:hover:shadow-none"
+      >
+        <span className="relative z-10 tracking-wider text-inherit mb-[3px]">{loading ? 'Submitting...' : 'Submit'}</span>
+        {!loading && <div className="absolute inset-0 bg-primary-shade translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>}
+      </button>
+    </form>
   );
 }
 

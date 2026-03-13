@@ -127,7 +127,7 @@ export default function Navbar() {
 
               {user ? (
                 // User is logged in - show profile menu
-                <div className="relative group">
+                <div className="hidden md:block relative group">
                   <button
                     className="flex items-center gap-2 px-5 py-2 border-2 border-primary text-primary rounded-full font-nunito font-semibold hover:bg-primary hover:text-white transition-all hover:shadow-lg"
                   >
@@ -184,14 +184,14 @@ export default function Navbar() {
                   }}
                 >
                   <span
-                    className="block h-0.5 w-full bg-current"
+                    className="block h-0.5 w-full bg-current rounded-full"
                     style={{
-                      transform: mobileMenuOpen ? 'rotate(45deg) translate(3px, 3px)' : 'none',
+                      transform: mobileMenuOpen ? 'translateY(9px) rotate(45deg)' : 'none',
                       transition: 'transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)',
                     }}
                   />
                   <span
-                    className="block h-0.5 w-full bg-current"
+                    className="block h-0.5 w-full bg-current rounded-full"
                     style={{
                       opacity: mobileMenuOpen ? 0 : 1,
                       transform: mobileMenuOpen ? 'scaleX(0)' : 'scaleX(1)',
@@ -199,9 +199,9 @@ export default function Navbar() {
                     }}
                   />
                   <span
-                    className="block h-0.5 w-full bg-current"
+                    className="block h-0.5 w-full bg-current rounded-full"
                     style={{
-                      transform: mobileMenuOpen ? 'rotate(-45deg) translate(3px, -3px)' : 'none',
+                      transform: mobileMenuOpen ? 'translateY(-9px) rotate(-45deg)' : 'none',
                       transition: 'transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)',
                     }}
                   />
@@ -378,10 +378,10 @@ function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, onLogout }: { mob
       {mobileMenuOpen && (
         <div
           key={mobileMenuOpen ? 'open' : 'closed'}
-          className="fixed inset-x-0 top-0 bg-white/90 backdrop-blur-2xl shadow-2xl z-[60] lg:hidden mobile-menu-panel open"
-          style={{ maxHeight: '100dvh', overflowY: 'auto' }}
+          className="fixed inset-0 bg-white/95 backdrop-blur-2xl shadow-2xl z-[60] lg:hidden mobile-menu-panel open"
+          style={{ overflowY: 'auto' }}
         >
-          <div className="p-6">
+          <div className="p-6 min-h-full flex flex-col">
             {/* Header */}
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-2.5">
@@ -392,18 +392,10 @@ function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, onLogout }: { mob
                 onClick={() => setMobileMenuOpen(false)}
                 className="p-2 text-deep-navy hover:text-primary relative w-10 h-10 flex items-center justify-center"
                 aria-label="Close Menu"
-                style={{ transition: 'color 0.3s ease' }}
               >
-                <div className="w-6 h-5 flex flex-col justify-between">
-                  <span
-                    className="block h-0.5 w-full bg-current"
-                    style={{ transform: 'rotate(45deg) translate(3px, 3px)', transition: 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1)' }}
-                  />
-                  <span className="block h-0.5 w-full bg-current" style={{ opacity: 0 }} />
-                  <span
-                    className="block h-0.5 w-full bg-current"
-                    style={{ transform: 'rotate(-45deg) translate(3px, -3px)', transition: 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1)' }}
-                  />
+                <div className="w-6 h-6 relative flex items-center justify-center">
+                  <span className="absolute block h-0.5 w-6 bg-current rotate-45 rounded-full" />
+                  <span className="absolute block h-0.5 w-6 bg-current -rotate-45 rounded-full" />
                 </div>
               </button>
             </div>
@@ -514,9 +506,17 @@ function MobileDropdown({ label, children, setMobileMenuOpen }: { label: string;
         className="flex items-center justify-between w-full px-4 py-3 font-nunito font-semibold text-deep-navy hover:bg-primary/10 hover:text-primary rounded-xl transition-colors"
       >
         {label}
-        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
-      {isOpen && <div className="mt-1 ml-4 space-y-1">{children}</div>}
+      <div
+        className={`grid transition-[grid-template-rows,opacity,margin] duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100 mt-1' : 'grid-rows-[0fr] opacity-0 mt-0'}`}
+      >
+        <div className="overflow-hidden">
+          <div className="ml-4 space-y-1 pb-2">
+            {children}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

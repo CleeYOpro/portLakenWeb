@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
+import { useAuth } from '@/context/AuthContext';
 
 const inputClass =
   "mt-2 h-[46px] w-full rounded-full border border-[#6e8ea4] bg-white px-6 text-[13px] text-[#2f3f4a] placeholder:text-[#9aa9b4] outline-none focus:border-[#5a819a]";
@@ -15,10 +15,11 @@ export default function Page() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [subscribe, setSubscribe] = useState(true);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { signUp, signInWithGoogle } = useFirebaseAuth();
+  const { signUp, signInWithGoogle } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +39,7 @@ export default function Page() {
     setLoading(true);
 
     try {
-      await signUp(email, password);
+      await signUp(email, password, subscribe);
       // After successful signup, redirect to dashboard or sign-in
       router.push('/dashboard');
       router.refresh();
@@ -197,6 +198,19 @@ export default function Page() {
                   autoComplete="new-password"
                   required
                 />
+              </div>
+
+              <div className="mt-4 flex items-center">
+                <input
+                  id="subscribe"
+                  type="checkbox"
+                  checked={subscribe}
+                  onChange={(e) => setSubscribe(e.target.checked)}
+                  className="h-4 w-4 rounded border-[#6e8ea4] text-[#5a819a] focus:ring-[#5a819a]"
+                />
+                <label htmlFor="subscribe" className="ml-2 block text-sm text-[#2f3f4a]">
+                  Subscribe to Port Laken newsletter
+                </label>
               </div>
 
               <button
