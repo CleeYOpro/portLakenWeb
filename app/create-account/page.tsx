@@ -100,13 +100,8 @@ export default function Page() {
               onSubmit={handleSubmit}
               className="w-full max-w-[560px]"
             >
-              <div className="md:hidden text-center mb-6">
-                <h1 className="font-serif text-3xl font-bold text-[#2f3f4a]">
-                  Create your PL account.
-                </h1>
-                <p className="mt-2 text-sm text-[#6f7f8a]">
-                  Get access to alerts, resources, forms, and updates
-                </p>
+              <div className="text-center mb-12">
+
               </div>
 
               {error && (

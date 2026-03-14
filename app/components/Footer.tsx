@@ -7,9 +7,10 @@ import {
   FaDirections
 } from "react-icons/fa";
 import { FaXTwitter, FaFacebookF } from "react-icons/fa6";
-import { FaPhone, FaEnvelope } from "react-icons/fa";
+import { FaPhone, FaEnvelope, FaGoogle } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useAuth } from "@/context/AuthContext"; // Import the useAuth hook
 
 export default function Footer() {
   const containerVariants = {
@@ -29,6 +30,18 @@ export default function Footer() {
       opacity: 1,
       y: 0,
       transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }
+    }
+  };
+
+  const { user, loading, signInWithGoogle } = useAuth(); // Get user info from auth context
+
+  const handleSignInWithGoogle = async () => {
+    if (!loading && !user) {
+      try {
+        await signInWithGoogle();
+      } catch (error) {
+        console.error("Error signing in with Google:", error);
+      }
     }
   };
 
@@ -75,7 +88,7 @@ export default function Footer() {
 
           </div>
 
-          {/* Right Column: Newsletter, Utils, Socials, Bottom */}
+          {/* Right Column: Account Section, Utils, Socials, Bottom */}
           <div className="flex flex-col h-full lg:w-1/3 gap-4 lg:min-h-[400px] w-full">
 
             {/* SVG Logo at the top */}
@@ -96,31 +109,62 @@ export default function Footer() {
 
 
 
-            {/* Newsletter */}
+            {/* Port Laken Account Section */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col gap-2 text-white/70 py-3 border-b border-white/10 w-full"
+              className="flex flex-col gap-4 text-white/70 py-3 border-b border-white/10 w-full"
             >
-              <p className="text-sm max-w-full">
-                City updates, events, and notices. No spam.
-              </p>
-              <form className="flex flex-col sm:flex-row gap-2 w-full max-w-full">
-                <input
-                  type="email"
-                  placeholder="you@email.com"
-                  className="flex-1 bg-transparent border border-white/20 rounded-full px-3 py-1.5 text-sm text-white w-full"
-                />
-                <button
-                  className="px-4 py-1.5 rounded-full border border-white/20
-                            bg-transparent
-                            text-white/70
-                            flex items-center justify-center
-                            transition-all duration-300
-                            hover:bg-white hover:text-[#708aa3] w-full sm:w-auto"
-                >
-                  Join
-                </button>
-              </form>
+              {user ? (
+                // Show welcome message if user is logged in
+                <div className="flex flex-col gap-3">
+                  <h3 className="text-lg font-medium">Port Laken welcomes you back, {user.displayName || user.email?.split('@')[0]}</h3>
+
+                  <Link
+                    href="/dashboard"
+                    className="px-4 py-1.5 rounded-full border border-white/20
+                              bg-transparent
+                              text-white/70
+                              flex items-center justify-center
+                              transition-all duration-300
+                              hover:bg-white hover:text-[#708aa3] w-full sm:w-auto text-center"
+                  >
+                    View your Port Laken Dashboard
+                  </Link>
+                </div>
+              ) : (
+                // Show sign in options if user is not logged in
+                <>
+                  <h3 className="text-lg font-medium">Get a Port Laken Account</h3>
+                  <p className="text-sm max-w-full text-white/60">Access exclusive features and personalized services</p>
+
+                  <div className="flex flex-col gap-2 w-full max-w-full">
+                    <button
+                        onClick={handleSignInWithGoogle}
+                        disabled={loading}
+                        className="px-4 py-1.5 rounded-full border border-white/20
+                                bg-transparent
+                                text-white/70
+                                flex items-center justify-center
+                                transition-all duration-300
+                                hover:bg-white hover:text-[#708aa3] w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <FaGoogle className="mr-2" /> Sign in with Google
+                      </button>
+
+                    <Link
+                      href="/sign-in"
+                      className="px-4 py-1.5 rounded-full border border-white/20
+                                bg-transparent
+                                text-white/70
+                                flex items-center justify-center
+                                transition-all duration-300
+                                hover:bg-white hover:text-[#708aa3] w-full"
+                    >
+                      Sign in with Email
+                    </Link>
+                  </div>
+                </>
+              )}
             </motion.div>
 
             {/* Utils */}

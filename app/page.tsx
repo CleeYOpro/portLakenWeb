@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthContext";  // Make sure to destructure loading as well
 import Image from "next/image";
 import { IoMdAlert } from "react-icons/io";
 import { HiDocumentText } from "react-icons/hi";
@@ -128,7 +128,7 @@ export default function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const [paused, setPaused] = useState(false);
-  const { user } = useAuth(); // Get the authenticated user
+  const { user, loading } = useAuth(); // Get the authenticated user and loading state
 
   useEffect(() => {
     if (paused) return;
@@ -260,10 +260,37 @@ export default function Home() {
               const [first, ...rest] = action.title.split(' ');
               const second = rest.join(' ') || '';
 
+              // Determine the href based on auth state and loading status
+              let href;
+              if (loading) {
+                // While loading, prevent navigation by linking to '#'
+                href = '#';
+              } else if (user) {
+                // Authenticated user goes to the authLink
+                href = action.authLink;
+              } else {
+                // Non-authenticated user goes to sign-in with callback
+                href = `${action.nonAuthLink}?callbackUrl=${encodeURIComponent(action.authLink)}`;
+              }
+
               return (
-                <a
+                <Link
                   key={idx}
-                  href={user ? action.authLink : action.nonAuthLink}
+                  href={href}
+                  onClick={(e) => {
+                    // If auth state is still loading, prevent the click
+                    if (loading) {
+                      e.preventDefault();
+                      // Optionally show a message or do nothing
+                      return;
+                    }
+                    
+                    // If user is authenticated, allow normal navigation
+                    if (user) return;
+                    
+                    // If user is not authenticated, the link already includes callback URL
+                    // So we don't need additional logic here
+                  }}
                   className={`
               group relative block 
               transition-all duration-500 ease-out
@@ -319,10 +346,9 @@ export default function Home() {
                 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent
                 blur-xl -z-10
                 scale-110 group-hover:scale-125
-                [@media(hover:hover)]:block hidden
               `}
-                  />
-                </a>
+                  ></div>
+                </Link>
               );
             })}
           </div>
@@ -847,6 +873,7 @@ function AccountSection() {
   // ── Signed-out state: unified two-column layout ──────────────────────────
   return (
     <section className="relative py-20 px-6 md:px-20 overflow-hidden animate-[fadeIn_0.8s_ease]">
+      {/* Background Glow */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] bg-primary-shade/10 rounded-full blur-3xl" />
       </div>
@@ -854,42 +881,26 @@ function AccountSection() {
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-start">
 
-          {/* Left */}
-          <div className="space-y-7">
-            <p className="text-primary-shade/40 text-xs font-semibold tracking-[0.18em] uppercase">
-              Port Laken · Your City
-            </p>
-            <h3 className="font-playfair text-5xl md:text-6xl font-bold text-primary-shade leading-tight tracking-tight">
-              <span className="italic">Stay in the loop.</span>
+          {/* Left Side */}
+          <div className="space-y-6">
+            <h3 className="font-playfair text-4xl md:text-5xl font-bold text-primary-shade leading-tight tracking-tight">
+              <span className="italic">Stay in the loop.</span> Get the latest stories, highlights, and the people shaping Port Laken.
             </h3>
-            <p className="text-primary-shade/60 text-lg font-light leading-relaxed max-w-md">
-              Port Laken&apos;s latest stories, creative highlights, and the people shaping our city&apos;s future — all in one place.
+            <p className="text-primary-shade/70 text-sm font-light tracking-wide hover:text-primary-shade/90 transition-colors duration-300 max-w-md">
+              Create your Port Laken Account to get started.
             </p>
-            <ul className="space-y-3">
-              {[
-                "Breaking city news & council updates",
-                "Resident stories & community spotlights",
-                "Events, parks, and local business finds",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-base text-primary-shade/70 font-light">
-                  <span className="w-2 h-2 rounded-full bg-primary-shade/60 flex-shrink-0 mt-1" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+
           </div>
 
-          {/* Right */}
-          <div className="space-y-5 bg-white/70 backdrop-blur-xl border border-primary-shade/10 rounded-3xl p-8 shadow-xl">
-            <p className="text-primary-shade/40 text-xs font-semibold tracking-[0.18em] uppercase text-center">
-              Join Port Laken
-            </p>
+          {/* Right Side */}
+          <div className="space-y-6 flex flex-col justify-start">
 
-            {/* Google button */}
+
+            {/* Google Button */}
             <button
               onClick={handleGoogle}
               disabled={googleLoading}
-              className="group relative w-full flex items-center gap-4 px-6 py-4 rounded-2xl border-2 border-primary-shade/20 bg-white hover:border-primary-shade hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-60"
+              className="group relative w-full flex items-center gap-4 px-6 py-4 rounded-2xl border-2 border-primary-shade/20 bg-white hover:bg-primary-shade/5 transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-60"
             >
               <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -912,21 +923,21 @@ function AccountSection() {
               <div className="flex-1 h-px bg-primary-shade/15" />
             </div>
 
-            {/* Email button */}
+            {/* Email Button */}
             <Link
               href="/create-account"
-              className="group relative w-full flex items-center gap-4 px-6 py-4 rounded-2xl border-2 border-primary-shade bg-transparent overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98]"
+              className="group relative w-full flex items-center gap-4 px-6 py-4 rounded-2xl border-2 border-primary-shade bg-transparent overflow-hidden transition-all duration-300 hover:bg-primary-shade/5 hover:-translate-y-0.5 active:scale-[0.98]"
             >
-              <div className="absolute inset-0 bg-primary-shade translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out z-0" />
-              <svg className="relative z-10 w-5 h-5 flex-shrink-0 text-primary-shade group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-5 h-5 flex-shrink-0 text-primary-shade group-hover:text-primary-shade/80 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
               </svg>
-              <span className="relative z-10 flex-1 text-left font-semibold text-primary-shade group-hover:text-white tracking-wide text-sm transition-colors duration-300">
+              <span className="flex-1 text-left font-semibold text-primary-shade group-hover:text-primary-shade/90 tracking-wide text-sm transition-colors duration-300">
                 Get Updates
               </span>
-              <FaArrowRight className="relative z-10 text-primary-shade/40 group-hover:text-white group-hover:translate-x-1 transition-all duration-300 text-xs" />
+              <FaArrowRight className="text-primary-shade/30 group-hover:text-primary-shade group-hover:translate-x-1 transition-all duration-300 text-xs" />
             </Link>
 
+            {/* Sign in / Trust */}
             <p className="text-xs text-primary-shade/40 text-center pt-1">
               Already have an account?{" "}
               <Link href="/sign-in" className="underline underline-offset-2 hover:text-primary-shade transition-colors">
@@ -934,9 +945,6 @@ function AccountSection() {
               </Link>
             </p>
 
-            <p className="text-xs text-primary-shade/40 text-center">
-              Free forever. No spam. Unsubscribe anytime.
-            </p>
           </div>
 
         </div>

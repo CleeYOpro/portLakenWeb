@@ -259,7 +259,7 @@ export default function ApplyPage() {
                         onChange={handleInputChange}
                         required
                         className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl font-nunito text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#708AA3]/30 focus:border-[#708AA3] transition-all"
-                        placeholder="(555) 123-4567"
+                        placeholder="(360) 597-3322"
                       />
                     </div>
                     <div>

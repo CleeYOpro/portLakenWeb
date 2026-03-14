@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import { Suspense } from "react";
 
 export default function CreateAccountLayout({
   children,
@@ -9,7 +10,9 @@ export default function CreateAccountLayout({
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1">
-        {children}
+        <Suspense fallback={<div>Loading...</div>}>
+          {children}
+        </Suspense>
       </main>
     </div>
   );
