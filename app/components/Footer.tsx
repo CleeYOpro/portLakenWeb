@@ -75,11 +75,11 @@ export default function Footer() {
                   <Link
                     href={link.href}
                     className="group relative inline-block 
-                      text-5xl 
-                      sm:text-6xl 
-                      md:text-7xl 
-                      lg:text-[6rem] 
-                      xl:text-[7rem]
+                      text-4xl 
+                      sm:text-5xl 
+                      md:text-6xl 
+                      lg:text-[5rem] 
+                      xl:text-[5.5rem]
                       font-[family-name:var(--font-playfair),serif] 
                       font-bold 
                       uppercase 

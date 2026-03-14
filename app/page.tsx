@@ -14,6 +14,19 @@ import { motion } from "framer-motion";
 import { FaArrowRight } from 'react-icons/fa6';
 import InvertButton from "../components/ui/InvertButton";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  WeightedScrollProvider,
+  ParallaxLayer,
+  WeightedScrollLayer,
+} from "@/app/components/WeightedScroll";
+import {
+  ScrollRevealText,
+  ScrollRevealImage,
+  ScrollRevealCTA,
+  ScrollRevealStagger,
+  ScrollRevealStaggerItem,
+  ScrollReveal,
+} from "@/app/components/ScrollReveal";
 
 
 
@@ -147,6 +160,8 @@ export default function Home() {
   }, []);
 
   return (
+    <WeightedScrollProvider>
+    <WeightedScrollLayer>
     <main className="relative min-h-screen w-full bg-white">
 
       {/* HERO SECTION – NO WHITE FLASH, CURVED WHEN SCROLLED */}
@@ -255,7 +270,7 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Responsive Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <ScrollRevealStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" staggerChildren={0.1} delayChildren={0.05}>
             {quickActions.map((action, idx) => {
               const [first, ...rest] = action.title.split(' ');
               const second = rest.join(' ') || '';
@@ -274,8 +289,8 @@ export default function Home() {
               }
 
               return (
+                <ScrollRevealStaggerItem key={idx}>
                 <Link
-                  key={idx}
                   href={href}
                   onClick={(e) => {
                     // If auth state is still loading, prevent the click
@@ -349,9 +364,10 @@ export default function Home() {
               `}
                   ></div>
                 </Link>
+                </ScrollRevealStaggerItem>
               );
             })}
-          </div>
+          </ScrollRevealStagger>
         </div>
       </section>
 
@@ -362,13 +378,16 @@ export default function Home() {
 
             {/* Left: Text + Button */}
             <div className="space-y-6 order-2 md:order-1">
-              <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-                Welcome to <span className="text-primary">Port Laken</span>
-              </h2>
-              <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
+              <ScrollRevealText direction="right" className="space-y-6">
+                <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+                  Welcome to <span className="text-primary">Port Laken</span>
+                </h2>
+                <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
                 Port Laken is a city where community meets innovation. From scenic parks to thriving neighborhoods, it’s a place where families, businesses, and visitors all feel at home. Discover how tradition and progress come together to make our city unique.
-              </p>
-              <InvertButton
+                </p>
+              </ScrollRevealText>
+              <ScrollRevealCTA delay={0.15}>
+                <InvertButton
                 text="Learn More About Us"
                 icon={<FaArrowRight className="text-sm" />}
                 size="text-base"
@@ -380,56 +399,27 @@ export default function Home() {
                 invertDirection="light-to-dark"
                 className="hover:shadow-lg hover:scale-105 transition-transform"
               />
+              </ScrollRevealCTA>
             </div>
 
-            {/* Right: Parallax Image */}
-            <div className="relative order-1 md:order-2 h-64 md:h-96 rounded-[40px] overflow-hidden shadow-2xl">
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10"></div>
-
-              {/* Parallax Image */}
-              <Image
-                src="https://www.visitportangeles.com/visit_port_angeles_uploads/2025/12/port-angeles-wa-aerial-view.jpg"
-                alt="Port Laken Skyline"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-              />
-            </div>
+            {/* Right: Parallax + Reveal Image */}
+            <ParallaxLayer factor={0.4} className="relative order-1 md:order-2 h-64 md:h-96">
+              <ScrollRevealImage direction="left" scaleIn className="h-full rounded-[40px] overflow-hidden shadow-2xl">
+                <div className="relative w-full h-full">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10" />
+                  <Image
+                    src="https://www.visitportangeles.com/visit_port_angeles_uploads/2025/12/port-angeles-wa-aerial-view.jpg"
+                    alt="Port Laken Skyline"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                </div>
+              </ScrollRevealImage>
+            </ParallaxLayer>
 
           </div>
         </div>
-
-        {/* Parallax CSS */}
-        <style jsx>{`
-    .parallax-image {
-      transform: translateY(0);
-      transition: transform 0.3s ease-out;
-    }
-    @media (min-width: 768px) {
-      .parallax-image {
-        transform: translateY(calc(var(--scroll-y, 0) * -0.3));
-      }
-    }
-  `}</style>
-
-        {/* Scroll Listener for Parallax */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-        if (typeof window !== 'undefined') {
-          const parallax = document.querySelector('.parallax-image');
-          const updateParallax = () => {
-            if (!parallax) return;
-            const scrollY = window.scrollY;
-            parallax.style.setProperty('--scroll-y', scrollY + 'px');
-          };
-          window.addEventListener('scroll', updateParallax);
-          updateParallax();
-        }
-      `,
-          }}
-        />
       </section>
 
 
@@ -440,7 +430,7 @@ export default function Home() {
       <section className="relative py-16 px-6 md:px-12 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="mb-10 text-center md:text-left">
+          <ScrollRevealText direction="up" className="mb-10 text-center md:text-left">
             <h2 className="font-playfair text-4xl md:text-5xl font-extrabold text-gray-900 mb-3">
               WHAT&apos;S <span className="text-primary italic">HAPPENING</span> IN PORT LAKEN?
             </h2>
@@ -453,7 +443,7 @@ export default function Home() {
                 Read All News →
               </a>
             </p>
-          </div>
+          </ScrollRevealText>
 
           {/* News Grid - Compressed */}
           <div className="space-y-8">
@@ -480,7 +470,13 @@ export default function Home() {
                 image: "https://www.hkinteriors.com/wp-content/uploads/2018/11/bg-useful-links.jpg",
               },
             ].map((item, i) => (
-              <div key={i} className="group cursor-pointer">
+              <ScrollReveal
+                key={i}
+                initial={{ opacity: 0, y: 32 }}
+                animateInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+              >
+              <div className="group cursor-pointer">
                 <div className="grid md:grid-cols-2 gap-4 md:gap-6 items-center">
                   {/* Image */}
                   <div className={`relative ${i % 2 === 0 ? 'md:order-1' : 'md:order-2'}`}>
@@ -529,6 +525,7 @@ export default function Home() {
                   <div className="mt-8 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
                 )}
               </div>
+              </ScrollReveal>
             ))}
           </div>
 
@@ -546,7 +543,7 @@ export default function Home() {
 
         <div className="relative z-10 max-w-7xl mx-auto">
           {/* Header */}
-          <div className="max-w-3xl mb-12 md:mb-16">
+          <ScrollRevealText direction="up" className="max-w-3xl mb-12 md:mb-16">
             <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight drop-shadow-xl">
               See What’s <em className="italic font-bold text-white">Next</em>
             </h2>
@@ -555,15 +552,15 @@ export default function Home() {
               Discover upcoming events, holidays, markets, and community moments in Port Laken.
               Stay in the know — never miss what’s happening next!
             </p>
-          </div>
+          </ScrollRevealText>
 
           {/* Main content - grid layout */}
           <div className="grid lg:grid-cols-2 gap-10 xl:gap-14 items-start">
             {/* Events Column */}
-            <div className="space-y-6">
+            <ScrollRevealStagger className="space-y-6" staggerChildren={0.1} delayChildren={0.05}>
               {upcomingEvents.slice(0, 4).map((event, idx) => (
+                <ScrollRevealStaggerItem key={idx}>
                 <div
-                  key={idx}
                   className="
         group flex items-center gap-5 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm
         hover:shadow-md hover:-translate-y-0.5 transition-all duration-200
@@ -589,9 +586,11 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
+                </ScrollRevealStaggerItem>
               ))}
 
               {/* CTA Button */}
+              <ScrollRevealStaggerItem>
               <div className="flex justify-end pt-2">
                 <InvertButton
                   text="View Full Calendar"
@@ -609,7 +608,8 @@ export default function Home() {
                   onClick={() => window.location.href = '/events'}
                 />
               </div>
-            </div>
+              </ScrollRevealStaggerItem>
+            </ScrollRevealStagger>
 
 
             {/* Spotlight Slideshow - now much more prominent */}
@@ -625,10 +625,12 @@ export default function Home() {
       <section id="awards" className="relative py-20 px-6 bg-white w-full">
         <div className="w-full">
           <div className="max-w-7xl mx-auto px-4">
+            <ScrollRevealText direction="up">
             <h3 className="font-playfair text-left text-xl md:text-3xl font-semibold text-gray-600 max-w-5xl mb-16">
               In 2025, Port Laken received numerous awards for its quality of life and innovation, including <a href="https://www.usnews.com/" target="_blank" rel="noopener noreferrer" className="hover:underline font-semibold" style={{ color: 'var(--color-primary)' }}>#1 Family-Friendly City in the US</a>,
-              <a href="https://urbannext.com/" target="_blank" rel="noopener noreferrer" className="hover:underline font-semibold" style={{ color: 'var(--color-primary)' }}> Most Innovative City</a>, and <a href="https://urbannext.com/" target="_blank" rel="noopener noreferrer" className="hover:underline font-semibold" style={{ color: 'var(--color-primary)' }}>Work-Life Balance honors</a>.
+              <a href="https://urbannext.com/" target="_blank" rel="noopener noreferrer" className="hover:underline font-semibold" style={{ color: 'var(--color-primary)' }}> Most Innovative City</a>, and               <a href="https://urbannext.com/" target="_blank" rel="noopener noreferrer" className="hover:underline font-semibold" style={{ color: 'var(--color-primary)' }}>Work-Life Balance honors</a>.
             </h3>
+            </ScrollRevealText>
           </div>
           <div className="relative">
             <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
@@ -803,11 +805,11 @@ export default function Home() {
       <section className="relative py-20 px-6 md:px-20 rounded-b-[40px] bg-primary overflow-hidden">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-16">
+          <ScrollRevealText direction="up" className="text-center mb-16">
             <h2 className="font-playfair text-4xl md:text-6xl font-extrabold text-white mb-4">
               love, <span className="italic">port laken</span>
             </h2>
-          </div>
+          </ScrollRevealText>
 
           {/* Masonry Grid */}
           <GallerySection />
@@ -817,6 +819,8 @@ export default function Home() {
       {/* Account / Join Section */}
       <AccountSection />
     </main>
+    </WeightedScrollLayer>
+    </WeightedScrollProvider>
   );
 }
 
@@ -882,21 +886,21 @@ function AccountSection() {
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-start">
 
           {/* Left Side */}
-          <div className="space-y-6">
+          <ScrollRevealText direction="right" className="space-y-6">
             <h3 className="font-playfair text-4xl md:text-5xl font-bold text-primary-shade leading-tight tracking-tight">
               <span className="italic">Stay in the loop.</span> Get the latest stories, highlights, and the people shaping Port Laken.
             </h3>
             <p className="text-primary-shade/70 text-sm font-light tracking-wide hover:text-primary-shade/90 transition-colors duration-300 max-w-md">
               Create your Port Laken Account to get started.
             </p>
-
-          </div>
+          </ScrollRevealText>
 
           {/* Right Side */}
-          <div className="space-y-6 flex flex-col justify-start">
+          <ScrollRevealStagger className="space-y-6 flex flex-col justify-start" staggerChildren={0.08} delayChildren={0.05}>
 
 
             {/* Google Button */}
+            <ScrollRevealStaggerItem>
             <button
               onClick={handleGoogle}
               disabled={googleLoading}
@@ -913,17 +917,21 @@ function AccountSection() {
               </span>
               <FaArrowRight className="text-primary-shade/30 group-hover:text-primary-shade group-hover:translate-x-1 transition-all duration-300 text-xs" />
             </button>
+            </ScrollRevealStaggerItem>
 
             {googleError && <p className="text-red-600 text-sm">{googleError}</p>}
 
             {/* Divider */}
+            <ScrollRevealStaggerItem>
             <div className="flex items-center gap-3">
               <div className="flex-1 h-px bg-primary-shade/15" />
               <span className="text-primary-shade/40 text-xs font-medium tracking-widest uppercase">or</span>
               <div className="flex-1 h-px bg-primary-shade/15" />
             </div>
+            </ScrollRevealStaggerItem>
 
             {/* Email Button */}
+            <ScrollRevealStaggerItem>
             <Link
               href="/create-account"
               className="group relative w-full flex items-center gap-4 px-6 py-4 rounded-2xl border-2 border-primary-shade bg-transparent overflow-hidden transition-all duration-300 hover:bg-primary-shade/5 hover:-translate-y-0.5 active:scale-[0.98]"
@@ -936,17 +944,19 @@ function AccountSection() {
               </span>
               <FaArrowRight className="text-primary-shade/30 group-hover:text-primary-shade group-hover:translate-x-1 transition-all duration-300 text-xs" />
             </Link>
+            </ScrollRevealStaggerItem>
 
             {/* Sign in / Trust */}
+            <ScrollRevealStaggerItem>
             <p className="text-xs text-primary-shade/40 text-center pt-1">
               Already have an account?{" "}
               <Link href="/sign-in" className="underline underline-offset-2 hover:text-primary-shade transition-colors">
                 Sign in
               </Link>
             </p>
+            </ScrollRevealStaggerItem>
 
-          </div>
-
+          </ScrollRevealStagger>
         </div>
       </div>
     </section>
@@ -1017,7 +1027,7 @@ function PortLakenServicesSection() {
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         {/* Header - Single Line at Max Width */}
-        <div className="text-center mb-6 md:mb-8">
+        <ScrollRevealText direction="up" className="text-center mb-6 md:mb-8">
           <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 leading-tight">
             Supporting <span className="italic">Every Chapter</span> of Your Story
           </h2>
@@ -1025,7 +1035,7 @@ function PortLakenServicesSection() {
 
             From healthcare to community support, Port Laken is built around care, connection, and opportunity.
           </p>
-        </div>
+        </ScrollRevealText>
 
         {/* Carousel Container */}
         <div className="relative">

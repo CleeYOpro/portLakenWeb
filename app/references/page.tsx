@@ -1,7 +1,17 @@
 "use client";
 
-import RevealOnScroll from "@/components/RevealOnScroll";
 import Image from "next/image";
+import {
+  WeightedScrollProvider,
+  WeightedScrollLayer,
+} from "@/app/components/WeightedScroll";
+import {
+  ScrollRevealText,
+  ScrollRevealImage,
+  ScrollRevealStagger,
+  ScrollRevealStaggerItem,
+  ScrollReveal,
+} from "@/app/components/ScrollReveal";
 import {
   FaClipboardList,
   FaCheckCircle,
@@ -55,6 +65,8 @@ const referenceCards = [
 
 export default function ReferencesPage() {
   return (
+    <WeightedScrollProvider>
+    <WeightedScrollLayer>
     <>
       {/* Hero: split layout */}
       <section className="pt-28 pb-16 min-h-[40vh] flex flex-col justify-end bg-port-navy relative overflow-hidden">
@@ -63,23 +75,23 @@ export default function ReferencesPage() {
           <div className="absolute bottom-0 left-1/4 w-64 h-64 rounded-full bg-port-ice blur-3xl" />
         </div>
         <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
-          <RevealOnScroll>
+          <ScrollRevealText direction="up">
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight">
               References & Documentation
             </h1>
             <p className="mt-5 text-port-mist/90 text-lg sm:text-xl max-w-2xl">
               How we approached the project and the technical decisions behind it.
             </p>
-          </RevealOnScroll>
+          </ScrollRevealText>
         </div>
       </section>
 
       {/* PDF cards: bento strip */}
       <section className="py-12 lg:py-16 bg-white">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-7">
-            {referenceCards.map((card, index) => (
-              <RevealOnScroll key={card.title}>
+          <ScrollRevealStagger className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-7" staggerChildren={0.1} delayChildren={0.05}>
+            {referenceCards.map((card) => (
+              <ScrollRevealStaggerItem key={card.title}>
                 <div className="group relative bg-port-frost/50 border border-port-mist/60 rounded-2xl p-6 md:p-7 shadow-sm hover:shadow-lg hover:border-port-sky/30 transition-all duration-300 flex flex-col h-full">
                   <div className="w-12 h-12 bg-port-sky/20 rounded-xl flex items-center justify-center mb-5 text-port-sky">
                     <card.icon className="text-xl" />
@@ -110,28 +122,25 @@ export default function ReferencesPage() {
                     </button>
                   )}
                 </div>
-              </RevealOnScroll>
+              </ScrollRevealStaggerItem>
             ))}
-          </div>
+          </ScrollRevealStagger>
         </div>
       </section>
 
-      {/* Narrative: why we made it up, what story we're telling (no repeat of disclaimer) */}
-      <section className="py-16 lg:py-20 bg-port-frost/50 border-y border-port-mist/40">
-        <div className="max-w-4xl mx-auto px-5 sm:px-8 lg:px-12">
-          <RevealOnScroll>
-            <div className="flex gap-6">
-              <div className="hidden sm:flex flex-col items-center shrink-0">
-                <div className="w-10 h-10 rounded-full bg-port-sky/30 flex items-center justify-center text-port-navy">
-                  <FaAnchor className="text-lg" />
-                </div>
-                <div className="w-px flex-grow min-h-[80px] bg-port-mist/60 mt-3" />
+      {/* Narrative and Map: unified layout (same section size and style) */}
+      <section className="py-14 lg:py-20 bg-port-frost/50 border-y border-port-mist/40">
+        <div className="max-w-4xl mx-auto px-5 sm:px-8 lg:px-12 space-y-14 lg:space-y-16">
+          <ScrollRevealText direction="right">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-xl bg-port-sky/20 flex items-center justify-center text-port-navy shrink-0">
+                <FaAnchor className="text-lg" />
               </div>
-              <div>
-                <h2 className="font-display text-2xl sm:text-3xl font-semibold text-port-navy mb-6">
+              <div className="min-w-0">
+                <h2 className="font-display text-2xl sm:text-3xl font-semibold text-port-navy mb-4">
                   Narrative and intent
                 </h2>
-                <div className="space-y-4 text-port-slate leading-relaxed">
+                <div className="space-y-4 text-port-slate leading-relaxed text-base">
                   <p>
                     We wanted the site to feel like a real city portal, not a generic template. So we gave it a single, coherent place: a coastal city anchored in the Pacific Northwest. Every design choice (palette, imagery, copy, maps) serves that one narrative. The goal was to show that a fictional project can be built with the same rigor as a real one, so judges can evaluate structure, accessibility, and technical execution in a believable context.
                   </p>
@@ -141,35 +150,30 @@ export default function ReferencesPage() {
                 </div>
               </div>
             </div>
-          </RevealOnScroll>
-        </div>
-      </section>
+          </ScrollRevealText>
 
-      {/* Map choice: one short block, no disclaimer repeat */}
-      <section className="py-12 lg:py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-5 sm:px-8 lg:px-12">
-          <RevealOnScroll>
+          <ScrollRevealText direction="left">
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-xl bg-port-sky/20 flex items-center justify-center text-port-navy shrink-0">
                 <FaMapMarkedAlt className="text-lg" />
               </div>
-              <div>
-                <h2 className="font-display text-xl font-semibold text-port-navy mb-3">
+              <div className="min-w-0">
+                <h2 className="font-display text-2xl sm:text-3xl font-semibold text-port-navy mb-4">
                   Map and geography
                 </h2>
-                <p className="text-port-slate leading-relaxed">
+                <p className="text-port-slate leading-relaxed text-base">
                   The Maps & Transport page uses a full-screen Google Maps embed. We set the default query to Port Angeles, WA, so the demo geography matches the narrative. A carousel of featured resources updates the map query on click so users see how “click a place, jump to it on the map” would work. Resource directory popups use a Google Static Map with the resource address and a Get Directions button. Resource data includes mapCoordinates for future per-pin mapping. We used Google (embed plus static) so the experience is familiar and we did not have to maintain custom tiles or geocoding.
                 </p>
               </div>
             </div>
-          </RevealOnScroll>
+          </ScrollRevealText>
         </div>
       </section>
 
       {/* Technical: flowcharts + specific details, unique layout */}
       <section className="py-16 lg:py-24 bg-port-navy text-white overflow-hidden">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
-          <RevealOnScroll>
+          <ScrollRevealText direction="up">
             <div className="flex items-center gap-3 mb-12">
               <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
                 <FaCode className="text-xl" />
@@ -186,13 +190,13 @@ export default function ReferencesPage() {
                   Request flow
                 </h3>
                 <div className="flex flex-wrap items-center gap-2 text-sm">
-                  <span className="px-3 py-2 rounded-lg bg-white/10">Browser</span>
+                  <span className="arch-hover px-3 py-2 rounded-lg bg-white/10 transition-transform duration-200 hover:scale-110 origin-center cursor-default">Browser</span>
                   <FaLongArrowAltRight className="text-port-sky/80 shrink-0" />
-                  <span className="px-3 py-2 rounded-lg bg-white/10">Next.js App Router</span>
+                  <span className="arch-hover px-3 py-2 rounded-lg bg-white/10 transition-transform duration-200 hover:scale-110 origin-center cursor-default">Next.js App Router</span>
                   <FaLongArrowAltRight className="text-port-sky/80 shrink-0" />
-                  <span className="px-3 py-2 rounded-lg bg-white/10">Page or API route</span>
+                  <span className="arch-hover px-3 py-2 rounded-lg bg-white/10 transition-transform duration-200 hover:scale-110 origin-center cursor-default">Page or API route</span>
                   <FaLongArrowAltRight className="text-port-sky/80 shrink-0" />
-                  <span className="px-3 py-2 rounded-lg bg-port-sky/30">Firebase / Resend</span>
+                  <span className="arch-hover px-3 py-2 rounded-lg bg-port-sky/30 transition-transform duration-200 hover:scale-110 origin-center cursor-default">Firebase / Resend</span>
                 </div>
                 <p className="text-port-mist/80 text-sm leading-relaxed">
                   All routes live under app/. layout.tsx wraps the app with AuthProvider and renders Navbar and Footer. Pages are server or client components; API routes are in app/api/.
@@ -206,19 +210,19 @@ export default function ReferencesPage() {
                 </h3>
                 <div className="space-y-3 text-sm">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="px-3 py-2 rounded-lg bg-white/10">Sign in / Sign up / Google</span>
+                    <span className="arch-hover px-3 py-2 rounded-lg bg-white/10 transition-transform duration-200 hover:scale-110 origin-center cursor-default">Sign in / Sign up / Google</span>
                     <FaArrowRight className="text-port-sky/80" />
-                    <span className="px-3 py-2 rounded-lg bg-white/10">Firebase Auth</span>
+                    <span className="arch-hover px-3 py-2 rounded-lg bg-white/10 transition-transform duration-200 hover:scale-110 origin-center cursor-default">Firebase Auth</span>
                   </div>
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="px-3 py-2 rounded-lg bg-white/10">onAuthStateChanged</span>
+                    <span className="arch-hover px-3 py-2 rounded-lg bg-white/10 transition-transform duration-200 hover:scale-110 origin-center cursor-default">onAuthStateChanged</span>
                     <FaArrowRight className="text-port-sky/80" />
-                    <span className="px-3 py-2 rounded-lg bg-white/10">user state in AuthContext</span>
+                    <span className="arch-hover px-3 py-2 rounded-lg bg-white/10 transition-transform duration-200 hover:scale-110 origin-center cursor-default">user state in AuthContext</span>
                   </div>
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="px-3 py-2 rounded-lg bg-white/10">New user</span>
+                    <span className="arch-hover px-3 py-2 rounded-lg bg-white/10 transition-transform duration-200 hover:scale-110 origin-center cursor-default">New user</span>
                     <FaArrowRight className="text-port-sky/80" />
-                    <span className="px-3 py-2 rounded-lg bg-port-sky/30">setDoc(users/{`{uid}`})</span>
+                    <span className="arch-hover px-3 py-2 rounded-lg bg-port-sky/30 transition-transform duration-200 hover:scale-110 origin-center cursor-default">setDoc(users/{`{uid}`})</span>
                   </div>
                 </div>
                 <p className="text-port-mist/80 text-sm leading-relaxed">
@@ -243,19 +247,19 @@ export default function ReferencesPage() {
                     </tr>
                   </thead>
                   <tbody className="text-port-mist/90">
-                    <tr className="border-b border-white/5">
+                    <tr className="border-b border-white/5 transition-transform duration-200 hover:scale-[1.02] origin-left">
                       <td className="py-3 px-4 font-mono">/api/send-email</td>
                       <td className="py-3 px-4">POST</td>
                       <td className="py-3 px-4">email, subject, html</td>
                       <td className="py-3 px-4">Validates, then Resend.send(). Used by contact and broadcasts.</td>
                     </tr>
-                    <tr className="border-b border-white/5">
+                    <tr className="border-b border-white/5 transition-transform duration-200 hover:scale-[1.02] origin-left">
                       <td className="py-3 px-4 font-mono">/api/spotlight-data</td>
                       <td className="py-3 px-4">GET</td>
                       <td className="py-3 px-4">none</td>
                       <td className="py-3 px-4">Returns spotlight entries array for home/calendar.</td>
                     </tr>
-                    <tr className="border-b border-white/5">
+                    <tr className="border-b border-white/5 transition-transform duration-200 hover:scale-[1.02] origin-left">
                       <td className="py-3 px-4 font-mono">/api/admin/broadcast</td>
                       <td className="py-3 px-4">POST</td>
                       <td className="py-3 px-4">?secret=, campaignType, subject, html</td>
@@ -272,15 +276,15 @@ export default function ReferencesPage() {
                 Broadcast flow
               </h3>
               <div className="flex flex-col sm:flex-row flex-wrap items-center gap-2 text-sm">
-                <span className="px-3 py-2 rounded-lg bg-white/10">POST /api/admin/broadcast?secret=</span>
+                <span className="arch-hover px-3 py-2 rounded-lg bg-white/10 transition-transform duration-200 hover:scale-110 origin-center cursor-default">POST /api/admin/broadcast?secret=</span>
                 <FaArrowRight className="text-port-sky/80 shrink-0" />
-                <span className="px-3 py-2 rounded-lg bg-white/10">Validate secret</span>
+                <span className="arch-hover px-3 py-2 rounded-lg bg-white/10 transition-transform duration-200 hover:scale-110 origin-center cursor-default">Validate secret</span>
                 <FaArrowRight className="text-port-sky/80 shrink-0" />
-                <span className="px-3 py-2 rounded-lg bg-white/10">Firestore query (newsletter or alert)</span>
+                <span className="arch-hover px-3 py-2 rounded-lg bg-white/10 transition-transform duration-200 hover:scale-110 origin-center cursor-default">Firestore query (newsletter or alert)</span>
                 <FaArrowRight className="text-port-sky/80 shrink-0" />
-                <span className="px-3 py-2 rounded-lg bg-white/10">getDocs(users)</span>
+                <span className="arch-hover px-3 py-2 rounded-lg bg-white/10 transition-transform duration-200 hover:scale-110 origin-center cursor-default">getDocs(users)</span>
                 <FaArrowRight className="text-port-sky/80 shrink-0" />
-                <span className="px-3 py-2 rounded-lg bg-port-sky/30">Resend per user email</span>
+                <span className="arch-hover px-3 py-2 rounded-lg bg-port-sky/30 transition-transform duration-200 hover:scale-110 origin-center cursor-default">Resend per user email</span>
               </div>
             </div>
 
@@ -288,45 +292,46 @@ export default function ReferencesPage() {
             <div className="mt-14 pt-10 border-t border-white/10">
               <p className="text-port-mist/70 text-sm mb-4">Stack</p>
               <div className="flex flex-wrap gap-4 items-center">
-                <span className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5">
+                <span className="arch-hover flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 transition-transform duration-200 hover:scale-110 origin-center cursor-default">
                   <SiNextdotjs className="text-xl" /> Next.js 16
                 </span>
-                <span className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5">
+                <span className="arch-hover flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 transition-transform duration-200 hover:scale-110 origin-center cursor-default">
                   <SiReact className="text-xl" /> React 18
                 </span>
-                <span className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5">
+                <span className="arch-hover flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 transition-transform duration-200 hover:scale-110 origin-center cursor-default">
                   <SiTypescript className="text-xl" /> TypeScript
                 </span>
-                <span className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5">
+                <span className="arch-hover flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 transition-transform duration-200 hover:scale-110 origin-center cursor-default">
                   <SiTailwindcss className="text-xl" /> Tailwind
                 </span>
-                <span className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5">
+                <span className="arch-hover flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 transition-transform duration-200 hover:scale-110 origin-center cursor-default">
                   <SiFirebase className="text-xl" /> Firebase
                 </span>
-                <span className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5">
+                <span className="arch-hover flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 transition-transform duration-200 hover:scale-110 origin-center cursor-default">
                   <SiGoogle className="text-xl" /> Google Maps
                 </span>
-                <span className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5">
+                <span className="arch-hover flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 transition-transform duration-200 hover:scale-110 origin-center cursor-default">
                   <FaEnvelope className="text-lg" /> Resend
                 </span>
-                <span className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5">
+                <span className="arch-hover flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 transition-transform duration-200 hover:scale-110 origin-center cursor-default">
                   <SiVercel className="text-xl" /> Vercel Analytics
                 </span>
-                <span className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5">
+                <span className="arch-hover flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 transition-transform duration-200 hover:scale-110 origin-center cursor-default">
                   <SiNetlify className="text-xl" /> Netlify
                 </span>
-                <span className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5">
+                <span className="arch-hover flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 transition-transform duration-200 hover:scale-110 origin-center cursor-default">
                   <SiNodedotjs className="text-xl" /> Node
                 </span>
               </div>
             </div>
-          </RevealOnScroll>
+          </ScrollRevealText>
         </div>
       </section>
 
       {/* Disclaimer + Visual Inspiration (unchanged content, no repetition) */}
       <section className="py-16 md:py-24 bg-port-frost/40 border-t border-port-mist/40">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 space-y-16 md:space-y-20">
+          <ScrollRevealText direction="up">
           <div className="bg-white rounded-2xl border border-port-mist/40 shadow-sm p-8 md:p-10 lg:p-12">
             <div className="space-y-8 max-w-4xl">
               <h3 className="font-display text-3xl sm:text-4xl font-semibold text-port-navy">
@@ -365,7 +370,9 @@ export default function ReferencesPage() {
               </div>
             </div>
           </div>
+          </ScrollRevealText>
 
+          <ScrollRevealText direction="up">
           <div className="space-y-6">
             <h4 className="font-display text-2xl sm:text-3xl font-semibold text-port-navy">
               Visual Inspiration
@@ -383,7 +390,7 @@ export default function ReferencesPage() {
               >
                 <div className="aspect-[4/3] overflow-hidden relative">
                   <Image
-                    src="https://olympicpeninsula.org/wp-content/uploads/2024/09/port-angeles-wa-city-pier-hdr-e1727213387696.jpg"
+                    src="https://portofpa.com/wp-content/uploads/2022/03/harboroverview.jpg"
                     alt="Port Angeles harbor with mountains in background"
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -405,7 +412,7 @@ export default function ReferencesPage() {
               >
                 <div className="aspect-[4/3] overflow-hidden relative">
                   <Image
-                    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80"
+                    src="https://bellingham.objects.liquidweb.services/photos/1164-oyster-dome-whatcom-county-1200x800.jpg"
                     alt="Calm waterfront and coastal scenery inspired by Bellingham"
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -427,7 +434,7 @@ export default function ReferencesPage() {
               >
                 <div className="aspect-[4/3] overflow-hidden relative">
                   <Image
-                    src="https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=800&q=80"
+                    src="https://thumbs.dreamstime.com/b/pacific-coast-rocky-rugged-shoreline-misty-fog-2539664.jpg"
                     alt="Misty shoreline and coastal atmosphere inspired by Sequim area"
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -449,7 +456,7 @@ export default function ReferencesPage() {
               >
                 <div className="aspect-[4/3] overflow-hidden relative">
                   <Image
-                    src="https://images.unsplash.com/photo-1544551763-46a01398b0d5?w=800&q=80"
+                    src="https://whidbeycamanoislands.com/wp-content/uploads/2016/04/DNS9435.jpg"
                     alt="Dramatic coastal bridges and channels inspired by Anacortes region"
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -464,8 +471,11 @@ export default function ReferencesPage() {
               </a>
             </div>
           </div>
+          </ScrollRevealText>
         </div>
       </section>
     </>
+    </WeightedScrollLayer>
+    </WeightedScrollProvider>
   );
 }
