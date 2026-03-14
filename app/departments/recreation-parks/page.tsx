@@ -33,11 +33,11 @@ export default function RecreationParksPage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="pt-32 pb-20 bg-port-cream">
+      <section className="pt-28 pb-14 bg-port-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/departments"
-            className="inline-flex items-center gap-2 text-sm transition-colors mb-10"
+            className="inline-flex items-center gap-2 text-sm transition-colors mb-7"
             style={{ color: `${PRIMARY}80` }}
             onMouseEnter={e => (e.currentTarget.style.color = PRIMARY)}
             onMouseLeave={e => (e.currentTarget.style.color = `${PRIMARY}80`)}
@@ -45,7 +45,7 @@ export default function RecreationParksPage() {
             <FaArrowLeft className="text-xs" /> All Departments
           </Link>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
             {/* Text */}
             <motion.div
               initial="hidden"
@@ -53,18 +53,18 @@ export default function RecreationParksPage() {
               variants={fadeUp}
             >
               <div
-                className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6"
+                className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4"
                 style={{ color: PRIMARY, backgroundColor: `${SHADE}30`, border: `1px solid ${SHADE}` }}
               >
                 Nature &amp; Community
               </div>
-              <h1 className="font-display text-5xl md:text-6xl font-bold text-port-navy mb-5 leading-tight">
+              <h1 className="font-display text-5xl md:text-6xl font-bold text-port-navy mb-4 leading-tight">
                 Recreation <em style={{ color: PRIMARY }}>&amp; Parks</em>
               </h1>
               <p className="text-port-slate/70 text-lg leading-relaxed max-w-lg">
                 Creating vibrant outdoor spaces, community programs, and recreational opportunities for every resident of Port Laken.
               </p>
-              <div className="mt-8 h-px" style={{ backgroundColor: SHADE }} />
+              <div className="mt-6 h-px" style={{ backgroundColor: SHADE }} />
             </motion.div>
 
             {/* Hero image */}
@@ -110,14 +110,14 @@ export default function RecreationParksPage() {
       </section>
 
       {/* ── SERVICES ── */}
-      <section className="py-20 bg-white">
+      <section className="py-14 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="mb-12"
+            className="mb-8"
           >
             <p className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ color: PRIMARY }}>What We Do</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-port-navy">Our Services</h2>
@@ -158,8 +158,8 @@ export default function RecreationParksPage() {
       </section>
 
       {/* ── ABOUT ── */}
-      <section className="py-20 bg-port-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-14 items-center">
+      <section className="py-14 bg-port-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -193,16 +193,16 @@ export default function RecreationParksPage() {
             viewport={{ once: true }}
             variants={fadeUp}
           >
-            <p className="text-xs font-bold uppercase tracking-[0.25em] mb-4" style={{ color: PRIMARY }}>
+            <p className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ color: PRIMARY }}>
               Our Green Spaces
             </p>
-            <h3 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-6 leading-snug">
+            <h3 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-4 leading-snug">
               28 Parks, <em>Endless Possibilities</em>
             </h3>
-            <p className="text-port-slate/70 leading-relaxed mb-4">
+            <p className="text-port-slate/70 leading-relaxed mb-3">
               From Harborview Park on the waterfront to the new Elm Street community park, Port Laken&apos;s parks are gathering places for families, athletes, artists, and everyone in between.
             </p>
-            <p className="text-port-slate/70 leading-relaxed mb-8">
+            <p className="text-port-slate/70 leading-relaxed mb-6">
               With 14 miles of maintained trails and 200+ annual programs, there&apos;s always something to explore, learn, or celebrate outdoors.
             </p>
             <div className="h-px" style={{ backgroundColor: SHADE }} />
@@ -211,7 +211,7 @@ export default function RecreationParksPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-20 bg-white" style={{ borderTop: `1px solid ${SHADE}50` }}>
+      <section className="py-14 bg-white" style={{ borderTop: `1px solid ${SHADE}50` }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial="hidden"
@@ -222,7 +222,7 @@ export default function RecreationParksPage() {
             <h2 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-4">
               Register for a <em>Program</em>
             </h2>
-            <p className="text-port-slate/70 text-lg mb-10 max-w-xl mx-auto">
+            <p className="text-port-slate/70 text-lg mb-7 max-w-xl mx-auto">
               Browse our full catalog of parks, classes, and events — and register online today.
             </p>
             <Link

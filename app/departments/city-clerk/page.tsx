@@ -33,11 +33,11 @@ export default function CityClerkPage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="pt-32 pb-20 bg-port-cream">
+      <section className="pt-28 pb-14 bg-port-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/departments"
-            className="inline-flex items-center gap-2 text-sm transition-colors mb-10"
+            className="inline-flex items-center gap-2 text-sm transition-colors mb-7"
             style={{ color: `${PRIMARY}80` }}
             onMouseEnter={e => (e.currentTarget.style.color = PRIMARY)}
             onMouseLeave={e => (e.currentTarget.style.color = `${PRIMARY}80`)}
@@ -45,7 +45,7 @@ export default function CityClerkPage() {
             <FaArrowLeft className="text-xs" /> All Departments
           </Link>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
             {/* Text */}
             <motion.div
               initial="hidden"
@@ -53,18 +53,18 @@ export default function CityClerkPage() {
               variants={fadeUp}
             >
               <div
-                className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6"
+                className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4"
                 style={{ color: PRIMARY, backgroundColor: `${SHADE}30`, border: `1px solid ${SHADE}` }}
               >
                 Official Records &amp; Elections
               </div>
-              <h1 className="font-display text-5xl md:text-6xl font-bold text-port-navy mb-5 leading-tight">
+              <h1 className="font-display text-5xl md:text-6xl font-bold text-port-navy mb-4 leading-tight">
                 City <em style={{ color: PRIMARY }}>Clerk</em>
               </h1>
               <p className="text-port-slate/70 text-lg leading-relaxed max-w-lg">
                 The official keeper of Port Laken&apos;s public record — ensuring transparency, accountability, and access for all residents.
               </p>
-              <div className="mt-8 h-px" style={{ backgroundColor: SHADE }} />
+              <div className="mt-6 h-px" style={{ backgroundColor: SHADE }} />
             </motion.div>
 
             {/* Hero image */}
@@ -110,14 +110,14 @@ export default function CityClerkPage() {
       </section>
 
       {/* ── SERVICES ── */}
-      <section className="py-20 bg-white">
+      <section className="py-14 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="mb-12"
+            className="mb-8"
           >
             <p className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ color: PRIMARY }}>What We Do</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-port-navy">Our Services</h2>
@@ -158,14 +158,14 @@ export default function CityClerkPage() {
       </section>
 
       {/* ── ABOUT ── */}
-      <section className="py-20 bg-port-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-14 items-center">
+      <section className="py-14 bg-port-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="relative h-80 lg:h-[420px] rounded-2xl overflow-hidden shadow-sm"
+            className="relative h-72 lg:h-[360px] rounded-2xl overflow-hidden shadow-sm"
           >
             <Image
               src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?auto=format&fit=crop&q=80&w=900"
@@ -185,16 +185,16 @@ export default function CityClerkPage() {
             viewport={{ once: true }}
             variants={fadeUp}
           >
-            <p className="text-xs font-bold uppercase tracking-[0.25em] mb-4" style={{ color: PRIMARY }}>
+            <p className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ color: PRIMARY }}>
               Democracy in Action
             </p>
-            <h3 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-6 leading-snug">
+            <h3 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-4 leading-snug">
               Keeping Government <em>Open &amp; Accessible</em>
             </h3>
-            <p className="text-port-slate/70 leading-relaxed mb-4">
+            <p className="text-port-slate/70 leading-relaxed mb-3">
               The City Clerk&apos;s Office is the foundation of open government in Port Laken — maintaining records, administering elections, and ensuring residents can access the information they need.
             </p>
-            <p className="text-port-slate/70 leading-relaxed mb-8">
+            <p className="text-port-slate/70 leading-relaxed mb-6">
               From business licensing to ballot counting, we work with precision and integrity every day.
             </p>
             <div className="h-px" style={{ backgroundColor: SHADE }} />
@@ -203,7 +203,7 @@ export default function CityClerkPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-20 bg-white" style={{ borderTop: `1px solid ${SHADE}50` }}>
+      <section className="py-14 bg-white" style={{ borderTop: `1px solid ${SHADE}50` }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial="hidden"
@@ -214,7 +214,7 @@ export default function CityClerkPage() {
             <h2 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-4">
               Need a Public <em>Record?</em>
             </h2>
-            <p className="text-port-slate/70 text-lg mb-10 max-w-xl mx-auto">
+            <p className="text-port-slate/70 text-lg mb-7 max-w-xl mx-auto">
               Submit a public records request online or visit our office during business hours. Most requests fulfilled within 5 business days.
             </p>
             <Link
