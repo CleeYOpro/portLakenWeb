@@ -249,4 +249,11 @@ function ResourceDirectoryContent() {
   );
 }
 
-// pr samyak
+// 包装组件以解决 useSearchParams 错误
+const ResourceDirectoryPage = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <ResourceDirectoryContent />
+  </Suspense>
+);
+
+export default ResourceDirectoryPage;
