@@ -70,12 +70,25 @@ export default function Footer() {
                 { name: "About", href: "/about" },
                 { name: "News", href: "/news" },
                 { name: "Calendar", href: "/events" },
-
               ].map((link) => (
                 <motion.div key={link.name} variants={itemVariants}>
                   <Link
                     href={link.href}
-                    className="group relative inline-block text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-[family-name:var(--font-playfair),serif] font-bold uppercase leading-[0.9] tracking-tight text-white/90 hover:text-white transition-colors duration-300"
+                    className="group relative inline-block 
+                      text-5xl 
+                      sm:text-6xl 
+                      md:text-7xl 
+                      lg:text-[6rem] 
+                      xl:text-[7rem]
+                      font-[family-name:var(--font-playfair),serif] 
+                      font-bold 
+                      uppercase 
+                      leading-[0.85] 
+                      tracking-tight 
+                      text-white/90 
+                      hover:text-white 
+                      transition-colors 
+                      duration-300"
                   >
                     <span className="relative z-10 group-hover:translate-x-2 transition-transform duration-500 inline-block">
                       {link.name}
@@ -232,7 +245,7 @@ export default function Footer() {
             >
               <div className="flex gap-3 pt-2 border-t border-white/10 w-full">
                 <span>© 2026 City of Port Laken.</span>
-                <Link href="/under-construction">Privacy Policy</Link>
+                <Link href="/privacy">Privacy Policy</Link>
                 <Link href="/references">References</Link>
               </div>
             </motion.div>
