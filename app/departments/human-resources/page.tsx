@@ -33,11 +33,11 @@ export default function HumanResourcesPage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="pt-32 pb-20 bg-port-cream">
+      <section className="pt-28 pb-14 bg-port-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/departments"
-            className="inline-flex items-center gap-2 text-sm transition-colors mb-10"
+            className="inline-flex items-center gap-2 text-sm transition-colors mb-7"
             style={{ color: `${PRIMARY}80` }}
             onMouseEnter={e => (e.currentTarget.style.color = PRIMARY)}
             onMouseLeave={e => (e.currentTarget.style.color = `${PRIMARY}80`)}
@@ -45,7 +45,7 @@ export default function HumanResourcesPage() {
             <FaArrowLeft className="text-xs" /> All Departments
           </Link>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
             {/* Text */}
             <motion.div
               initial="hidden"
@@ -53,18 +53,18 @@ export default function HumanResourcesPage() {
               variants={fadeUp}
             >
               <div
-                className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6"
+                className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4"
                 style={{ color: PRIMARY, backgroundColor: `${SHADE}30`, border: `1px solid ${SHADE}` }}
               >
                 People &amp; Culture
               </div>
-              <h1 className="font-display text-5xl md:text-6xl font-bold text-port-navy mb-5 leading-tight">
+              <h1 className="font-display text-5xl md:text-6xl font-bold text-port-navy mb-4 leading-tight">
                 Human <em style={{ color: PRIMARY }}>Resources</em>
               </h1>
               <p className="text-port-slate/70 text-lg leading-relaxed max-w-lg">
                 Empowering Port Laken&apos;s workforce — recruiting great people, investing in their growth, and building a city team to be proud of.
               </p>
-              <div className="mt-8 h-px" style={{ backgroundColor: SHADE }} />
+              <div className="mt-6 h-px" style={{ backgroundColor: SHADE }} />
             </motion.div>
 
             {/* Hero image */}
@@ -110,14 +110,14 @@ export default function HumanResourcesPage() {
       </section>
 
       {/* ── SERVICES ── */}
-      <section className="py-20 bg-white">
+      <section className="py-14 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="mb-12"
+            className="mb-8"
           >
             <p className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ color: PRIMARY }}>What We Do</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-port-navy">Our Services</h2>
@@ -158,14 +158,14 @@ export default function HumanResourcesPage() {
       </section>
 
       {/* ── ABOUT ── */}
-      <section className="py-20 bg-port-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-14 items-center">
+      <section className="py-14 bg-port-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="relative h-80 lg:h-[420px] rounded-2xl overflow-hidden shadow-sm"
+            className="relative h-72 lg:h-[360px] rounded-2xl overflow-hidden shadow-sm"
           >
             <Image
               src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=900"
@@ -185,16 +185,16 @@ export default function HumanResourcesPage() {
             viewport={{ once: true }}
             variants={fadeUp}
           >
-            <p className="text-xs font-bold uppercase tracking-[0.25em] mb-4" style={{ color: PRIMARY }}>
+            <p className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ color: PRIMARY }}>
               Our People
             </p>
-            <h3 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-6 leading-snug">
+            <h3 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-4 leading-snug">
               A Team That <em>Serves Together</em>
             </h3>
-            <p className="text-port-slate/70 leading-relaxed mb-4">
+            <p className="text-port-slate/70 leading-relaxed mb-3">
               Port Laken&apos;s greatest asset is its people. Our Human Resources team works every day to recruit exceptional talent, support employee wellbeing, and create a workplace culture built on respect and purpose.
             </p>
-            <p className="text-port-slate/70 leading-relaxed mb-8">
+            <p className="text-port-slate/70 leading-relaxed mb-6">
               Whether you&apos;re exploring a career with the city or a current employee seeking support, we&apos;re here for you.
             </p>
             <div className="h-px" style={{ backgroundColor: SHADE }} />
@@ -203,7 +203,7 @@ export default function HumanResourcesPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-20 bg-white" style={{ borderTop: `1px solid ${SHADE}50` }}>
+      <section className="py-14 bg-white" style={{ borderTop: `1px solid ${SHADE}50` }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial="hidden"
@@ -214,7 +214,7 @@ export default function HumanResourcesPage() {
             <h2 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-4">
               Join Our <em>Team</em>
             </h2>
-            <p className="text-port-slate/70 text-lg mb-10 max-w-xl mx-auto">
+            <p className="text-port-slate/70 text-lg mb-7 max-w-xl mx-auto">
               Explore open positions, learn about city benefits, and start a meaningful career serving Port Laken.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
