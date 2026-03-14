@@ -135,7 +135,7 @@ export default function PoliceDepartmentPage() {
               </div>
               <div className="bg-white/10 border border-white/20 rounded-2xl px-8 py-5 text-center">
                 <div className="text-white/60 text-xs uppercase tracking-widest mb-1">Non-Emergency</div>
-                <div className="text-2xl font-bold text-white">(555) 400-5000</div>
+                <div className="text-2xl font-bold text-white">(360) 597-3322</div>
               </div>
             </div>
           </RevealOnScroll>

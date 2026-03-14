@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
 
 export default function Page() {
@@ -13,6 +13,8 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'; // Default to dashboard if no callback
   const { signIn, signInWithGoogle } = useFirebaseAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,8 +24,8 @@ export default function Page() {
 
     try {
       await signIn(email, password);
-      // Redirect to dashboard or home page after successful login
-      router.push('/dashboard');
+      // Redirect to the original destination or default after successful login
+      router.push(callbackUrl);
       router.refresh(); // Refresh to update UI based on auth state
     } catch (err: any) {
       console.error('Sign in error:', err);
@@ -36,7 +38,7 @@ export default function Page() {
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
-      router.push('/dashboard');
+      router.push(callbackUrl);
       router.refresh();
     } catch (err: any) {
       console.error('Google sign in error:', err);
@@ -75,7 +77,7 @@ export default function Page() {
         <div className="flex items-center justify-center px-4 sm:px-10 py-12 md:py-0">
           <form
             onSubmit={handleSubmit}
-            className="w-full max-w-[420px]"
+            className="w-full max-w-[560px]"
             aria-label="Sign in to your account"
           >
             <div className="md:hidden text-center mb-6">
