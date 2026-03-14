@@ -22,7 +22,56 @@ const featuredResources = [
     name: 'Port Laken Food Bank',
     category: 'Food',
     address: '789 Pine St, Port Angeles, WA 98362',
-    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3c56?w=800&q=80',
+  },
+  {
+    id: '11',
+    name: 'Port Laken Food Bank',
+    category: 'Food',
+    address: '789 Pine St, Port Angeles, WA 98362',
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3c56?w=800&q=80',
+  },
+  {
+    id: '11',
+    name: 'Port Laken Food Bank',
+    category: 'Food',
+    address: '789 Pine St, Port Angeles, WA 98362',
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3c56?w=800&q=80',
+  },
+  {
+    id: '11',
+    name: 'Port Laken Food Bank',
+    category: 'Food',
+    address: '789 Pine St, Port Angeles, WA 98362',
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3c56?w=800&q=80',
+  },
+  {
+    id: '11',
+    name: 'Port Laken Food Bank',
+    category: 'Food',
+    address: '789 Pine St, Port Angeles, WA 98362',
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3c56?w=800&q=80',
+  },
+  {
+    id: '11',
+    name: 'Port Laken Food Bank',
+    category: 'Food',
+    address: '789 Pine St, Port Angeles, WA 98362',
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3c56?w=800&q=80',
+  },
+  {
+    id: '11',
+    name: 'Port Laken Food Bank',
+    category: 'Food',
+    address: '789 Pine St, Port Angeles, WA 98362',
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3c56?w=800&q=80',
+  },
+  {
+    id: '11',
+    name: 'Port Laken Food Bank',
+    category: 'Food',
+    address: '789 Pine St, Port Angeles, WA 98362',
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3c56?w=800&q=80',
   },
   {
     id: '15',
@@ -52,6 +101,7 @@ export default function MapsTransportPage() {
   const [showCarousel, setShowCarousel] = useState(true);
   const [isHovering, setIsHovering] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number | null>(null);
 
   const handleResourceClick = (address: string) => {
     setMapQuery(address);
@@ -59,23 +109,30 @@ export default function MapsTransportPage() {
 
   // Infinite continuous scroll
   useEffect(() => {
-    if (!showCarousel || isHovering) return;
+    if (!showCarousel || isHovering || !carouselRef.current) return;
     
-    let animationFrame: number;
-    const speed = 0.8; // px per frame
+    const speed = 0.5; // px per frame for smoother movement
     const scroll = () => {
       if (carouselRef.current) {
         carouselRef.current.scrollLeft += speed;
+
+        // When we reach the halfway point of the duplicated items, reset to beginning
+        // This creates an infinite loop effect
         const scrollWidth = carouselRef.current.scrollWidth / 2;
         if (carouselRef.current.scrollLeft >= scrollWidth) {
           carouselRef.current.scrollLeft = 0;
         }
       }
-      animationFrame = requestAnimationFrame(scroll);
+      animationRef.current = requestAnimationFrame(scroll);
     };
-    animationFrame = requestAnimationFrame(scroll);
-    return () => cancelAnimationFrame(animationFrame);
-  }, [showCarousel, isHovering]);
+
+    animationRef.current = requestAnimationFrame(scroll);
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [showCarousel, isHovering]); // Dependencies are correct - only restart when visibility or hover state changes
 
   return (
     <div className="w-full flex flex-col bg-white">
