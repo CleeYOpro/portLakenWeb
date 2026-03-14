@@ -17,6 +17,8 @@ const nextConfig = {
       { protocol: "https", hostname: "thediversitymovement.com" },
       { protocol: "https", hostname: "www.beecreekphoto.com" },
       { protocol: "https", hostname: "wp.bibbeo.com" },
+      { protocol: "https", hostname: "olympicpeninsula.org" },
+      { protocol: "https", hostname: "www.olympicpeninsula.org" },
     ],
     domains: ['www.visitportangeles.com', '*'], // Allow all external domains including visitportangeles.com
     unoptimized: true // This allows any external image to be used without optimization
