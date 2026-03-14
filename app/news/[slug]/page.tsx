@@ -418,8 +418,9 @@ export function generateStaticParams() {
   return Object.keys(articles).map((slug) => ({ slug }));
 }
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
-  const article = articles[params.slug];
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const article = articles[slug];
 
   if (!article) {
     notFound();
@@ -612,20 +613,6 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
                 </div>
               </div>
             </aside>
-          {/* Article Body */}
-          <div className="prose prose-lg max-w-none">
-            {article.content.map((paragraph, index) => (
-              <p
-                key={index}
-                className={`font-nunito text-gray-700 leading-relaxed mb-6 ${paragraph === paragraph.toUpperCase() && paragraph.includes(':')
-                    ? 'font-bold text-[#1e3a5f] text-lg mt-8'
-                    : ''
-                  }`}
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
 
           </div>
         </div>
