@@ -5,6 +5,7 @@ import { useAuth } from "@/context/AuthContext"; // Using Firebase Auth Context 
 import { db } from "@/lib/firebase";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function AlertsPage() {
   const { user } = useAuth(); // Using Firebase user instead of next-auth session
@@ -141,9 +142,19 @@ export default function AlertsPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Alert Preferences</h1>
-          <p className="text-gray-600">
+        <div className="mb-10 pt-20 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-center md:text-left">
+          <div className="flex items-center">
+            <Link href="/dashboard" className="mr-4 text-gray-600 hover:text-gray-900">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+              </svg>
+            </Link>
+            <h1 className="text-3xl font-bold text-gray-900">
+              Alert Preferences
+            </h1>
+          </div>
+
+          <p className="text-gray-600 md:max-w-md">
             Manage your notification preferences for Port Laken updates
           </p>
         </div>
@@ -206,22 +217,7 @@ export default function AlertsPage() {
           )}
         </div>
 
-        <div className="mt-10 bg-white shadow rounded-lg p-6 md:p-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Unsubscribe from Newsletter</h2>
-          <p className="text-gray-600 mb-4">
-            If you no longer wish to receive our monthly newsletter, you can unsubscribe here.
-          </p>
-          <button
-            onClick={() => {
-              const newSettings = { ...alertSettings, newsletter: false };
-              setAlertSettings(newSettings);
-              handleSave(newSettings);
-            }}
-            className="px-6 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-          >
-            Unsubscribe from Newsletter
-          </button>
-        </div>
+
       </div>
     </div>
   );

@@ -98,11 +98,14 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Your Dashboard</h1>
-          <p className="text-gray-600">
+        <div className="text-center md:text-left mb-16 pt-16 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <h1 className="text-3xl font-bold text-gray-900">
+            Your Dashboard
+          </h1>
+
+          <p className="text-gray-600 md:max-w-md">
             Manage your resources and notification preferences
           </p>
         </div>

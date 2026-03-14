@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { db } from "@/lib/firebase";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 import Image from "next/image";
 import { IoMdAlert } from "react-icons/io";
 import { HiDocumentText } from "react-icons/hi";
@@ -95,22 +96,30 @@ const heroSlides = [
 const quickActions = [
   {
     title: "Emergency Alerts",
-    link: "/under-construction",
+    link: "/alerts",
+    authLink: "/alerts",
+    nonAuthLink: "/sign-in",
     icon: <IoMdAlert className="text-3xl text-primary" />,
   },
   {
     title: "Submit Resource",
     link: "/resource-directory/submit",
+    authLink: "/resource-directory/submit",
+    nonAuthLink: "/sign-in",
     icon: <HiDocumentText className="text-3xl text-primary" />,
   },
   {
     title: "Access Regulatory Forms",
     link: "/forms",
+    authLink: "/forms",
+    nonAuthLink: "/sign-in",
     icon: <MdPayment className="text-3xl text-primary" />,
   },
   {
     title: "Transportation & Maps",
     link: "/maps-transport",
+    authLink: "/maps-transport",
+    nonAuthLink: "/sign-in",
     icon: <FaBus className="text-3xl text-primary" />,
   },
 ];
@@ -119,6 +128,7 @@ export default function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const [paused, setPaused] = useState(false);
+  const { user } = useAuth(); // Get the authenticated user
 
   useEffect(() => {
     if (paused) return;
@@ -253,7 +263,7 @@ export default function Home() {
               return (
                 <a
                   key={idx}
-                  href={action.link}
+                  href={user ? action.authLink : action.nonAuthLink}
                   className={`
               group relative block 
               transition-all duration-500 ease-out
@@ -778,134 +788,160 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Newsletter Signup */}
-      <section className="relative py-20 px-6 md:px-20 overflow-hidden">
-        {/* Optional subtle background accent */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-primary-shade/3 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
-            {/* Left: Heading */}
-            <div className="space-y-4">
-              <h3 className="font-playfair text-4xl md:text-5xl font-bold text-primary-shade leading-tight tracking-tight">
-                <span className="italic">Stay in the loop.</span> Port Laken’s latest stories, creative highlights, and the people shaping our city’s future.</h3>
-              <p className="text-primary-shade/70 text-sm font-light tracking-wide hover:text-primary-shade/90 transition-colors duration-300">
-                Unsubscribe anytime. We respect your privacy and never share your information.
-              </p>
-            </div>
-
-            {/* Right: Form */}
-            <div>
-              <NewsletterForm />
-            </div>
-          </div>
-        </div>
-      </section>
-
+      {/* Account / Join Section */}
+      <AccountSection />
     </main>
   );
 }
 
-// Custom Newsletter Form Component
-function NewsletterForm() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+// Unified Account Section
+function AccountSection() {
+  const { user, signInWithGoogle } = useAuth();
+  const router = useRouter();
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const [googleError, setGoogleError] = useState("");
 
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setStatus("idle");
-
+  const handleGoogle = async () => {
+    setGoogleLoading(true);
+    setGoogleError("");
     try {
-      // 1. Write to firestore (document ID = email)
-      const emailLower = email.toLowerCase().trim();
-      await setDoc(doc(db, "subscribers", emailLower), {
-        firstName,
-        lastName,
-        email: emailLower,
-        subscribedAt: serverTimestamp(),
-      }, { merge: true });
-
-      // Email sending logic removed.
-
-      setStatus("success");
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-    } catch (error) {
-      console.error("Subscription Error:", error);
-      setStatus("error");
+      await signInWithGoogle();
+      router.push("/dashboard");
+    } catch (err: unknown) {
+      console.error(err);
+      setGoogleError("Google sign-in failed. Please try again.");
     } finally {
-      setLoading(false);
+      setGoogleLoading(false);
     }
   };
 
+  // ── Signed-in state: full-width, no left column ──────────────────────────
+  if (user) {
+    const firstName = user.displayName?.split(" ")[0] ?? null;
+    return (
+      <section className="relative py-24 px-6 md:px-20 overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-primary-shade/5 rounded-full blur-3xl" />
+        </div>
+        <div className="max-w-6xl mx-auto text-center">
+
+          <h3 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-primary-shade leading-tight tracking-tight mb-6">
+            <span className="italic">Welcome back{firstName ? `, ${firstName}` : ""}.</span>
+          </h3>
+          <p className="text-primary-shade/55 text-base font-light leading-relaxed max-w-md mx-auto mb-10">
+            You&apos;re already part of Port Laken. Stay connected, manage your preferences, and never miss a thing.
+          </p>
+          <Link
+            href="/dashboard"
+            className="group inline-flex items-center gap-3 px-8 py-3.5 rounded-full border-2 border-primary-shade text-primary-shade font-semibold text-sm tracking-wide overflow-hidden relative hover:shadow-xl hover:-translate-y-0.5 active:scale-95 transition-all duration-300"
+          >
+            <div className="absolute inset-0 bg-primary-shade translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out z-0" />
+            <span className="relative z-10 group-hover:text-white transition-colors duration-300">Go to your dashboard</span>
+            <FaArrowRight className="relative z-10 text-xs group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
+          </Link>
+        </div>
+      </section>
+    );
+  }
+
+  // ── Signed-out state: unified two-column layout ──────────────────────────
   return (
-    <form className="space-y-8" onSubmit={handleSubscribe}>
-      {status === "success" && (
-        <div className="p-4 bg-green-50/50 border border-green-200 text-green-800 rounded-lg">
-          Thanks for subscribing! Check your email for a welcome message.
+    <section className="relative py-20 px-6 md:px-20 overflow-hidden animate-[fadeIn_0.8s_ease]">
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] bg-primary-shade/10 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-start">
+
+          {/* Left */}
+          <div className="space-y-7">
+            <p className="text-primary-shade/40 text-xs font-semibold tracking-[0.18em] uppercase">
+              Port Laken · Your City
+            </p>
+            <h3 className="font-playfair text-5xl md:text-6xl font-bold text-primary-shade leading-tight tracking-tight">
+              <span className="italic">Stay in the loop.</span>
+            </h3>
+            <p className="text-primary-shade/60 text-lg font-light leading-relaxed max-w-md">
+              Port Laken&apos;s latest stories, creative highlights, and the people shaping our city&apos;s future — all in one place.
+            </p>
+            <ul className="space-y-3">
+              {[
+                "Breaking city news & council updates",
+                "Resident stories & community spotlights",
+                "Events, parks, and local business finds",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-base text-primary-shade/70 font-light">
+                  <span className="w-2 h-2 rounded-full bg-primary-shade/60 flex-shrink-0 mt-1" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Right */}
+          <div className="space-y-5 bg-white/70 backdrop-blur-xl border border-primary-shade/10 rounded-3xl p-8 shadow-xl">
+            <p className="text-primary-shade/40 text-xs font-semibold tracking-[0.18em] uppercase text-center">
+              Join Port Laken
+            </p>
+
+            {/* Google button */}
+            <button
+              onClick={handleGoogle}
+              disabled={googleLoading}
+              className="group relative w-full flex items-center gap-4 px-6 py-4 rounded-2xl border-2 border-primary-shade/20 bg-white hover:border-primary-shade hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-60"
+            >
+              <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" />
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+              </svg>
+              <span className="flex-1 text-left font-semibold text-primary-shade tracking-wide text-sm">
+                {googleLoading ? "Signing in…" : "Continue with Google"}
+              </span>
+              <FaArrowRight className="text-primary-shade/30 group-hover:text-primary-shade group-hover:translate-x-1 transition-all duration-300 text-xs" />
+            </button>
+
+            {googleError && <p className="text-red-600 text-sm">{googleError}</p>}
+
+            {/* Divider */}
+            <div className="flex items-center gap-3">
+              <div className="flex-1 h-px bg-primary-shade/15" />
+              <span className="text-primary-shade/40 text-xs font-medium tracking-widest uppercase">or</span>
+              <div className="flex-1 h-px bg-primary-shade/15" />
+            </div>
+
+            {/* Email button */}
+            <Link
+              href="/create-account"
+              className="group relative w-full flex items-center gap-4 px-6 py-4 rounded-2xl border-2 border-primary-shade bg-transparent overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98]"
+            >
+              <div className="absolute inset-0 bg-primary-shade translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out z-0" />
+              <svg className="relative z-10 w-5 h-5 flex-shrink-0 text-primary-shade group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+              </svg>
+              <span className="relative z-10 flex-1 text-left font-semibold text-primary-shade group-hover:text-white tracking-wide text-sm transition-colors duration-300">
+                Get Updates
+              </span>
+              <FaArrowRight className="relative z-10 text-primary-shade/40 group-hover:text-white group-hover:translate-x-1 transition-all duration-300 text-xs" />
+            </Link>
+
+            <p className="text-xs text-primary-shade/40 text-center pt-1">
+              Already have an account?{" "}
+              <Link href="/sign-in" className="underline underline-offset-2 hover:text-primary-shade transition-colors">
+                Sign in
+              </Link>
+            </p>
+
+            <p className="text-xs text-primary-shade/40 text-center">
+              Free forever. No spam. Unsubscribe anytime.
+            </p>
+          </div>
+
         </div>
-      )}
-      {status === "error" && (
-        <div className="p-4 bg-red-50/50 border border-red-200 text-red-800 rounded-lg">
-          We encountered an error subscribing you. Please try again.
-        </div>
-      )}
-      {/* First Name */}
-      <div className="relative group">
-        <input
-          type="text"
-          placeholder="First name*"
-          required
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
-        />
-        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
       </div>
-
-      {/* Last Name */}
-      <div className="relative group">
-        <input
-          type="text"
-          placeholder="Last name*"
-          required
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
-        />
-        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
-      </div>
-
-      {/* Email */}
-      <div className="relative group">
-        <input
-          type="email"
-          placeholder="Email*"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-1 py-3 bg-transparent border-b-2 border-primary-shade/50 focus:border-primary-shade focus:outline-none transition-all duration-300 text-primary-shade placeholder-primary-shade/40 text-base font-light tracking-wide peer"
-        />
-        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary-shade transition-all duration-500 group-focus-within:w-full peer-focus:w-full"></span>
-      </div>
-
-      {/* Submit Button */}
-      <button
-        type="submit"
-        disabled={loading}
-        className="group relative inline-flex items-center justify-center px-10 py-3.5 border-2 border-primary-shade text-primary-shade font-medium rounded-full overflow-hidden transition-all duration-300 hover:text-white hover:shadow-xl hover:-translate-y-0.5 active:scale-95 disabled:opacity-50 disabled:hover:text-primary-shade disabled:hover:shadow-none"
-      >
-        <span className="relative z-10 tracking-wider text-inherit mb-[3px]">{loading ? 'Submitting...' : 'Submit'}</span>
-        {!loading && <div className="absolute inset-0 bg-primary-shade translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>}
-      </button>
-    </form>
+    </section>
   );
 }
 

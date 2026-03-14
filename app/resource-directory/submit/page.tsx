@@ -24,12 +24,15 @@ export default function SubmitResourcePage() {
   });
 
   useEffect(() => {
-    // Check if user is authenticated once auth finishes loading
-    if (!authLoading && !user) {
-      router.push("/sign-in");
+    // Only redirect to sign-in if auth has loaded and user is not authenticated
+    if (!authLoading) {
+      if (!user) {
+        router.push("/sign-in");
+      }
     }
   }, [user, authLoading, router]);
 
+  // Show loading indicator while checking authentication status
   if (authLoading || !user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -87,7 +90,7 @@ export default function SubmitResourcePage() {
         </div>
 
         {error && (
-          <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-lg">
+          <div className="mb-6 p-4 bg-red-500 text-white rounded-lg">
             {error}
           </div>
         )}
