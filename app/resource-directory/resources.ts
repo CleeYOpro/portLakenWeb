@@ -1,4 +1,3 @@
-
 export type ResourceCategory =
     | "Healthcare"
     | "Family"
@@ -62,7 +61,7 @@ export const RESOURCES: Resource[] = [
         website: "https://plcommunityclinic.org",
         email: "contact@plclinic.org",
         tags: ["clinic", "primary care", "affordable"],
-        image: "https://images.unsplash.com/photo-1538108149393-fbbd81897560?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1519494080410-f9aa76cb4283?w=800&q=80",
         rating: 4.5
     },
     {
@@ -77,7 +76,7 @@ export const RESOURCES: Resource[] = [
         website: "https://lakendental.com",
         email: "appt@lakendental.com",
         tags: ["dentist", "dental", "oral health"],
-        image: "https://images.unsplash.com/photo-1588776814546-1ffcf4722e12?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1445527815219-ecbfec67492e?w=800&q=80",
         rating: 4.7
     },
     {
@@ -107,7 +106,7 @@ export const RESOURCES: Resource[] = [
         website: "https://plmentalhealth.org",
         email: "help@plmentalhealth.org",
         tags: ["mental health", "therapy", "counseling"],
-        image: "https://prairie-care.com/wp-content/uploads/2021/11/1swap-scaled.jpg",
+        image: "https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=800&q=80",
         rating: 4.9
     },
 
@@ -155,7 +154,7 @@ export const RESOURCES: Resource[] = [
         website: "https://plparenting.org",
         email: "support@plparenting.org",
         tags: ["parenting", "support", "workshops"],
-        image: "https://images.unsplash.com/photo-1544280596-fddce524fa82?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800&q=80",
         rating: 4.6
     },
     {
@@ -170,7 +169,7 @@ export const RESOURCES: Resource[] = [
         website: "https://bgcpl.org",
         email: "contact@bgcpl.org",
         tags: ["youth", "mentorship", "recreation"],
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqT8cv8IeUo9LB-GcpLGe4txU0PlxuGxKC5w&s",
+        image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80",
         rating: 4.9
     },
     {
@@ -218,7 +217,7 @@ export const RESOURCES: Resource[] = [
         website: "https://mowpl.org",
         email: "signup@mowpl.org",
         tags: ["seniors", "delivery", "nutrition"],
-        image: "https://hemplers.com/wp-content/uploads/MOW1.jpg",
+        image: "https://images.unsplash.com/photo-1607478900766-efe13248b125?w=800&q=80",
         rating: 4.9
     },
     {
@@ -233,7 +232,7 @@ export const RESOURCES: Resource[] = [
         website: "https://urbanharvestpl.org",
         email: "grow@urbanharvestpl.org",
         tags: ["garden", "fresh food", "community"],
-        image: "https://geopot.com/cdn/shop/articles/geopot-header-harvest.png?v=1678343616",
+        image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80",
         rating: 4.7
     },
     {
@@ -248,7 +247,7 @@ export const RESOURCES: Resource[] = [
         website: "https://thesoupkitchenpl.org",
         email: "info@thesoupkitchenpl.org",
         tags: ["meals", "homeless", "hot food"],
-        image: "https://www.gosanangelo.com/gcdn/presto/2020/12/22/PSAT/efcd1837-24dd-43ba-a6d7-1593103d4589-1.jpg",
+        image: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80",
         rating: 4.6
     },
 
@@ -265,7 +264,7 @@ export const RESOURCES: Resource[] = [
         website: "https://gyscpl.org",
         email: "programs@gyscpl.org",
         tags: ["seniors", "activities", "social"],
-        image: "https://ozarch.imgix.net/images/Insights/Highlands-Ranch-Senior-Center-2.jpg?auto=compress%2Cformat&fit=clip&q=95&w=1440",
+        image: "https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?w=800&q=80",
         rating: 4.7
     },
     {
@@ -280,7 +279,7 @@ export const RESOURCES: Resource[] = [
         website: "https://seniortransportpl.org",
         email: "ride@seniortransportpl.org",
         tags: ["transportation", "seniors", "mobility"],
-        image: "https://www.storypoint.com/wp-content/uploads/2023/12/caregiver-assisting-resident-off-bus.jpg",
+        image: "https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&q=80",
         rating: 4.8
     },
     {
@@ -295,7 +294,7 @@ export const RESOURCES: Resource[] = [
         website: "https://storypointpl.com",
         email: "welcome@storypointpl.com",
         tags: ["housing", "assisted living", "retirement"],
-        image: "https://www.aplaceformom.com/image/apfm-web-api/1476178/storypoint-germantown.jpg?t=default",
+        image: "https://images.unsplash.com/photo-1568495248636-6432b97bd949?w=800&q=80",
         rating: 4.5
     },
 
@@ -344,7 +343,7 @@ export const RESOURCES: Resource[] = [
         website: "https://police.portlaken.gov",
         email: "police@portlaken.gov",
         tags: ["police", "safety", "emergency"],
-        image: "https://images.unsplash.com/photo-1596558151525-451bc0489627?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1453873531674-2151bcd01707?w=800&q=80",
         rating: 4.2
     },
     {
@@ -359,7 +358,7 @@ export const RESOURCES: Resource[] = [
         website: "https://fire.portlaken.gov",
         email: "fireinfo@portlaken.gov",
         tags: ["fire", "ems", "emergency"],
-        image: "https://images.unsplash.com/photo-1550974415-p002c0b561b36?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=800&q=80",
         rating: 4.8
     },
     {
@@ -406,7 +405,7 @@ export const RESOURCES: Resource[] = [
         website: "https://lakefronths.portlaken.k12.wa.us",
         email: "office@lakefronths.k12.wa.us",
         tags: ["school", "high school", "education"],
-        image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80",
         rating: 4.4
     },
     {
@@ -425,28 +424,20 @@ export const RESOURCES: Resource[] = [
         rating: 4.6
     },
     {
-    id: "26",
-    name: "Olympic University",
-    category: "Education",
-    shortDescription: "A top-20 global research university on the Pacific Rim.",
-    fullDescription: "Olympic University is a world-leading research institution with global strength in chemistry, molecular biology, law, and international law. Known for Nobel-level scientific research, elite legal scholarship, and strong ties to global policy institutions across the Pacific and Europe.",
-    address: "100 Founders Circle, Olympia Sound, WA 98501",
-    mapCoordinates: { lat: 47.0379, lng: -122.9007 },
-    phone: "(360) 555-2201",
-    website: "https://olympicu.edu",
-    email: "admissions@olympicu.edu",
-    tags: [
-        "university",
-        "research",
-        "top-20",
-        "chemistry",
-        "biology",
-        "law",
-        "international law"
-    ],
-    image: "https://www.olympic.edu/sites/default/files/styles/open_graph_image/public/images/HaselwoodLibrary.jpg?h=ef691a41&itok=GONMZJ0L",
-    rating: 4.8
-},
+        id: "26",
+        name: "Olympic University",
+        category: "Education",
+        shortDescription: "A top-20 global research university on the Pacific Rim.",
+        fullDescription: "Olympic University is a world-leading research institution with global strength in chemistry, molecular biology, law, and international law. Known for Nobel-level scientific research, elite legal scholarship, and strong ties to global policy institutions across the Pacific and Europe.",
+        address: "100 Founders Circle, Olympia Sound, WA 98501",
+        mapCoordinates: { lat: 47.0379, lng: -122.9007 },
+        phone: "(360) 555-2201",
+        website: "https://olympicu.edu",
+        email: "admissions@olympicu.edu",
+        tags: ["university", "research", "top-20", "chemistry", "biology", "law", "international law"],
+        image: "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=800&q=80",
+        rating: 4.8
+    },
     {
         id: "41",
         name: "Early Learning Center",
@@ -463,36 +454,36 @@ export const RESOURCES: Resource[] = [
         rating: 4.8
     },
     {
-    id: "27",
-    name: "Port Laken Montessori School",
-    category: "Education",
-    shortDescription: "Child-centered Montessori early learning.",
-    fullDescription: "Serving children ages 2.5–6 through accredited Montessori programs that foster independence, curiosity, and confidence in a nurturing classroom environment.",
-    address: "1450 S Jackson St, Port Laken, WA 98144",
-    mapCoordinates: { lat: 47.5669, lng: -122.3114 },
-    phone: "(206) 555-4123",
-    website: "https://plmontessori.org",
-    email: "admissions@plmontessori.org",
-    tags: ["montessori", "preschool", "early learning"],
-    image: "https://www.montessoriagoura.com/wp-content/uploads/2021/08/What-is-the-Montessori-Method-and-How-Was-it-Created-montessori-preschool-Montessori-School-of-Agoura.jpeg",
-    rating: 4.7
-},
-{
-    id: "29",
-    name: "Port Laken KinderCare",
-    category: "Education",
-    shortDescription: "Early education and child care for infants through pre-K.",
-    fullDescription: "Providing licensed child care and early learning programs for infants, toddlers, preschool, and pre-kindergarten. Our curriculum supports social, emotional, and academic development in a safe, structured environment.",
-    address: "2750 S Alaska St, Port Laken, WA 98144",
-    mapCoordinates: { lat: 47.5743, lng: -122.2951 },
-    phone: "(206) 555-4520",
-    website: "https://www.kindercare.com",
-    email: "portlaken@kindercare.com",
-    tags: ["childcare", "early learning", "preschool", "pre-k"],
-    image: "https://www.kindercare.com/ProfileBinary.axd/files/8837826302061372133/Building.jpg",
-    rating: 4.4
-}
-,
+        id: "27",
+        name: "Port Laken Montessori School",
+        category: "Education",
+        shortDescription: "Child-centered Montessori early learning.",
+        fullDescription: "Serving children ages 2.5–6 through accredited Montessori programs that foster independence, curiosity, and confidence in a nurturing classroom environment.",
+        address: "1450 S Jackson St, Port Laken, WA 98144",
+        mapCoordinates: { lat: 47.5669, lng: -122.3114 },
+        phone: "(206) 555-4123",
+        website: "https://plmontessori.org",
+        email: "admissions@plmontessori.org",
+        tags: ["montessori", "preschool", "early learning"],
+        image: "https://images.unsplash.com/photo-1567057419565-4349c49d8a04?w=800&q=80",
+        rating: 4.7
+    },
+    {
+        id: "29",
+        name: "Port Laken KinderCare",
+        category: "Education",
+        shortDescription: "Early education and child care for infants through pre-K.",
+        fullDescription: "Providing licensed child care and early learning programs for infants, toddlers, preschool, and pre-kindergarten. Our curriculum supports social, emotional, and academic development in a safe, structured environment.",
+        address: "2750 S Alaska St, Port Laken, WA 98144",
+        mapCoordinates: { lat: 47.5743, lng: -122.2951 },
+        phone: "(206) 555-4520",
+        website: "https://www.kindercare.com",
+        email: "portlaken@kindercare.com",
+        tags: ["childcare", "early learning", "preschool", "pre-k"],
+        image: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800&q=80",
+        rating: 4.4
+    },
+
     // Community
     {
         id: "42",
@@ -506,7 +497,7 @@ export const RESOURCES: Resource[] = [
         website: "https://portlaken.gov",
         email: "mayor@portlaken.gov",
         tags: ["government", "city", "services"],
-        image: "https://fsi-engineers.com/wp-content/uploads/2019/09/Olympia-city-hall.jpg",
+        image: "https://images.unsplash.com/photo-1523292562811-8fa7962a78c8?w=800&q=80",
         rating: 4.3
     },
     {
@@ -521,7 +512,7 @@ export const RESOURCES: Resource[] = [
         website: "https://dnapl.org",
         email: "board@dnapl.org",
         tags: ["neighborhood", "community", "advocacy"],
-        image: "https://images.unsplash.com/photo-1549487779-7a710207865c?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80",
         rating: 4.5
     },
     {
@@ -553,7 +544,7 @@ export const RESOURCES: Resource[] = [
         website: "https://seattle.gov/parks",
         email: "parks@portlaken.gov",
         tags: ["park", "nature", "sports"],
-        image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/5f/3e/51/photo8jpg.jpg?w=800&h=-1&s=1",
+        image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80",
         rating: 4.9
     },
     {
@@ -568,7 +559,7 @@ export const RESOURCES: Resource[] = [
         website: "https://seattleaquarium.org",
         email: "info@seattleaquarium.org",
         tags: ["aquarium", "family", "fun"],
-        image: "https://images.seattleschild.com/wp-content/uploads/2024/08/The-530000-gallon-reef-will-be-home-to-1000-fish.-Photo-by-JiaYing-Grygiel-e1724966363555.jpg",
+        image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
         rating: 4.6
     },
     {
@@ -586,8 +577,6 @@ export const RESOURCES: Resource[] = [
         image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
         rating: 4.9
     },
-
-    // More Health/Wellness
     {
         id: "33",
         name: "Yoga by the Lake",
@@ -600,7 +589,7 @@ export const RESOURCES: Resource[] = [
         website: "https://yogabylakepl.com",
         email: "namaste@yogabylakepl.com",
         tags: ["yoga", "fitness", "wellness"],
-        image: "https://s3-media0.fl.yelpcdn.com/bphoto/OIP4P6YWznt-A-g94HJQCA/1000s.jpg",
+        image: "https://images.unsplash.com/photo-1588286840104-8957b019727f?w=800&q=80",
         rating: 4.8
     },
     {
@@ -615,26 +604,26 @@ export const RESOURCES: Resource[] = [
         website: "https://www.crossfit.com/",
         email: "portlaken@crossfit.com",
         tags: ["gym", "fitness", "workout"],
-        image: "https://www.exceltherapy.com/wp-content/uploads/2019/05/201905_Blog_CrossFit_Hero.jpg",
+        image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
         rating: 4.7
     },
 
     // More Education
-{
-    id: "35",
-    name: "iCode Port Laken",
-    category: "Education",
-    shortDescription: "STEM education and coding for kids and teens.",
-    fullDescription: "iCode Port Laken offers after-school programs, camps, and competitive coding experiences for students ages 6–18. Courses include coding, robotics, game development, and AI fundamentals in a collaborative, project-based environment.",
-    address: "2020 Tech Pl, Port Laken, WA 98121",
-    mapCoordinates: { lat: 47.6150, lng: -122.3400 },
-    phone: "(206) 555-4263",
-    website: "https://www.icodeschool.com",
-    email: "portlaken@icodeschool.com",
-    tags: ["coding", "stem", "education"],
-    image: "https://icodeschool.com/severna-park-md/wp-content/uploads/2024/06/img-8.png",
-    rating: 4.6
-},
+    {
+        id: "35",
+        name: "iCode Port Laken",
+        category: "Education",
+        shortDescription: "STEM education and coding for kids and teens.",
+        fullDescription: "iCode Port Laken offers after-school programs, camps, and competitive coding experiences for students ages 6–18. Courses include coding, robotics, game development, and AI fundamentals in a collaborative, project-based environment.",
+        address: "2020 Tech Pl, Port Laken, WA 98121",
+        mapCoordinates: { lat: 47.6150, lng: -122.3400 },
+        phone: "(206) 555-4263",
+        website: "https://www.icodeschool.com",
+        email: "portlaken@icodeschool.com",
+        tags: ["coding", "stem", "education"],
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80",
+        rating: 4.6
+    },
 
     // More Community
     {
@@ -649,7 +638,7 @@ export const RESOURCES: Resource[] = [
         website: "https://seattleartmuseum.org",
         email: "visit@portlakenart.org",
         tags: ["art", "culture", "museum"],
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPzKfkl8Cn7ynDME1eHH5xjDXeWP1RpJkMHw&s",
+        image: "https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=800&q=80",
         rating: 4.7
     },
     {
@@ -698,7 +687,7 @@ export const RESOURCES: Resource[] = [
         website: "https://silversneakers.com",
         email: "support@silversneakers.com",
         tags: ["fitness", "seniors", "health"],
-        image: "https://images.unsplash.com/photo-1552674605-46d99a72010c?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1554284126-aa88f22d8b74?w=800&q=80",
         rating: 4.6
     },
 
@@ -715,7 +704,7 @@ export const RESOURCES: Resource[] = [
         website: "https://seattlehousing.org",
         email: "info@seattlehousing.org",
         tags: ["housing", "affordable", "government"],
-        image: "https://images.unsplash.com/photo-1460317442991-0ec2aaefcb88?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80",
         rating: 4.4
     }
 ];
