@@ -1,12 +1,11 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import RevealOnScroll from "@/components/RevealOnScroll";
 import {
   FaRecycle, FaSolarPanel, FaSeedling, FaLeaf,
-  FaArrowRight, FaTimes, FaCalendarAlt, FaMapMarkerAlt, FaClock,
+  FaArrowRight, FaTimes, FaCalendarAlt, FaMapMarkerAlt,
 } from "react-icons/fa";
-import { GiTreeGrowth, GiWaterDrop, GiWindmill } from "react-icons/gi";
+import { GiWaterDrop } from "react-icons/gi";
 import Link from "next/link";
 import Image from "next/image";
 import RollingNumber from "@/app/about/components/RollingNumber";
@@ -14,7 +13,6 @@ import RollingNumber from "@/app/about/components/RollingNumber";
 const GREEN = "#4CAF82";
 const BLUE = "#708aa3";
 
-/* ── Real news from the news page ── */
 const latestNews = [
   {
     date: "February 10, 2026",
@@ -36,7 +34,6 @@ const latestNews = [
   },
 ];
 
-/* ── Program popup data ── */
 const programs = [
   {
     title: "Recycling & Waste",
@@ -80,7 +77,6 @@ const programs = [
   },
 ];
 
-/* ── Initiative popups (real programs) ── */
 const initiatives = [
   {
     id: "community-gardens",
@@ -114,11 +110,25 @@ const initiatives = [
   },
 ];
 
-const impactStats = [
-  { value: "100%",   label: "Renewable Energy Goal", sub: "by 2030",     icon: GiWindmill   },
-  { value: "5,000+", label: "Trees Planted",          sub: "this year",  icon: GiTreeGrowth },
-  { value: "40%",    label: "Emissions Reduced",      sub: "since 2018", icon: FaLeaf       },
-  { value: "12",     label: "Community Gardens",       sub: "city-wide",  icon: FaSeedling   },
+const parks = [
+  {
+    name: "Elm Street Park",
+    description: "Port Laken's newest green space, opened January 2026. Features walking trails, a native plant garden, and a community pavilion on a former industrial lot.",
+    amenities: ["Walking Trails", "Pavilion", "Native Garden", "Benches"],
+    mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689.5!2d-122.3321!3d47.6062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDM2JzIyLjMiTiAxMjLCsDE5JzU1LjYiVw!5e0!3m2!1sen!2sus!4v1700000000000",
+  },
+  {
+    name: "Lakeview Waterfront Park",
+    description: "A 14-acre waterfront park along the Port Laken shoreline with picnic areas, a boat launch, and restored wetland habitat.",
+    amenities: ["Picnic Areas", "Boat Launch", "Wetland Trail", "Fishing Pier"],
+    mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689.5!2d-122.3421!3d47.6162!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDM2JzU4LjMiTiAxMjLCsDIwJzMxLjYiVw!5e0!3m2!1sen!2sus!4v1700000000001",
+  },
+  {
+    name: "Riverside Community Garden",
+    description: "One of 12 community garden sites, Riverside hosts 80+ active plots alongside a composting station and seasonal workshops.",
+    amenities: ["80+ Garden Plots", "Composting Station", "Tool Shed", "Workshop Space"],
+    mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689.5!2d-122.3221!3d47.5962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDM1JzQ2LjMiTiAxMjLCsDE5JzE5LjYiVw!5e0!3m2!1sen!2sus!4v1700000000002",
+  },
 ];
 
 function Fade({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -134,10 +144,22 @@ function Fade({ children, delay = 0 }: { children: React.ReactNode; delay?: numb
   }, [delay]);
   return <div ref={ref}>{children}</div>;
 }
-
+  const scrollToOverview = () => {
+    const overviewSection = document.getElementById('overview');
+    if (overviewSection) {
+      overviewSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
 export default function EnvironmentalPage() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [activeProgramPopup, setActiveProgramPopup] = useState<typeof programs[0] | null>(null);
+
+  const scrollToOverview = () => {
+    document.getElementById("overview")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const openModal = (id: string) => { setActiveModal(id); document.body.style.overflow = "hidden"; };
   const closeModal = () => { setActiveModal(null); document.body.style.overflow = ""; };
@@ -226,7 +248,6 @@ export default function EnvironmentalPage() {
 
       {/* ── HERO ── */}
       <section className="relative overflow-hidden" style={{ paddingTop: "10rem", paddingBottom: "7rem", minHeight: "100vh", display: "flex", alignItems: "center" }}>
-        {/* Olympic forest background image */}
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=1920&q=80"
@@ -235,36 +256,33 @@ export default function EnvironmentalPage() {
             className="object-cover"
             priority
           />
-          {/* Blue tinted overlay to match site palette */}
-          <div className="absolute inset-0" style={{ background: "rgba(112,138,163,0.82)" }} />
-          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 60% at 80% 20%, rgba(74,104,128,0.6), transparent 55%)" }} />
+          <div className="absolute inset-0" style={{ backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", background: "rgba(0,0,0,0.35)" }} />
         </div>
         <div className="absolute rounded-full border border-white/10 pointer-events-none z-10" style={{ width: 600, height: 600, top: -150, right: -150, animation: "pulse 7s ease-in-out infinite" }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <Fade>
-            <p className="text-xs font-semibold tracking-widest uppercase text-white/40 flex items-center gap-3 mb-10">
-              <span className="inline-block w-8 h-px" style={{ background: GREEN }} />Environmental Stewardship
-            </p>
             <h1 className="font-display font-black text-white tracking-tight mb-8" style={{ fontSize: "clamp(56px,8vw,100px)", lineHeight: 0.95 }}>
-              Our Commitment<br />to a <em className="not-italic" style={{ color: GREEN }}>Greener</em><br />Future
+              Our Commitment<br />to a <em className="not-italic" style={{ color: GREEN }}>Greener</em> Future<br />
             </h1>
             <p className="text-white/55 font-light leading-relaxed mb-12 max-w-lg" style={{ fontSize: 17 }}>
-              Discover how we are working together to protect and preserve our local environment for generations to come.
-            </p>
+Discover how Port Laken protects and preserves its natural environment. This includes clean energy, water conservation, parks, and green spaces that will serve the community for generations to come.            </p>
             <div className="flex flex-wrap gap-4">
-              <Link href="/environmental/programs" className="inline-flex items-center gap-2 rounded-full text-white text-sm font-semibold transition-colors" style={{ background: "rgba(255,255,255,0.2)", border: "1px solid rgba(255,255,255,0.3)", padding: "14px 28px" }}>
-                Explore Programs <FaArrowRight size={11} />
-              </Link>
-              <Link href="/environmental/get-involved" className="inline-flex items-center gap-2 rounded-full text-white/70 text-sm font-medium border border-white/20 hover:border-white/50 hover:text-white transition-all" style={{ padding: "14px 28px" }}>
-                Get Involved
+              <Link href="/environmental/programs"
+                className="inline-flex items-center gap-2 rounded-full text-base font-bold border-[3px] border-white text-white hover:bg-white hover:text-port-navy transition-all duration-200"
+                style={{ padding: "15px 36px" }}>
+                Explore Programs <FaArrowRight size={13} />
               </Link>
             </div>
           </Fade>
         </div>
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 cursor-pointer" onClick={scrollToOverview}>
+          <span className="text-white text-xs font-medium uppercase">Scroll Down ▼</span>
+        </div>
+        
       </section>
 
       {/* ── OVERVIEW ── */}
-      <section className="bg-white" style={{ padding: "6rem 0" }}>
+      <section id="overview" className="bg-white" style={{ padding: "6rem 0" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <Fade>
@@ -273,22 +291,37 @@ export default function EnvironmentalPage() {
                 Stewardship<br />for <em className="italic" style={{ color: GREEN }}>tomorrow</em>
               </h2>
               <p className="text-port-slate font-light leading-relaxed text-base">
-                Our community is dedicated to fostering a sustainable future through proactive environmental stewardship — from comprehensive recycling programs to the adoption of green energy — all designed to reduce our ecological footprint and enhance quality of life for all residents.
-              </p>
+Our community is dedicated to fostering a sustainable future through proactive environmental stewardship. This includes comprehensive recycling programs and the adoption of green energy. All of these efforts are designed to reduce our ecological footprint and improve the quality of life for all residents.              </p>
             </Fade>
             <Fade delay={150}>
-              <div className="grid grid-cols-2 gap-4">
-                <RollingNumber value={5000} label="Trees Planted" suffix="+" />
-                <RollingNumber value={40} label="Emissions Reduced" suffix="%" />
-                <RollingNumber value={2000000} label="Gallons Saved" suffix="+" />
-                <RollingNumber value={12} label="Community Gardens" />
+              <div className="relative flex items-center justify-center" style={{ height: 420 }}>
+                {[
+                  "https://olympicpeninsula.org/wp-content/uploads/2018/07/Hall-of-Mosses-Trail-Hoh-Rain-Forest-2.jpg",
+                  "https://stateofwatourism.com/wp-content/uploads/2022/07/Rain-Forest-Olympic-Peninsula-9699-narrow.jpg",
+                  "https://media.istockphoto.com/id/2082172331/photo/full-length-of-multicultural-friends-walking-in-city-park-and-having-fun.webp?b=1&s=612x612&w=0&k=20&c=ozyRAfHW0PY-OCmW0ctE7TmCkgohazyPxW8afCf74MA=",
+                ].map((src, i) => (
+                  <div
+                    key={i}
+                    className="absolute rounded-2xl overflow-hidden"
+                    style={{
+                      width: 280,
+                      height: 360,
+                      border: "5px solid white",
+                      boxShadow: "0 20px 60px rgba(0,0,0,0.18)",
+                      animation: `cardCycle 6s ease-in-out infinite`,
+                      animationDelay: `${i * 2}s`,
+                    }}
+                  >
+                    <Image src={src} alt={`Park photo ${i + 1}`} fill className="object-cover" sizes="280px" />
+                  </div>
+                ))}
               </div>
             </Fade>
           </div>
         </div>
       </section>
 
-      {/* ── PROGRAMS — clicking opens a popup ── */}
+      {/* ── PROGRAMS ── */}
       <section className="bg-port-cream" style={{ padding: "6rem 0" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Fade>
@@ -300,7 +333,6 @@ export default function EnvironmentalPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {programs.map((p, i) => (
               <Fade key={p.title} delay={i * 80}>
-                {/* clicking opens popup — not a dead link */}
                 <button onClick={() => openProgramPopup(p)}
                   className="group flex flex-col bg-white rounded-2xl border border-port-mist hover:border-port-sky/40 hover:shadow-lg transition-all duration-300 h-full text-left w-full"
                   style={{ padding: "2rem" }}>
@@ -362,7 +394,7 @@ export default function EnvironmentalPage() {
         </div>
       </section>
 
-      {/* ── IMPACT ── */}
+      {/* ── IMPACT STATS ── */}
       <section style={{ background: BLUE, padding: "5rem 0" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -374,8 +406,57 @@ export default function EnvironmentalPage() {
         </div>
       </section>
 
-      {/* ── NEWS — pulled from real articles ── */}
+      {/* ── PARKS & GREEN SPACES ── */}
       <section className="bg-port-cream" style={{ padding: "6rem 0" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Fade>
+            <div className="w-10 h-1 rounded-full mb-8" style={{ background: GREEN }} />
+            <h2 className="font-display font-bold text-port-navy tracking-tight mb-4" style={{ fontSize: "clamp(38px,4vw,54px)", lineHeight: 1.05 }}>
+              Parks &amp; <em className="italic" style={{ color: GREEN }}>Green Spaces</em>
+            </h2>
+            <p className="text-port-slate font-light leading-relaxed mb-14 max-w-xl" style={{ fontSize: 16 }}>
+              Port Laken's parks are living parts of our environmental commitment — maintained as natural habitats, community gathering spaces, and green corridors throughout the city.
+            </p>
+          </Fade>
+          <div className="flex flex-col gap-12">
+            {parks.map((park, i) => (
+              <Fade key={park.name} delay={i * 100}>
+                <div className={`grid lg:grid-cols-2 gap-8 items-start ${i % 2 === 1 ? "lg:[direction:rtl]" : ""}`}>
+                  <div className={i % 2 === 1 ? "lg:[direction:ltr]" : ""}>
+                    <div className="rounded-2xl overflow-hidden border border-port-mist shadow-sm" style={{ height: 320 }}>
+                      <iframe
+                        src={park.mapSrc}
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0 }}
+                        allowFullScreen
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        title={`Map of ${park.name}`}
+                      />
+                    </div>
+                  </div>
+                  <div className={`flex flex-col justify-center ${i % 2 === 1 ? "lg:[direction:ltr]" : ""}`}>
+                    <p className="text-xs font-semibold tracking-widest uppercase flex items-center gap-2 mb-3" style={{ color: GREEN }}>
+                      <FaMapMarkerAlt size={10} /> Park Location
+                    </p>
+                    <h3 className="font-display font-bold text-port-navy mb-3" style={{ fontSize: "clamp(24px,3vw,32px)", lineHeight: 1.15 }}>{park.name}</h3>
+                    <p className="text-port-slate font-light leading-relaxed mb-6" style={{ fontSize: 15 }}>{park.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {park.amenities.map(a => (
+                        <span key={a} className="text-xs font-semibold px-3 py-1.5 rounded-full border border-port-mist bg-white text-port-slate">{a}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Fade>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── NEWS ── */}
+      <section className="bg-white" style={{ padding: "6rem 0" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Fade>
             <div className="w-10 h-1 rounded-full mb-8" style={{ background: GREEN }} />
@@ -383,7 +464,6 @@ export default function EnvironmentalPage() {
               What&apos;s <em className="italic" style={{ color: GREEN }}>happening</em>
             </h2>
           </Fade>
-
           {latestNews.map((item, i) => (
             <Fade key={i} delay={i * 80}>
               <Link href={item.link}
@@ -400,7 +480,6 @@ export default function EnvironmentalPage() {
               </Link>
             </Fade>
           ))}
-
           <div style={{ marginTop: "2.5rem" }}>
             <Link href="/news" className="inline-flex items-center gap-2 text-sm font-semibold text-port-navy hover:text-port-sky transition-colors group">
               View all news <FaArrowRight size={11} className="group-hover:translate-x-1 transition-transform" />
@@ -409,35 +488,18 @@ export default function EnvironmentalPage() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className="bg-white" style={{ padding: "6rem 0" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Fade>
-            <div className="rounded-2xl text-center relative overflow-hidden" style={{ background: BLUE, padding: "5rem 3rem" }}>
-              <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(255,255,255,0.1), transparent 60%)" }} />
-              <FaLeaf className="relative mx-auto mb-6 opacity-80" size={36} style={{ color: GREEN }} />
-              <h2 className="relative font-display font-bold text-white tracking-tight mb-4" style={{ fontSize: "clamp(30px,4vw,46px)", lineHeight: 1.1 }}>
-                Join Our <em className="italic" style={{ color: GREEN }}>Green Movement</em>
-              </h2>
-              <p className="relative text-white/60 font-light leading-relaxed max-w-md mx-auto mb-10" style={{ fontSize: 15 }}>
-                Every action counts. Volunteer, participate in community cleanups, or simply make sustainable choices.
-              </p>
-              <div className="relative flex gap-4 justify-center flex-wrap">
-                <Link href="/environmental/get-involved" className="inline-flex items-center gap-2 rounded-full text-port-navy bg-white font-semibold text-sm hover:bg-port-cream transition-colors" style={{ padding: "14px 32px" }}>
-                  Volunteer Today <FaArrowRight size={11} />
-                </Link>
-                <Link href="/contact" className="inline-flex items-center gap-2 rounded-full text-white/70 text-sm font-medium border border-white/25 hover:border-white/50 hover:text-white transition-all" style={{ padding: "14px 32px" }}>
-                  Contact Us
-                </Link>
-              </div>
-            </div>
-          </Fade>
-        </div>
-      </section>
-
       <style jsx global>{`
         @keyframes pulse { 0%,100%{opacity:.2;transform:scale(1)} 50%{opacity:.4;transform:scale(1.03)} }
         @keyframes mIn   { from{opacity:0;transform:translateY(16px) scale(.97)} to{opacity:1;transform:none} }
+        @keyframes cardCycle {
+          0%   { transform: rotate(-6deg) translateY(0px)   scale(0.88); z-index: 1; opacity: 0.7; }
+          15%  { transform: rotate(-6deg) translateY(-8px)  scale(0.88); z-index: 1; opacity: 0.7; }
+          33%  { transform: rotate(0deg)  translateY(-20px) scale(1);    z-index: 3; opacity: 1;   }
+          55%  { transform: rotate(0deg)  translateY(-20px) scale(1);    z-index: 3; opacity: 1;   }
+          70%  { transform: rotate(6deg)  translateY(0px)   scale(0.88); z-index: 2; opacity: 0.8; }
+          85%  { transform: rotate(6deg)  translateY(0px)   scale(0.88); z-index: 2; opacity: 0.8; }
+          100% { transform: rotate(-6deg) translateY(0px)   scale(0.88); z-index: 1; opacity: 0.7; }
+        }
       `}</style>
     </>
   );

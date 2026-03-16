@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, Suspense, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { RESOURCES, Resource, ResourceCategory } from "./resources";
 import ResourceCard from "./_components/ResourceCard";
@@ -293,12 +293,15 @@ If the answer is available through the visible resource cards, mention the speci
 
 STYLE RULES:
 - Write EXACTLY 4 sentences.
-- Each sentence should be 18-30 words when possible.
+- Each sentence should be 25-40 words when possible.
+- Target a total response of around 600 characters.
 - Be specific and helpful.
 - No bullet points.
 - No markdown.
 - End with a period.
 - Sound like an on-site assistant, not a generic chatbot.
+- When referencing a specific resource from the directory, write its exact name as it appears in the resource list.
+- When referencing a page on the website, write the page name exactly as it appears in the navigation (e.g. "Events", "Map", "Forms & Applications", "Life", "Council", "Ordinances", "Boards & Committees", "Environment", "Careers", "News", "About", "References", "Departments").
 
 Return only the final paragraph text.
 `.trim();
@@ -314,7 +317,7 @@ Return only the final paragraph text.
           contents: [{ role: "user", parts: [{ text: prompt }] }],
           generationConfig: {
             temperature: 0.2,
-            maxOutputTokens: 800,
+            maxOutputTokens: 1200,
             topP: 0.9,
           },
         }),
@@ -340,9 +343,9 @@ Return only the final paragraph text.
     return finalized.length >= minChars ? finalized : "";
   };
 
-  let out = await callGemini(260);
-  if (!out) out = await callGemini(220);
-  if (!out) out = await callGemini(180);
+  let out = await callGemini(400);
+  if (!out) out = await callGemini(320);
+  if (!out) out = await callGemini(240);
 
   return out || "No response generated.";
 }
@@ -362,6 +365,8 @@ function ResourceDirectoryContent() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const hasAutoSearched = useRef(false);
+
   useEffect(() => {
     const q = searchParams.get("q");
     if (q !== null) {
@@ -375,6 +380,13 @@ function ResourceDirectoryContent() {
         setSelectedResource(resource);
       }
     }
+
+    // Auto-fire AI search when arriving from navbar with ?q=
+    if (q && !hasAutoSearched.current) {
+      hasAutoSearched.current = true;
+      handleAiSearch(q);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   useEffect(() => {
@@ -467,6 +479,11 @@ function ResourceDirectoryContent() {
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           <aside className="w-full lg:w-1/4 flex-shrink-0 space-y-8 sticky top-36 h-fit hidden md:block">
+            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs text-amber-800 leading-relaxed">
+              <span className="font-bold">Disclaimer: </span>
+              The resource locations listed in this directory are not real. Port Laken is a fictional city inspired by the real city of Port Angeles in Washington State. Some listings may reference similar types of locations found in Port Angeles, while others point to random nearby areas. These resources are for demonstration purposes only and should not be used for real-world navigation or services.
+            </div>
+
             <div className="bg-white p-6 rounded-3xl border border-port-mist shadow-sm">
               <div className="mb-6 border-b border-port-mist pb-4">
                 <h2 className="font-display text-xl font-bold text-port-navy">
@@ -524,6 +541,8 @@ function ResourceDirectoryContent() {
                 aiOverview={aiOverview}
                 loading={loading}
                 error={error}
+                allResources={RESOURCES}
+                onResourceClick={(r) => setSelectedResource(r)}
               />
             </div>
 

@@ -2,7 +2,7 @@
 
 import { Resource } from "../resources";
 import { motion } from "framer-motion";
-import { Sparkles, Star } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import Image from 'next/image';
 
 interface ResourceCardProps extends Resource {
@@ -49,19 +49,6 @@ export default function ResourceCard({
 
             {/* Content */}
             <div className="p-6 flex-1 flex flex-col">
-                {/* Rating & Short Description */}
-                <div className="flex items-center gap-1 mb-2">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                        <Star
-                            key={i}
-                            size={14}
-                            className={`${i < Math.round(rating || 0) ? "text-yellow-400 fill-yellow-400" : "text-gray-200"
-                                }`}
-                        />
-                    ))}
-                    <span className="text-xs text-port-slate ml-1 pt-0.5">({rating})</span>
-                </div>
-
                 <p className="text-port-slate text-[15px] leading-relaxed mb-6 line-clamp-3 flex-grow">
                     {shortDescription}
                 </p>

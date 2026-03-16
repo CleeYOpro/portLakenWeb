@@ -97,9 +97,7 @@ export default function ProgramsPage() {
             <FaArrowRight className="rotate-180" size={10} /> Environmental Overview
           </Link>
           <Fade>
-            <p className="text-xs font-semibold tracking-widest uppercase text-white/40 flex items-center gap-3 mb-8">
-              <span className="inline-block w-8 h-px" style={{ background: GREEN }} />Environmental Programs
-            </p>
+            
             <h1 className="font-display font-black text-white tracking-tight mb-8" style={{ fontSize: "clamp(52px,7vw,90px)", lineHeight: 0.95 }}>
               Explore Our<br /><em className="italic" style={{ color: GREEN }}>Programs</em>
             </h1>
@@ -108,18 +106,7 @@ export default function ProgramsPage() {
             </p>
           </Fade>
 
-          <Fade delay={100}>
-            <div className="grid grid-cols-2 sm:grid-cols-4 bg-white rounded-2xl overflow-hidden shadow-xl">
-              {heroStats.map((s, i) => (
-                <div key={i} className="flex flex-col items-center justify-center text-center"
-                  style={{ padding: "2rem 1rem", borderRight: i < 3 ? "1px solid #d6dfe8" : "none" }}>
-                  <s.icon className="mb-3" size={20} style={{ color: BLUE, opacity: 0.6 }} />
-                  <p className="font-display font-black text-port-navy mb-1" style={{ fontSize: 26, lineHeight: 1 }}>{s.value}</p>
-                  <p className="text-port-slate/55 tracking-wide" style={{ fontSize: 11 }}>{s.label}</p>
-                </div>
-              ))}
-            </div>
-          </Fade>
+          
         </div>
       </section>
 
@@ -234,25 +221,7 @@ export default function ProgramsPage() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className="bg-white" style={{ padding: "6rem 0" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Fade>
-            <div style={{ maxWidth: 520 }}>
-              <div className="w-10 h-1 rounded-full mb-8" style={{ background: GREEN }} />
-              <h2 className="font-display font-bold text-port-navy tracking-tight mb-5" style={{ fontSize: "clamp(34px,4vw,52px)", lineHeight: 1.05 }}>
-                Ready to make <em className="italic" style={{ color: GREEN }}>a difference?</em>
-              </h2>
-              <p className="text-sm text-port-slate font-light leading-relaxed mb-10">
-                Join thousands of Port Laken residents making a tangible impact on our environment.
-              </p>
-              <Link href="/environmental/get-involved" className="inline-flex items-center gap-2 rounded-full text-white font-semibold text-sm hover:opacity-90 transition-opacity" style={{ background: BLUE, padding: "14px 32px" }}>
-                Get Involved Today <FaArrowRight size={11} />
-              </Link>
-            </div>
-          </Fade>
-        </div>
-      </section>
+      
 
       <style jsx global>{`
         @keyframes pulse { 0%,100%{opacity:.2;transform:scale(1)} 50%{opacity:.45;transform:scale(1.03)} }
