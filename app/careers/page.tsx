@@ -84,9 +84,9 @@ export default function CareersPage() {
                 Find us on
               </span>
               <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Indeed_logo.svg/512px-Indeed_logo.svg.png"
+                src="https://www.unleash.ai/wp-content/uploads/2023/06/Indeed-logo1-white.png"
                 alt="Indeed"
-                className="h-5 w-auto flex-shrink-0 brightness-0 invert -translate-y-[3px]"
+                className="h-8 w-auto flex-shrink-0 brightness-0 invert -translate-y-[1px]"
               />
             </a>
           </div>
