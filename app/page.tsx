@@ -940,7 +940,7 @@ function AccountSection() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
               </svg>
               <span className="flex-1 text-left font-semibold text-primary-shade group-hover:text-primary-shade/90 tracking-wide text-sm transition-colors duration-300">
-                Get Updates
+                Create an account with email
               </span>
               <FaArrowRight className="text-primary-shade/30 group-hover:text-primary-shade group-hover:translate-x-1 transition-all duration-300 text-xs" />
             </Link>
