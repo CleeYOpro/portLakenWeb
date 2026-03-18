@@ -39,7 +39,7 @@ export default function Page() {
     setLoading(true);
 
     try {
-      await signUp(email, password, subscribe);
+      await signUp(email, password, `${firstName} ${lastName}`.trim(), subscribe);
       // After successful signup, redirect to dashboard or sign-in
       router.push('/dashboard');
       router.refresh();

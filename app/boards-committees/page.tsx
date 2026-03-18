@@ -17,7 +17,7 @@ import { HiOutlineClock } from "react-icons/hi";
 
 const boards = [
   {
-    id: "planning-1",
+    id: "planning",
     name: "Planning Commission",
     members: 7,
     frequency: "Meets Monthly",
@@ -28,7 +28,7 @@ const boards = [
     image:
       "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&q=80",
     detailedDescription:
-      "The Planning Commission plays a key role in shaping the long-term growth of Port Laken. Members review zoning proposals, land development plans, comprehensive planning updates, and major policy recommendations before forwarding guidance to city leadership. The commission helps ensure development aligns with the city’s goals for sustainability, housing, transportation, and neighborhood character.",
+      "The Planning Commission plays a key role in shaping the long-term growth of Port Laken. Members review zoning proposals, land development plans, comprehensive planning updates, and major policy recommendations before forwarding guidance to city leadership. The commission helps ensure development aligns with the city's goals for sustainability, housing, transportation, and neighborhood character.",
     responsibilities: [
       "Review zoning and land use proposals",
       "Advise on long-range planning and growth strategy",
@@ -40,30 +40,7 @@ const boards = [
     contact: "planning@portlaken.gov",
   },
   {
-    id: "planning-2",
-    name: "Planning Commission",
-    members: 7,
-    frequency: "Meets Monthly",
-    term: "4 Year Term",
-    description:
-      "Reviews and recommends policies for the physical development of Port Laken, including zoning regulations, land use planning, and long-term growth strategies for sustainable community development.",
-    tags: ["Development", "Policy Advisory"],
-    image:
-      "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&q=80",
-    detailedDescription:
-      "The Planning Commission works closely with staff and residents to review development policy and land use strategy. Its recommendations help shape future neighborhood growth, transportation connections, housing policy, and public realm improvements across Port Laken.",
-    responsibilities: [
-      "Study land use and zoning impacts",
-      "Review staff reports and development proposals",
-      "Provide public-facing policy recommendations",
-      "Encourage balanced growth and neighborhood planning",
-    ],
-    meetingSchedule: "First Thursday of each month, 6:00 PM",
-    location: "City Hall Council Chambers, Port Laken",
-    contact: "planning@portlaken.gov",
-  },
-  {
-    id: "civic-arts-1",
+    id: "civic-arts",
     name: "Civic Arts Commission",
     members: 5,
     frequency: "Meets Quarterly",
@@ -86,50 +63,188 @@ const boards = [
     contact: "arts@portlaken.gov",
   },
   {
-    id: "civic-arts-2",
-    name: "Civic Arts Commission",
-    members: 5,
-    frequency: "Meets Quarterly",
-    term: "4 Year Term",
+    id: "parks-recreation",
+    name: "Parks & Recreation Board",
+    members: 7,
+    frequency: "Meets Monthly",
+    term: "3 Year Term",
     description:
-      "Promotes artistic and cultural development by commissioning public art, supporting local artists, and enhancing the cultural vibrancy of our community through various programs and initiatives.",
-    tags: ["Civic", "Public Engagement"],
+      "Oversees the development and maintenance of Port Laken's parks, trails, and recreational facilities, ensuring residents have access to quality green spaces and programming for all ages.",
+    tags: ["Parks", "Community"],
     image:
-      "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200&q=80",
+      "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=80",
     detailedDescription:
-      "The Civic Arts Commission encourages creative expression throughout Port Laken by advising on exhibitions, murals, performance opportunities, and cultural partnerships. The commission helps connect residents to arts experiences that make the city more vibrant and welcoming.",
+      "The Parks & Recreation Board advises the city on the planning, development, and stewardship of public parks, open spaces, trails, and recreation programs. The board works to ensure Port Laken's natural assets are preserved and that residents of all ages have access to enriching outdoor and recreational experiences.",
     responsibilities: [
-      "Review arts and culture proposals",
-      "Collaborate with community partners",
-      "Help guide creative public space improvements",
-      "Expand visibility of local art and artists",
+      "Review park development and improvement proposals",
+      "Advise on recreational programming and facility needs",
+      "Advocate for trail connectivity and open space preservation",
+      "Engage the community on parks priorities and feedback",
     ],
-    meetingSchedule: "Quarterly on the second Tuesday, 5:30 PM",
-    location: "Community Arts Center, Port Laken",
-    contact: "arts@portlaken.gov",
+    meetingSchedule: "Third Wednesday of each month, 6:00 PM",
+    location: "Parks & Recreation Office, Port Laken",
+    contact: "parks@portlaken.gov",
   },
   {
-    id: "civic-arts-3",
-    name: "Civic Arts Commission",
+    id: "ethics",
+    name: "Ethics Commission",
     members: 5,
-    frequency: "Meets Quarterly",
+    frequency: "Meets As Needed",
     term: "4 Year Term",
     description:
-      "Promotes artistic and cultural development by commissioning public art, supporting local artists, and enhancing the cultural vibrancy of our community through various programs and initiatives.",
-    tags: ["Civic", "Public Engagement"],
+      "Upholds the integrity of city government by reviewing ethics complaints, providing guidance on conflicts of interest, and ensuring public officials adhere to Port Laken's code of ethics.",
+    tags: ["Governance", "Accountability"],
     image:
-      "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200&q=80",
+      "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&q=80",
     detailedDescription:
-      "The Civic Arts Commission champions programs that celebrate Port Laken’s artistic identity. From temporary exhibitions to neighborhood-based creative events, the commission helps make arts and culture accessible to residents of all ages.",
+      "The Ethics Commission serves as an independent body responsible for interpreting and enforcing Port Laken's ethics ordinance. It reviews complaints against city officials and employees, issues advisory opinions, and promotes a culture of transparency and accountability in local government.",
     responsibilities: [
-      "Encourage participation in local arts programming",
-      "Advise on cultural development priorities",
-      "Support artist-focused partnerships and events",
-      "Promote inclusive access to public art initiatives",
+      "Investigate and adjudicate ethics complaints",
+      "Issue advisory opinions on conflicts of interest",
+      "Educate city staff and officials on ethics standards",
+      "Recommend updates to the city's ethics ordinance",
     ],
-    meetingSchedule: "Quarterly on the second Tuesday, 5:30 PM",
-    location: "Community Arts Center, Port Laken",
-    contact: "arts@portlaken.gov",
+    meetingSchedule: "As needed, with notice provided to the public",
+    location: "City Hall, Port Laken",
+    contact: "ethics@portlaken.gov",
+  },
+  {
+    id: "historic-preservation",
+    name: "Historic Preservation Board",
+    members: 7,
+    frequency: "Meets Monthly",
+    term: "4 Year Term",
+    description:
+      "Identifies, protects, and celebrates Port Laken's historic and cultural landmarks, reviewing development proposals that may affect designated historic properties and districts.",
+    tags: ["Heritage", "Policy Advisory"],
+    image:
+      "https://images.unsplash.com/photo-1464817739973-0128fe77aaa1?w=1200&q=80",
+    detailedDescription:
+      "The Historic Preservation Board works to safeguard Port Laken's architectural and cultural heritage. Members review applications for alterations to historic landmarks, nominate properties for local and state designation, and advise the city on preservation policy to ensure the community's history remains visible for future generations.",
+    responsibilities: [
+      "Review alterations to designated historic properties",
+      "Nominate landmarks for local and state historic registers",
+      "Advise on preservation incentives and policy",
+      "Educate the public on Port Laken's historic resources",
+    ],
+    meetingSchedule: "Second Monday of each month, 5:30 PM",
+    location: "City Hall Council Chambers, Port Laken",
+    contact: "historic@portlaken.gov",
+  },
+  {
+    id: "youth-advisory",
+    name: "Youth Advisory Council",
+    members: 12,
+    frequency: "Meets Monthly",
+    term: "1 Year Term",
+    description:
+      "Gives young residents ages 14–21 a direct voice in city government, advising the City Council on issues affecting youth and helping shape programs, policies, and community initiatives.",
+    tags: ["Youth", "Public Engagement"],
+    image:
+      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=80",
+    detailedDescription:
+      "The Youth Advisory Council empowers Port Laken's next generation of civic leaders. Young residents collaborate with city staff and elected officials to identify issues important to youth, develop recommendations, and participate in community events. The council builds civic skills and ensures youth perspectives are represented in city decision-making.",
+    responsibilities: [
+      "Advise the City Council on youth-related issues",
+      "Develop and promote youth-focused programs and events",
+      "Represent the interests of Port Laken's young residents",
+      "Engage peers in civic participation and community service",
+    ],
+    meetingSchedule: "First Tuesday of each month, 5:00 PM",
+    location: "Community Hub, Port Laken",
+    contact: "youth@portlaken.gov",
+  },
+  {
+    id: "environmental-sustainability",
+    name: "Environmental Sustainability Commission",
+    members: 7,
+    frequency: "Meets Monthly",
+    term: "4 Year Term",
+    description:
+      "Advises the city on environmental policy, climate resilience, and sustainability initiatives to protect Port Laken's natural resources and reduce the community's environmental footprint.",
+    tags: ["Environment", "Policy Advisory"],
+    image:
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80",
+    detailedDescription:
+      "The Environmental Sustainability Commission guides Port Laken's efforts to address climate change, protect natural resources, and build a more sustainable community. Members advise on energy efficiency, stormwater management, urban forestry, and green infrastructure, helping the city meet its long-term environmental goals.",
+    responsibilities: [
+      "Advise on climate action and sustainability planning",
+      "Review environmental impacts of city projects",
+      "Promote energy efficiency and renewable energy adoption",
+      "Support urban forestry, stormwater, and green infrastructure initiatives",
+    ],
+    meetingSchedule: "Second Thursday of each month, 6:00 PM",
+    location: "City Hall, Port Laken",
+    contact: "sustainability@portlaken.gov",
+  },
+  {
+    id: "public-safety",
+    name: "Public Safety Advisory Board",
+    members: 9,
+    frequency: "Meets Monthly",
+    term: "3 Year Term",
+    description:
+      "Provides community oversight and advisory input on police, fire, and emergency services, helping build trust between residents and public safety agencies in Port Laken.",
+    tags: ["Public Safety", "Community"],
+    image:
+      "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=80",
+    detailedDescription:
+      "The Public Safety Advisory Board fosters transparency and community trust in Port Laken's police and fire departments. Members review public safety policies, hear community concerns, and make recommendations to improve emergency services, crisis response, and neighborhood safety programs.",
+    responsibilities: [
+      "Review public safety policies and department reports",
+      "Facilitate community dialogue on policing and fire services",
+      "Recommend improvements to emergency response programs",
+      "Promote community-oriented public safety initiatives",
+    ],
+    meetingSchedule: "Fourth Tuesday of each month, 6:30 PM",
+    location: "Public Safety Building, Port Laken",
+    contact: "publicsafety@portlaken.gov",
+  },
+  {
+    id: "housing-community-development",
+    name: "Housing & Community Development Committee",
+    members: 7,
+    frequency: "Meets Monthly",
+    term: "4 Year Term",
+    description:
+      "Addresses housing affordability, neighborhood revitalization, and community development needs, advising on programs that expand access to safe and stable housing for all Port Laken residents.",
+    tags: ["Housing", "Development"],
+    image:
+      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80",
+    detailedDescription:
+      "The Housing & Community Development Committee works to ensure Port Laken remains an inclusive and affordable place to live. Members advise on housing policy, federal community development funding, anti-displacement strategies, and programs that support low- and moderate-income residents.",
+    responsibilities: [
+      "Advise on affordable housing policy and programs",
+      "Review community development block grant allocations",
+      "Support anti-displacement and neighborhood stabilization efforts",
+      "Engage residents on housing needs and priorities",
+    ],
+    meetingSchedule: "Third Thursday of each month, 6:00 PM",
+    location: "Community Development Office, Port Laken",
+    contact: "housing@portlaken.gov",
+  },
+  {
+    id: "library-advisory",
+    name: "Library Advisory Board",
+    members: 5,
+    frequency: "Meets Quarterly",
+    term: "3 Year Term",
+    description:
+      "Supports the Port Laken Public Library by advising on programming, collections, and services that meet the educational and cultural needs of the community.",
+    tags: ["Education", "Community"],
+    image:
+      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80",
+    detailedDescription:
+      "The Library Advisory Board champions the Port Laken Public Library as a vital community resource. Members advise on library programming, digital services, collection development, and outreach efforts that ensure the library serves residents of all backgrounds and ages.",
+    responsibilities: [
+      "Advise on library programs, services, and collections",
+      "Advocate for library funding and resources",
+      "Support community outreach and digital literacy initiatives",
+      "Provide input on library facility needs and improvements",
+    ],
+    meetingSchedule: "Quarterly on the first Wednesday, 5:00 PM",
+    location: "Port Laken Public Library",
+    contact: "library@portlaken.gov",
   },
 ];
 
@@ -156,7 +271,6 @@ export default function BoardsPage() {
     } else {
       document.body.style.overflow = "";
     }
-
     return () => {
       document.body.style.overflow = "";
     };
@@ -311,11 +425,9 @@ export default function BoardsPage() {
                     <h4 className="font-nunito text-sm font-bold tracking-wide text-[#1e3a5f] uppercase mb-4">
                       Contact
                     </h4>
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3 text-gray-700 font-nunito">
-                        <FaEnvelope className="text-[#708AA3]" />
-                        <span>{selectedBoard.contact}</span>
-                      </div>
+                    <div className="flex items-center gap-3 text-gray-700 font-nunito">
+                      <FaEnvelope className="text-[#708AA3]" />
+                      <span>{selectedBoard.contact}</span>
                     </div>
                   </div>
 
