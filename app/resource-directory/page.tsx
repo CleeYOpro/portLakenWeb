@@ -130,12 +130,6 @@ export const PAGE_CONTEXTS: Record<string, PageContext> = {
     description: "Port Laken city employment opportunities. Benefits include comprehensive health, dental & vision coverage, generous retirement & pension plans, paid time off & holidays, and long-term job stability. The city values community impact, career growth, and stability. Job listings are posted on Indeed. Roles include civil engineers, recreation coordinators, IT support specialists, and more. The Careers page links to the full Benefits Guide.",
     images: [],
   },
-  life: {
-    route: "/living-in-portlaken",
-    label: "Life",
-    description: "Living in Port Laken: Affordable Housing (programs for buyers and renters, forms available), Schools & Childcare (25 public schools, A+ safety rating, childcare resources in Resource Directory), Parks & Recreation (50+ parks, 100 miles of trails, award-winning park system), Local Business & Economy (1,500+ local businesses, support for entrepreneurs), Public Transit (bus routes and intercity rail, ~2hr from Seattle), Community Centers (Eastlaken Community Center, Harbor Community Center), Waste & Recycling (curbside Tuesdays, green initiatives), Public Safety (police, fire, emergency services), Health Services (clinics, hospitals, wellness programs in Resource Directory), Libraries & Arts (Port Laken Public Library, Port Laken Art Museum, Port Laken History Museum), Permits & Licenses (forms page).",
-    images: [],
-  },
 };
 
 const siteContext = {

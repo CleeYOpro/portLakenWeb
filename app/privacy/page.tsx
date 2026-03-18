@@ -1,153 +1,206 @@
-"use client";
-
-import RevealOnScroll from "@/components/RevealOnScroll";
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | Port Laken",
+  description:
+    "How the Port Laken website collects, uses, stores, and shares information.",
+};
+
+const sections = [
+  {
+    title: "What this page covers",
+    body: [
+      "This Privacy Policy explains how the Port Laken website collects, uses, stores, and shares information when you browse the site, create an account, submit a form, or interact with features such as maps, alerts, and email communications.",
+      "Port Laken is a fictional city project created for educational and portfolio purposes. Even so, the site includes real web technologies and account features, so this policy describes how information is handled within that project environment.",
+    ],
+  },
+  {
+    title: "Information we collect",
+    list: [
+      "Account information such as your email address, password-authenticated account, display name, and Google profile details if you choose Google sign-in.",
+      "Profile and preference data stored with your account, including newsletter subscription status, alert preferences, and basic interface preferences.",
+      "Messages or content you submit through contact or email-related features.",
+      "Technical and usage data such as pages visited, approximate traffic patterns, device or browser information, and performance metrics collected through analytics or hosting tools.",
+      "Location-related request data when you use embedded or static map features.",
+    ],
+  },
+  {
+    title: "How we use information",
+    list: [
+      "To create and maintain user accounts.",
+      "To authenticate sign-ins and manage session-related features.",
+      "To store dashboard settings, communication preferences, and account records.",
+      "To send transactional messages such as verification emails and requested communications.",
+      "To send newsletters or emergency-style alerts when a user has opted in.",
+      "To improve the site, understand feature usage, and monitor reliability.",
+      "To protect the site, enforce policies, and comply with legal obligations where required.",
+    ],
+  },
+  {
+    title: "Services and vendors used on this site",
+    list: [
+      "Firebase Authentication is used for email/password sign-in, Google sign-in, and email verification workflows.",
+      "Cloud Firestore is used to store account records and preference data tied to user accounts.",
+      "Google services may process data when you use Google sign-in or interact with embedded or static map content.",
+      "Resend or comparable email infrastructure may be used to deliver transactional messages, newsletters, or alert-style emails.",
+      "Vercel Analytics may collect aggregated usage information for traffic and performance measurement.",
+      "Hosting providers such as Vercel or Netlify may log request, device, and performance metadata needed to operate the site.",
+    ],
+  },
+  {
+    title: "Cookies and similar technologies",
+    body: [
+      "The site may use cookies, local browser storage, and similar technologies to support authentication, maintain preferences, measure usage, and keep core features working properly.",
+      "You can limit cookies in your browser settings, but some sign-in, personalization, or embedded content features may not function correctly if you do.",
+    ],
+  },
+  {
+    title: "Data retention",
+    body: [
+      "We keep information for as long as reasonably necessary to operate the site, maintain accounts, deliver requested services, resolve disputes, and meet legal or administrative obligations.",
+      "If you request deletion of your account, we may remove or anonymize associated information except where retention is reasonably necessary for security, fraud prevention, recordkeeping, or legal compliance.",
+    ],
+  },
+  {
+    title: "Security",
+    body: [
+      "We use reasonable administrative, technical, and organizational measures to protect information from unauthorized access, loss, misuse, or disclosure. That said, no website or online service can guarantee absolute security.",
+    ],
+  },
+  {
+    title: "Your choices",
+    list: [
+      "You can choose whether to create an account.",
+      "You can unsubscribe from newsletters or similar communications.",
+      "You can update account details and communication preferences through your account features when available.",
+      "You can contact the site to request access, correction, or deletion, subject to technical and legal limitations.",
+    ],
+  },
+  {
+    title: "Children's privacy",
+    body: [
+      "This site is not intended for children under 13, and we do not knowingly collect personal information from children under 13. If you believe a child has submitted personal information, contact us so we can review and remove it where appropriate.",
+    ],
+  },
+  {
+    title: "Changes to this policy",
+    body: [
+      "We may update this Privacy Policy from time to time. When we do, the effective date on this page will change. Continued use of the site after an update means the revised policy applies going forward.",
+    ],
+  },
+];
 
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <section className="pt-28 pb-16 bg-gradient-to-br from-port-mist via-white to-port-mist/30">
-        <div className="max-w-4xl mx-auto px-5 sm:px-8 lg:px-12">
-          <RevealOnScroll>
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-port-navy tracking-tight">
+      <section className="relative overflow-hidden bg-port-navy pt-28 pb-18">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute left-[-8rem] top-16 h-72 w-72 rounded-full bg-port-sky blur-3xl" />
+          <div className="absolute bottom-[-4rem] right-0 h-64 w-64 rounded-full bg-white blur-3xl" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 lg:px-12">
+          <div className="max-w-3xl">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.28em] text-port-mist/80">
+              Legal
+            </p>
+            <h1 className="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
               Privacy Policy
             </h1>
-            <p className="mt-4 text-port-slate text-lg">
-              City of Port Laken. Last updated: March 2026.
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-port-mist/90 sm:text-xl">
+              How information is collected, used, and protected across the Port
+              Laken website and account features.
             </p>
-          </RevealOnScroll>
+            <p className="mt-6 text-sm text-port-mist/75">
+              Effective date: March 18, 2026
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="py-12 lg:py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="prose prose-slate max-w-none space-y-10 text-port-slate">
-            <RevealOnScroll>
-              <div>
-                <h2 className="font-display text-xl font-semibold text-port-navy mb-3">
-                  Overview
-                </h2>
-                <p className="leading-relaxed">
-                  This privacy policy describes how the City of Port Laken website collects, uses, and protects information when you visit or use our services. Port Laken is a fictional city and this site is for educational and demonstration purposes; the policy below explains our practices in that context.
-                </p>
-              </div>
-            </RevealOnScroll>
+      <section className="bg-port-frost/40 py-12 lg:py-16">
+        <div className="mx-auto grid max-w-5xl gap-8 px-5 sm:px-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:px-12">
+          <div className="space-y-6 rounded-[2rem] border border-port-mist/40 bg-white p-7 shadow-[0_24px_80px_rgba(50,66,79,0.08)] sm:p-9 lg:p-10">
+            <div className="rounded-2xl border border-port-mist/40 bg-port-frost/70 p-5">
+              <p className="text-sm leading-7 text-port-slate">
+                This page is written to match the current features of the Port
+                Laken app, including account creation, Google sign-in, Firestore
+                profile storage, map embeds, analytics, and email delivery.
+              </p>
+            </div>
 
-            <RevealOnScroll>
-              <div>
-                <h2 className="font-display text-xl font-semibold text-port-navy mb-3">
-                  Information We Collect
+            {sections.map((section) => (
+              <article
+                key={section.title}
+                className="border-b border-port-mist/30 pb-6 last:border-b-0 last:pb-0"
+              >
+                <h2 className="font-display text-2xl font-semibold text-port-navy">
+                  {section.title}
                 </h2>
-                <ul className="list-disc pl-6 space-y-2 leading-relaxed">
-                  <li>Account data: If you create an account or sign in (email or Google), we store your email address and profile information in a secure database to provide account features, dashboards, and optional alerts or newsletters.</li>
-                  <li>Contact form and email: If you send a message through our contact or email features, we receive and process the content you submit to respond or provide services.</li>
-                  <li>Usage data: We may collect anonymized usage information (e.g., pages visited, general traffic) to improve the site and understand how it is used.</li>
-                </ul>
-              </div>
-            </RevealOnScroll>
 
-            <RevealOnScroll>
-              <div>
-                <h2 className="font-display text-xl font-semibold text-port-navy mb-3">
-                  How We Use Your Information
-                </h2>
-                <p className="leading-relaxed mb-2">
-                  We use the information above to:
-                </p>
-                <ul className="list-disc pl-6 space-y-1 leading-relaxed">
-                  <li>Provide and maintain your account and preferences</li>
-                  <li>Send you optional newsletters or emergency-style alerts if you have opted in</li>
-                  <li>Respond to inquiries and contact requests</li>
-                  <li>Improve the website and user experience</li>
-                  <li>Comply with applicable law or protect our rights where necessary</li>
-                </ul>
-              </div>
-            </RevealOnScroll>
+                {section.body ? (
+                  <div className="mt-4 space-y-4 text-base leading-8 text-port-slate">
+                    {section.body.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                ) : null}
 
-            <RevealOnScroll>
-              <div>
-                <h2 className="font-display text-xl font-semibold text-port-navy mb-3">
-                  Cookies and Similar Technologies
-                </h2>
-                <p className="leading-relaxed">
-                  We may use cookies and similar technologies to keep you signed in, remember preferences, and analyze site traffic. You can adjust your browser settings to limit or block cookies; some features may not work fully if cookies are disabled.
-                </p>
-              </div>
-            </RevealOnScroll>
+                {section.list ? (
+                  <ul className="mt-4 space-y-3 pl-5 text-base leading-7 text-port-slate marker:text-port-sky list-disc">
+                    {section.list.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </article>
+            ))}
 
-            <RevealOnScroll>
-              <div>
-                <h2 className="font-display text-xl font-semibold text-port-navy mb-3">
-                  Third-Party Services
-                </h2>
-                <p className="leading-relaxed mb-3">
-                  Our site uses third-party services that may collect or process data. Their own privacy policies apply:
-                </p>
-                <ul className="list-disc pl-6 space-y-1 leading-relaxed">
-                  <li>Authentication and database: Firebase (Google). Used for sign-in and storing account and preference data.</li>
-                  <li>Maps: Google Maps (embed and static maps). Google may collect data per its privacy policy when you interact with maps.</li>
-                  <li>Email: Resend (or similar) for sending transactional and marketing emails.</li>
-                  <li>Analytics: We may use analytics providers (e.g., Vercel Analytics) for anonymized usage statistics.</li>
-                  <li>Hosting: The site may be hosted on platforms such as Netlify or Vercel, which may log requests and performance data.</li>
-                </ul>
-              </div>
-            </RevealOnScroll>
-
-            <RevealOnScroll>
-              <div>
-                <h2 className="font-display text-xl font-semibold text-port-navy mb-3">
-                  Data Retention and Security
-                </h2>
-                <p className="leading-relaxed">
-                  We retain your information for as long as needed to provide services and as required by law. We take reasonable steps to protect your data using industry-standard security practices; no system is completely secure, and we cannot guarantee absolute security.
-                </p>
-              </div>
-            </RevealOnScroll>
-
-            <RevealOnScroll>
-              <div>
-                <h2 className="font-display text-xl font-semibold text-port-navy mb-3">
-                  Your Choices
-                </h2>
-                <p className="leading-relaxed">
-                  You may update or delete your account and preferences through your account or dashboard. You can unsubscribe from newsletters or alerts at any time using the links in those messages or your account settings. You may also contact us to request access to or deletion of your personal information, subject to applicable law.
-                </p>
-              </div>
-            </RevealOnScroll>
-
-            <RevealOnScroll>
-              <div>
-                <h2 className="font-display text-xl font-semibold text-port-navy mb-3">
-                  Children
-                </h2>
-                <p className="leading-relaxed">
-                  Our site is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you believe we have collected such information, please contact us so we can delete it.
-                </p>
-              </div>
-            </RevealOnScroll>
-
-            <RevealOnScroll>
-              <div>
-                <h2 className="font-display text-xl font-semibold text-port-navy mb-3">
-                  Changes to This Policy
-                </h2>
-                <p className="leading-relaxed">
-                  We may update this privacy policy from time to time. The &quot;Last updated&quot; date at the top will change when we do. Continued use of the site after changes constitutes acceptance of the updated policy.
-                </p>
-              </div>
-            </RevealOnScroll>
-
-            <RevealOnScroll>
-              <div>
-                <h2 className="font-display text-xl font-semibold text-port-navy mb-3">
-                  Contact
-                </h2>
-                <p className="leading-relaxed">
-                  For privacy-related questions or requests, contact the City of Port Laken at the address or email provided on our <Link href="/contact" className="text-port-sky hover:underline">contact page</Link>.
-                </p>
-              </div>
-            </RevealOnScroll>
+            <article>
+              <h2 className="font-display text-2xl font-semibold text-port-navy">
+                Contact
+              </h2>
+              <p className="mt-4 text-base leading-8 text-port-slate">
+                Questions about this policy can be directed through the{" "}
+                <Link
+                  href="/contact"
+                  className="font-semibold text-port-sky transition-colors hover:text-port-navy"
+                >
+                  contact page
+                </Link>
+                . You can also review supporting project context on the{" "}
+                <Link
+                  href="/references"
+                  className="font-semibold text-port-sky transition-colors hover:text-port-navy"
+                >
+                  references page
+                </Link>
+                .
+              </p>
+            </article>
           </div>
+
+          <aside className="h-fit rounded-[1.75rem] border border-port-mist/40 bg-white p-6 shadow-sm lg:sticky lg:top-28">
+            <h2 className="font-display text-2xl font-semibold text-port-navy">
+              Quick Summary
+            </h2>
+            <div className="mt-5 space-y-4 text-sm leading-7 text-port-slate">
+              <p>
+                Account data is used for sign-in, preferences, newsletters, and
+                alert-style communications.
+              </p>
+              <p>
+                Third-party tools used by the app may process some information,
+                including Firebase, Google services, analytics, email delivery,
+                and hosting infrastructure.
+              </p>
+              <p>
+                Users can manage subscriptions and request account changes
+                through available account features or by contacting the site.
+              </p>
+            </div>
+          </aside>
         </div>
       </section>
     </>
