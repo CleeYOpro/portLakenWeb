@@ -24,7 +24,6 @@ const PAGE_ROUTES: Record<string, string> = {
   "Events": "/events",
   "Map": "/maps-transport",
   "Forms & Applications": "/forms",
-  "Life": "/living-in-portlaken",
   "Council": "/mayor-council",
   "Ordinances": "/ordinances",
   "Boards & Committees": "/boards-committees",

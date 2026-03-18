@@ -215,7 +215,6 @@ portLakenWeb/
 │   ├── references/               # TSA worklog, copyright, sources PDFs + disclaimer
 │   ├── events/, news/, forms/, departments/, mayor-council/, ordinances/, boards-committees/
 │   ├── environmental/, careers/, sustainability/
-│   ├── living-in-portlaken/      # Life in Port Laken (city services; links to /map for transit)
 │   ├── sign-in/, create-account/, change-password/, dashboard/, profile/, alerts/
 │   ├── api/
 │   │   ├── send-email/route.ts
