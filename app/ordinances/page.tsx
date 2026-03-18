@@ -595,6 +595,382 @@ SECTION 8. PERMIT PROCESS
 ADOPTED June 28, 2022.`
   },
   {
+    id: 11,
+    title: "Artificial Intelligence Use in City Services",
+    description: "Governs the ethical deployment of AI tools by city departments, requiring transparency, bias audits, and resident notification.",
+    number: "ORD-2026-04",
+    date: "Feb 18, 2026",
+    year: 2026,
+    status: "Active",
+    category: "Technology",
+    summary: `This ordinance establishes a governance framework for the use of artificial intelligence and automated decision-making systems by City of Port Laken departments.
+
+Key Provisions:
+• All AI systems used in public-facing decisions must be registered with the City Clerk
+• Annual algorithmic impact assessments required for high-risk applications
+• Residents must be notified when AI influences decisions affecting them
+• Prohibited uses: predictive policing, real-time biometric surveillance in public spaces
+• Independent third-party bias audits required every 2 years
+
+Oversight:
+• AI Review Board established (5 members: 2 council appointees, 1 tech expert, 1 civil liberties rep, 1 resident)
+• Board meets quarterly; reports published publicly
+• Residents may request human review of any AI-influenced decision`,
+    fullText: `ORDINANCE NO. ORD-2026-04
+
+AN ORDINANCE ESTABLISHING GOVERNANCE STANDARDS FOR ARTIFICIAL INTELLIGENCE USE IN CITY SERVICES
+
+WHEREAS, the City of Port Laken recognizes the potential benefits and risks of AI in public administration; and
+WHEREAS, residents have a right to transparent and accountable government decision-making;
+
+THE CITY COUNCIL ORDAINS:
+
+SECTION 1. PURPOSE
+To ensure AI systems used by the City are transparent, equitable, and subject to meaningful oversight.
+
+SECTION 2. DEFINITIONS
+(a) "AI System" means any machine-based system that generates outputs such as predictions, recommendations, or decisions.
+(b) "High-Risk Application" means AI used in benefits eligibility, code enforcement, hiring, or public safety.
+
+SECTION 3. REGISTRATION REQUIREMENT
+All AI systems used in public-facing decisions must be registered with the City Clerk within 90 days of deployment.
+
+SECTION 4. PROHIBITED USES
+(a) Predictive policing systems
+(b) Real-time biometric surveillance in public spaces
+(c) Automated denial of essential services without human review
+
+SECTION 5. TRANSPARENCY
+(a) Residents must be notified when AI influences a decision affecting them.
+(b) Plain-language explanations must be available upon request.
+(c) Residents may request human review of any AI-influenced decision at no cost.
+
+SECTION 6. AUDITS
+(a) Annual algorithmic impact assessments for high-risk applications.
+(b) Independent third-party bias audits every 2 years.
+(c) Audit results published on City website within 30 days.
+
+SECTION 7. AI REVIEW BOARD
+(a) Five-member board: 2 council appointees, 1 technology expert, 1 civil liberties representative, 1 resident.
+(b) Board meets quarterly; meeting minutes published publicly.
+(c) Board may recommend suspension of any non-compliant system.
+
+ADOPTED by the City Council on February 18, 2026.`
+  },
+  {
+    id: 12,
+    title: "Micromobility and E-Scooter Regulations",
+    description: "Establishes operating rules, parking standards, and speed limits for shared and privately owned e-scooters and e-bikes.",
+    number: "ORD-2025-11",
+    date: "Apr 22, 2025",
+    year: 2025,
+    status: "Active",
+    category: "Transportation",
+    summary: `This ordinance creates a comprehensive regulatory framework for micromobility devices including e-scooters, e-bikes, and shared mobility services.
+
+Operating Rules:
+• Maximum speed: 15 mph on streets, 8 mph in pedestrian zones
+• Helmet required for riders under 18
+• No riding on sidewalks in commercial districts
+• Designated parking corrals required; no blocking ADA ramps or crosswalks
+
+Shared Mobility Operators:
+• Annual operator permit: $2,500 + $10/device/year
+• Fleet cap: 300 devices per operator citywide
+• Real-time GPS data sharing with City required
+• Equity zone deployment: 20% of fleet in underserved areas
+
+Enforcement:
+• Improperly parked devices: $75 retrieval fee
+• Riding in prohibited areas: $50 fine`,
+    fullText: `ORDINANCE NO. ORD-2025-11
+
+AN ORDINANCE REGULATING MICROMOBILITY DEVICES AND SHARED MOBILITY SERVICES
+
+WHEREAS, e-scooters and e-bikes provide sustainable transportation options; and
+WHEREAS, regulations are needed to ensure safe and equitable deployment;
+
+THE CITY COUNCIL ORDAINS:
+
+SECTION 1. DEFINITIONS
+(a) "Micromobility device" means any e-scooter, e-bike, or similar device with a motor not exceeding 750 watts.
+(b) "Shared mobility operator" means any company offering micromobility devices for rent.
+
+SECTION 2. OPERATING RULES
+(a) Maximum speed: 15 mph on streets; 8 mph in designated pedestrian zones.
+(b) Riders under 18 must wear a helmet.
+(c) No riding on sidewalks in commercial districts.
+(d) Devices must be parked in designated corrals or against curbs.
+(e) Devices shall not block ADA ramps, crosswalks, or building entrances.
+
+SECTION 3. SHARED MOBILITY OPERATOR PERMITS
+(a) Annual permit fee: $2,500 plus $10 per device per year.
+(b) Fleet cap: 300 devices per operator.
+(c) Operators must share real-time GPS data with the City.
+(d) Minimum 20% of fleet deployed in City-designated equity zones.
+
+SECTION 4. ENFORCEMENT
+(a) Improperly parked device: $75 retrieval fee charged to operator.
+(b) Riding in prohibited area: $50 fine.
+(c) Operating without permit: $1,000 fine per day.
+
+SECTION 5. EQUITY PROVISIONS
+(a) Operators must offer cash payment options.
+(b) Reduced-rate memberships required for income-qualifying residents.
+
+ADOPTED April 22, 2025.`
+  },
+  {
+    id: 13,
+    title: "Tenant Anti-Displacement and Relocation Assistance",
+    description: "Requires landlords to provide relocation assistance to tenants displaced by no-fault evictions or substantial rent increases.",
+    number: "ORD-2025-03",
+    date: "Jan 14, 2025",
+    year: 2025,
+    status: "Active",
+    category: "Zoning",
+    summary: `This ordinance protects renters from displacement by requiring relocation assistance in no-fault eviction scenarios and large rent increases.
+
+Relocation Assistance Requirements:
+• No-fault eviction (owner move-in, demolition, renovation): 3 months' rent
+• Rent increase exceeding 10% in 12 months: 2 months' rent if tenant vacates
+• Seniors (62+) and disabled tenants: Additional 1 month's rent
+
+Landlord Obligations:
+• Written notice of relocation rights required with any eviction notice
+• Payment due within 15 days of tenant's written acceptance
+• Failure to pay: Tenant may sue for 3x relocation amount plus attorney fees
+
+Exemptions:
+• Owner-occupied buildings with 3 or fewer units
+• Tenancies of less than 12 months
+• Evictions for lease violations`,
+    fullText: `ORDINANCE NO. ORD-2025-03
+
+AN ORDINANCE ESTABLISHING TENANT ANTI-DISPLACEMENT PROTECTIONS AND RELOCATION ASSISTANCE REQUIREMENTS
+
+WHEREAS, housing displacement causes significant harm to residents and communities; and
+WHEREAS, relocation assistance helps mitigate the burden of no-fault displacement;
+
+THE CITY COUNCIL ORDAINS:
+
+SECTION 1. PURPOSE
+To protect tenants from displacement and ensure they receive financial assistance when displaced through no fault of their own.
+
+SECTION 2. APPLICABILITY
+Applies to all residential rental units in Port Laken except:
+(a) Owner-occupied buildings with 3 or fewer units.
+(b) Tenancies of less than 12 months.
+(c) Evictions for documented lease violations.
+
+SECTION 3. RELOCATION ASSISTANCE AMOUNTS
+(a) No-fault eviction (owner move-in, demolition, substantial renovation): 3 months' rent.
+(b) Rent increase exceeding 10% within 12 months, if tenant vacates: 2 months' rent.
+(c) Tenants who are seniors (62+) or have a documented disability: Additional 1 month's rent.
+
+SECTION 4. LANDLORD OBLIGATIONS
+(a) Written notice of relocation rights must accompany any eviction notice.
+(b) Payment due within 15 days of tenant's written acceptance.
+(c) Landlord must provide payment in a single lump sum.
+
+SECTION 5. ENFORCEMENT
+(a) Failure to pay: Tenant may sue for 3x the relocation amount plus attorney fees.
+(b) City may impose administrative fine of $5,000 per violation.
+(c) Complaints filed with City Housing Office within 180 days of violation.
+
+ADOPTED January 14, 2025.`
+  },
+  {
+    id: 14,
+    title: "Single-Use Plastics Reduction Ordinance",
+    description: "Phases out single-use plastic bags, utensils, and polystyrene containers at food service establishments and retail stores.",
+    number: "ORD-2024-19",
+    date: "Jul 01, 2024",
+    year: 2024,
+    status: "Active",
+    category: "Environment",
+    summary: `This ordinance phases out single-use plastics at food service establishments and retail stores to reduce plastic pollution.
+
+Prohibited Items (effective Jan 1, 2025):
+• Single-use plastic checkout bags
+• Polystyrene (Styrofoam) food containers and cups
+• Single-use plastic straws (available upon request only)
+• Single-use plastic utensils (provided only upon request)
+
+Acceptable Alternatives:
+• Paper bags (minimum 40% recycled content)
+• Compostable or recyclable food containers
+• Reusable bags and containers
+
+Fees:
+• Paper bag fee: $0.10 per bag (retailer retains $0.07; $0.03 to City sustainability fund)
+
+Enforcement:
+• First violation: Written warning
+• Second violation: $250 fine
+• Third+ violation: $500 fine per day`,
+    fullText: `ORDINANCE NO. ORD-2024-19
+
+AN ORDINANCE REDUCING SINGLE-USE PLASTICS AT FOOD SERVICE ESTABLISHMENTS AND RETAIL STORES
+
+WHEREAS, single-use plastics contribute significantly to environmental pollution; and
+WHEREAS, alternatives are widely available and cost-effective;
+
+THE CITY COUNCIL ORDAINS:
+
+SECTION 1. PROHIBITED ITEMS
+Effective January 1, 2025, the following are prohibited:
+(a) Single-use plastic checkout bags at retail establishments.
+(b) Polystyrene food containers, cups, and trays at food service establishments.
+(c) Single-use plastic straws except when provided upon customer request.
+(d) Single-use plastic utensils except when provided upon customer request.
+
+SECTION 2. ACCEPTABLE ALTERNATIVES
+(a) Paper bags with minimum 40% post-consumer recycled content.
+(b) Compostable food service ware certified to ASTM D6400 or equivalent.
+(c) Reusable containers and bags.
+
+SECTION 3. PAPER BAG FEE
+(a) Retailers must charge $0.10 per paper bag provided.
+(b) Retailer retains $0.07; $0.03 remitted to City Sustainability Fund quarterly.
+(c) Fee waived for customers using SNAP/EBT benefits.
+
+SECTION 4. EXEMPTIONS
+(a) Bags used for bulk items, produce, or meat.
+(b) Bags provided by pharmacies for prescription medications.
+(c) Plastic straws for medical necessity.
+
+SECTION 5. ENFORCEMENT
+(a) First violation: Written warning.
+(b) Second violation: $250 fine.
+(c) Third and subsequent violations: $500 fine per day.
+
+ADOPTED July 1, 2024.`
+  },
+  {
+    id: 15,
+    title: "Broadband Infrastructure and Digital Equity",
+    description: "Requires broadband conduit installation in new construction and establishes a digital equity fund for low-income household connectivity.",
+    number: "ORD-2024-07",
+    date: "Mar 05, 2024",
+    year: 2024,
+    status: "Active",
+    category: "Technology",
+    summary: `This ordinance expands broadband access and reduces the digital divide in Port Laken.
+
+New Construction Requirements:
+• All new residential and commercial buildings must install conduit for broadband
+• Multi-family buildings (5+ units) must provide in-unit wiring to each unit
+• City-owned buildings must offer free public Wi-Fi in common areas
+
+Digital Equity Fund:
+• 1% of annual telecommunications franchise fees directed to fund
+• Subsidized internet service for households below 200% of federal poverty level
+• Device lending program through Port Laken Public Library
+• Digital literacy training grants for community organizations
+
+Open Access:
+• City-installed conduit available to any licensed ISP at cost-based rates
+• No exclusive franchise agreements for new infrastructure`,
+    fullText: `ORDINANCE NO. ORD-2024-07
+
+AN ORDINANCE EXPANDING BROADBAND INFRASTRUCTURE AND ESTABLISHING A DIGITAL EQUITY FUND
+
+WHEREAS, reliable internet access is essential for economic participation, education, and civic engagement; and
+WHEREAS, significant disparities in broadband access exist within Port Laken;
+
+THE CITY COUNCIL ORDAINS:
+
+SECTION 1. CONDUIT INSTALLATION REQUIREMENTS
+(a) All new residential and commercial construction must install empty conduit suitable for broadband fiber.
+(b) Multi-family buildings with 5 or more units must provide in-unit wiring to each dwelling unit.
+(c) Conduit specifications shall be established by the City Engineer.
+
+SECTION 2. CITY-OWNED FACILITIES
+(a) All City-owned buildings must provide free public Wi-Fi in common areas.
+(b) City parks with permanent structures must include outdoor Wi-Fi access points.
+
+SECTION 3. DIGITAL EQUITY FUND
+(a) 1% of annual telecommunications franchise fees directed to the Digital Equity Fund.
+(b) Fund used for: subsidized internet service, device lending, and digital literacy programs.
+(c) Households below 200% of federal poverty level eligible for subsidized service.
+
+SECTION 4. OPEN ACCESS
+(a) City-installed conduit available to any licensed ISP at cost-based rates.
+(b) No exclusive franchise agreements for infrastructure funded by the City.
+
+SECTION 5. DEVICE LENDING PROGRAM
+Port Laken Public Library shall administer a device lending program using Fund resources.
+
+SECTION 6. REPORTING
+Annual report to City Council on Fund expenditures and program outcomes.
+
+ADOPTED March 5, 2024.`
+  },
+  {
+    id: 16,
+    title: "Urban Tree Canopy Expansion and Protection",
+    description: "Establishes a citywide urban forest management plan, expands tree planting requirements, and strengthens protections for heritage trees.",
+    number: "ORD-2024-14",
+    date: "May 20, 2024",
+    year: 2024,
+    status: "Active",
+    category: "Environment",
+    summary: `This ordinance strengthens Port Laken's urban forest through expanded planting requirements and enhanced heritage tree protections.
+
+Canopy Goals:
+• 40% citywide tree canopy coverage by 2035 (current: 28%)
+• Priority planting in heat island zones and underserved neighborhoods
+
+New Development Requirements:
+• 1 tree per 2,500 sq ft of impervious surface
+• Street trees required every 30 linear feet of frontage
+• In-lieu fee: $500 per required tree if site constraints prevent planting
+
+Heritage Tree Protections:
+• Trees 24"+ diameter at breast height designated as heritage trees
+• Removal requires City Arborist approval and public notice
+• Replacement ratio: 3:1 for heritage trees
+• Unauthorized removal: Fine up to $25,000 per tree
+
+City Responsibilities:
+• Free tree planting program for qualifying residential properties
+• Annual urban forest inventory and health assessment`,
+    fullText: `ORDINANCE NO. ORD-2024-14
+
+AN ORDINANCE ESTABLISHING AN URBAN TREE CANOPY EXPANSION AND PROTECTION PROGRAM
+
+WHEREAS, urban trees provide critical environmental, health, and economic benefits; and
+WHEREAS, Port Laken's tree canopy has declined and requires active management;
+
+THE CITY COUNCIL ORDAINS:
+
+SECTION 1. URBAN FOREST MANAGEMENT PLAN
+The City shall maintain an Urban Forest Management Plan with a goal of 40% citywide tree canopy coverage by 2035.
+
+SECTION 2. NEW DEVELOPMENT REQUIREMENTS
+(a) One tree required per 2,500 square feet of impervious surface.
+(b) Street trees required every 30 linear feet of street frontage.
+(c) In-lieu fee of $500 per required tree where site constraints prevent planting.
+(d) In-lieu fees deposited into the Urban Forest Fund.
+
+SECTION 3. HERITAGE TREE DESIGNATION
+(a) Trees with a diameter at breast height (DBH) of 24 inches or greater are designated heritage trees.
+(b) Heritage tree removal requires City Arborist approval and 30-day public notice.
+(c) Replacement ratio for removed heritage trees: 3 new trees per 1 removed.
+(d) Unauthorized removal of a heritage tree: Fine up to $25,000 per tree.
+
+SECTION 4. PRIORITY PLANTING ZONES
+The City Arborist shall identify heat island zones and underserved neighborhoods for priority tree planting using Urban Forest Fund resources.
+
+SECTION 5. CITY PROGRAMS
+(a) Free tree planting program for residential properties in priority zones.
+(b) Annual urban forest inventory and health assessment published publicly.
+(c) Subsidized tree care workshops for property owners.
+
+ADOPTED May 20, 2024.`
+  },
+  {
     id: 10,
     title: "Outdoor Dining Permit Program",
     description: "Creates a streamlined permit process for restaurants to offer outdoor dining on sidewalks and parklets.",
@@ -661,8 +1037,8 @@ ADOPTED May 18, 2021.`
   }
 ];
 
-const categories = ["Zoning", "Public Safety", "Environment", "Business Licensing"];
-const years = [2024, 2023, 2022, 2021, 2020];
+const categories = ["Zoning", "Public Safety", "Environment", "Business Licensing", "Technology", "Transportation"];
+const years = [2026, 2025, 2024, 2023, 2022, 2021, 2020];
 const statuses = ["Active", "Repealed"];
 
 type DropdownType = "year" | "category" | "status" | null;
@@ -832,7 +1208,7 @@ export default function OrdinancesPage() {
             City Ordinances & Regulations
           </h1>
           <p className="font-nunito text-gray-500 text-sm">
-            Search, browse, and download local laws and resolutions.
+            Search, browse, and download local laws and resolutions from the past couple of years.
           </p>
         </div>
       </section>
@@ -869,65 +1245,7 @@ export default function OrdinancesPage() {
                   )}
                 </div>
 
-                {/* Category Filter */}
-                <div className="mb-6">
-                  <h4 className="font-nunito font-semibold text-gray-700 text-sm mb-3">Category</h4>
-                  <div className="space-y-2">
-                    {categories.map((category) => (
-                      <label key={category} className="flex items-center gap-3 cursor-pointer group">
-                        <input
-                          type="checkbox"
-                          checked={selectedCategories.includes(category)}
-                          onChange={() => toggleCategory(category)}
-                          className="w-4 h-4 rounded border-gray-300 text-[#708AA3] focus:ring-[#708AA3]/30"
-                        />
-                        <span className="font-nunito text-sm text-gray-600 group-hover:text-[#1e3a5f] transition-colors">
-                          {category}
-                        </span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Year Filter */}
-                <div className="mb-6">
-                  <h4 className="font-nunito font-semibold text-gray-700 text-sm mb-3">Year</h4>
-                  <div className="space-y-2">
-                    {years.map((year) => (
-                      <label key={year} className="flex items-center gap-3 cursor-pointer group">
-                        <input
-                          type="checkbox"
-                          checked={selectedYears.includes(year)}
-                          onChange={() => toggleYear(year)}
-                          className="w-4 h-4 rounded border-gray-300 text-[#708AA3] focus:ring-[#708AA3]/30"
-                        />
-                        <span className="font-nunito text-sm text-gray-600 group-hover:text-[#1e3a5f] transition-colors">
-                          {year}
-                        </span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Status Filter */}
-                <div className="mb-6">
-                  <h4 className="font-nunito font-semibold text-gray-700 text-sm mb-3">Status</h4>
-                  <div className="space-y-2">
-                    {statuses.map((status) => (
-                      <label key={status} className="flex items-center gap-3 cursor-pointer group">
-                        <input
-                          type="checkbox"
-                          checked={selectedStatuses.includes(status)}
-                          onChange={() => toggleStatus(status)}
-                          className="w-4 h-4 rounded border-gray-300 text-[#708AA3] focus:ring-[#708AA3]/30"
-                        />
-                        <span className="font-nunito text-sm text-gray-600 group-hover:text-[#1e3a5f] transition-colors">
-                          {status}
-                        </span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
+                
 
                 {/* Quick Filter Dropdowns */}
                 <div className="pt-6 border-t border-gray-100" ref={dropdownRef}>

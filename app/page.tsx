@@ -9,6 +9,8 @@ import { IoMdAlert } from "react-icons/io";
 import { HiDocumentText } from "react-icons/hi";
 import { MdPayment } from "react-icons/md";
 import { FaBus } from "react-icons/fa";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 import { motion } from "framer-motion";
 import { FaArrowRight } from 'react-icons/fa6';
@@ -830,6 +832,18 @@ function AccountSection() {
   const router = useRouter();
   const [googleLoading, setGoogleLoading] = useState(false);
   const [googleError, setGoogleError] = useState("");
+  const [firestoreName, setFirestoreName] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (user && !user.displayName) {
+      getDoc(doc(db, "users", user.uid)).then((snap) => {
+        if (snap.exists()) {
+          const name = snap.data()?.displayName as string | undefined;
+          if (name) setFirestoreName(name.split(" ")[0]);
+        }
+      });
+    }
+  }, [user]);
 
   const handleGoogle = async () => {
     setGoogleLoading(true);
@@ -847,7 +861,7 @@ function AccountSection() {
 
   // ── Signed-in state: full-width, no left column ──────────────────────────
   if (user) {
-    const firstName = user.displayName?.split(" ")[0] ?? null;
+    const firstName = user.displayName?.split(" ")[0] ?? firestoreName;
     return (
       <section className="relative py-24 px-6 md:px-20 overflow-hidden">
         <div className="absolute inset-0 -z-10">
@@ -856,7 +870,7 @@ function AccountSection() {
         <div className="max-w-6xl mx-auto text-center">
 
           <h3 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-primary-shade leading-tight tracking-tight mb-6">
-            <span className="italic">Welcome back{firstName ? `, ${firstName}` : ""}.</span>
+            <span className="italic">Welcome back {user.displayName || user.email?.split('@')[0]}!</span>
           </h3>
           <p className="text-primary-shade/55 text-base font-light leading-relaxed max-w-md mx-auto mb-10">
             You&apos;re already part of Port Laken. Stay connected, manage your preferences, and never miss a thing.

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import Link from "next/link";
 import {
@@ -12,11 +12,16 @@ import {
   FaFileAlt,
   FaCheckCircle,
   FaCalendarAlt,
-  FaPaperPlane
+  FaPaperPlane,
+  FaUpload,
+  FaFilePdf,
+  FaTimes,
 } from "react-icons/fa";
-import { HiOutlineClipboardDocumentList, HiSparkles } from "react-icons/hi2";
 import { BsBuildings, BsPalette, BsTreeFill, BsShieldCheck, BsPeopleFill } from "react-icons/bs";
 import { MdOutlineHistoryEdu } from "react-icons/md";
+import { db, storage } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const boardOptions = [
   { id: "planning", name: "Planning Commission", icon: BsBuildings },
@@ -25,6 +30,10 @@ const boardOptions = [
   { id: "ethics", name: "Ethics Commission", icon: BsShieldCheck },
   { id: "historic-preservation", name: "Historic Preservation Board", icon: MdOutlineHistoryEdu },
   { id: "youth-advisory", name: "Youth Advisory Council", icon: BsPeopleFill },
+  { id: "environmental-sustainability", name: "Environmental Sustainability Commission", icon: BsTreeFill },
+  { id: "public-safety", name: "Public Safety Advisory Board", icon: BsShieldCheck },
+  { id: "housing-community-development", name: "Housing & Community Development Committee", icon: BsBuildings },
+  { id: "library-advisory", name: "Library Advisory Board", icon: BsPeopleFill },
 ];
 
 export default function ApplyPage() {
@@ -38,97 +47,125 @@ export default function ApplyPage() {
     experience: "",
     motivation: "",
   });
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [submittedEmail, setSubmittedEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.type !== "application/pdf" && !file.type.includes("word")) {
+      setError("Please upload a PDF or Word document.");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setError("File must be under 5MB.");
+      return;
+    }
+    setError("");
+    setResumeFile(file);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmittedEmail(formData.email);
-    setIsSubmitted(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsLoading(true);
+    setError("");
+
+    try {
+      let resumeUrl = "";
+
+      if (resumeFile) {
+        const storageRef = ref(storage, `board-applications/resumes/${Date.now()}_${resumeFile.name}`);
+        await uploadBytes(storageRef, resumeFile);
+        resumeUrl = await getDownloadURL(storageRef);
+      }
+
+      await addDoc(collection(db, "boardApplications"), {
+        ...formData,
+        resumeUrl,
+        resumeFileName: resumeFile?.name || "",
+        submittedAt: serverTimestamp(),
+        status: "pending",
+      });
+
+      setIsSubmitted(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong submitting your application. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (isSubmitted) {
     return (
-      <>
-        {/* Success State */}
-        <section className="min-h-screen pt-32 pb-20 bg-gradient-to-b from-gray-50 to-white">
-          <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-            <RevealOnScroll>
-              <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 text-center border border-gray-100">
-                {/* Success Icon */}
-                <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
-                  <FaCheckCircle className="text-5xl text-green-500" />
-                </div>
-
-                <h1 className="font-playfair text-3xl md:text-4xl font-bold text-[#244C5C] mb-4">
-                  Application Received!
-                </h1>
-
-                <p className="font-nunito text-lg text-gray-600 mb-8 leading-relaxed">
-                  Thank you for your interest in serving Port Laken. Your application has been submitted and our team has been notified.
-                </p>
-
-                {/* Email Confirmation Box */}
-                <div className="bg-[#ABD1E6]/20 rounded-2xl p-6 mb-8">
-                  <div className="flex items-center justify-center gap-2 text-[#244C5C] mb-3">
-                    <FaEnvelope className="text-lg" />
-                    <span className="font-nunito font-semibold">Confirmation sent to:</span>
-                  </div>
-                  <p className="font-nunito text-[#244C5C] font-bold text-lg">{submittedEmail}</p>
-                </div>
-
-                {/* Next Steps */}
-                <div className="bg-gray-50 rounded-2xl p-6 mb-8 text-left">
-                  <h3 className="font-playfair text-xl font-bold text-[#244C5C] mb-4 flex items-center gap-2">
-                    <FaCalendarAlt className="text-[#708AA3]" />
-                    What Happens Next?
-                  </h3>
-                  <ul className="space-y-3 font-nunito text-gray-600">
-                    <li className="flex items-start gap-3">
-                      <span className="w-6 h-6 bg-[#708AA3] text-white rounded-full flex items-center justify-center text-sm flex-shrink-0 mt-0.5">1</span>
-                      <span>Our staff will review your application within 5-7 business days.</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="w-6 h-6 bg-[#708AA3] text-white rounded-full flex items-center justify-center text-sm flex-shrink-0 mt-0.5">2</span>
-                      <span>You&apos;ll receive an email to schedule an interview with the selection committee.</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="w-6 h-6 bg-[#708AA3] text-white rounded-full flex items-center justify-center text-sm flex-shrink-0 mt-0.5">3</span>
-                      <span>Final appointments are made by the City Council at a public meeting.</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <p className="font-nunito text-gray-500 text-sm mb-8">
-                  Please check your email (including spam folder) for confirmation and updates about your interview scheduling.
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link
-                    href="/boards-committees"
-                    className="bg-[#244C5C] text-white px-8 py-4 rounded-full font-nunito font-bold transition-all duration-300 hover:bg-[#708AA3] hover:scale-105 inline-flex items-center justify-center gap-2"
-                  >
-                    <FaArrowLeft />
-                    Back to Boards
-                  </Link>
-                  <Link
-                    href="/"
-                    className="bg-gray-100 text-[#244C5C] px-8 py-4 rounded-full font-nunito font-bold transition-all duration-300 hover:bg-gray-200 hover:scale-105"
-                  >
-                    Return Home
-                  </Link>
-                </div>
+      <section className="min-h-screen pt-32 pb-20 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+          <RevealOnScroll>
+            <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 text-center border border-gray-100">
+              <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
+                <FaCheckCircle className="text-5xl text-green-500" />
               </div>
-            </RevealOnScroll>
-          </div>
-        </section>
-      </>
+              <h1 className="font-playfair text-3xl md:text-4xl font-bold text-[#244C5C] mb-4">
+                Application Received!
+              </h1>
+              <p className="font-nunito text-lg text-gray-600 mb-8 leading-relaxed">
+                Thank you for your interest in serving Port Laken. Your application has been submitted and our team has been notified.
+              </p>
+              <div className="bg-[#ABD1E6]/20 rounded-2xl p-6 mb-8">
+                <div className="flex items-center justify-center gap-2 text-[#244C5C] mb-3">
+                  <FaEnvelope className="text-lg" />
+                  <span className="font-nunito font-semibold">Confirmation sent to:</span>
+                </div>
+                <p className="font-nunito text-[#244C5C] font-bold text-lg">{formData.email}</p>
+              </div>
+              <div className="bg-gray-50 rounded-2xl p-6 mb-8 text-left">
+                <h3 className="font-playfair text-xl font-bold text-[#244C5C] mb-4 flex items-center gap-2">
+                  <FaCalendarAlt className="text-[#708AA3]" />
+                  What Happens Next?
+                </h3>
+                <ul className="space-y-3 font-nunito text-gray-600">
+                  <li className="flex items-start gap-3">
+                    <span className="w-6 h-6 bg-[#708AA3] text-white rounded-full flex items-center justify-center text-sm flex-shrink-0 mt-0.5">1</span>
+                    <span>Our staff will review your application within 5-7 business days.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-6 h-6 bg-[#708AA3] text-white rounded-full flex items-center justify-center text-sm flex-shrink-0 mt-0.5">2</span>
+                    <span>You&apos;ll receive an email to schedule an interview with the selection committee.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-6 h-6 bg-[#708AA3] text-white rounded-full flex items-center justify-center text-sm flex-shrink-0 mt-0.5">3</span>
+                    <span>Final appointments are made by the City Council at a public meeting.</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/boards-committees"
+                  className="bg-[#244C5C] text-white px-8 py-4 rounded-full font-nunito font-bold transition-all duration-300 hover:bg-[#708AA3] hover:scale-105 inline-flex items-center justify-center gap-2"
+                >
+                  <FaArrowLeft />
+                  Back to Boards
+                </Link>
+                <Link
+                  href="/"
+                  className="bg-gray-100 text-[#244C5C] px-8 py-4 rounded-full font-nunito font-bold transition-all duration-300 hover:bg-gray-200 hover:scale-105"
+                >
+                  Return Home
+                </Link>
+              </div>
+            </div>
+          </RevealOnScroll>
+        </div>
+      </section>
     );
   }
 
@@ -142,7 +179,6 @@ export default function ApplyPage() {
             <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#ABD1E6]/10 rounded-full blur-3xl"></div>
           </div>
         </div>
-
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Link
             href="/boards-committees"
@@ -151,16 +187,9 @@ export default function ApplyPage() {
             <FaArrowLeft />
             Back to Boards & Committees
           </Link>
-
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full mb-6 border border-white/20">
-            <HiOutlineClipboardDocumentList className="text-[#ABD1E6] text-lg" />
-            <span className="text-white/90 font-nunito text-sm font-medium tracking-wide">Board Application</span>
-          </div>
-
           <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             Apply to <span className="text-[#ABD1E6] italic">Serve</span>
           </h1>
-
           <p className="font-nunito text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
             Take the first step toward making a difference in your community. Complete the application below and we&apos;ll be in touch.
           </p>
@@ -172,17 +201,9 @@ export default function ApplyPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealOnScroll>
             <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-xl p-8 md:p-10 border border-gray-100">
-              {/* Form Header */}
               <div className="text-center mb-10">
-                <div className="w-16 h-16 bg-[#ABD1E6]/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <HiSparkles className="text-3xl text-[#708AA3]" />
-                </div>
-                <h2 className="font-playfair text-2xl font-bold text-[#244C5C] mb-2">
-                  Application Form
-                </h2>
-                <p className="font-nunito text-gray-500">
-                  All fields marked with * are required
-                </p>
+                <h2 className="font-playfair text-2xl font-bold text-[#244C5C] mb-2">Application Form</h2>
+                <p className="font-nunito text-gray-500">All fields marked with * are required</p>
               </div>
 
               {/* Personal Information */}
@@ -191,12 +212,9 @@ export default function ApplyPage() {
                   <FaUser className="text-[#708AA3]" />
                   Personal Information
                 </h3>
-
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block font-nunito font-semibold text-[#244C5C] mb-2">
-                      First Name *
-                    </label>
+                    <label className="block font-nunito font-semibold text-[#244C5C] mb-2">First Name *</label>
                     <input
                       type="text"
                       name="firstName"
@@ -208,9 +226,7 @@ export default function ApplyPage() {
                     />
                   </div>
                   <div>
-                    <label className="block font-nunito font-semibold text-[#244C5C] mb-2">
-                      Last Name *
-                    </label>
+                    <label className="block font-nunito font-semibold text-[#244C5C] mb-2">Last Name *</label>
                     <input
                       type="text"
                       name="lastName"
@@ -230,12 +246,9 @@ export default function ApplyPage() {
                   <FaEnvelope className="text-[#708AA3]" />
                   Contact Information
                 </h3>
-
                 <div className="space-y-6">
                   <div>
-                    <label className="block font-nunito font-semibold text-[#244C5C] mb-2">
-                      Email Address *
-                    </label>
+                    <label className="block font-nunito font-semibold text-[#244C5C] mb-2">Email Address *</label>
                     <input
                       type="email"
                       name="email"
@@ -246,12 +259,9 @@ export default function ApplyPage() {
                       placeholder="john.doe@email.com"
                     />
                   </div>
-
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block font-nunito font-semibold text-[#244C5C] mb-2">
-                        Phone Number *
-                      </label>
+                      <label className="block font-nunito font-semibold text-[#244C5C] mb-2">Phone Number *</label>
                       <input
                         type="tel"
                         name="phone"
@@ -263,9 +273,7 @@ export default function ApplyPage() {
                       />
                     </div>
                     <div>
-                      <label className="block font-nunito font-semibold text-[#244C5C] mb-2">
-                        City of Residence *
-                      </label>
+                      <label className="block font-nunito font-semibold text-[#244C5C] mb-2">City of Residence *</label>
                       <input
                         type="text"
                         name="address"
@@ -286,7 +294,6 @@ export default function ApplyPage() {
                   <FaBuilding className="text-[#708AA3]" />
                   Board Selection
                 </h3>
-
                 <div>
                   <label className="block font-nunito font-semibold text-[#244C5C] mb-2">
                     Which board are you interested in? *
@@ -314,12 +321,9 @@ export default function ApplyPage() {
                   <FaFileAlt className="text-[#708AA3]" />
                   Experience & Motivation
                 </h3>
-
                 <div className="space-y-6">
                   <div>
-                    <label className="block font-nunito font-semibold text-[#244C5C] mb-2">
-                      Relevant Experience *
-                    </label>
+                    <label className="block font-nunito font-semibold text-[#244C5C] mb-2">Relevant Experience *</label>
                     <textarea
                       name="experience"
                       value={formData.experience}
@@ -330,11 +334,8 @@ export default function ApplyPage() {
                       placeholder="Describe any relevant professional, volunteer, or personal experience..."
                     />
                   </div>
-
                   <div>
-                    <label className="block font-nunito font-semibold text-[#244C5C] mb-2">
-                      Why do you want to serve? *
-                    </label>
+                    <label className="block font-nunito font-semibold text-[#244C5C] mb-2">Why do you want to serve? *</label>
                     <textarea
                       name="motivation"
                       value={formData.motivation}
@@ -348,14 +349,78 @@ export default function ApplyPage() {
                 </div>
               </div>
 
-              {/* Submit Button */}
+              {/* Resume Upload */}
+              <div className="mb-10">
+                <h3 className="font-playfair text-lg font-bold text-[#244C5C] mb-6 flex items-center gap-2">
+                  <FaUpload className="text-[#708AA3]" />
+                  Resume
+                </h3>
+                <div>
+                  <label className="block font-nunito font-semibold text-[#244C5C] mb-2">
+                    Upload Resume <span className="text-gray-400 font-normal">(optional — PDF or Word, max 5MB)</span>
+                  </label>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+                  {!resumeFile ? (
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="w-full border-2 border-dashed border-gray-300 rounded-xl py-8 flex flex-col items-center gap-3 text-gray-400 hover:border-[#708AA3] hover:text-[#708AA3] transition-all cursor-pointer bg-gray-50 hover:bg-[#ABD1E6]/10"
+                    >
+                      <FaUpload className="text-2xl" />
+                      <span className="font-nunito font-semibold">Click to upload your resume</span>
+                      <span className="font-nunito text-sm">PDF or Word document</span>
+                    </button>
+                  ) : (
+                    <div className="flex items-center gap-4 bg-[#ABD1E6]/20 border border-[#708AA3]/30 rounded-xl px-5 py-4">
+                      <FaFilePdf className="text-2xl text-[#244C5C] flex-shrink-0" />
+                      <span className="font-nunito text-[#244C5C] font-semibold flex-1 truncate">{resumeFile.name}</span>
+                      <button
+                        type="button"
+                        onClick={() => { setResumeFile(null); if (fileInputRef.current) fileInputRef.current.value = ""; }}
+                        className="text-gray-400 hover:text-red-500 transition-colors"
+                        aria-label="Remove file"
+                      >
+                        <FaTimes />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Error */}
+              {error && (
+                <div className="mb-6 bg-red-50 border border-red-200 text-red-600 rounded-xl px-5 py-4 font-nunito text-sm">
+                  {error}
+                </div>
+              )}
+
+              {/* Submit */}
               <div className="pt-6 border-t border-gray-100">
                 <button
                   type="submit"
-                  className="w-full bg-[#244C5C] text-white px-8 py-4 rounded-full font-nunito font-bold text-lg transition-all duration-300 hover:bg-[#708AA3] hover:scale-[1.02] hover:shadow-xl flex items-center justify-center gap-3"
+                  disabled={isLoading}
+                  className="w-full bg-[#244C5C] text-white px-8 py-4 rounded-full font-nunito font-bold text-lg transition-all duration-300 hover:bg-[#708AA3] hover:scale-[1.02] hover:shadow-xl flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
-                  <FaPaperPlane />
-                  Submit Application
+                  {isLoading ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                      </svg>
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      <FaPaperPlane />
+                      Submit Application
+                    </>
+                  )}
                 </button>
                 <p className="font-nunito text-gray-400 text-sm text-center mt-4">
                   By submitting, you agree to be contacted regarding your application.

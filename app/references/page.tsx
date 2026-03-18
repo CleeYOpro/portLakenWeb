@@ -74,7 +74,7 @@ export default function ReferencesPage() {
           <div className="absolute top-20 right-0 w-96 h-96 rounded-full bg-port-sky blur-3xl" />
           <div className="absolute bottom-0 left-1/4 w-64 h-64 rounded-full bg-port-ice blur-3xl" />
         </div>
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10 w-full">
           <ScrollRevealText direction="up">
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight">
               References & Documentation
