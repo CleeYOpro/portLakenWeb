@@ -95,7 +95,7 @@ export default function Navbar() {
                 onMouseEnter={() => handleMouseEnter('government')}
                 onMouseLeave={handleMouseLeave}
               >
-                <DropdownLink href="/mayor-council" label="Council" />
+                <DropdownLink href="/city-council" label="Council" />
                 <DropdownLink href="/ordinances" label="Ordinances" />
                 <DropdownLink href="/boards-committees" label="Boards & Committees" />
                 <DropdownLink href="/environmental" label="Environment" />
@@ -107,7 +107,7 @@ export default function Navbar() {
                 onMouseEnter={() => handleMouseEnter('residents')}
                 onMouseLeave={handleMouseLeave}
               >
-                <DropdownLink href="/living-in-portlaken" label="Life" />
+
                 <DropdownLink href="/news" label="News" />
                 <DropdownLink href="/forms" label="Forms & Applications" />
                 <DropdownLink href="/maps-transport" label="Map" />
@@ -425,7 +425,7 @@ function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, onLogout }: { mob
               </div>
               <div className="mobile-link-item" style={{ '--link-delay': '310ms' } as React.CSSProperties}>
                 <MobileDropdown label="Residents" setMobileMenuOpen={setMobileMenuOpen}>
-                  <MobileLink href="/living-in-portlaken" label="Life" setMobileMenuOpen={setMobileMenuOpen} />
+
                   <MobileLink href="/news" label="News" setMobileMenuOpen={setMobileMenuOpen} />
                   <MobileLink href="/forms" label="Forms & Applications" setMobileMenuOpen={setMobileMenuOpen} />
                   <MobileLink href="/maps-transport" label="Map" setMobileMenuOpen={setMobileMenuOpen} />
