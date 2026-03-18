@@ -154,7 +154,6 @@ const siteContext = {
     },
     residents: {
       pages: {
-        life: PAGE_CONTEXTS.life.description,
         formsAndApplications: PAGE_CONTEXTS.forms.description,
         employment: "Employment — city jobs and employment information. Benefits: health/dental/vision, pension, PTO. Apply via Indeed.",
       },
@@ -231,7 +230,6 @@ PAGES & CONTENT:
 - News: ${nav.news.description}
 - Departments: ${nav.departments.description}
 - Careers: ${nav.residents.pages.employment}
-- Life: ${nav.residents.pages.life}
 - References: ${nav.references.description}
 - Sign In: ${nav.signIn.description}
 - Resource Directory (current page): Community resource listings with AI assistant.
@@ -279,7 +277,7 @@ RULES FOR text:
 - Sound like an on-site assistant.
 - ALWAYS check the RESOURCE DIRECTORY LISTINGS first. If relevant resources exist there, name them by their exact name. Never say something is "not listed" if it appears in the listings.
 - When referencing a resource, use its exact name from the listings.
-- When referencing a page, use its exact navigation name (Events, Map, Forms & Applications, Life, Council, Ordinances, Boards & Committees, Environment, Careers, News, About, Departments).
+- When referencing a page, use its exact navigation name (Events, Map, Forms & Applications, Council, Ordinances, Boards & Committees, Environment, Careers, News, About, Departments).
 
 RULES FOR pageContextKey:
 - Set to the most relevant page key if the question is primarily about that page's content.

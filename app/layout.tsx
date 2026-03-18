@@ -1,25 +1,11 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Playfair_Display, Nunito } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer"; // Changed from named import to default import
 import { AuthProvider } from "@/context/AuthContext";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-});
-
-const nunito = Nunito({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "600", "700", "900"],
-  variable: "--font-nunito-sans",
-});
 
 export const metadata: Metadata = {
   title: "Port Laken - Community First",
@@ -43,7 +29,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
         />
       </head>
-      <body className={`${playfair.variable} ${nunito.variable} antialiased`}>
+      <body className="antialiased">
         <AuthProvider>
           <div className="min-h-screen flex flex-col">
             <Navbar />
