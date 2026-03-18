@@ -2,12 +2,48 @@ import CouncilMember from "@/components/CouncilMember";
 import RevealOnScroll from "@/components/RevealOnScroll";
 
 const councilMembers = [
-  { name: "Mayor Sarah Johnson", role: "Mayor", description: "Dedicated to fostering community growth." },
-  { name: "David Martinez", role: "District 1", description: "Focused on infrastructure improvements." },
-  { name: "Emily Chen", role: "District 2", description: "Championing environmental initiatives." },
-  { name: "Michael Thompson", role: "District 3", description: "Advocating for public safety." },
-  { name: "Lisa Rodriguez", role: "District 4", description: "Improving educational resources." },
-  { name: "James Wilson", role: "At Large", description: "Overseeing fiscal responsibility." },
+  {
+    name: "Mayor Sarah Johnson",
+    role: "Mayor",
+    description: "Dedicated to fostering community growth.",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80",
+  },
+  {
+    name: "David Martinez",
+    role: "District 1",
+    description: "Focused on infrastructure improvements.",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&q=80",
+  },
+  {
+    name: "Emily Chen",
+    role: "District 2",
+    description: "Championing environmental initiatives.",
+    image:
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=800&q=80",
+  },
+  {
+    name: "Michael Thompson",
+    role: "District 3",
+    description: "Advocating for public safety.",
+    image:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80",
+  },
+  {
+    name: "Lisa Rodriguez",
+    role: "District 4",
+    description: "Improving educational resources.",
+    image:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&q=80",
+  },
+  {
+    name: "James Wilson",
+    role: "At Large",
+    description: "Overseeing fiscal responsibility.",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
+  },
 ];
 
 const meetings = [
@@ -47,6 +83,7 @@ export default function CityCouncilPage() {
                   name={member.name}
                   role={member.role}
                   description={member.description}
+                  image={member.image}
                 />
               </RevealOnScroll>
             ))}
