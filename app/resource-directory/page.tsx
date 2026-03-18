@@ -278,7 +278,7 @@ RESPONSE FORMAT — return ONLY valid JSON, no markdown, no code fences:
 }
 
 RULES FOR text:
-- Exactly 4 sentences, 25-40 words each, ~600 chars total.
+- Exactly 3 sentences, 20-30 words each, ~250 chars total.
 - No bullet points, no markdown.
 - End with a period.
 - Sound like an on-site assistant.
@@ -316,7 +316,7 @@ Return ONLY the JSON object.
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contents: [{ role: "user", parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.2, maxOutputTokens: 1200, topP: 0.9, responseMimeType: "application/json" },
+          generationConfig: { temperature: 0.2, maxOutputTokens: 2048, topP: 0.9, responseMimeType: "application/json" },
         }),
       }
     );
@@ -509,6 +509,7 @@ function ResourceDirectoryContent() {
             <SearchSection
               onSearch={handleAiSearch}
               onQueryChange={setQuery}
+              onClear={() => { setQuery(""); setAiOverview(""); setAiQuery(""); }}
               initialValue={query}
               isLoading={loading}
             />

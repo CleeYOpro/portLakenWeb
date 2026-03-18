@@ -1,11 +1,12 @@
 "use client";
 
-import { Search, Loader2, Mic } from "lucide-react";
+import { Search, Loader2, X } from "lucide-react";
 import { useState, KeyboardEvent, useEffect } from "react";
 
 interface SearchSectionProps {
   onSearch: (query: string) => void;
   onQueryChange?: (query: string) => void;
+  onClear?: () => void;
   initialValue?: string;
   isLoading?: boolean;
 }
@@ -13,6 +14,7 @@ interface SearchSectionProps {
 export default function SearchSection({
   onSearch,
   onQueryChange,
+  onClear,
   initialValue = "",
   isLoading = false,
 }: SearchSectionProps) {
@@ -39,6 +41,12 @@ export default function SearchSection({
     }
   };
 
+  const handleClear = () => {
+    setQuery("");
+    if (onQueryChange) onQueryChange("");
+    if (onClear) onClear();
+  };
+
   return (
     <div className="relative group w-full">
       <div className="absolute left-6 top-1/2 -translate-y-1/2 text-port-slate transition-colors group-focus-within:text-port-sky">
@@ -53,7 +61,7 @@ export default function SearchSection({
         className="w-full pl-14 pr-14 py-4 bg-white border border-port-mist rounded-full shadow-sm text-base placeholder:text-port-slate/50 outline-none transition-all duration-300 focus:border-port-sky focus:ring-4 focus:ring-port-sky/10"
       />
       <div className="absolute right-6 top-1/2 -translate-y-1/2 text-port-slate hover:text-port-navy cursor-pointer transition-colors">
-        <Mic size={20} />
+        {query ? <X size={20} onClick={handleClear} /> : null}
       </div>
     </div>
   );

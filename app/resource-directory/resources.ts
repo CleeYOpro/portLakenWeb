@@ -1091,6 +1091,39 @@ export const RESOURCES: Resource[] = [
         image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=800&q=80",
         rating: 4.5
     },
+    // City Center Landmarks
+    {
+        id: "69",
+        name: "Founders' Statue & Plaza",
+        category: "Recreation",
+        shortDescription: "Historic bronze statue honoring Port Laken's founding families, set in a public plaza.",
+        fullDescription: "Standing at the heart of downtown, the Founders' Statue is a bronze monument dedicated to the families who established Port Laken in the late 19th century. The surrounding plaza features engraved historical plaques, seasonal flower beds, and benches — a popular gathering spot for residents and visitors alike.",
+        address: "100 E 4th St, Port Angeles, WA 98362",
+        mapCoordinates: { lat: 48.1172, lng: -123.4300 },
+        phone: "(206) 684-4075",
+        website: "https://portlaken.gov",
+        email: "parks@portlaken.gov",
+        tags: ["statue", "monument", "landmark", "history", "plaza", "downtown"],
+        image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=80",
+        rating: 4.7
+    },
+    {
+        id: "70",
+        name: "Port Laken History Museum",
+        category: "Community",
+        shortDescription: "Explore Port Laken's rich history from its founding to the present day.",
+        fullDescription: "The Port Laken History Museum chronicles the city's journey from a small fishing settlement to a thriving Pacific Northwest community. Permanent exhibits cover Indigenous heritage, the logging and fishing industries, immigration waves, and the city's modern growth. Rotating exhibits highlight local artists and community stories. Free admission on Sundays.",
+        address: "150 E 4th St, Port Angeles, WA 98362",
+        mapCoordinates: { lat: 48.1170, lng: -123.4292 },
+        phone: "(206) 555-8200",
+        website: "https://portlakenhistory.org",
+        email: "info@portlakenhistory.org",
+        socialLinks: { facebook: "fb.com/portlakenhistory", instagram: "@portlakenhistory" },
+        tags: ["museum", "history", "culture", "heritage", "exhibits", "downtown"],
+        image: "https://images.unsplash.com/photo-1565060169194-19fabf63012c?w=800&q=80",
+        rating: 4.8
+    },
+
     {
         id: "68",
         name: "Laken Market",
