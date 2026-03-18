@@ -44,7 +44,7 @@ export const PAGE_CONTEXTS: Record<string, PageContext> = {
   about: {
     route: "/about",
     label: "About",
-    description: "Port Laken was founded in 1834. Population ~85,000. 45 sq miles. 19 parks. 1,500+ local businesses. 98% resident satisfaction. Located along northern Washington shores between the San Juan Strait and Olympic Mountains.",
+    description: "Port Laken was founded in 1834. Population ~85,000. 45 sq miles. 19 parks (50+ total green spaces). 1,500+ local businesses. 98% resident satisfaction. Located along northern Washington shores between the San Juan Strait and Olympic Mountains. Tagline: 'Rooted in Place. Rising Forward.' The city has a vibrant culinary scene, waterfront life, a thriving arts and education sector, and a strong sense of community. Key landmarks include the Founders' Statue & Plaza (downtown), Port Laken History Museum, Port Laken Art Museum, and the waterfront pier.",
     images: [
       { url: "https://outdoor-society.com/wp-content/uploads/2018/04/MP7A1677-1.jpg", alt: "Port Laken aerial view", caption: "Port Laken" },
       { url: "https://olympicpeninsula.org/wp-content/uploads/2024/09/port-angeles-wa-city-pier-hdr-e1727213387696.jpg", alt: "Waterfront Life", caption: "Waterfront" },
@@ -55,7 +55,7 @@ export const PAGE_CONTEXTS: Record<string, PageContext> = {
   events: {
     route: "/events",
     label: "Events",
-    description: "Upcoming events: Spring Food Drive (March 15, 2026, Community Center, 9AM-4PM), Summer Concert Series (April 22, 2026, Lakeside Park, 6-10PM), Job Skills Workshop (May 8, 2026, Public Library, 10AM-2PM), Earth Day Cleanup (April 22, 2026, Various Locations, 8AM-12PM), Farmers Market Opening (May 1, 2026, Town Square, 7AM-1PM), Kids Art Camp (June 15-19, 2026, Arts Center, 9AM-3PM), Senior Health Fair (May 20, 2026, Senior Center, 10AM-3PM), Independence Day Celebration (July 4, 2026, Harbor Park, 4-10PM).",
+    description: "Upcoming events: Spring Food Drive (March 15, 2026, Community Center, 9AM-4PM), Summer Concert Series (April 22, 2026, Lakeside Park, 6-10PM), Job Skills Workshop (May 8, 2026, Public Library, 10AM-2PM), Earth Day Cleanup (April 22, 2026, Various Locations, 8AM-12PM), Farmers Market Opening (May 1, 2026, Town Square, 7AM-1PM), Kids Art Camp (June 15-19, 2026, Arts Center, 9AM-3PM), Senior Health Fair (May 20, 2026, Senior Center, 10AM-3PM), Independence Day Celebration (July 4, 2026, Harbor Park, 4-10PM), Summer Festival (annual, multiple venues).",
     images: [
       { url: "https://images.unsplash.com/photo-1513618827672-0d7c5ad591b1?w=600&q=80", alt: "Spring Food Drive", caption: "Spring Food Drive" },
       { url: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=600&q=80", alt: "Summer Concert Series", caption: "Summer Concert" },
@@ -67,7 +67,7 @@ export const PAGE_CONTEXTS: Record<string, PageContext> = {
   maps: {
     route: "/maps-transport",
     label: "Map",
-    description: "Interactive map of Port Laken with key locations. Bus routes: Route 120 (Downtown Loop, every 15 min), Route 240 (Riverside Park, every 20 min), Route 480 (Airport, every 30 min), Route 960 (Arts District, every 25 min). Intercity rail: West/South Peninsula Line to Tacoma/Olympia, East/North Sound Line to Seattle/Bellevue.",
+    description: "Interactive map of Port Laken with key locations. Bus routes: Route 120 (Downtown Loop, every 15 min), Route 240 (Riverside Park, every 20 min), Route 480 (Airport, every 30 min), Route 960 (Arts District, every 25 min). Intercity rail: West/South Peninsula Line to Tacoma/Olympia, East/North Sound Line to Seattle/Bellevue. Port Laken is approximately a 2-hour drive from Seattle.",
     images: [
       { url: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80", alt: "Harborview Medical Center", caption: "Harborview Medical" },
       { url: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80", alt: "Eastlaken Community Center", caption: "Community Center" },
@@ -76,7 +76,7 @@ export const PAGE_CONTEXTS: Record<string, PageContext> = {
   forms: {
     route: "/forms",
     label: "Forms & Applications",
-    description: "Available forms: Residential Building Permit Application (Building & Zoning, planning@portlaken.gov), Special Event Permit Application (City Clerk), Park Facility Reservation Form (Parks & Recreation), Business License Application (Finance, $150/year), Zoning Variance Request, Water Service Connection Application (Public Works), Street Closure Permit, Dog License Application, Garage Sale Permit, Public Records Request, Commercial Sign Permit, Sidewalk Cafe Permit. Featured: 2025 Business License Renewal (deadline Jan 31), Property Tax Assessment Appeal (deadline Mar 15), Summer Recreation Program Registration.",
+    description: "Available forms: Residential Building Permit Application (Building & Zoning, planning@portlaken.gov), Special Event Permit Application (City Clerk), Park Facility Reservation Form (Parks & Recreation), Business License Application (Finance, $150/year), Zoning Variance Request, Water Service Connection Application (Public Works), Street Closure Permit, Dog License Application, Garage Sale Permit, Public Records Request, Commercial Sign Permit, Sidewalk Cafe Permit ($100/year). Featured: 2025 Business License Renewal (deadline Jan 31), Property Tax Assessment Appeal (deadline Mar 15), Summer Recreation Program Registration.",
     images: [
       { url: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80", alt: "Business License Renewal", caption: "Business License" },
       { url: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80", alt: "Property Tax Appeal", caption: "Property Tax" },
@@ -86,25 +86,25 @@ export const PAGE_CONTEXTS: Record<string, PageContext> = {
   council: {
     route: "/mayor-council",
     label: "Council",
-    description: "City Council members: Mayor Sarah Johnson, David Martinez (District 1, infrastructure), Emily Chen (District 2, environment), Michael Thompson (District 3, public safety), Lisa Rodriguez (District 4, education), James Wilson (At Large, fiscal). Upcoming meetings: Regular City Council Meeting (Jan 15, 2026), Special Session on Urban Planning (Jan 8, 2026), Public Hearing on Budget Allocation (Dec 20, 2025).",
+    description: "City Council members: Mayor Sarah Johnson, David Martinez (District 1, infrastructure), Emily Chen (District 2, environment), Michael Thompson (District 3, public safety), Lisa Rodriguez (District 4, education), James Wilson (At Large, fiscal). Upcoming meetings: Regular City Council Meeting (Jan 15, 2026), Special Session on Urban Planning (Jan 8, 2026), Public Hearing on Budget Allocation (Dec 20, 2025). Council meetings are open to the public.",
     images: [],
   },
   ordinances: {
     route: "/ordinances",
     label: "Ordinances",
-    description: "Active ordinances: Residential Noise Abatement (ORD-2023-12, max 65dB daytime/55dB nighttime), Zoning Regulations Amendment (ORD-2023-05, new MU-1 mixed-use zone, 45ft height limit), Environmental Protection Standards (ORD-2022-05, LEED Silver required for 10k+ sqft buildings), Business Licensing Requirements (ORD-2021-89, general license $150/year), Water Conservation Requirements (ORD-2023-22, no watering 10AM-6PM), Short-Term Rental Regulations (ORD-2023-08, $350/year permit), Accessory Dwelling Unit Standards (ORD-2022-33), Outdoor Dining Permit Program (ORD-2021-52, sidewalk dining $100/year).",
+    description: "Active ordinances: Residential Noise Abatement (ORD-2023-12, max 65dB daytime/55dB nighttime), Zoning Regulations Amendment (ORD-2023-05, new MU-1 mixed-use zone, 45ft height limit), Environmental Protection Standards (ORD-2022-05, LEED Silver required for 10k+ sqft buildings), Business Licensing Requirements (ORD-2021-89, general license $150/year), Water Conservation Requirements (ORD-2023-22, no outdoor watering 10AM-6PM), Short-Term Rental Regulations (ORD-2023-08, $350/year permit), Accessory Dwelling Unit Standards (ORD-2022-33), Outdoor Dining Permit Program (ORD-2021-52, sidewalk dining $100/year).",
     images: [],
   },
   boardsCommittees: {
     route: "/boards-committees",
     label: "Boards & Committees",
-    description: "Users can submit a board application and view commissions including the Planning Commission and Civic Arts Commission.",
+    description: "Residents can apply to serve on city boards and commissions including the Planning Commission and Civic Arts Commission. An online application form is available on the Boards & Committees page.",
     images: [],
   },
   environment: {
     route: "/environmental",
     label: "Environment",
-    description: "Port Laken environmental programs: Recycling & Waste (curbside pickup Tuesdays, 40% landfill diversion goal by 2026), Green Energy (100% renewable by 2030, $3,000 solar rebate, 75% clean energy now), Water Conservation (2M gallons saved, usage down 30%, smart irrigation rebates up to $200), Community Gardens (12 sites, 400+ plots, 10,000 lbs donated to food banks). Parks: Elm Street Park (opened Jan 2026), Lakeview Waterfront Park (14 acres, boat launch), Riverside Community Garden (80+ plots). Initiatives: Tree Planting (5,000+ trees), Clean Harbor Project, Green Building Standards.",
+    description: "Port Laken environmental programs: Recycling & Waste (curbside pickup Tuesdays, 40% landfill diversion goal by 2026), Green Energy (100% renewable by 2030, $3,000 solar rebate available, 75% clean energy now), Water Conservation (2M gallons saved, usage down 30%, smart irrigation rebates up to $200), Community Gardens (12 sites citywide, 400+ plots, 10,000 lbs donated to food banks annually). Parks: Elm Street Park (opened Jan 2026, walking trails, native plant garden, community pavilion), Lakeview Waterfront Park (14 acres, boat launch, wetland trail, fishing pier), Riverside Community Garden (80+ plots, composting station). Initiatives: Tree Planting (5,000+ trees planted), Clean Harbor Project, Green Building Standards (LEED Silver required for large buildings).",
     images: [
       { url: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=1920&q=80", alt: "Olympic National Forest", caption: "Port Laken Environment" },
       { url: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800&q=80", alt: "Community Gardens", caption: "Community Gardens" },
@@ -115,25 +115,25 @@ export const PAGE_CONTEXTS: Record<string, PageContext> = {
   news: {
     route: "/news",
     label: "News",
-    description: "Latest news: Green Port 2026 sustainability plan (Feb 10, 2026), $50M Downtown Initiative (Jan 16, 2026), Elm Street Park opening (Jan 11, 2026). Also features resident stories, local business spotlights, and newsletters.",
+    description: "Latest news: Green Port 2026 sustainability plan (Feb 10, 2026), $50M Downtown Revitalization Initiative (Jan 16, 2026), Elm Street Park opening (Jan 11, 2026), New Park Opens on Elm Street, Council Meeting Highlights, Summer Festival Schedule. Featured resident stories: Sarah Martinez (community volunteer, leads food drive initiatives), Michael Chen (youth mentor, 15 years mentoring at-risk youth, founded Future Forward Port Laken in 2013). Business spotlights: Harbor Brew Coffee, Green Thumb Nursery, Pages & Prose.",
     images: [],
   },
   departments: {
     route: "/departments",
     label: "Departments",
-    description: "City departments: City Clerk, Community Development, Fire Department, Police Department, Public Works, Finance, HR, Recreation and Parks.",
+    description: "City departments: City Clerk (records, elections), Community Development (planning, zoning, permits), Fire Department (fire suppression, EMS), Police Department (law enforcement, public safety), Public Works (infrastructure, roads, utilities), Finance (budget, taxes, billing), Human Resources (city employment), Recreation and Parks (parks, trails, recreation programs).",
     images: [],
   },
   careers: {
     route: "/careers",
     label: "Careers",
-    description: "City employment opportunities and employee benefits information.",
+    description: "Port Laken city employment opportunities. Benefits include comprehensive health, dental & vision coverage, generous retirement & pension plans, paid time off & holidays, and long-term job stability. The city values community impact, career growth, and stability. Job listings are posted on Indeed. Roles include civil engineers, recreation coordinators, IT support specialists, and more. The Careers page links to the full Benefits Guide.",
     images: [],
   },
   life: {
     route: "/living-in-portlaken",
     label: "Life",
-    description: "Overview of living in Port Laken: Affordable Housing, Schools and Childcare, Parks and Recreation, Local Business and Economy, Public Transit, Community Centers, Waste and Recycling, Public Safety, Health Services, Libraries and Arts, Permits & Licenses.",
+    description: "Living in Port Laken: Affordable Housing (programs for buyers and renters, forms available), Schools & Childcare (25 public schools, A+ safety rating, childcare resources in Resource Directory), Parks & Recreation (50+ parks, 100 miles of trails, award-winning park system), Local Business & Economy (1,500+ local businesses, support for entrepreneurs), Public Transit (bus routes and intercity rail, ~2hr from Seattle), Community Centers (Eastlaken Community Center, Harbor Community Center), Waste & Recycling (curbside Tuesdays, green initiatives), Public Safety (police, fire, emergency services), Health Services (clinics, hospitals, wellness programs in Resource Directory), Libraries & Arts (Port Laken Public Library, Port Laken Art Museum, Port Laken History Museum), Permits & Licenses (forms page).",
     images: [],
   },
 };
@@ -151,7 +151,7 @@ const siteContext = {
   navigation: {
     communityHub: {
       pages: {
-        resourceDirectory: "Resource Directory — AI assistant and community resource listings.",
+        resourceDirectory: "Resource Directory — AI assistant and community resource listings covering Healthcare, Family, Food, Seniors, Legal, Emergency, Education, Community, Recreation, and Service Stars categories.",
         events: "Events & Calendar — featured events, calendar with upcoming events.",
         map: "Map — interactive map of Port Laken with key locations and transit routes.",
         submitResource: "Submit a Resource — submit items to the city for review.",
@@ -162,7 +162,7 @@ const siteContext = {
       pages: {
         life: PAGE_CONTEXTS.life.description,
         formsAndApplications: PAGE_CONTEXTS.forms.description,
-        employment: "Employment — city jobs and employment information.",
+        employment: "Employment — city jobs and employment information. Benefits: health/dental/vision, pension, PTO. Apply via Indeed.",
       },
     },
     departments: { description: PAGE_CONTEXTS.departments.description },
@@ -176,7 +176,7 @@ const siteContext = {
     },
     news: { description: PAGE_CONTEXTS.news.description },
     about: {
-      stats: { population: "85,000", founded: "1834", area: "45 sq miles" },
+      stats: { population: "85,000", founded: "1834", area: "45 sq miles", parks: "50+", trails: "100 miles", schools: "25 public", safetyRating: "A+" },
       description: PAGE_CONTEXTS.about.description,
     },
     references: {
@@ -202,8 +202,8 @@ function buildAiContext(query: string, contextResources: Resource[]) {
   });
   scored.sort((a, b) => b.score - a.score);
   // Always include top matches + a broad sample so the AI has enough context
-  const topMatches = scored.filter((s) => s.score > 0).slice(0, 20).map((s) => s.r);
-  const fallback = scored.slice(0, 20).map((s) => s.r);
+  const topMatches = scored.filter((s) => s.score > 0).slice(0, 30).map((s) => s.r);
+  const fallback = scored.slice(0, 30).map((s) => s.r);
   const visibleResources = topMatches.length >= 5 ? topMatches : fallback;
 
   const resourceLines = visibleResources
@@ -267,6 +267,7 @@ async function generateOverview(query: string, contextResources: Resource[]): Pr
 You are the built-in AI guide for the Port Laken city website.
 
 Answer based ONLY on the website context below. Do not invent anything not described.
+IMPORTANT: Always check the RESOURCE DIRECTORY LISTINGS section first. If the answer exists there, use those resources — do not say something is unavailable if it appears in the listings.
 
 ${context}
 
@@ -282,12 +283,13 @@ RULES FOR text:
 - No bullet points, no markdown.
 - End with a period.
 - Sound like an on-site assistant.
+- ALWAYS check the RESOURCE DIRECTORY LISTINGS first. If relevant resources exist there, name them by their exact name. Never say something is "not listed" if it appears in the listings.
 - When referencing a resource, use its exact name from the listings.
 - When referencing a page, use its exact navigation name (Events, Map, Forms & Applications, Life, Council, Ordinances, Boards & Committees, Environment, Careers, News, About, Departments).
 
 RULES FOR pageContextKey:
 - Set to the most relevant page key if the question is primarily about that page's content.
-- about → questions about city history, age, population, founding, stats, culture, waterfront, food scene.
+- about → questions about city history, age, population, founding, stats, culture, waterfront. NOT for food/restaurant questions if resources exist.
 - events → questions about events, activities, calendar, things to do, upcoming happenings.
 - maps → questions about locations, getting around, transit, bus routes, directions.
 - forms → questions about permits, applications, licenses, forms, paperwork.
@@ -455,7 +457,9 @@ function ResourceDirectoryContent() {
 
   const handleAiSearch = async (q: string, resourcesOverride?: Resource[]) => {
     setAiQuery(q);
-    const snapshot = resourcesOverride ?? filteredResources;
+    // Always give the AI the full resource list so it can reason over everything,
+    // regardless of what the UI filter currently shows.
+    const snapshot = resourcesOverride ?? RESOURCES;
     setAiContextResources(snapshot);
     setLoading(true);
     setError("");
