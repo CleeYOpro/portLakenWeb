@@ -8,12 +8,15 @@ export type ResourceCategory =
     | "Education"
     | "Community"
     | "Recreation"
+    | "Religious"
     | "Service Stars";
 
 export interface Resource {
     id: string;
     name: string;
     category: ResourceCategory;
+    /** Additional categories this resource belongs to (enables multi-filter matching) */
+    categories?: ResourceCategory[];
     shortDescription: string;
     fullDescription: string;
     address: string;
@@ -237,16 +240,17 @@ export const RESOURCES: Resource[] = [
     },
     {
         id: "14",
-        name: "The Soup Kitchen",
+        name: "The Soup Kitchen at St. Michael's",
         category: "Food",
-        shortDescription: "Hot daily meals for anyone hungry.",
-        fullDescription: "Serving hot, nutritious lunches and dinners seven days a week. Everyone is welcome at our table.",
+        categories: ["Food", "Religious", "Community"],
+        shortDescription: "Hot daily meals for anyone hungry, run by St. Michael's Cathedral Parish.",
+        fullDescription: "Operated by the parish volunteers of St. Michael's Cathedral, The Soup Kitchen serves hot, nutritious lunches and dinners seven days a week. Everyone is welcome at our table — no questions asked. The ministry is a cornerstone of the Cathedral's outreach mission to serve the poor and vulnerable of Port Laken.",
         address: "216 S Peabody St, Port Angeles, WA 98362",
         mapCoordinates: { lat: 48.1159, lng: -123.4322 },
         phone: "(206) 555-9876",
-        website: "https://thesoupkitchenpl.org",
-        email: "info@thesoupkitchenpl.org",
-        tags: ["meals", "homeless", "hot food"],
+        website: "https://stmichaelsportlaken.org/soup-kitchen",
+        email: "soupkitchen@stmichaelsportlaken.org",
+        tags: ["meals", "homeless", "hot food", "catholic", "parish", "outreach"],
         image: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80",
         rating: 4.6
     },
@@ -1139,5 +1143,75 @@ export const RESOURCES: Resource[] = [
         tags: ["grocery", "local", "neighborhood", "fresh", "Port Laken"],
         image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80",
         rating: 4.8
-    }
+    },
+
+    // Religious
+    {
+        id: "71",
+        name: "St. Michael's Cathedral",
+        category: "Religious",
+        categories: ["Religious", "Community"],
+        shortDescription: "Port Laken's historic Catholic cathedral, home to vibrant parish life and community outreach.",
+        fullDescription: "St. Michael's Cathedral is the heart of Port Laken's Catholic community, serving thousands of parishioners across the city. The cathedral offers daily Mass, sacramental preparation, youth ministry, and a robust outreach program that includes running The Soup Kitchen on S. Peabody St. The stunning Gothic Revival building, built in 1901, is a beloved landmark of downtown Port Laken.",
+        address: "300 W 3rd St, Port Angeles, WA 98362",
+        mapCoordinates: { lat: 48.1178, lng: -123.4430 },
+        phone: "(206) 555-7200",
+        website: "https://stmichaelsportlaken.org",
+        email: "parish@stmichaelsportlaken.org",
+        socialLinks: { facebook: "fb.com/stmichaelsportlaken" },
+        tags: ["catholic", "cathedral", "church", "mass", "parish", "outreach"],
+        image: "https://images.unsplash.com/photo-1548625149-720754874e8e?w=800&q=80",
+        rating: 4.8
+    },
+    {
+        id: "72",
+        name: "Laken Community Church",
+        category: "Religious",
+        categories: ["Religious", "Community"],
+        shortDescription: "A welcoming non-denominational community church rooted in Port Laken.",
+        fullDescription: "Laken Community Church is a non-denominational congregation committed to being a home for everyone in Port Laken. With Sunday services, small groups, community events, and a strong focus on local service, the church partners with neighborhood organizations to support families and individuals in need. Visit them online at Laken.church.",
+        address: "415 E 6th St, Port Angeles, WA 98362",
+        mapCoordinates: { lat: 48.1143, lng: -123.4255 },
+        phone: "(206) 555-7300",
+        website: "https://laken.church",
+        email: "hello@laken.church",
+        socialLinks: { instagram: "@lakenchurch" },
+        tags: ["church", "non-denominational", "community", "worship", "sunday service"],
+        image: "https://images.unsplash.com/photo-1438032005730-c779502df39b?w=800&q=80",
+        rating: 4.7
+    },
+    {
+        id: "73",
+        name: "Port Laken Islamic Center",
+        category: "Religious",
+        categories: ["Religious", "Community"],
+        shortDescription: "Mosque and community center serving Port Laken's Muslim community.",
+        fullDescription: "The Port Laken Islamic Center is a welcoming mosque and community hub for Muslims in Port Laken and the surrounding region. The center offers daily prayers, Friday Jumu'ah services, Quran classes, youth programs, and interfaith outreach events. The community kitchen hosts monthly dinners open to all residents.",
+        address: "820 E 4th St, Port Angeles, WA 98362",
+        mapCoordinates: { lat: 48.1165, lng: -123.4200 },
+        phone: "(206) 555-7400",
+        website: "https://portlakenislamiccenter.org",
+        email: "info@portlakenislamiccenter.org",
+        socialLinks: { facebook: "fb.com/portlakenislamiccenter" },
+        tags: ["mosque", "islam", "muslim", "prayer", "jummah", "community"],
+        image: "https://images.unsplash.com/photo-1564769662533-4f00a87b4056?w=800&q=80",
+        rating: 4.8
+    },
+    {
+        id: "74",
+        name: "Congregation Beth Shalom",
+        category: "Religious",
+        categories: ["Religious", "Community"],
+        shortDescription: "Port Laken's Jewish synagogue, a center for worship, learning, and community.",
+        fullDescription: "Congregation Beth Shalom is Port Laken's Jewish synagogue, serving the local Jewish community with Shabbat and holiday services, Torah study, a Hebrew school for children, and a vibrant social calendar. The congregation is affiliated with the Conservative movement and warmly welcomes Jews of all backgrounds and interfaith families.",
+        address: "610 W 7th St, Port Angeles, WA 98362",
+        mapCoordinates: { lat: 48.1118, lng: -123.4470 },
+        phone: "(206) 555-7500",
+        website: "https://bethshalomportlaken.org",
+        email: "office@bethshalomportlaken.org",
+        socialLinks: { facebook: "fb.com/bethshalomportlaken" },
+        tags: ["synagogue", "jewish", "shabbat", "torah", "hebrew school", "conservative"],
+        image: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800&q=80",
+        rating: 4.7
+    },
 ];

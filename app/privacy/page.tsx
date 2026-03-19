@@ -45,16 +45,10 @@ const sections = [
       "Google services may process data when you use Google sign-in or interact with embedded or static map content.",
       "Resend or comparable email infrastructure may be used to deliver transactional messages, newsletters, or alert-style emails.",
       "Vercel Analytics may collect aggregated usage information for traffic and performance measurement.",
-      "Hosting providers such as Vercel or Netlify may log request, device, and performance metadata needed to operate the site.",
+      "Our hosting provider, Vercel, may log request, device, and performance metadata needed to operate the site.",
     ],
   },
-  {
-    title: "Cookies and similar technologies",
-    body: [
-      "The site may use cookies, local browser storage, and similar technologies to support authentication, maintain preferences, measure usage, and keep core features working properly.",
-      "You can limit cookies in your browser settings, but some sign-in, personalization, or embedded content features may not function correctly if you do.",
-    ],
-  },
+
   {
     title: "Data retention",
     body: [
@@ -102,9 +96,7 @@ export default function PrivacyPolicyPage() {
 
         <div className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 lg:px-12">
           <div className="max-w-3xl">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.28em] text-port-mist/80">
-              Legal
-            </p>
+
             <h1 className="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
               Privacy Policy
             </h1>
@@ -115,6 +107,7 @@ export default function PrivacyPolicyPage() {
             <p className="mt-6 text-sm text-port-mist/75">
               Effective date: March 18, 2026
             </p>
+            <p className="mt-6 text-sm text-port-mist/75">   </p>
           </div>
         </div>
       </section>
@@ -124,9 +117,7 @@ export default function PrivacyPolicyPage() {
           <div className="space-y-6 rounded-[2rem] border border-port-mist/40 bg-white p-7 shadow-[0_24px_80px_rgba(50,66,79,0.08)] sm:p-9 lg:p-10">
             <div className="rounded-2xl border border-port-mist/40 bg-port-frost/70 p-5">
               <p className="text-sm leading-7 text-port-slate">
-                This page is written to match the current features of the Port
-                Laken app, including account creation, Google sign-in, Firestore
-                profile storage, map embeds, analytics, and email delivery.
+If this website were publicly available in a real city, the privacy policy would be along the lines of this, covering features like account creation, Google sign-in, Firestore profile storage, map embeds, analytics, and email delivery.
               </p>
             </div>
 

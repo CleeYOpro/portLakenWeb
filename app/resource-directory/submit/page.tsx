@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext"; // Using Firebase Auth Context instead of next-auth
 import { db } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 
 export default function SubmitResourcePage() {
@@ -58,19 +58,50 @@ export default function SubmitResourcePage() {
     }
 
     try {
-      // Add the resource to Firestore with the user ID
-      await addDoc(collection(db, "resources"), {
+      // Save to Firestore first with pending status
+      const docRef = await addDoc(collection(db, "resources"), {
         ...formData,
-        userId: user.uid, // Connect resource to user
-        status: "pending", // Default status is pending
+        userId: user.uid,
+        status: "pending",
         createdAt: serverTimestamp(),
         approvedAt: null,
         approvedBy: null
       });
 
+      // Run AI review
+      try {
+        const reviewRes = await fetch("/api/review-resource", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: formData.title,
+            category: formData.category,
+            shortDescription: formData.description,
+            fullDescription: formData.description,
+            address: formData.address,
+            phone: formData.phone,
+            email: formData.email,
+            website: formData.website,
+            operatingHours: formData.hours,
+            tags: [],
+          }),
+        });
+
+        if (reviewRes.ok) {
+          const { approved, reason } = await reviewRes.json();
+          await updateDoc(doc(db, "resources", docRef.id), {
+            status: approved ? "approved" : "rejected",
+            aiReviewReason: reason,
+            reviewedAt: serverTimestamp(),
+          });
+        }
+      } catch (reviewErr) {
+        console.error("AI review failed, leaving as pending:", reviewErr);
+      }
+
       // Redirect to dashboard after successful submission
       router.push("/dashboard");
-      router.refresh(); // Refresh to show the new resource in the list
+      router.refresh();
     } catch (err) {
       console.error("Error submitting resource:", err);
       setError("Failed to submit resource. Please try again.");

@@ -85,6 +85,11 @@ export default function ResourcePopup({ resource, onClose }: ResourcePopupProps)
                             <span className="inline-block px-3 py-1 bg-port-sky/90 backdrop-blur-sm rounded-full text-xs font-bold uppercase tracking-wider mb-2">
                                 {resource.category}
                             </span>
+                            {resource.categories && resource.categories.filter(c => c !== resource.category).map(c => (
+                                <span key={c} className="inline-block ml-1 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+                                    {c}
+                                </span>
+                            ))}
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,9 @@ import ResourcePopup from "./_components/ResourcePopup";
 import SearchSection from "./_components/SearchSection";
 import AIOverview from "./_components/AIOverview";
 import { FolderOpen, PlusCircle, ChevronDown } from "lucide-react";
+import { db } from "@/lib/firebase";
+import { collection, query as firestoreQuery, where, getDocs } from "firebase/firestore";
+import { mergeResources } from "@/lib/mergeResources";
 
 const CATEGORIES: { label: string; value: ResourceCategory | "All" }[] = [
   { label: "All Resources", value: "All" },
@@ -20,6 +23,7 @@ const CATEGORIES: { label: string; value: ResourceCategory | "All" }[] = [
   { label: "Education", value: "Education" },
   { label: "Community", value: "Community" },
   { label: "Recreation", value: "Recreation" },
+  { label: "Religious", value: "Religious" },
   { label: "Service Stars", value: "Service Stars" },
 ];
 
@@ -375,6 +379,21 @@ Return ONLY the JSON object.
   return callGemini();
 }
 
+function mapSubmissionCategory(cat: string): ResourceCategory {
+  const map: Record<string, ResourceCategory> = {
+    healthcare: "Healthcare",
+    food: "Food",
+    family: "Family",
+    seniors: "Seniors",
+    legal: "Legal",
+    emergency: "Emergency",
+    education: "Education",
+    community: "Community",
+    recreation: "Recreation",
+  };
+  return map[cat?.toLowerCase()] ?? "Community";
+}
+
 function ResourceDirectoryContent() {
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") || "";
@@ -383,6 +402,7 @@ function ResourceDirectoryContent() {
   const [aiQuery, setAiQuery] = useState("");
   const [aiContextResources, setAiContextResources] = useState<Resource[]>([]);
   const [activeCategory, setActiveCategory] = useState<ResourceCategory | "All">("All");
+  const [communityResources, setCommunityResources] = useState<Resource[]>([]);
   const [filteredResources, setFilteredResources] = useState<Resource[]>(RESOURCES);
   const [selectedResource, setSelectedResource] = useState<Resource | null>(null);
 
@@ -394,6 +414,39 @@ function ResourceDirectoryContent() {
 
   const hasAutoSearched = useRef(false);
 
+  // Fetch approved community submissions from Firestore on mount
+  useEffect(() => {
+    async function fetchApprovedResources() {
+      try {
+        const q = firestoreQuery(collection(db, "resources"), where("approvalStatus", "==", "approved"));
+        const snapshot = await getDocs(q);
+        const fetched: Resource[] = snapshot.docs.map((doc) => {
+          const d = doc.data() as Record<string, any>;
+          return {
+            id: doc.id,
+            name: d.name ?? "",
+            category: mapSubmissionCategory(d.category),
+            shortDescription: d.shortDescription ?? "",
+            fullDescription: d.fullDescription ?? "",
+            address: d.address ?? "",
+            mapCoordinates: d.mapCoordinates ?? { lat: 0, lng: 0 },
+            phone: d.phone ?? "",
+            website: d.website ?? "",
+            email: d.email ?? "",
+            tags: Array.isArray(d.tags) ? d.tags : [],
+            image: d.imageUrl ?? "",
+            rating: 4.0,
+          };
+        });
+        setCommunityResources(fetched);
+      } catch (err) {
+        console.error("[ResourceDirectory] Failed to fetch community resources:", err);
+      }
+    }
+    fetchApprovedResources();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     const q = searchParams.get("q");
     if (q !== null) {
@@ -402,13 +455,14 @@ function ResourceDirectoryContent() {
 
     const resourceId = searchParams.get("resourceId");
     if (resourceId) {
-      const resource = RESOURCES.find((r) => r.id === resourceId);
+      const allResources = mergeResources(RESOURCES, communityResources);
+      const resource = allResources.find((r) => r.id === resourceId);
       if (resource) {
         setSelectedResource(resource);
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
+  }, [searchParams, communityResources]);
 
   // Auto-fire AI search once on mount if ?q= is present
   useEffect(() => {
@@ -416,16 +470,21 @@ function ResourceDirectoryContent() {
     if (q && !hasAutoSearched.current) {
       hasAutoSearched.current = true;
       console.log("[AutoSearch] firing for query:", q);
-      handleAiSearch(q, RESOURCES);
+      const allResources = mergeResources(RESOURCES, communityResources);
+      handleAiSearch(q, allResources);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [communityResources]);
 
   useEffect(() => {
-    let result = RESOURCES;
+    const allResources = mergeResources(RESOURCES, communityResources);
+    let result = allResources;
 
     if (activeCategory !== "All") {
-      result = result.filter((r) => r.category === activeCategory);
+      result = result.filter((r) => {
+        const allCats = r.categories ?? [r.category];
+        return allCats.includes(activeCategory);
+      });
     }
 
     if (query) {
@@ -445,13 +504,14 @@ function ResourceDirectoryContent() {
     }
 
     setFilteredResources(result);
-  }, [query, activeCategory]);
+  }, [query, activeCategory, communityResources]);
 
   const handleAiSearch = async (q: string, resourcesOverride?: Resource[]) => {
     setAiQuery(q);
-    // Always give the AI the full resource list so it can reason over everything,
+    // Always give the AI the full resource list (static + community) so it can reason over everything,
     // regardless of what the UI filter currently shows.
-    const snapshot = resourcesOverride ?? RESOURCES;
+    const allResources = mergeResources(RESOURCES, communityResources);
+    const snapshot = resourcesOverride ?? allResources;
     setAiContextResources(snapshot);
     setLoading(true);
     setError("");
@@ -578,7 +638,7 @@ function ResourceDirectoryContent() {
                 aiOverview={aiOverview}
                 loading={loading}
                 error={error}
-                allResources={RESOURCES}
+                allResources={mergeResources(RESOURCES, communityResources)}
                 pageContextKey={aiPageContextKey}
                 address={aiAddress}
                 onResourceClick={(r) => setSelectedResource(r)}

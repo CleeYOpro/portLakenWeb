@@ -8,5 +8,7 @@
     "typescriptreact": "javascriptreact",
     "javascript": "javascript",
     "plaintext": "html"
-  }
+  },
+  "kiroAgent.configureMCP": "Enabled",
+  "typescript.autoClosingTags": false
 }

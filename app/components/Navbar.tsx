@@ -72,7 +72,10 @@ export default function Navbar() {
                   alt="Port Laken"
                   width={160}
                   height={48}
-                  className="h-12 w-auto object-contain transition-transform group-hover:scale-[1.04] -translate-y-[1px]"
+                  priority
+                  loading="eager"
+                  style={{ width: "auto" }}
+                  className="h-12 object-contain transition-transform group-hover:scale-[1.04] -translate-y-[1px]"
                 />
                 <span className="text-2xl font-steel text-slate tracking-tight group-hover:text-primary transition-colors translate-y-[1px]">
                   Port Laken
@@ -385,7 +388,7 @@ function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, onLogout }: { mob
             {/* Header */}
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-2.5">
-                <Image src="/Port Laken (6 x 2 in) (6 x 1.6 in) (6 x 6 in).svg" alt="Port Laken" width={120} height={36} className="h-9 w-auto object-contain" />
+                <Image src="/Port Laken (6 x 2 in) (6 x 1.6 in) (6 x 6 in).svg" alt="Port Laken" width={120} height={36} style={{ width: "auto" }} className="h-9 object-contain" />
                 <span className="font-nunito font-bold text-xl text-deep-navy">Port Laken</span>
               </div>
               <button
