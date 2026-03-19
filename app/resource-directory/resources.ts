@@ -205,7 +205,7 @@ export const RESOURCES: Resource[] = [
         email: "volunteer@plfoodbank.org",
         socialLinks: { facebook: "fb.com/plfoodbank" },
         tags: ["food bank", "groceries", "assistance"],
-        image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         rating: 4.8
     },
     {
@@ -220,7 +220,7 @@ export const RESOURCES: Resource[] = [
         website: "https://mowpl.org",
         email: "signup@mowpl.org",
         tags: ["seniors", "delivery", "nutrition"],
-        image: "https://images.unsplash.com/photo-1607478900766-efe13248b125?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1668838268173-816ee121ad4a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVhbHMlMjBvbiUyMHdoZWVsc3xlbnwwfHwwfHx8MA%3D%3D",
         rating: 4.9
     },
     {
@@ -283,7 +283,7 @@ export const RESOURCES: Resource[] = [
         website: "https://seniortransportpl.org",
         email: "ride@seniortransportpl.org",
         tags: ["transportation", "seniors", "mobility"],
-        image: "https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1745096437279-1cf0f995bb2a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c2VuaW9yJTIwdHJhbnNwb3J0JTIwc2VydmljZXN8ZW58MHx8MHx8fDA%3D",
         rating: 4.8
     },
     {
@@ -298,7 +298,7 @@ export const RESOURCES: Resource[] = [
         website: "https://storypointpl.com",
         email: "welcome@storypointpl.com",
         tags: ["housing", "assisted living", "retirement"],
-        image: "https://images.unsplash.com/photo-1568495248636-6432b97bd949?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1647913097155-4859fb131dd6?q=80&w=1026&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         rating: 4.5
     },
 
@@ -377,7 +377,7 @@ export const RESOURCES: Resource[] = [
         website: "https://dvhopepl.org",
         email: "safe@dvhopepl.org",
         tags: ["crisis", "support", "hotline"],
-        image: "https://images.unsplash.com/photo-1520315342629-6ea920342047?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1628282928102-9d81b72397d8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZG9tZXN0aWMlMjB2aW9sZW5jZXxlbnwwfHwwfHx8MA%3D%3D",
         rating: 4.9
     },
 
@@ -469,7 +469,7 @@ export const RESOURCES: Resource[] = [
         website: "https://plmontessori.org",
         email: "admissions@plmontessori.org",
         tags: ["montessori", "preschool", "early learning"],
-        image: "https://images.unsplash.com/photo-1567057419565-4349c49d8a04?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1596066190600-3af9aadaaea1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW9udGVzc29yaXxlbnwwfHwwfHx8MA%3D%3D",
         rating: 4.7
     },
     {
@@ -755,7 +755,7 @@ export const RESOURCES: Resource[] = [
         website: "https://urbanharvestpl.org",
         email: "grow@urbanharvestpl.org",
         tags: ["community garden", "urban farming", "composting", "food"],
-        image: "https://images.unsplash.com/photo-1464226184081-280282a76e63?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1631195414013-85b70ff2c180?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29tbXVuaXR5JTIwZ2FyZGVufGVufDB8fDB8fHww",
         rating: 4.7
     },
 
@@ -772,7 +772,7 @@ export const RESOURCES: Resource[] = [
         website: "https://portside-grille.com",
         email: "info@portside-grille.com",
         tags: ["restaurant", "dining", "local", "food"],
-        image: "https://images.unsplash.com/photo-1517457373614-b7152f800fd1?w=800&q=80",
+        image: "https://media.istockphoto.com/id/2153912560/photo/modern-coffee-shop-interior-with-tables-coffee-maker-pastries-and-walled-garden.webp?a=1&b=1&s=612x612&w=0&k=20&c=r-jKhFS7dZXoFnTkbVx8tzhJNFwTCJpRVjMul6fZ04c=",
         rating: 4.7
     },
     {
@@ -787,7 +787,7 @@ export const RESOURCES: Resource[] = [
         website: "https://canela-restaurant.com",
         email: "reservations@canela-restaurant.com",
         tags: ["restaurant", "community", "sustainable", "dining"],
-        image: "https://images.unsplash.com/photo-1504674900968-e4355a63dee2?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1573822028151-731623cb0722?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y296eSUyMHJlc3RhdXJhbnQlMjBpbnRlcmlvcnxlbnwwfHwwfHx8MA%3D%3D",
         rating: 4.8
     },
     {
@@ -820,7 +820,7 @@ export const RESOURCES: Resource[] = [
         email: "hello@harborbrewcoffee.com",
         socialLinks: { instagram: "@harborbrewcoffee" },
         tags: ["coffee", "café", "community", "social mission"],
-        image: "https://images.unsplash.com/photo-1559056199-641a0ac8b3f0?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1453614512568-c4024d13c247?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         rating: 4.8
     },
     {
@@ -835,7 +835,7 @@ export const RESOURCES: Resource[] = [
         website: "https://pages-and-prose.com",
         email: "info@pagesandprose.com",
         tags: ["bookstore", "reading", "community", "events"],
-        image: "https://images.unsplash.com/photo-1507842931343-583f7270bffd?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1518373714866-3f1478910cc0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         rating: 4.7
     },
     {
@@ -850,7 +850,7 @@ export const RESOURCES: Resource[] = [
         website: "https://greenthumbportlaken.com",
         email: "info@greenthumbportlaken.com",
         tags: ["nursery", "native plants", "gardening", "sustainability"],
-        image: "https://images.unsplash.com/photo-1585320736145-e5c6b3e08d26?w=800&q=80",
+        image: "https://media.istockphoto.com/id/2194723896/photo/gardener-center-worker-pushing-a-cart-loaded-with-flowers.webp?a=1&b=1&s=612x612&w=0&k=20&c=D3lYS9SdO_Pznz7UxAOj09HQ8Gt0yCFdZD89voxNoR8=",
         rating: 4.8
     },
 
@@ -882,7 +882,7 @@ export const RESOURCES: Resource[] = [
         website: "https://futureforwardportlaken.org",
         email: "info@futureforwardportlaken.org",
         tags: ["mentorship", "youth", "education", "community"],
-        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1758687126375-e2c1683219e9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8eW91dGglMjBtZW50b3JzaGlwfGVufDB8fDB8fHww",
         rating: 4.9
     },
     {
@@ -897,7 +897,7 @@ export const RESOURCES: Resource[] = [
         website: "https://westsideelementary.portlaken.k12.wa.us",
         email: "office@westsideelementary.k12.wa.us",
         tags: ["school", "elementary", "education", "public"],
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
+        image: "https://plus.unsplash.com/premium_photo-1723773874409-8661740a79b6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZWxlbWVudGFyeSUyMHNjaG9vbHxlbnwwfHwwfHx8MA%3D%3D",
         rating: 4.5
     },
 
@@ -915,7 +915,7 @@ export const RESOURCES: Resource[] = [
         email: "paddle@lakenwatersports.com",
         socialLinks: { instagram: "@lakenwatersports" },
         tags: ["kayak", "paddleboard", "jet ski", "watersports", "beach", "waterfront"],
-        image: "https://images.unsplash.com/photo-1530053969600-caed2596d242?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1581545048011-564bf4a743ab?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         rating: 4.8
     },
 
@@ -932,7 +932,7 @@ export const RESOURCES: Resource[] = [
         website: "https://plimmigrationclinic.org",
         email: "intake@plimmigrationclinic.org",
         tags: ["immigration", "legal aid", "visa", "DACA", "asylum"],
-        image: "https://images.unsplash.com/photo-1521791055366-0d553872952f?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1765020553734-2c050ddb9494?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         rating: 4.7
     },
 
@@ -964,7 +964,7 @@ export const RESOURCES: Resource[] = [
         website: "https://lakenfamilycounseling.org",
         email: "appointments@lakenfamilycounseling.org",
         tags: ["counseling", "therapy", "family", "couples"],
-        image: "https://images.unsplash.com/photo-1573497491765-dccce02b29df?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1654613698275-b0930ef9570f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         rating: 4.6
     },
 
@@ -1045,7 +1045,7 @@ export const RESOURCES: Resource[] = [
         email: "outreach@harborhope.org",
         socialLinks: { facebook: "fb.com/harborhope" },
         tags: ["homeless", "outreach", "shelter", "social services"],
-        image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1509059852496-f3822ae057bf?q=80&w=945&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         rating: 4.9
     },
 
@@ -1077,7 +1077,7 @@ export const RESOURCES: Resource[] = [
         website: "https://www.walmart.com",
         email: "portlaken@walmart.com",
         tags: ["grocery", "supercenter", "retail", "food", "pharmacy"],
-        image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1670684684445-a4504dca0bbc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGdyb2NlcnklMjBzdG9yZXxlbnwwfHwwfHx8MA%3D%3D",
         rating: 3.9
     },
     {
@@ -1108,7 +1108,7 @@ export const RESOURCES: Resource[] = [
         website: "https://portlaken.gov",
         email: "parks@portlaken.gov",
         tags: ["statue", "monument", "landmark", "history", "plaza", "downtown"],
-        image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1667385755929-8847d01dbf74?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Zm91bmRlcnN0YXR1ZXxlbnwwfHwwfHx8MA%3D%3D",
         rating: 4.7
     },
     {
@@ -1124,7 +1124,7 @@ export const RESOURCES: Resource[] = [
         email: "info@portlakenhistory.org",
         socialLinks: { facebook: "fb.com/portlakenhistory", instagram: "@portlakenhistory" },
         tags: ["museum", "history", "culture", "heritage", "exhibits", "downtown"],
-        image: "https://images.unsplash.com/photo-1565060169194-19fabf63012c?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1696694139314-e0e5962b8dc0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGlzdG9yeSUyMG11c2V1bXxlbnwwfHwwfHx8MA%3D%3D",
         rating: 4.8
     },
 
@@ -1160,7 +1160,7 @@ export const RESOURCES: Resource[] = [
         email: "parish@stmichaelsportlaken.org",
         socialLinks: { facebook: "fb.com/stmichaelsportlaken" },
         tags: ["catholic", "cathedral", "church", "mass", "parish", "outreach"],
-        image: "https://images.unsplash.com/photo-1548625149-720754874e8e?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1746475148454-7421974b5a23?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2F0aGVkZXJhbHxlbnwwfHwwfHx8MA%3D%3D",
         rating: 4.8
     },
     {
@@ -1194,7 +1194,7 @@ export const RESOURCES: Resource[] = [
         email: "info@portlakenislamiccenter.org",
         socialLinks: { facebook: "fb.com/portlakenislamiccenter" },
         tags: ["mosque", "islam", "muslim", "prayer", "jummah", "community"],
-        image: "https://images.unsplash.com/photo-1564769662533-4f00a87b4056?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1751529284945-a614109d2899?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8aW5zaWRlJTIwbW9zcXVlfGVufDB8fDB8fHww",
         rating: 4.8
     },
     {
@@ -1211,7 +1211,7 @@ export const RESOURCES: Resource[] = [
         email: "office@bethshalomportlaken.org",
         socialLinks: { facebook: "fb.com/bethshalomportlaken" },
         tags: ["synagogue", "jewish", "shabbat", "torah", "hebrew school", "conservative"],
-        image: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1585834372646-5306d75a60ee?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3luYWdvZ3VlfGVufDB8fDB8fHww",
         rating: 4.7
     },
 ];
