@@ -1177,7 +1177,7 @@ export const RESOURCES: Resource[] = [
         email: "hello@laken.church",
         socialLinks: { instagram: "@lakenchurch" },
         tags: ["church", "non-denominational", "community", "worship", "sunday service"],
-        image: "https://images.unsplash.com/photo-1438032005730-c779502df39b?w=800&q=80",
+        image: "https://images.squarespace-cdn.com/content/v1/58bccf9517bffc35906da3c7/1672671764714-YVC0UI40IGLA5QCWCKWU/real-stuff-1500x600.jpg",
         rating: 4.7
     },
     {

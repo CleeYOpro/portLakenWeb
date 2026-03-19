@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, Loader2, X } from "lucide-react";
+import { Search, Loader2, X, Sparkles } from "lucide-react";
 import { useState, KeyboardEvent, useEffect } from "react";
 
 interface SearchSectionProps {
@@ -36,9 +36,7 @@ export default function SearchSection({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setQuery(newValue);
-    if (onQueryChange) {
-      onQueryChange(newValue);
-    }
+    if (onQueryChange) onQueryChange(newValue);
   };
 
   const handleClear = () => {
@@ -47,21 +45,46 @@ export default function SearchSection({
     if (onClear) onClear();
   };
 
+  const handleAiClick = () => {
+    const trimmed = query.trim();
+    if (!trimmed) return;
+    onSearch(trimmed);
+  };
+
   return (
     <div className="relative group w-full">
+      {/* Left icon */}
       <div className="absolute left-6 top-1/2 -translate-y-1/2 text-port-slate transition-colors group-focus-within:text-port-sky">
         {isLoading ? <Loader2 className="animate-spin" size={20} /> : <Search size={20} />}
       </div>
+
       <input
         type="text"
         value={query}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        placeholder="Search Resources... (Press Enter for AI Overview)"
-        className="w-full pl-14 pr-14 py-4 bg-white border border-port-mist rounded-full shadow-sm text-base placeholder:text-port-slate/50 outline-none transition-all duration-300 focus:border-port-sky focus:ring-4 focus:ring-port-sky/10"
+        placeholder="Ask AI about resources in Port Laken..."
+        className="w-full pl-14 pr-36 py-4 bg-white border border-port-mist rounded-full shadow-sm text-base placeholder:text-port-slate/50 outline-none transition-all duration-300 focus:border-port-sky focus:ring-4 focus:ring-port-sky/10"
       />
-      <div className="absolute right-6 top-1/2 -translate-y-1/2 text-port-slate hover:text-port-navy cursor-pointer transition-colors">
-        {query ? <X size={20} onClick={handleClear} /> : null}
+
+      {/* Right side: clear or AI button */}
+      <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
+        {query && (
+          <button onClick={handleClear} className="text-port-slate hover:text-port-navy transition-colors">
+            <X size={18} />
+          </button>
+        )}
+
+        {/* AI button — matches site aesthetic */}
+        <button
+          onClick={handleAiClick}
+          disabled={!query.trim() || isLoading}
+          title="AI search these resources"
+          className="flex items-center gap-1.5 px-4 py-1.5 rounded-full border-2 border-port-sky text-port-sky font-semibold text-sm hover:bg-port-sky hover:text-white transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          <Sparkles size={15} className="shrink-0" />
+          <span>AI</span>
+        </button>
       </div>
     </div>
   );

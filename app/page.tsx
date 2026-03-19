@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
@@ -34,34 +34,34 @@ import {
 
 const upcomingEvents = [
   {
-    month: 'FEB',
-    day: '2',
-    title: 'Groundhog Day Celebration',
-    desc: 'Join us at the park for the annual Groundhog Day festivities with local treats and games.',
-  },
-  {
-    month: 'FEB',
-    day: '14',
-    title: 'Valentine’s Day Market',
-    desc: 'Local vendors showcase handmade gifts, flowers, and sweets for everyone to enjoy.',
-  },
-  {
-    month: 'FEB',
-    day: '17',
-    title: 'Winter Arts Workshop',
-    desc: 'Interactive workshops for all ages at the community arts center.',
-  },
-  {
-    month: 'FEB',
+    month: 'MAR',
     day: '20',
+    title: 'First Day of Spring Celebration',
+    desc: 'Welcome the new season with live music, food vendors, and family activities at Lakeside Park.',
+  },
+  {
+    month: 'MAR',
+    day: '22',
+    title: 'Spring Farmers Market Opening',
+    desc: 'The seasonal farmers market returns to Town Square with fresh produce, local goods, and more.',
+  },
+  {
+    month: 'MAR',
+    day: '25',
     title: 'City Council Town Hall',
     desc: 'Discuss upcoming projects and community initiatives with local leaders.',
   },
   {
-    month: 'FEB',
+    month: 'MAR',
     day: '28',
     title: 'Community Clean-Up Day',
     desc: 'Volunteer to help keep our parks and streets clean; tools and refreshments provided.',
+  },
+  {
+    month: 'MAR',
+    day: '31',
+    title: 'Spring Arts & Crafts Fair',
+    desc: 'Local artists and makers showcase their work at the community arts center — all ages welcome.',
   },
 ];
 
@@ -1520,7 +1520,7 @@ function GallerySection() {
     { src: "https://peakbaggerblobs.blob.core.windows.net/pbphoto/p515L.jpg", alt: "Mountain landscape" },
     { src: "https://www.globalholdings-mgmt.com/wp-content/uploads/2022/09/washington-harbour-1-1024x682.jpg", alt: "Nature scene" },
     { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJRUxmnROa9bcRLzcl0S-vhdwFVkDycEtGiA&s", alt: "Lake view" },
-    { src: "https://excursionmania.com/cdn-cgi/image/quality=75,format=webp,w=auto,h=auto,fit=scale-down,trim=border/https://excursionmania.com/uploads/blog/ideas/420a5a39e12ea478c2f267b2cee4607f.jpg", alt: "Forest view" },
+    { src: "https://olympicpeninsula.org/wp-content/uploads/2025/03/Olympic-National-Park-Sign-v3-800x600.jpg", alt: "Forest view" },
     { src: "https://nrs.objectstore.gov.bc.ca/kuwyyf/frontcountry_camping_RS_8873_82ab7cecb1.jpg", alt: "Waterfall" },
     { src: "https://www.thoughtco.com/thmb/qO4W06u8TNDKXRktinwhTHMLZHE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-885794240-5b5e2c574cedfd0050fae7f2.jpg", alt: "City skyline" },
     { src: "https://quietly-image-uploads.s3.amazonaws.com/image_7015_1280px_c975e1f0ed274103ad6d949df3292aaf.jpeg", alt: "Park trees" },

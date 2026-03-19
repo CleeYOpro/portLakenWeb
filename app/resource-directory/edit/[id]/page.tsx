@@ -3,40 +3,59 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { db } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { doc, getDoc, updateDoc, serverTimestamp } from "firebase/firestore";
+import { useRouter, useParams } from "next/navigation";
 import { validateResource } from "@/lib/validateResource";
-import HoursSelector from "./_components/HoursSelector";
+import HoursSelector from "@/app/resource-directory/submit/_components/HoursSelector";
 
-export default function SubmitResourcePage() {
+export default function EditResourcePage() {
   const { user, loading: authLoading } = useAuth();
   const router = useRouter();
+  const params = useParams();
+  const id = params.id as string;
+
   const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    category: "",
-    address: "",
-    phone: "",
-    email: "",
-    website: "",
-    hours: "",
-    imageUrl: "",
+    title: "", description: "", category: "",
+    address: "", phone: "", email: "",
+    website: "", hours: "", imageUrl: "",
   });
 
   useEffect(() => {
     if (!authLoading && !user) router.push("/sign-in");
   }, [user, authLoading, router]);
 
-  if (authLoading || !user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500" />
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (!id || !user) return;
+    async function fetchResource() {
+      try {
+        const snap = await getDoc(doc(db, "resources", id));
+        if (!snap.exists()) { router.push("/dashboard"); return; }
+        const d = snap.data();
+        if (d.userId !== user!.uid) { router.push("/dashboard"); return; }
+        setFormData({
+          title: d.title ?? d.name ?? "",
+          description: d.description ?? d.shortDescription ?? "",
+          category: d.category ?? "",
+          address: d.address ?? "",
+          phone: d.phone ?? "",
+          email: d.email ?? "",
+          website: d.website ?? "",
+          hours: d.hours ?? d.operatingHours ?? "",
+          imageUrl: d.imageUrl ?? "",
+        });
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load resource.");
+      } finally {
+        setFetching(false);
+      }
+    }
+    fetchResource();
+  }, [id, user, router]);
 
   const wordCount = formData.description.trim().split(/\s+/).filter(Boolean).length;
 
@@ -57,7 +76,7 @@ export default function SubmitResourcePage() {
 
     setLoading(true);
     try {
-      await addDoc(collection(db, "resources"), {
+      await updateDoc(doc(db, "resources", id), {
         title: formData.title,
         name: formData.title,
         description: formData.description,
@@ -71,31 +90,39 @@ export default function SubmitResourcePage() {
         hours: formData.hours,
         operatingHours: formData.hours,
         imageUrl: formData.imageUrl,
-        userId: user.uid,
         status: "approved",
         approvalStatus: "approved",
-        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
         reviewedAt: serverTimestamp(),
       });
       router.push("/dashboard");
       router.refresh();
     } catch (err) {
       console.error(err);
-      setError("Failed to submit resource. Please try again.");
+      setError("Failed to update resource. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
+  if (authLoading || fetching) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500" />
+      </div>
+    );
+  }
+
   return (
-<div className="min-h-screen bg-gray-50 py-24">
+    <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Submit a Resource</h1>
-          <p className="text-gray-600">Share valuable resources with the Port Laken community</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Edit Resource</h1>
+          <p className="text-gray-600">Update your submission — changes go live immediately if they pass validation.</p>
         </div>
 
         {error && <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg">{error}</div>}
+
         <div className="bg-white shadow rounded-lg p-6 md:p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
 
@@ -174,10 +201,14 @@ export default function SubmitResourcePage() {
               <p className="mt-1 text-xs text-gray-500">Paste a direct link to an image for your resource card.</p>
             </div>
 
-            <div className="pt-4">
+            <div className="pt-4 flex gap-3">
+              <button type="button" onClick={() => router.push("/dashboard")}
+                className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
+                Cancel
+              </button>
               <button type="submit" disabled={loading}
-                className="w-full px-6 py-3 bg-primary text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50">
-                {loading ? "Submitting..." : "Submit Resource"}
+                className="flex-1 px-6 py-3 bg-primary text-white rounded-lg hover:bg-blue-700 disabled:opacity-50">
+                {loading ? "Saving..." : "Save Changes"}
               </button>
             </div>
           </form>
