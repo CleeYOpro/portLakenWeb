@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { GiWaves } from 'react-icons/gi';
-import { Search, LogIn, ChevronDown, User, LogOut } from 'lucide-react';
+import { Search, LogIn, ChevronDown, User, LogOut, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -47,6 +48,74 @@ export default function Navbar() {
       console.error("Error logging out:", error);
     }
   };
+
+  function NavDropdown({
+    label,
+    children,
+    isActive,
+    onMouseEnter,
+    onMouseLeave,
+  }: {
+    label: string;
+    children: React.ReactNode;
+    isActive: boolean;
+    onMouseEnter: () => void;
+    onMouseLeave: () => void;
+  }) {
+    const triggerRef = useRef<HTMLDivElement>(null);
+    const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
+
+    useEffect(() => {
+      if (isActive && triggerRef.current) {
+        const rect = triggerRef.current.getBoundingClientRect();
+        setPos({ top: rect.bottom + 32, left: rect.left });
+      }
+    }, [isActive]);
+
+    return (
+      <div ref={triggerRef} className="relative" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+        <button className="flex items-center gap-1 font-nunito font-semibold text-deep-navy hover:text-primary transition-colors group relative">
+          <span className="relative inline-block">
+            {label}
+            <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+          </span>
+          <ChevronDown className={`w-4 h-4 transition-transform ${isActive ? 'rotate-180' : ''}`} />
+        </button>
+        {isActive && pos && typeof document !== 'undefined' && createPortal(
+          <div
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            className="fixed rounded-2xl border border-white/20 shadow-md min-w-[240px] animate-fadeIn"
+            style={{
+              top: pos.top,
+              left: pos.left,
+              zIndex: 9999,
+              backgroundColor: 'rgba(241, 245, 249, 0.75)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+            }}
+          >
+            {children}
+          </div>,
+          document.body
+        )}
+      </div>
+    );
+  }
+
+  function DropdownLink({ href, label }: { href: string; label: string }) {
+    return (
+      <Link
+        href={href}
+        className="block px-6 py-2.5 font-nunito font-semibold text-deep-navy hover:bg-primary/10 hover:text-primary transition-colors rounded-lg group"
+      >
+        <span className="relative inline-block">
+          {label}
+          <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+        </span>
+      </Link>
+    );
+  }
 
   return (
     <>
@@ -120,13 +189,14 @@ export default function Navbar() {
 
             {/* Right: Quick Actions */}
             <div className="absolute right-6 flex items-center gap-3">
-              <button
-                onClick={() => setSearchOpen(true)}
-                className="p-2 text-deep-navy hover:text-primary transition-colors hover:bg-primary/10 rounded-full"
-                aria-label="Search"
-              >
-                <Search className="w-6 h-6" />
-              </button>
+<button
+  onClick={() => setSearchOpen(true)}
+  aria-label="AI Search"
+  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border-2 border-primary text-primary font-nunito font-semibold text-sm sm:gap-2 sm:px-4 sm:py-2 sm:text-base hover:bg-primary hover:text-white transition-all hover:shadow-lg"
+>
+  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+  <span className="hidden sm:inline">AI</span>
+</button>
 
               {user ? (
                 // User is logged in - show profile menu
@@ -137,7 +207,7 @@ export default function Navbar() {
                     <User className="w-5 h-5" />
                     <span className="hidden md:inline">Account</span>
                   </button>
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-gray-100">
+                  <div className="absolute right-0 mt-2 w-48 bg-white/75 backdrop-blur-3xl rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-white/20">
                     <Link
                       href="/dashboard"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white flex items-center gap-2"
@@ -247,11 +317,11 @@ export default function Navbar() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-3 border-b-2 border-primary pb-3">
-              <Search className="w-6 h-6 text-primary" />
+              <Sparkles className="w-6 h-6 text-primary" />
               <SearchInput setSearchOpen={setSearchOpen} />
             </div>
             <div className="mt-4 text-sm text-gray-500 font-nunito">
-              Start typing and press Enter to search...
+               Ask a question and press Enter for AI results.
             </div>
           </div>
         </div>
@@ -270,70 +340,6 @@ function NavLink({ href, label }: { href: string; label: string }) {
       {label}
       <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
     </Link>
-  );
-}
-
-// NavDropdown Component
-function NavDropdown({
-  label,
-  children,
-  isActive,
-  onMouseEnter,
-  onMouseLeave,
-}: {
-  label: string;
-  children: React.ReactNode;
-  isActive: boolean;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
-}) {
-  return (
-    <div
-      className="relative"
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      <button className="flex items-center gap-1 font-nunito font-semibold text-deep-navy hover:text-primary transition-colors group relative">
-        <span className="relative inline-block">
-          {label}
-          <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-        </span>
-        <ChevronDown
-          className={`w-4 h-4 transition-transform ${isActive ? 'rotate-180' : ''}`}
-        />
-      </button>
-
-
-      {isActive && (
-        <div
-          className="absolute top-full left-0 mt-8 rounded-2xl border  shadow-sm min-w-[240px] animate-fadeIn"
-          style={{
-            zIndex: 60,
-            backgroundColor: 'rgba(241, 245, 249, 0.7)', // increased transparency for more blur effect
-            backdropFilter: 'blur(100px)', // increased blur amount
-            WebkitBackdropFilter: 'blur(100px)', // increased blur amount
-          }}
-        >
-          {children}
-        </div>
-      )}
-
-    </div>
-  );
-}
-
-function DropdownLink({ href, label }: { href: string; label: string }) {
-  return (
-    <Link
-      href={href}
-      className="block px-6 py-2.5 font-nunito font-semibold text-deep-navy hover:bg-primary/10 hover:text-primary transition-colors rounded-lg group"
-    >
-      <span className="relative inline-block">
-        {label}
-        <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-      </span>
-    </Link>
-
   );
 }
 

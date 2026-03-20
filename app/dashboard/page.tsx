@@ -11,6 +11,7 @@ import {
   doc,
   getDoc,
   deleteDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -40,16 +41,6 @@ export default function DashboardPage() {
     if (!user?.uid) return;
 
     try {
-      const resourcesQuery = query(
-        collection(db, "resources"),
-        where("userId", "==", user.uid)
-      );
-      const resourcesSnapshot = await getDocs(resourcesQuery);
-      const userResources = resourcesSnapshot.docs.map((d) => ({
-        id: d.id,
-        ...d.data(),
-      }));
-
       const userDocRef = doc(db, "users", user.uid);
       const userDocSnap = await getDoc(userDocRef);
 
@@ -65,14 +56,13 @@ export default function DashboardPage() {
         }
       }
 
-      setResources(userResources);
       setAlertSettings(alertData);
     } catch (error) {
       console.error("Error fetching user data:", error);
     } finally {
       setLoading(false);
     }
-  }, [user, router]);
+  }, [user]);
 
   useEffect(() => {
     if (!user) {
@@ -81,6 +71,18 @@ export default function DashboardPage() {
     }
     fetchUserData();
   }, [user, router, fetchUserData]);
+
+  // Real-time listener for resources so status updates instantly
+  useEffect(() => {
+    if (!user?.uid) return;
+    const q = query(collection(db, "resources"), where("userId", "==", user.uid));
+    const unsub = onSnapshot(q, (snapshot) => {
+      const userResources = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+      setResources(userResources);
+      setLoading(false);
+    });
+    return () => unsub();
+  }, [user]);
 
   const handleDeleteResource = async (resourceId: string) => {
     if (!confirm("Are you sure you want to delete this resource?")) return;
@@ -185,19 +187,28 @@ export default function DashboardPage() {
                       {isExpanded && (
                         <div className="border-t bg-gray-50 p-4 space-y-3 text-sm text-gray-700">
                           {/* Status-specific messages */}
+                          {approvalStatus === "pending" && (
+                            <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-800">
+                              <div className="flex items-center gap-2 mb-2">
+                                <span className="text-sm font-medium">AI review in progress...</span>
+                              </div>
+                              <div className="w-full bg-yellow-200 rounded-full h-1.5 overflow-hidden">
+                                <div className="bg-yellow-500 h-1.5 rounded-full animate-[slide_1.5s_ease-in-out_infinite]" style={{width: "60%", animation: "pulse 1.5s ease-in-out infinite"}} />
+                              </div>
+                            </div>
+                          )}
                           {approvalStatus === "approved" && (
                             <div className="flex items-center gap-2 p-3 bg-green-50 border border-green-200 rounded-lg text-green-800">
                               <span>✓</span>
                               <span>This resource is live in the directory.</span>
                             </div>
                           )}
-                          {approvalStatus === "rejected" && resource.rejectionReason && (
+                          {approvalStatus === "rejected" && (resource.rejectionReason || resource.aiReviewReason) && (
                             <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-800">
                               <p className="font-medium mb-1">Rejection Reason</p>
-                              <p>{resource.rejectionReason}</p>
+                              <p>{resource.rejectionReason || resource.aiReviewReason}</p>
                             </div>
                           )}
-
                           {/* Full submission fields */}
                           <div className="grid grid-cols-1 gap-2">
                             {resource.category && (

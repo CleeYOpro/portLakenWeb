@@ -424,17 +424,17 @@ function ResourceDirectoryContent() {
           const d = doc.data() as Record<string, any>;
           return {
             id: doc.id,
-            name: d.name ?? "",
+            name: d.name ?? d.title ?? "",
             category: mapSubmissionCategory(d.category),
-            shortDescription: d.shortDescription ?? "",
-            fullDescription: d.fullDescription ?? "",
+            shortDescription: d.shortDescription ?? d.description ?? "",
+            fullDescription: d.fullDescription ?? d.description ?? "",
             address: d.address ?? "",
             mapCoordinates: d.mapCoordinates ?? { lat: 0, lng: 0 },
             phone: d.phone ?? "",
             website: d.website ?? "",
             email: d.email ?? "",
             tags: Array.isArray(d.tags) ? d.tags : [],
-            image: d.imageUrl ?? "",
+            image: d.imageUrl || d.image || "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
             rating: 4.0,
           };
         });
@@ -539,10 +539,10 @@ function ResourceDirectoryContent() {
         <div className="max-w-[1600px] mx-auto px-6 space-y-6">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
             <div>
-              <h1 className="font-display text-4xl font-bold text-port-navy mb-2">
+              <h1 className="font-display text-4xl font-bold text-port-navy mb-2 animate-fade-in-up">
                 Resource Directory
               </h1>
-              <p className="text-lg text-port-slate">
+              <p className="text-lg text-port-slate opacity-0 animate-fade-in-up [animation-delay:200ms] [animation-fill-mode:forwards]">
                 Find what you need in Port Laken.
               </p>
             </div>
@@ -569,6 +569,9 @@ function ResourceDirectoryContent() {
               initialValue={query}
               isLoading={loading}
             />
+            <p className="mt-2 text-xs text-port-slate/60 text-center">
+              Tap <span className="font-semibold text-port-slate/80">AI</span> & it will search and summarize resources for you using AI
+            </p>
           </div>
         </div>
       </div>

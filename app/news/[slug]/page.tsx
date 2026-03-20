@@ -363,6 +363,35 @@ const articles: Record<string, Article> = {
     ]
   },
 
+  "laken-watersports": {
+    slug: "laken-watersports",
+    title: "Laken Watersports Co.: The Business That Put Port Laken on the Water",
+    subtitle: "How a former marine biologist turned a single kayak rental into the harbor's most beloved adventure hub — and why she says the water is for everyone",
+    category: "Business Spotlight",
+    author: "Port Laken News",
+    date: "March 15, 2026",
+    readTime: "6 min read",
+    image: "https://images.unsplash.com/photo-1581545048011-564bf4a743ab?q=80&w=1470&auto=format&fit=crop",
+    content: [
+      "On a Tuesday morning in late March, Priya Nair is standing at the edge of the Laken Watersports Co. dock watching a 67-year-old retired teacher named Gerald attempt to board a stand-up paddleboard for the first time. Gerald is doing fine. Gerald is, in fact, doing great. He doesn't know this yet.",
+      "\"That's the moment I live for,\" Nair says quietly, not taking her eyes off him. \"When someone realizes the water isn't something to be afraid of.\"",
+      "FROM FIELD RESEARCH TO FRONT DESK:",
+      "Nair spent eight years as a marine biologist with the Olympic Peninsula Coastal Research Institute before a knee injury sidelined her fieldwork in 2018. She spent a year figuring out what came next.",
+      "\"I kept coming back to the harbor,\" she says. \"I'd sit on the dock and watch people walk past the water without ever touching it. Port Laken has one of the most beautiful working harbors on the Pacific coast, and most residents had never been on it.\"",
+      "She opened Laken Watersports Co. in the spring of 2019 with six kayaks, two paddleboards, and a folding table for a check-in desk. The first season, she rented equipment 340 times. By 2023, that number was 4,800.",
+      "WHAT THEY OFFER:",
+      "The current fleet includes 24 kayaks (single and tandem), 18 stand-up paddleboards, 6 canoes, and 4 jet skis. Rentals run by the hour or the day. All equipment and safety gear are included in the price.",
+      "But the rentals are only part of the story. Nair has built a programming operation that she considers the real work of the business. Guided harbor tours run twice daily in season, covering the working waterfront, the historic fishing pier, and the restored wetland habitat at Lakeview Waterfront Park.",
+      "The beginner surf lesson program — launched in 2022 in partnership with the Port Laken Recreation Department — has introduced more than 600 residents to surfing, with a deliberate focus on making the program accessible to kids from lower-income families through a sliding-scale fee structure.",
+      "THE WHALE-WATCHING EXCURSIONS:",
+      "In 2024, Nair added seasonal whale-watching excursions in partnership with the Olympic Peninsula Coastal Research Institute — her former employer. The three-hour guided tours run from late April through September and have a 78% sighting rate for gray whales.",
+      "\"I wanted to connect people to the science,\" she says. \"Not just the spectacle. When you understand what you're looking at — the migration patterns, the feeding behavior — it changes how you see the harbor. It changes how you see the city.\"",
+      "THE COMMUNITY MISSION:",
+      "Laken Watersports Co. donates 5% of annual revenue to the Port Laken Clean Streets Initiative's harbor cleanup program and provides free equipment for the annual Harbor Spring Cleanup. Nair also runs a free \"First Time on the Water\" program for Port Laken public school students — 340 kids participated last year.",
+      "\"The harbor belongs to everyone,\" she says. \"My job is just to make that feel true.\"",
+      "Laken Watersports Co. is open daily from April through October at 200 N Harbor Ave. Visit lakenwatersports.com or call (206) 555-7700."
+    ]
+  },
   "harbor-trail-mural": {
     slug: "harbor-trail-mural",
     title: "A New Mural Transforms Harbor Trail — and Tells a Story the City Needed to Tell",

@@ -2,7 +2,7 @@
 
 import { Resource } from "../resources";
 import { motion } from "framer-motion";
-import { X, MapPin, Phone, Globe, Mail, Facebook, Twitter, Instagram, Star } from "lucide-react";
+import { X, MapPin, Phone, Globe, Mail, Facebook, Twitter, Instagram, Clock } from "lucide-react";
 import { useEffect } from "react";
 import Image from 'next/image';
 
@@ -101,26 +101,13 @@ export default function ResourcePopup({ resource, onClose }: ResourcePopupProps)
                             {resource.name}
                         </h2>
 
-                        <div className="flex items-center gap-4 mb-4">
-                            <div className="flex items-center gap-1">
-                                {Array.from({ length: 5 }).map((_, i) => (
-                                    <Star
-                                        key={i}
-                                        size={16}
-                                        className={`${i < Math.round(resource.rating || 0) ? "text-yellow-400 fill-yellow-400" : "text-slate-300"}`}
-                                    />
-                                ))}
-                                <span className="text-sm font-bold text-port-navy ml-1">{resource.rating}</span>
-                            </div>
-                            <div className="h-4 w-px bg-port-mist" />
-                            <div className="flex flex-wrap gap-2 text-sm text-port-slate">
+                        <div className="flex flex-wrap gap-2 mb-4 text-sm text-port-slate">
                                 {resource.tags?.map((tag) => (
                                     <span key={tag} className="bg-port-frost px-2 py-1 rounded text-xs font-medium">
                                         #{tag}
                                     </span>
                                 ))}
                             </div>
-                        </div>
                     </div>
 
                     <div className="prose prose-slate prose-sm text-port-slate mb-8 leading-relaxed">
@@ -149,6 +136,12 @@ export default function ResourcePopup({ resource, onClose }: ResourcePopupProps)
                                         {resource.website}
                                     </a>
                                 </div>
+                                {(resource as any).operatingHours && (
+                                    <div className="flex items-center gap-3 text-port-slate sm:col-span-2">
+                                        <Clock size={16} className="text-port-sky flex-shrink-0" />
+                                        <span>{(resource as any).operatingHours}</span>
+                                    </div>
+                                )}
                             </div>
                         </div>
 
