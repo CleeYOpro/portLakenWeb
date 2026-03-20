@@ -22,7 +22,7 @@ const featuredResources = [
     name: 'Port Laken Food Bank',
     category: 'Food',
     address: '789 Pine St, Port Angeles, WA 98362',
-    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3c56?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80',
   },
   {
     id: '4',
