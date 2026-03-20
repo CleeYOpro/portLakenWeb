@@ -167,7 +167,7 @@ export default function Navbar() {
                 onMouseEnter={() => handleMouseEnter('government')}
                 onMouseLeave={handleMouseLeave}
               >
-                <DropdownLink href="/city-council" label="Council" />
+                <DropdownLink href="/mayor-council" label="Council" />
                 <DropdownLink href="/ordinances" label="Ordinances" />
                 <DropdownLink href="/boards-committees" label="Boards & Committees" />
                 <DropdownLink href="/environmental" label="Environment" />

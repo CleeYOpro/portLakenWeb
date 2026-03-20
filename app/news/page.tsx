@@ -225,18 +225,18 @@ export default function CommunityHubPage() {
               </Link>
             </RevealOnScroll>
             <RevealOnScroll className="delay-100">
-              <Link href="/news/michael-chen" className="block">
+              <Link href="/news/demarcus-jones" className="block">
                 <div className="group relative rounded-2xl overflow-hidden h-[400px] cursor-pointer">
                   <Image
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
-                    alt="Michael Chen"
+                    src="https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=500&q=80"
+                    alt="Demarcus Jones"
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-port-navy via-transparent to-transparent opacity-90"></div>
                   <div className="absolute bottom-0 p-8 text-white">
-                    <h3 className="text-2xl font-bold mb-1">Michael Chen</h3>
+                    <h3 className="text-2xl font-bold mb-1">Demarcus Jones</h3>
                     <p className="text-port-ice text-sm mb-4">Youth Mentor</p>
                     <p className="text-white/80 line-clamp-2">15 years mentoring at-risk youth.</p>
                   </div>
