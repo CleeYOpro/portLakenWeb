@@ -577,6 +577,10 @@ export const RESOURCES: Resource[] = [
         address: "613 S G St, Port Angeles, WA 98362",
         // Based on: Shane Park — 613 S G St, Port Angeles (large city park with fields, trails, sports)
         mapCoordinates: { lat: 48.1236113, lng: -123.4621725 },
+        phone: "(206) 684-4075",
+        website: "https://seattle.gov/parks",
+        email: "parks@portlaken.gov",
+        tags: ["park", "trails", "lake", "sports"],
         image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80",
         rating: 4.9
     },
@@ -761,6 +765,10 @@ export const RESOURCES: Resource[] = [
         address: "207 W Railroad Ave, Port Angeles, WA 98362",
         // Based on: Waterfront Park — 207 W Railroad Ave, Port Angeles
         mapCoordinates: { lat: 48.1210374, lng: -123.4325808 },
+        phone: "(206) 684-4075",
+        website: "https://seattle.gov/parks",
+        email: "parks@portlaken.gov",
+        tags: ["park", "trails", "garden", "pavilion"],
         image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&q=80",
         rating: 4.9
     },
@@ -789,6 +797,10 @@ export const RESOURCES: Resource[] = [
         address: "811 Caroline St, Port Angeles, WA 98362",
         // Based on: 9/11 Memorial Waterfront Park area — 811 Caroline St, Port Angeles
         mapCoordinates: { lat: 48.1169026, lng: -123.4175939 },
+        phone: "(206) 684-4075",
+        website: "https://seattle.gov/parks",
+        email: "parks@portlaken.gov",
+        tags: ["garden", "community", "composting", "urban farming"],
         image: "https://images.unsplash.com/photo-1631195414013-85b70ff2c180?w=800&q=80",
         rating: 4.7
     },
@@ -853,6 +865,7 @@ export const RESOURCES: Resource[] = [
         address: "115 E Railroad Ave, Port Angeles, WA 98362",
         // Based on: Downriggers on the Water area — 115 E Railroad Ave, Port Angeles waterfront
         mapCoordinates: { lat: 48.1210897, lng: -123.4302195 },
+        phone: "(206) 555-1890",
         website: "https://harborbrewcoffee.com",
         email: "hello@harborbrewcoffee.com",
         socialLinks: { instagram: "@harborbrewcoffee" },
@@ -972,6 +985,7 @@ export const RESOURCES: Resource[] = [
         address: "412 E 3rd St, Port Angeles, WA 98362",
         // Based on: nearby legal office area east of downtown — Port Angeles
         mapCoordinates: { lat: 48.1175, lng: -123.4270 },
+        phone: "(206) 555-9240",
         website: "https://plimmigrationclinic.org",
         email: "intake@plimmigrationclinic.org",
         tags: ["immigration", "legal aid", "visa", "DACA", "asylum"],
@@ -1090,6 +1104,7 @@ export const RESOURCES: Resource[] = [
         address: "410 W 1st St, Port Angeles, WA 98362",
         // Based on: West downtown Port Angeles outreach area
         mapCoordinates: { lat: 48.1190, lng: -123.4430 },
+        phone: "(206) 555-4100",
         website: "https://harborhope.org",
         email: "outreach@harborhope.org",
         socialLinks: { facebook: "fb.com/harborhope" },
@@ -1158,6 +1173,11 @@ export const RESOURCES: Resource[] = [
         address: "115 E Railroad Ave, Port Angeles, WA 98362",
         // Based on: Port Angeles Ferry Terminal plaza area — waterfront downtown
         mapCoordinates: { lat: 48.1195, lng: -123.4350 },
+        phone: "(206) 555-0100",
+        website: "https://portlaken.gov/founders-plaza",
+        email: "parks@portlaken.gov",
+        tags: ["landmark", "plaza", "history", "downtown", "public space"],
+        image: "https://images.unsplash.com/photo-1568515387631-8b650bbcdb90?w=800&q=80",
         rating: 4.7
     },
     {
@@ -1186,6 +1206,7 @@ export const RESOURCES: Resource[] = [
         address: "203 E Front St, Port Angeles, WA 98362",
         // Based on: Kokopelli Grill / downtown Front St block — 203 E Front St, Port Angeles
         mapCoordinates: { lat: 48.1192512, lng: -123.4304809 },
+        phone: "(206) 555-6800",
         website: "https://lakenmarket.com",
         email: "hello@lakenmarket.com",
         socialLinks: { facebook: "fb.com/lakenmarket", instagram: "@lakenmarket" },

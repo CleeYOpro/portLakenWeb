@@ -11,6 +11,7 @@
 /.claude
 # next.js
 /.next/
+/_tests_
 /out/
 /.kiro
 # production

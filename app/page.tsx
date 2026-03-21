@@ -437,7 +437,7 @@ export default function Home() {
               WHAT&apos;S <span className="text-primary italic">HAPPENING</span> IN PORT LAKEN?
             </h2>
             <p className="text-gray-600 text-lg">
-              Fresh stories and winter updates from around the city this season.{' '}
+              Fresh stories and spring updates from around the city this season.{' '}
               <a
                 href="/news"
                 className="text-black border-b-2 border-transparent hover:border-primary hover:text-primary transition-colors"
@@ -451,25 +451,25 @@ export default function Home() {
           <div className="space-y-8">
             {[
               {
-                slug: "mlk-day-service",
-                date: "JAN 19, 2026",
-                title: "MLK Day Service & Community Glow",
-                desc: "Port Laken honors the legacy with a special MLK Day event at the waterfront park, featuring community service, live music, and glowing lantern displays.",
-                image: "https://riverheadlocal.com/wp-content/uploads/2025/01/2025_0120_Martin-Luther-King-Lincoln-Memorial-28-Aug-1963-681x516.jpg",
+                slug: "spring-cleanup-2026",
+                date: "MAR 22, 2026",
+                title: "Spring Cleanup Day Draws Record Volunteers",
+                desc: "Hundreds of Port Laken residents turned out for the annual Spring Cleanup, clearing trails, planting flowers along the waterfront, and refreshing neighborhood parks ahead of the season.",
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
               },
               {
-                slug: "winter-market",
-                date: "JAN 25, 2026",
-                title: "Winter Market Lights Up Harbor",
-                desc: "The Winter Market returns to Harbor Plaza with local artisans, warm food trucks, craft drinks, and waterfront lights.",
-                image: "https://foxbaltimore.com/resources/media2/16x9/3851/986/0x361/90/63423fb2-22ce-4454-aed0-68d5eab9dc17-1TOP5_ChristmasVillageinBaltimore2022_heatedtent5_creditChristinaKalff.jpg",
+                slug: "harbor-farmers-market",
+                date: "MAR 26, 2026",
+                title: "Harbor Farmers Market Opens for the Season",
+                desc: "The beloved Harbor Farmers Market is back every Saturday morning, featuring local produce, fresh-baked goods, handmade crafts, and live acoustic performances through the spring.",
+                image: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80",
               },
               {
                 slug: "sustainability-vision-2026",
-                date: "FEB 10, 2026",
-                title: "City Unveils 2026 Sustainability Vision",
-                desc: "Mayor Johnson outlines new green spaces, waterfront upgrades, and eco-friendly public projects.",
-                image: "https://www.hkinteriors.com/wp-content/uploads/2018/11/bg-useful-links.jpg",
+                date: "MAR 18, 2026",
+                title: "City Breaks Ground on Waterfront Green Corridor",
+                desc: "Mayor Johnson joined city officials and community members to break ground on the new Waterfront Green Corridor, a mile-long eco-trail connecting Harbor Plaza to Laken Park.",
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
               },
             ].map((item, i) => (
               <ScrollReveal
