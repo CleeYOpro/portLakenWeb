@@ -82,7 +82,7 @@ const heroSlides = [
     title: "Winter",
     titleItalic: "Highlights",
     description:
-      "The downtown ice rink reopens this December! Enjoy free skating weekends, winter lights, and cozy cocoa pop-ups across Port Laken.",
+      "The downtown ice rink reopened in December! Enjoy free skating weekends, winter lights, and cozy cocoa pop-ups across Port Laken.",
     buttonText: "Read More",
     buttonLink: "/news",
   },

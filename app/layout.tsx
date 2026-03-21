@@ -1,10 +1,11 @@
 import React from "react";
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 
 import "./globals.css";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer"; // Changed from named import to default import
+import Footer from "./components/Footer";
 import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata: Metadata = {
@@ -39,6 +40,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
+        <div id="google_translate_element" style={{ display: 'none' }} />
         <AuthProvider>
           <div className="min-h-screen flex flex-col">
             <Navbar />
@@ -47,6 +49,45 @@ export default function RootLayout({
           </div>
         </AuthProvider>
         <Analytics />
+        <Script
+          id="google-translate-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                  pageLanguage: 'en',
+                  autoDisplay: false
+                }, 'google_translate_element');
+
+                // Aggressively remove Google Translate banner and body offset
+                function removeGoogleBanner() {
+                  // Kill the iframe banner
+                  var banner = document.querySelector('.goog-te-banner-frame');
+                  if (banner) banner.remove();
+                  // Kill the top offset on body
+                  document.body.style.setProperty('top', '0', 'important');
+                  document.body.style.setProperty('margin-top', '0', 'important');
+                  document.body.style.setProperty('position', 'static', 'important');
+                }
+
+                // Run immediately and on any DOM/style mutation
+                removeGoogleBanner();
+                var observer = new MutationObserver(removeGoogleBanner);
+                observer.observe(document.documentElement, {
+                  childList: true,
+                  subtree: true,
+                  attributes: true,
+                  attributeFilter: ['style']
+                });
+              }
+            `,
+          }}
+        />
+        <Script
+          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

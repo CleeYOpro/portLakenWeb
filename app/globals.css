@@ -251,3 +251,33 @@ body {
   0% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
+/* =========================
+   Hide Google Translate UI
+========================= */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-tooltip,
+.goog-tooltip:hover,
+.goog-te-ftab-float,
+#goog-gt- ,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.goog-te-gadget {
+  display: none !important;
+}
+
+/* Prevent Google Translate from pushing the page down */
+body {
+  top: 0 !important;
+  position: static !important;
+}
+
+html body {
+  margin-top: 0 !important;
+}

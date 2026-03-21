@@ -14,15 +14,24 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [navVisible, setNavVisible] = useState(true);
   const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(null);
+  const lastScrollY = useRef(0);
   const { user, logout } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 0);
+      const currentY = window.scrollY;
+      setScrolled(currentY > 0);
+      if (currentY < lastScrollY.current || currentY < 10) {
+        setNavVisible(true);
+      } else if (currentY > lastScrollY.current && currentY > 60) {
+        setNavVisible(false);
+      }
+      lastScrollY.current = currentY;
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -31,12 +40,27 @@ export default function Navbar() {
       clearTimeout(dropdownTimeout);
       setDropdownTimeout(null);
     }
-    setTimeout(() => setActiveDropdown(item), 150);
+    setActiveDropdown(item);
   };
 
   const handleMouseLeave = () => {
-    const timeout = setTimeout(() => setActiveDropdown(null), 200);
+    const timeout = setTimeout(() => setActiveDropdown(null), 300);
     setDropdownTimeout(timeout);
+  };
+
+  const changeLanguage = (langCode: string) => {
+    if (langCode === 'en') {
+      // Reset to original language
+      const cookie = document.cookie.match(/googtrans=([^;]+)/);
+      if (cookie) {
+        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname;
+      }
+    } else {
+      document.cookie = `googtrans=/en/${langCode}; path=/`;
+      document.cookie = `googtrans=/en/${langCode}; path=/; domain=${window.location.hostname}`;
+    }
+    window.location.reload();
   };
 
   const handleLogout = async () => {
@@ -63,12 +87,12 @@ export default function Navbar() {
     onMouseLeave: () => void;
   }) {
     const triggerRef = useRef<HTMLDivElement>(null);
-    const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
+    const [pos, setPos] = useState<{ top: number; left: number; triggerWidth: number; triggerBottom: number } | null>(null);
 
     useEffect(() => {
       if (isActive && triggerRef.current) {
         const rect = triggerRef.current.getBoundingClientRect();
-        setPos({ top: rect.bottom + 32, left: rect.left });
+        setPos({ top: rect.bottom + 32, left: rect.left, triggerWidth: rect.width, triggerBottom: rect.bottom });
       }
     }, [isActive]);
 
@@ -85,17 +109,33 @@ export default function Navbar() {
           <div
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
-            className="fixed rounded-2xl border border-white/20 shadow-md min-w-[240px] animate-fadeIn"
-            style={{
-              top: pos.top,
-              left: pos.left,
-              zIndex: 9999,
-              backgroundColor: 'rgba(241, 245, 249, 0.75)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-            }}
           >
-            {children}
+            {/* Invisible bridge covering the gap between navbar and dropdown */}
+            <div
+              className="fixed"
+              style={{
+                top: pos.triggerBottom,
+                left: pos.left,
+                width: '240px',
+                height: '32px',
+                zIndex: 9999,
+              }}
+            />
+            <div
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}
+              className="fixed rounded-2xl border border-white/20 shadow-md min-w-[240px] animate-fadeIn"
+              style={{
+                top: pos.top,
+                left: pos.left,
+                zIndex: 9999,
+                backgroundColor: 'rgba(241, 245, 249, 0.75)',
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
+              }}
+            >
+              {children}
+            </div>
           </div>,
           document.body
         )}
@@ -121,7 +161,7 @@ export default function Navbar() {
     <>
       {/* Sticky Navbar */}
       <nav
-        className={`fixed top-0 z-50 w-full transition-all duration-300 ease-in-out border border-white/20 backdrop-blur-3xl shadow-md ${scrolled ? 'rounded-b-3xl' : 'rounded-b-3xl'}`}
+        className={`fixed top-0 z-50 w-full transition-all duration-300 ease-in-out border border-white/20 backdrop-blur-3xl shadow-md rounded-b-3xl ${navVisible ? 'translate-y-0' : '-translate-y-full'}`}
         style={{
           backgroundColor: 'rgba(241, 245, 249, 0.75)',
           backdropFilter: 'blur(20px)',
@@ -199,47 +239,94 @@ export default function Navbar() {
 </button>
 
               {user ? (
-                // User is logged in - show profile menu
+                // User is logged in - show settings menu
                 <div className="hidden md:block relative group">
                   <button
-                    className="flex items-center gap-2 px-5 py-2 border-2 border-primary text-primary rounded-full font-nunito font-semibold hover:bg-primary hover:text-white transition-all hover:shadow-lg"
+                    className="flex items-center gap-2 px-4 py-2 border-2 border-primary text-primary rounded-full font-nunito font-semibold hover:bg-primary hover:text-white transition-all hover:shadow-lg"
                   >
                     <User className="w-5 h-5" />
-                    <span className="hidden md:inline">Account</span>
                   </button>
-                  <div className="absolute right-0 mt-2 w-48 bg-white/75 backdrop-blur-3xl rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-white/20">
+                  <div className="absolute right-0 mt-2 w-56 bg-white/90 backdrop-blur-3xl rounded-2xl shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-white/20">
+                    {/* Greeting */}
+                    <div className="px-4 py-2 border-b border-gray-100">
+                      <p className="font-nunito font-bold text-deep-navy text-sm">
+                        Hi, {user.displayName?.split(' ')[0] ?? user.email?.split('@')[0] ?? 'there'} 👋
+                      </p>
+                    </div>
                     <Link
                       href="/dashboard"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white flex items-center gap-2"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white flex items-center gap-2 transition-colors"
                     >
                       <User className="w-4 h-4" />
                       Dashboard
                     </Link>
-                    <Link
-                      href="/alerts"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white flex items-center gap-2"
-                    >
-                      <span className="material-symbols-outlined text-base">notifications</span>
-                      Alerts Settings
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white flex items-center gap-2"
-                    >
-                      <LogOut className="w-4 h-4" />
-                      Logout
-                    </button>
+                    {/* Accessibility / Language */}
+                    <div className="px-4 py-2 border-t border-gray-100">
+                      <p className="text-xs text-gray-400 font-nunito font-semibold uppercase tracking-wide mb-1.5">Accessibility</p>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm text-gray-600 font-nunito">Language</span>
+                        <select
+                          className="ml-auto text-xs border border-gray-200 rounded-lg px-2 py-1 font-nunito text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-primary"
+                          defaultValue="en"
+                          onChange={(e) => changeLanguage(e.target.value)}
+                        >
+                          <option value="en">English</option>
+                          <option value="es">Español</option>
+                          <option value="fr">Français</option>
+                          <option value="zh">中文</option>
+                          <option value="ar">العربية</option>
+                          <option value="pt">Português</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="border-t border-gray-100 mt-1">
+                      <button
+                        onClick={handleLogout}
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 flex items-center gap-2 transition-colors"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Logout
+                      </button>
+                    </div>
                   </div>
                 </div>
               ) : (
-                // User is not logged in - show sign in button
-                <Link
-                  href="/sign-in"
-                  className="hidden md:flex items-center gap-2 px-5 py-2 border-2 border-primary text-primary rounded-full font-nunito font-semibold hover:bg-primary hover:text-white transition-all hover:shadow-lg"
-                >
-                  <LogIn className="w-5 h-5" />
-                  Sign In
-                </Link>
+                // User is not logged in - show icon button with dropdown
+                <div className="hidden md:block relative group">
+                  <button
+                    className="flex items-center gap-2 px-4 py-2 border-2 border-primary text-primary rounded-full font-nunito font-semibold hover:bg-primary hover:text-white transition-all hover:shadow-lg"
+                  >
+                    <User className="w-5 h-5" />
+                  </button>
+                  <div className="absolute right-0 mt-2 w-56 bg-white/90 backdrop-blur-3xl rounded-2xl shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-white/20">
+                    <Link
+                      href="/sign-in"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white flex items-center gap-2 transition-colors"
+                    >
+                      <LogIn className="w-4 h-4" />
+                      Sign In
+                    </Link>
+                    {/* Accessibility / Language */}
+                    <div className="px-4 py-2 border-t border-gray-100">
+                      <p className="text-xs text-gray-400 font-nunito font-semibold uppercase tracking-wide mb-1.5">Accessibility</p>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm text-gray-600 font-nunito">Language</span>
+                        <select
+                          className="ml-auto text-xs border border-gray-200 rounded-lg px-2 py-1 font-nunito text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-primary"
+                          defaultValue="en"
+                          onChange={(e) => changeLanguage(e.target.value)}
+                        >
+                          <option value="en">English</option>
+                          <option value="es">Español</option>
+                          <option value="fr">Français</option>
+                          <option value="zh">中文</option>
+                          <option value="ar">العربية</option>
+                          <option value="pt">Português</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               )}
 
               {/* Mobile Menu Button */}

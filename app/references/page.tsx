@@ -892,7 +892,7 @@ export default function ReferencesPage() {
               </ScrollRevealText>
 
               {/* Image Sources Table */}
-              <div className="space-y-6">
+              <div className="space-y-6 ">
                 <h4 className="font-display text-2xl sm:text-3xl font-semibold text-port-navy">
                   Image Sources
                 </h4>
@@ -911,7 +911,7 @@ export default function ReferencesPage() {
                         )}
                       </div>
                       <div className="rounded-xl border border-port-mist/50 overflow-hidden">
-                        <table className="w-full text-sm text-left">
+                        <table className="w-full text-sm text-left bg-white">
                           <thead>
                             <tr className="bg-port-frost border-b border-port-mist/50">
                               <th className="py-2 px-4 text-port-navy font-medium w-8">#</th>
