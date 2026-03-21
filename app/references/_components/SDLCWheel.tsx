@@ -1,82 +1,71 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { FaGoogleDrive, FaGithub, FaFigma, FaFlask, FaSearch, FaTimes } from "react-icons/fa";
 import { SiVercel } from "react-icons/si";
 
 const STEPS = [
   {
     id: 1, label: "Planning", color: "#8B1A2B", icon: FaGoogleDrive,
-    short: "Defined the concept, goals, and features as a team.",
+    short: "Locked in the concept, goals, and core features as a team.",
     bullets: [
-      "Shared Google Doc for coordination",
-      "Decided on Port Laken as the fictional city concept",
-      "Defined project goals and target features",
-      "Assigned roles across the team",
+      "Chose Port Laken and defined the city concept",
+      "Outlined key features and site requirements",
+      "Assigned roles and coordinated in a shared doc",
     ],
     link: null,
   },
   {
     id: 2, label: "Analysis", color: "#1e3a5f", icon: FaSearch,
-    short: "Researched real city sites and defined user needs.",
+    short: "Studied real city sites and figured out what users actually need.",
     bullets: [
-      "Studied real city websites (Seattle, Kirkland, Dubai)",
-      "Defined user needs and personas",
-      "Broke down required pages: departments, ordinances, maps, events",
-      "In-depth research into municipal UX patterns",
+      "Analyzed real city websites for structure and UX",
+      "Defined users like residents, visitors, and admins",
+      "Mapped required pages like maps, departments, and events",
     ],
     link: null,
   },
   {
     id: 3, label: "Design", color: "#2980b9", icon: FaFigma,
-    short: "Built the design system and laid out every page in Figma.",
+    short: "Built a full design system and planned every page in Figma.",
     bullets: [
-      "Designed layouts in Figma",
-      "Built a Pacific Northwest design system (colors, fonts, vibe)",
-      "Custom palette: port-navy, port-sky, port-frost, etc.",
-      "Created scroll timeline, full-screen map UI, resource cards",
-      "Focused on accessibility, clean navigation, realistic municipal feel",
+      "Designed layouts and flows in Figma",
+      "Created a consistent Pacific Northwest design system",
+      "Built core UI like timeline, maps, and resource cards",
     ],
     link: { label: "See Design Philosophy", href: "#design" },
   },
   {
     id: 4, label: "Implementation", color: "#1a9e8f", icon: FaGithub,
-    short: "Built everything with Next.js, React, TypeScript, and Firebase.",
+    short: "Turned designs into a full working app with modern tools.",
     bullets: [
-      "Shared GitHub repo with separate branches and PRs",
-      "Next.js + React + TypeScript + Tailwind CSS",
-      "Firebase Auth (login, signup, Google)",
-      "Firestore for user data, alerts, and newsletter",
-      "Resource directory, Maps page, Admin broadcast system",
-      "API routes: /api/send-email, /api/admin/broadcast",
+      "Built with Next.js, React, TypeScript, and Tailwind",
+      "Implemented Firebase Auth and Firestore data systems",
+      "Developed features like maps, resources, and admin tools",
     ],
     link: { label: "See Technical Architecture", href: "#tech-architecture" },
   },
   {
     id: 5, label: "Testing", color: "#e6a817", icon: FaFlask,
-    short: "Tested auth, resource interactions, and all API routes.",
+    short: "Tested everything to make sure the whole system worked smoothly.",
     bullets: [
-      "Tested auth flow: sign in, create account, Google sign-in",
-      "Resource interactions: click card, map updates",
-      "API routes: email sending and broadcast",
-      "Integrated Google Maps embed and static maps",
-      "Integrated Resend for transactional emails",
-      "Fixed navigation mismatches and data consistency issues",
+      "Tested auth flows and user interactions",
+      "Verified APIs and email functionality",
+      "Fixed bugs in navigation and data consistency",
     ],
     link: null,
   },
   {
     id: 6, label: "Maintenance", color: "#e07b1a", icon: SiVercel,
-    short: "Deployed on Vercel. TSA project, so no ongoing maintenance.",
+    short: "Deployed and finalized the project for TSA submission.",
     bullets: [
-      "Deployed with Vercel (automatic from GitHub)",
-      "Environment variables managed via Vercel dashboard",
-      "No ongoing maintenance required — TSA competition project",
+      "Deployed with Vercel using GitHub integration",
+      "Prepared a complete and stable final build",
     ],
     link: null,
   },
 ];
-
 const N = STEPS.length;
 // Each segment spans exactly 360/6 = 60 degrees with a tiny gap
 const SLICE = 360 / N;
@@ -86,8 +75,8 @@ const GAP = 2; // degrees gap between segments
 const SIZE = 460;
 const CX = SIZE / 2;
 const CY = SIZE / 2;
-const R_OUT = 210; // outer radius
-const R_IN  = 100; // inner radius
+const R_OUT = 218; // outer radius — nearly fills canvas
+const R_IN  = 68;  // inner radius — small center
 
 function toRad(deg: number) { return (deg * Math.PI) / 180; }
 
@@ -118,17 +107,8 @@ function labelPos(i: number) {
   return polar(midAngle(i), (R_OUT + R_IN) / 2);
 }
 
-// Text rotation: face outward from center
-// The text should read outward — rotate so baseline points toward center
-// For top half (0-180): rotate = midAngle - 90 (text reads left-to-right outward)
-// For bottom half (180-360): flip 180 so text doesn't appear upside down
-function textRotation(i: number) {
-  const ma = midAngle(i);
-  // Standard: align text along the radius pointing outward
-  let rot = ma - 90;
-  // Bottom half: flip so text is readable
-  if (ma > 180) rot += 180;
-  return rot;
+function textRotation(_i: number) {
+  return 0; // always upright — counter-rotation handles orientation
 }
 
 export default function SDLCWheel() {
@@ -195,23 +175,36 @@ export default function SDLCWheel() {
 
   if (!mounted) return null;
 
-  // Diameter for the info circle — match wheel size
-  const CIRCLE_SIZE = SIZE;
+  // Diameter for the info circle — slightly smaller than wheel
+  const CIRCLE_SIZE = 400;
 
   return (
     <section className="py-16 lg:py-24 bg-white border-t border-port-mist/40" id="sdlc">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
-        <h2 className="font-display text-3xl sm:text-4xl font-semibold text-port-navy mb-2">
-          Software Development Life Cycle
-        </h2>
-        <p className="text-port-slate text-sm mb-10 max-w-xl">
-          How we took Port Laken from idea to deployed product. Click each step.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px 0px -80px 0px", amount: 0.2 }}
+          transition={{ type: "tween", duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
+          <h2 className="font-display text-3xl sm:text-4xl font-semibold text-port-navy mb-2">
+            Software Development Life Cycle
+          </h2>
+          <p className="text-port-slate text-sm mb-10 max-w-xl">
+            How we took Port Laken from idea to deployed product. Click each step.
+          </p>
+        </motion.div>
 
         {/* Stack vertically on mobile, side-by-side on lg */}
         <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-4">
 
           {/* ── Wheel ── */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px 0px -80px 0px", amount: 0.2 }}
+            transition={{ type: "tween", duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
           <div
             ref={containerRef}
             className="shrink-0 select-none"
@@ -242,7 +235,6 @@ export default function SDLCWheel() {
                 {STEPS.map((step, i) => {
                   const isActive = active === step.id;
                   const lp = labelPos(i);
-                  const tr = textRotation(i);
 
                   return (
                     <g key={step.id}>
@@ -261,9 +253,9 @@ export default function SDLCWheel() {
                         onClick={() => handleSegClick(step.id)}
                       />
 
-                      {/* Label — counter-rotates so it stays upright, faces outward */}
+                      {/* Label — orbits with wheel, but counter-rotates to stay upright */}
                       <g
-                        transform={`translate(${lp.x},${lp.y}) rotate(${-rotation + tr})`}
+                        transform={`translate(${lp.x},${lp.y}) rotate(${-rotation})`}
                         style={{ pointerEvents: "none", userSelect: "none" }}
                       >
                         <text
@@ -294,24 +286,33 @@ export default function SDLCWheel() {
                   );
                 })}
 
-                {/* Center circle — counter-rotates */}
+                {/* Center — always counter-rotates, shows logo */}
                 <g
                   transform={`translate(${CX},${CY}) rotate(${-rotation})`}
                   style={{ pointerEvents: "none" }}
                 >
-                  <circle cx={0} cy={0} r={R_IN - 5} fill="white" />
-                  <text y={-16} textAnchor="middle" fill="#1e3a5f" fontSize="12" fontWeight="700" fontFamily="system-ui, sans-serif">THE</text>
-                  <text y={0}   textAnchor="middle" fill="#1e3a5f" fontSize="13" fontWeight="900" fontFamily="system-ui, sans-serif">SOFTWARE</text>
-                  <text y={16}  textAnchor="middle" fill="#1e3a5f" fontSize="13" fontWeight="900" fontFamily="system-ui, sans-serif">DEVELOPMENT</text>
-                  <text y={32}  textAnchor="middle" fill="#6b9bc3" fontSize="12" fontWeight="600" fontFamily="system-ui, sans-serif">CYCLE</text>
+                  <circle cx={0} cy={0} r={R_IN - 4} fill="white" />
+                  <image
+                    href="/pl.svg"
+                    x={-(R_IN - 14)}
+                    y={-(R_IN - 14)}
+                    width={(R_IN - 14) * 2}
+                    height={(R_IN - 14) * 2}
+                    preserveAspectRatio="xMidYMid meet"
+                  />
                 </g>
               </svg>
             </div>
           </div>
+          </motion.div>
 
           {/* ── Info circle ── */}
-          <div
+          <motion.div
             className="shrink-0 relative flex items-center justify-center"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px 0px -80px 0px", amount: 0.2 }}
+            transition={{ type: "tween", duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.15 }}
             style={{
               width: CIRCLE_SIZE,
               height: CIRCLE_SIZE,
@@ -350,48 +351,62 @@ export default function SDLCWheel() {
                   </button>
 
                   {/* Icon + title */}
-                  <div
-                    className="w-12 h-12 rounded-2xl flex items-center justify-center mb-3"
-                    style={{ background: focusedStep.color }}
+                  <motion.div
+                    key={focusedStep.id}
+                    initial={{ opacity: 0, scale: 0.85, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ type: "tween", duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    className="flex flex-col items-center"
                   >
-                    <focusedStep.icon className="text-white text-xl" />
-                  </div>
-                  <span
-                    className="text-xs font-bold uppercase tracking-widest mb-1"
-                    style={{ color: focusedStep.color }}
-                  >
-                    Step {focusedStep.id}
-                  </span>
-                  <h3 className="font-display text-2xl font-semibold text-port-navy mb-3 leading-tight">
-                    {focusedStep.label}
-                  </h3>
-                  <p className="text-port-slate text-xs mb-3 max-w-[260px]">{focusedStep.short}</p>
-
-                  <ul className="space-y-1 mb-4 text-left max-w-[260px] w-full">
-                    {focusedStep.bullets.map((b, i) => (
-                      <li key={i} className="flex items-start gap-2 text-xs text-port-slate">
-                        <span
-                          className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"
-                          style={{ background: focusedStep.color }}
-                        />
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {focusedStep.link && (
-                    <button
-                      onClick={(e) => handleLinkClick(e, focusedStep.link!.href)}
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-1.5 rounded-full border transition-all duration-200 hover:opacity-70"
-                      style={{ borderColor: focusedStep.color, color: focusedStep.color }}
+                    <div
+                      className="w-12 h-12 rounded-2xl flex items-center justify-center mb-3 transition-transform duration-200 hover:scale-110"
+                      style={{ background: focusedStep.color }}
                     >
-                      {focusedStep.link.label} ↓
-                    </button>
-                  )}
+                      <focusedStep.icon className="text-white text-xl" />
+                    </div>
+                    <span
+                      className="text-xs font-bold uppercase tracking-widest mb-1"
+                      style={{ color: focusedStep.color }}
+                    >
+                      Step {focusedStep.id}
+                    </span>
+                    <h3 className="font-display text-2xl font-semibold text-port-navy mb-3 leading-tight">
+                      {focusedStep.label}
+                    </h3>
+                    <p className="text-port-slate text-xs mb-3 max-w-[260px]">{focusedStep.short}</p>
+
+                    <ul className="space-y-1 mb-4 text-left max-w-[260px] w-full">
+                      {focusedStep.bullets.map((b, i) => (
+                        <motion.li
+                          key={i}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.08, duration: 0.3 }}
+                          className="flex items-start gap-2 text-xs text-port-slate"
+                        >
+                          <span
+                            className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"
+                            style={{ background: focusedStep.color }}
+                          />
+                          {b}
+                        </motion.li>
+                      ))}
+                    </ul>
+
+                    {focusedStep.link && (
+                      <button
+                        onClick={(e) => handleLinkClick(e, focusedStep.link!.href)}
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-1.5 rounded-full border transition-all duration-200 hover:opacity-70 hover:-translate-y-0.5"
+                        style={{ borderColor: focusedStep.color, color: focusedStep.color }}
+                      >
+                        {focusedStep.link.label} ↓
+                      </button>
+                    )}
+                  </motion.div>
                 </>
               )}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

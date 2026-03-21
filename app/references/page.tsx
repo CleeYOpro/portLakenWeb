@@ -8,6 +8,8 @@ import {
 import {
   ScrollRevealText,
   ScrollReveal,
+  ScrollRevealStagger,
+  ScrollRevealStaggerItem,
 } from "@/app/components/ScrollReveal";
 import {
   FaClipboardList,
@@ -231,27 +233,29 @@ export default function ReferencesPage() {
           {/* PDF embeds: 2-column grid */}
           <section className="py-12 lg:py-16 bg-white">
             <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <ScrollRevealStagger className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {referenceCards.map((card) => (
-                  <div key={card.title} className="bg-port-frost/50 border border-port-mist/60 rounded-2xl overflow-hidden shadow-sm flex flex-col">
-                    <div className="flex items-center gap-3 px-5 py-4 border-b border-port-mist/40 shrink-0">
-                      <div className="w-9 h-9 bg-port-sky/20 rounded-lg flex items-center justify-center text-port-sky shrink-0">
-                        <card.icon className="text-base" />
+                  <ScrollRevealStaggerItem key={card.title}>
+                    <div className="bg-port-frost/50 border border-port-mist/60 rounded-2xl overflow-hidden shadow-sm flex flex-col transition-all duration-300 hover:shadow-lg hover:border-port-sky/30 hover:-translate-y-1">
+                      <div className="flex items-center gap-3 px-5 py-4 border-b border-port-mist/40 shrink-0">
+                        <div className="w-9 h-9 bg-port-sky/20 rounded-lg flex items-center justify-center text-port-sky shrink-0 transition-all duration-200 hover:bg-port-sky/40 hover:scale-110">
+                          <card.icon className="text-base" />
+                        </div>
+                        <div>
+                          <h2 className="font-display text-sm font-semibold text-port-navy">{card.title}</h2>
+                          <p className="text-port-slate text-xs leading-snug">{card.description}</p>
+                        </div>
                       </div>
-                      <div>
-                        <h2 className="font-display text-sm font-semibold text-port-navy">{card.title}</h2>
-                        <p className="text-port-slate text-xs leading-snug">{card.description}</p>
-                      </div>
+                      <iframe
+                        src={card.pdfHref}
+                        className="w-full"
+                        style={{ height: "700px" }}
+                        title={card.title}
+                      />
                     </div>
-                    <iframe
-                      src={card.pdfHref}
-                      className="w-full"
-                      style={{ height: "700px" }}
-                      title={card.title}
-                    />
-                  </div>
+                  </ScrollRevealStaggerItem>
                 ))}
-              </div>
+              </ScrollRevealStagger>
             </div>
           </section>
 
@@ -537,173 +541,197 @@ export default function ReferencesPage() {
                   <h3 className="font-display text-xl font-semibold text-port-navy">Design Philosophy</h3>
 
                   {/* Bento: Fonts + Colors */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-auto">
+                  <ScrollRevealStagger className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-auto">
 
                     {/* Color palette — tall left column */}
-                    <div className="row-span-2 rounded-2xl bg-port-navy p-5 flex flex-col gap-3">
-                      <p className="text-port-ice text-xs font-semibold uppercase tracking-widest mb-1">Palette</p>
-                      {[
-                        { name: "Navy", hex: "#1e3a5f", bg: "bg-[#1e3a5f]", border: true },
-                        { name: "Slate", hex: "#2d4a6f", bg: "bg-[#2d4a6f]", border: false },
-                        { name: "Steel", hex: "#4a6d8c", bg: "bg-[#4a6d8c]", border: false },
-                        { name: "Sky", hex: "#6b9bc3", bg: "bg-[#6b9bc3]", border: false },
-                        { name: "Ice", hex: "#a8c5db", bg: "bg-[#a8c5db]", border: false },
-                        { name: "Mist", hex: "#d4e4ed", bg: "bg-[#d4e4ed]", border: false },
-                        { name: "Frost", hex: "#eef4f8", bg: "bg-[#eef4f8]", border: false },
-                      ].map((c) => (
-                        <div key={c.name} className="flex items-center gap-3">
-                          <div className={`w-8 h-8 rounded-lg shrink-0 ${c.bg} ${c.border ? "border border-white/20" : ""}`} />
-                          <div>
-                            <p className="text-white text-xs font-medium leading-none">{c.name}</p>
-                            <p className="text-port-ice/60 text-[10px] font-mono mt-0.5">{c.hex}</p>
+                    <ScrollRevealStaggerItem className="row-span-2">
+                      <div className="rounded-2xl bg-port-navy p-5 flex flex-col gap-3 h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                        <p className="text-port-ice text-xs font-semibold uppercase tracking-widest mb-1">Palette</p>
+                        {[
+                          { name: "Navy", hex: "#1e3a5f", bg: "bg-[#1e3a5f]", border: true },
+                          { name: "Slate", hex: "#2d4a6f", bg: "bg-[#2d4a6f]", border: false },
+                          { name: "Steel", hex: "#4a6d8c", bg: "bg-[#4a6d8c]", border: false },
+                          { name: "Sky", hex: "#6b9bc3", bg: "bg-[#6b9bc3]", border: false },
+                          { name: "Ice", hex: "#a8c5db", bg: "bg-[#a8c5db]", border: false },
+                          { name: "Mist", hex: "#d4e4ed", bg: "bg-[#d4e4ed]", border: false },
+                          { name: "Frost", hex: "#eef4f8", bg: "bg-[#eef4f8]", border: false },
+                        ].map((c) => (
+                          <div key={c.name} className="flex items-center gap-3 group/swatch cursor-default">
+                            <div className={`w-8 h-8 rounded-lg shrink-0 ${c.bg} ${c.border ? "border border-white/20" : ""} transition-transform duration-200 group-hover/swatch:scale-125`} />
+                            <div>
+                              <p className="text-white text-xs font-medium leading-none">{c.name}</p>
+                              <p className="text-port-ice/60 text-[10px] font-mono mt-0.5">{c.hex}</p>
+                            </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
+                        ))}
+                      </div>
+                    </ScrollRevealStaggerItem>
 
                     {/* Display font */}
-                    <div className="col-span-2 rounded-2xl bg-port-frost/60 border border-port-mist/50 p-5 flex flex-col justify-between">
-                      <p className="text-port-slate/60 text-xs uppercase tracking-widest">Display / Headings</p>
-                      <p className="font-display text-5xl text-port-navy mt-2 leading-none">Aa</p>
-                      <div className="mt-3">
-                        <p className="font-display text-base font-semibold text-port-navy">Playfair Display</p>
-                        <p className="text-port-slate/60 text-xs mt-0.5">Serif, hero titles and section headers</p>
+                    <ScrollRevealStaggerItem className="col-span-2">
+                      <div className="rounded-2xl bg-port-frost/60 border border-port-mist/50 p-5 flex flex-col justify-between h-full transition-all duration-300 hover:shadow-md hover:border-port-sky/30 hover:-translate-y-1">
+                        <p className="text-port-slate/60 text-xs uppercase tracking-widest">Display / Headings</p>
+                        <p className="font-display text-5xl text-port-navy mt-2 leading-none">Aa</p>
+                        <div className="mt-3">
+                          <p className="font-display text-base font-semibold text-port-navy">Playfair Display</p>
+                          <p className="text-port-slate/60 text-xs mt-0.5">Serif, hero titles and section headers</p>
+                        </div>
                       </div>
-                    </div>
+                    </ScrollRevealStaggerItem>
 
                     {/* Body font */}
-                    <div className="rounded-2xl bg-port-frost/60 border border-port-mist/50 p-5 flex flex-col justify-between">
-                      <p className="text-port-slate/60 text-xs uppercase tracking-widest">Body / UI</p>
-                      <p className="font-nunito text-5xl text-port-navy mt-2 leading-none">Aa</p>
-                      <div className="mt-3">
-                        <p className="font-nunito text-base font-semibold text-port-navy">Nunito</p>
-                        <p className="text-port-slate/60 text-xs mt-0.5">Sans-serif, body copy, nav, and buttons</p>
+                    <ScrollRevealStaggerItem>
+                      <div className="rounded-2xl bg-port-frost/60 border border-port-mist/50 p-5 flex flex-col justify-between h-full transition-all duration-300 hover:shadow-md hover:border-port-sky/30 hover:-translate-y-1">
+                        <p className="text-port-slate/60 text-xs uppercase tracking-widest">Body / UI</p>
+                        <p className="font-nunito text-5xl text-port-navy mt-2 leading-none">Aa</p>
+                        <div className="mt-3">
+                          <p className="font-nunito text-base font-semibold text-port-navy">Nunito</p>
+                          <p className="text-port-slate/60 text-xs mt-0.5">Sans-serif, body copy, nav, and buttons</p>
+                        </div>
                       </div>
-                    </div>
+                    </ScrollRevealStaggerItem>
 
                     {/* Type scale sample */}
-                    <div className="col-span-2 rounded-2xl bg-white border border-port-mist/50 p-5 space-y-2">
-                      <p className="text-port-slate/60 text-xs uppercase tracking-widest mb-3">Type scale</p>
-                      <p className="font-display text-2xl font-bold text-port-navy leading-tight">Port Laken City Portal</p>
-                      <p className="font-display text-lg text-port-navy/80">Community <em>First</em></p>
-                      <p className="font-nunito text-sm text-port-slate leading-relaxed">Civic information, clearly presented. Nunito keeps the UI friendly and legible at every size.</p>
-                      <p className="font-nunito text-xs text-port-slate/60 uppercase tracking-wider">Label / Caption text</p>
-                    </div>
+                    <ScrollRevealStaggerItem className="col-span-2">
+                      <div className="rounded-2xl bg-white border border-port-mist/50 p-5 space-y-2 h-full transition-all duration-300 hover:shadow-md hover:border-port-sky/30 hover:-translate-y-1">
+                        <p className="text-port-slate/60 text-xs uppercase tracking-widest mb-3">Type scale</p>
+                        <p className="font-display text-2xl font-bold text-port-navy leading-tight">Port Laken City Portal</p>
+                        <p className="font-display text-lg text-port-navy/80">Community <em>First</em></p>
+                        <p className="font-nunito text-sm text-port-slate leading-relaxed">Civic information, clearly presented. Nunito keeps the UI friendly and legible at every size.</p>
+                        <p className="font-nunito text-xs text-port-slate/60 uppercase tracking-wider">Label / Caption text</p>
+                      </div>
+                    </ScrollRevealStaggerItem>
 
                     {/* Accent color */}
-                    <div className="rounded-2xl bg-port-sky p-5 flex flex-col justify-between">
-                      <p className="text-white/70 text-xs uppercase tracking-widest">Accent</p>
-                      <p className="text-white font-display text-3xl font-bold mt-2">#6b9bc3</p>
-                      <p className="text-white/70 text-xs mt-1">port-sky, highlights, icons, and links</p>
-                    </div>
-                  </div>
+                    <ScrollRevealStaggerItem>
+                      <div className="rounded-2xl bg-port-sky p-5 flex flex-col justify-between h-full transition-all duration-300 hover:shadow-lg hover:brightness-110 hover:-translate-y-1 cursor-default">
+                        <p className="text-white/70 text-xs uppercase tracking-widest">Accent</p>
+                        <p className="text-white font-display text-3xl font-bold mt-2">#6b9bc3</p>
+                        <p className="text-white/70 text-xs mt-1">port-sky, highlights, icons, and links</p>
+                      </div>
+                    </ScrollRevealStaggerItem>
+                  </ScrollRevealStagger>
 
                   {/* Interactive demos */}
                   <div className="space-y-6">
                     <p className="text-port-slate/60 text-xs uppercase tracking-widest">Components & Motion</p>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <ScrollRevealStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
                       {/* Buttons */}
-                      <div className="rounded-2xl bg-port-frost/60 border border-port-mist/50 p-6 space-y-4">
-                        <p className="text-port-slate/60 text-xs uppercase tracking-widest">Buttons</p>
-                        <div className="flex flex-wrap gap-3">
-                          <button className="px-5 py-2 rounded-full bg-port-navy text-white text-sm font-nunito font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-port-slate active:scale-95">
-                            Primary
-                          </button>
-                          <button className="px-5 py-2 rounded-full border-2 border-port-navy text-port-navy text-sm font-nunito font-semibold transition-all duration-200 hover:bg-port-navy hover:text-white hover:-translate-y-0.5 active:scale-95">
-                            Secondary
-                          </button>
-                          <button className="px-5 py-2 rounded-full bg-port-sky text-white text-sm font-nunito font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:bg-port-steel active:scale-95">
-                            Inverted
-                          </button>
-                          <button className="px-5 py-2 rounded-full border border-port-mist text-port-slate text-sm font-nunito transition-all duration-200 hover:border-port-sky hover:text-port-sky active:scale-95">
-                            Outlined
-                          </button>
+                      <ScrollRevealStaggerItem>
+                        <div className="rounded-2xl bg-port-frost/60 border border-port-mist/50 p-6 space-y-4 transition-all duration-300 hover:shadow-md hover:border-port-sky/30 hover:-translate-y-1">
+                          <p className="text-port-slate/60 text-xs uppercase tracking-widest">Buttons</p>
+                          <div className="flex flex-wrap gap-3">
+                            <button className="px-5 py-2 rounded-full bg-port-navy text-white text-sm font-nunito font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-port-slate active:scale-95">
+                              Primary
+                            </button>
+                            <button className="px-5 py-2 rounded-full border-2 border-port-navy text-port-navy text-sm font-nunito font-semibold transition-all duration-200 hover:bg-port-navy hover:text-white hover:-translate-y-0.5 active:scale-95">
+                              Secondary
+                            </button>
+                            <button className="px-5 py-2 rounded-full bg-port-sky text-white text-sm font-nunito font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:bg-port-steel active:scale-95">
+                              Inverted
+                            </button>
+                            <button className="px-5 py-2 rounded-full border border-port-mist text-port-slate text-sm font-nunito transition-all duration-200 hover:border-port-sky hover:text-port-sky active:scale-95">
+                              Outlined
+                            </button>
+                          </div>
                         </div>
-                      </div>
+                      </ScrollRevealStaggerItem>
 
                       {/* Card hover */}
-                      <div className="rounded-2xl bg-port-frost/60 border border-port-mist/50 p-6 space-y-4">
-                        <p className="text-port-slate/60 text-xs uppercase tracking-widest">Card Hover</p>
-                        <div className="group bg-white rounded-xl border border-port-mist/60 p-4 shadow-sm cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-port-sky/30">
-                          <div className="w-8 h-8 rounded-lg bg-port-sky/20 flex items-center justify-center mb-3">
-                            <FaAnchor className="text-port-sky text-sm" />
+                      <ScrollRevealStaggerItem>
+                        <div className="rounded-2xl bg-port-frost/60 border border-port-mist/50 p-6 space-y-4 transition-all duration-300 hover:shadow-md hover:border-port-sky/30 hover:-translate-y-1">
+                          <p className="text-port-slate/60 text-xs uppercase tracking-widest">Card Hover</p>
+                          <div className="group bg-white rounded-xl border border-port-mist/60 p-4 shadow-sm cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-port-sky/30">
+                            <div className="w-8 h-8 rounded-lg bg-port-sky/20 flex items-center justify-center mb-3">
+                              <FaAnchor className="text-port-sky text-sm" />
+                            </div>
+                            <p className="font-display text-sm font-semibold text-port-navy">Hover me</p>
+                            <p className="text-port-slate/70 text-xs mt-1">Cards lift on hover with shadow deepening</p>
                           </div>
-                          <p className="font-display text-sm font-semibold text-port-navy">Hover me</p>
-                          <p className="text-port-slate/70 text-xs mt-1">Cards lift on hover with shadow deepening</p>
                         </div>
-                      </div>
+                      </ScrollRevealStaggerItem>
 
                       {/* Navbar underline */}
-                      <div className="rounded-2xl bg-port-frost/60 border border-port-mist/50 p-6 space-y-4">
-                        <p className="text-port-slate/60 text-xs uppercase tracking-widest">Nav Links</p>
-                        <div className="flex flex-col gap-3">
-                          {["Home", "Departments", "Community"].map((link) => (
-                            <span key={link} className="relative inline-block w-fit font-nunito text-sm text-port-navy cursor-pointer group">
-                              {link}
-                              <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-port-sky transition-all duration-300 group-hover:w-full rounded-full" />
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Fade in up animation */}
-                      <div className="rounded-2xl bg-port-frost/60 border border-port-mist/50 p-6 space-y-4">
-                        <p className="text-port-slate/60 text-xs uppercase tracking-widest">Scroll Reveal</p>
-                        <p className="text-port-slate text-xs leading-relaxed">Elements enter with <code className="bg-port-mist/60 px-1 rounded text-port-navy">fadeInUp</code> at 0.8s ease-out. Staggered children animate in sequence via <code className="bg-port-mist/60 px-1 rounded text-port-navy">ScrollRevealStagger</code>.</p>
-                        <div className="space-y-2">
-                          {[1, 2, 3].map((i) => (
-                            <div
-                              key={i}
-                              className="h-2 rounded-full bg-port-sky/30 animate-pulse"
-                              style={{ width: `${90 - i * 15}%`, animationDelay: `${i * 0.15}s` }}
-                            />
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Frosted glass navbar */}
-                      <div className="rounded-2xl bg-gradient-to-br from-port-sky/30 to-port-navy/20 border border-port-mist/50 p-6 space-y-4">
-                        <p className="text-port-slate/60 text-xs uppercase tracking-widest">Frosted Glass</p>
-                        <div className="rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 px-4 py-3 flex items-center gap-3 shadow-sm">
-                          <div className="w-5 h-5 rounded bg-port-navy/80" />
-                          <span className="font-nunito text-xs text-port-navy font-semibold">Port Laken</span>
-                          <div className="ml-auto flex gap-2">
-                            {["Home", "Dept", "News"].map(l => (
-                              <span key={l} className="font-nunito text-[10px] text-port-navy/70">{l}</span>
+                      <ScrollRevealStaggerItem>
+                        <div className="rounded-2xl bg-port-frost/60 border border-port-mist/50 p-6 space-y-4 transition-all duration-300 hover:shadow-md hover:border-port-sky/30 hover:-translate-y-1">
+                          <p className="text-port-slate/60 text-xs uppercase tracking-widest">Nav Links</p>
+                          <div className="flex flex-col gap-3">
+                            {["Home", "Departments", "Community"].map((link) => (
+                              <span key={link} className="relative inline-block w-fit font-nunito text-sm text-port-navy cursor-pointer group">
+                                {link}
+                                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-port-sky transition-all duration-300 group-hover:w-full rounded-full" />
+                              </span>
                             ))}
                           </div>
                         </div>
-                        <p className="text-port-slate text-xs">Navbar uses <code className="bg-port-mist/60 px-1 rounded text-port-navy">backdrop-blur-3xl</code> + semi-transparent white</p>
-                      </div>
+                      </ScrollRevealStaggerItem>
+
+                      {/* Fade in up animation */}
+                      <ScrollRevealStaggerItem>
+                        <div className="rounded-2xl bg-port-frost/60 border border-port-mist/50 p-6 space-y-4 transition-all duration-300 hover:shadow-md hover:border-port-sky/30 hover:-translate-y-1">
+                          <p className="text-port-slate/60 text-xs uppercase tracking-widest">Scroll Reveal</p>
+                          <p className="text-port-slate text-xs leading-relaxed">Elements enter with <code className="bg-port-mist/60 px-1 rounded text-port-navy">fadeInUp</code> at 0.8s ease-out. Staggered children animate in sequence via <code className="bg-port-mist/60 px-1 rounded text-port-navy">ScrollRevealStagger</code>.</p>
+                          <div className="space-y-2">
+                            {[1, 2, 3].map((i) => (
+                              <div
+                                key={i}
+                                className="h-2 rounded-full bg-port-sky/30 animate-pulse"
+                                style={{ width: `${90 - i * 15}%`, animationDelay: `${i * 0.15}s` }}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </ScrollRevealStaggerItem>
+
+                      {/* Frosted glass navbar */}
+                      <ScrollRevealStaggerItem>
+                        <div className="rounded-2xl bg-gradient-to-br from-port-sky/30 to-port-navy/20 border border-port-mist/50 p-6 space-y-4 transition-all duration-300 hover:shadow-md hover:border-port-sky/40 hover:-translate-y-1">
+                          <p className="text-port-slate/60 text-xs uppercase tracking-widest">Frosted Glass</p>
+                          <div className="rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 px-4 py-3 flex items-center gap-3 shadow-sm">
+                            <div className="w-5 h-5 rounded bg-port-navy/80" />
+                            <span className="font-nunito text-xs text-port-navy font-semibold">Port Laken</span>
+                            <div className="ml-auto flex gap-2">
+                              {["Home", "Dept", "News"].map(l => (
+                                <span key={l} className="font-nunito text-[10px] text-port-navy/70">{l}</span>
+                              ))}
+                            </div>
+                          </div>
+                          <p className="text-port-slate text-xs">Navbar uses <code className="bg-port-mist/60 px-1 rounded text-port-navy">backdrop-blur-3xl</code> + semi-transparent white</p>
+                        </div>
+                      </ScrollRevealStaggerItem>
 
                       {/* Spotlight card */}
-                      <div className="rounded-2xl bg-port-frost/60 border border-port-mist/50 p-6 space-y-4">
-                        <p className="text-port-slate/60 text-xs uppercase tracking-widest">Spotlight Grid</p>
-                        <div className="grid grid-cols-2 gap-2">
-                          {["Parks", "Fire Dept", "Finance", "Police"].map((item) => (
-                            <div
-                              key={item}
-                              className="group/card rounded-xl bg-white border border-port-mist/50 p-3 text-center cursor-pointer transition-all duration-300 hover:border-port-sky/40 hover:shadow-md peer"
-                            >
-                              <p className="font-nunito text-xs text-port-navy font-semibold transition-opacity duration-300 group-hover/card:text-port-sky">{item}</p>
-                            </div>
-                          ))}
+                      <ScrollRevealStaggerItem>
+                        <div className="rounded-2xl bg-port-frost/60 border border-port-mist/50 p-6 space-y-4 transition-all duration-300 hover:shadow-md hover:border-port-sky/30 hover:-translate-y-1">
+                          <p className="text-port-slate/60 text-xs uppercase tracking-widest">Spotlight Grid</p>
+                          <div className="grid grid-cols-2 gap-2">
+                            {["Parks", "Fire Dept", "Finance", "Police"].map((item) => (
+                              <div
+                                key={item}
+                                className="group/card rounded-xl bg-white border border-port-mist/50 p-3 text-center cursor-pointer transition-all duration-300 hover:border-port-sky/40 hover:shadow-md peer"
+                              >
+                                <p className="font-nunito text-xs text-port-navy font-semibold transition-opacity duration-300 group-hover/card:text-port-sky">{item}</p>
+                              </div>
+                            ))}
+                          </div>
+                          <p className="text-port-slate text-xs">Siblings dim when a card is hovered</p>
                         </div>
-                        <p className="text-port-slate text-xs">Siblings dim when a card is hovered</p>
-                      </div>
+                      </ScrollRevealStaggerItem>
 
-                    </div>
+                    </ScrollRevealStagger>
                   </div>
 
                   {/* Short explanation */}
-                  <div className="rounded-2xl bg-port-navy p-7 w-full">
-                    <p className="font-display text-lg font-semibold text-white mb-3">Why it works together</p>
-                    <p className="font-nunito text-port-mist/80 text-sm leading-relaxed">
-                      Playfair Display gives Port Laken editorial weight, the kind of gravitas you'd expect from a real civic institution. Nunito keeps everything readable and warm at the UI level. The coastal blue ramp (navy to frost) creates natural depth without needing shadows everywhere. Rounded corners and subtle lift animations signal interactivity without being loud. The result is a site that feels trustworthy, approachable, and distinctly Pacific Northwest.
-                    </p>
-                  </div>
+                  <ScrollRevealText direction="up">
+                    <div className="rounded-2xl bg-port-navy p-7 w-full transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                      <p className="font-display text-lg font-semibold text-white mb-3">Why it works together</p>
+                      <p className="font-nunito text-port-mist/80 text-sm leading-relaxed">
+                        Playfair Display gives Port Laken editorial weight, the kind of gravitas you'd expect from a real civic institution. Nunito keeps everything readable and warm at the UI level. The coastal blue ramp (navy to frost) creates natural depth without needing shadows everywhere. Rounded corners and subtle lift animations signal interactivity without being loud. The result is a site that feels trustworthy, approachable, and distinctly Pacific Northwest.
+                      </p>
+                    </div>
+                  </ScrollRevealText>
 
                 </div>
               </ScrollRevealText>
@@ -763,12 +791,13 @@ export default function ReferencesPage() {
                     Reference imagery from Washington State coastal communities. Each card links to the source.
                   </p>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                  <ScrollRevealStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    <ScrollRevealStaggerItem>
                     <a
                       href="https://olympicpeninsula.org"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative rounded-2xl overflow-hidden border border-port-mist/30 shadow-sm hover:shadow-lg transition-all duration-300 bg-white block"
+                      className="group relative rounded-2xl overflow-hidden border border-port-mist/30 shadow-sm hover:shadow-lg transition-all duration-300 bg-white block hover:-translate-y-1 hover:border-port-sky/30"
                     >
                       <div className="aspect-[4/3] overflow-hidden relative">
                         <Image
@@ -785,12 +814,14 @@ export default function ReferencesPage() {
                         <p className="text-xs text-port-sky mt-2 font-medium">View source</p>
                       </div>
                     </a>
+                    </ScrollRevealStaggerItem>
 
+                    <ScrollRevealStaggerItem>
                     <a
                       href="https://unsplash.com/s/photos/bellingham-waterfront"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative rounded-2xl overflow-hidden border border-port-mist/30 shadow-sm hover:shadow-lg transition-all duration-300 bg-white block"
+                      className="group relative rounded-2xl overflow-hidden border border-port-mist/30 shadow-sm hover:shadow-lg transition-all duration-300 bg-white block hover:-translate-y-1 hover:border-port-sky/30"
                     >
                       <div className="aspect-[4/3] overflow-hidden relative">
                         <Image
@@ -807,12 +838,14 @@ export default function ReferencesPage() {
                         <p className="text-xs text-port-sky mt-2 font-medium">View source</p>
                       </div>
                     </a>
+                    </ScrollRevealStaggerItem>
 
+                    <ScrollRevealStaggerItem>
                     <a
                       href="https://unsplash.com/s/photos/pacific-northwest-coast"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative rounded-2xl overflow-hidden border border-port-mist/30 shadow-sm hover:shadow-lg transition-all duration-300 bg-white block"
+                      className="group relative rounded-2xl overflow-hidden border border-port-mist/30 shadow-sm hover:shadow-lg transition-all duration-300 bg-white block hover:-translate-y-1 hover:border-port-sky/30"
                     >
                       <div className="aspect-[4/3] overflow-hidden relative">
                         <Image
@@ -829,12 +862,14 @@ export default function ReferencesPage() {
                         <p className="text-xs text-port-sky mt-2 font-medium">View source</p>
                       </div>
                     </a>
+                    </ScrollRevealStaggerItem>
 
+                    <ScrollRevealStaggerItem>
                     <a
                       href="https://unsplash.com/s/photos/bridge-water-coast"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative rounded-2xl overflow-hidden border border-port-mist/30 shadow-sm hover:shadow-lg transition-all duration-300 bg-white block"
+                      className="group relative rounded-2xl overflow-hidden border border-port-mist/30 shadow-sm hover:shadow-lg transition-all duration-300 bg-white block hover:-translate-y-1 hover:border-port-sky/30"
                     >
                       <div className="aspect-[4/3] overflow-hidden relative">
                         <Image
@@ -851,7 +886,8 @@ export default function ReferencesPage() {
                         <p className="text-xs text-port-sky mt-2 font-medium">View source</p>
                       </div>
                     </a>
-                  </div>
+                    </ScrollRevealStaggerItem>
+                  </ScrollRevealStagger>
                 </div>
               </ScrollRevealText>
 

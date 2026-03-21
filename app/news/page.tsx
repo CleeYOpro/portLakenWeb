@@ -12,7 +12,7 @@ const businesses = [
     icon: "coffee",
     color: "bg-port-navy",
     description:
-      "A beloved Main Street café donating 10% of every sale to local homeless shelters. More than a coffee shop — it's where Port Laken shows up for each other.",
+      "A beloved Main Street café donating 10% of every sale to local homeless shelters. More than a coffee shop, it's where Port Laken shows up for each other.",
     slug: "harbor-brew-coffee",
     resourceId: "50",
   },
@@ -32,7 +32,7 @@ const businesses = [
     icon: "menu_book",
     color: "bg-indigo-600",
     description:
-      "The independent bookstore that refused to close. Weekly reading clubs, author events, and a community that keeps coming back — Pages & Prose is Port Laken's literary heart.",
+      "The independent bookstore that refused to close. Weekly reading clubs, author events, and a community that keeps coming back. Pages & Prose is Port Laken's literary heart.",
     slug: "pages-and-prose",
     resourceId: "51",
   },
@@ -42,7 +42,7 @@ const businesses = [
     icon: "sailing",
     color: "bg-sky-600",
     description:
-      "Kayaks, paddleboards, jet skis, and guided harbor tours — Laken Watersports Co. is the go-to spot for getting out on the water. Beginner-friendly and open to all skill levels.",
+      "Kayaks, paddleboards, jet skis, and guided harbor tours. Laken Watersports Co. is the go-to spot for getting out on the water. Beginner-friendly and open to all skill levels.",
     slug: "laken-watersports",
     resourceId: "56",
   },
@@ -86,7 +86,7 @@ const archiveItems = [
     slug: "mlk-day-service",
   },
   {
-    title: "The Coastal Winter Market Returns — and It's Better Than Ever",
+    title: "The Coastal Winter Market Returns, and It's Better Than Ever",
     date: "January 25, 2026",
     category: "Lifestyle",
     slug: "winter-market",
@@ -110,10 +110,16 @@ const archiveItems = [
     slug: "summer-festival",
   },
   {
-    title: "Elm Street Park Is Finally Open — And It Was Worth the Wait",
+    title: "Elm Street Park Is Finally Open, and It Was Worth the Wait",
     date: "January 14, 2026",
     category: "City News",
     slug: "elm-street-park",
+  },
+  {
+    title: "Lakefront High TSA Club Heads to States in Spokane",
+    date: "April 10, 2026",
+    category: "Community Spotlight",
+    slug: "tsa-states-spokane",
   },
   {
     title: "Sarah Martinez: A Decade of Feeding Hope",
@@ -196,30 +202,27 @@ export default function CommunityHubPage() {
           <RevealOnScroll>
             <div className="text-center mb-12">
               <h2 className="font-display text-4xl font-bold text-port-navy mb-4">
-                Featured Resident Stories
+                Featured Stories
               </h2>
-              <p className="text-port-slate max-w-xl mx-auto">
-                Meet the remarkable individuals making a difference.
-              </p>
             </div>
           </RevealOnScroll>
 
           <div className="grid md:grid-cols-2 gap-8 mb-8">
             <RevealOnScroll>
-              <Link href="/news/sarah-martinez" className="block">
+              <Link href="/news/tsa-states-spokane" className="block">
                 <div className="group relative rounded-2xl overflow-hidden h-[400px] cursor-pointer">
                   <Image
-                    src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80"
-                    alt="Sarah Martinez"
+                    src="https://scontent-sea1-1.xx.fbcdn.net/v/t39.30808-6/309062501_158952430094819_4367917776384999240_n.png?_nc_cat=100&ccb=1-7&_nc_sid=2a1932&_nc_ohc=qQai6-NaBgEQ7kNvwGi_BQ2&_nc_oc=AdpFC8dfww_9tFbPZL59x7CGGaO-iezdTD1ZNOxz7nSENQb6iTijQqbBQWoMc_SgbSM&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&_nc_gid=fiee9V8kfhPrdN34_WOAOw&_nc_ss=7a30f&oh=00_Afznty1m2pY6PoTRwBC2Jd-DtUtx3vp7acTiNC-lc17bvA&oe=69C3DD72"
+                    alt="Lakefront High TSA Club"
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-port-navy via-transparent to-transparent opacity-90"></div>
                   <div className="absolute bottom-0 p-8 text-white">
-                    <h3 className="text-2xl font-bold mb-1">Sarah Martinez</h3>
-                    <p className="text-port-ice text-sm mb-4">Community Volunteer</p>
-                    <p className="text-white/80 line-clamp-2">Leading food drive initiatives.</p>
+                    <h3 className="text-2xl font-bold mb-1">Lakefront High TSA Club</h3>
+                    <p className="text-port-ice text-sm mb-4">Technology Student Association</p>
+                    <p className="text-white/80 line-clamp-2">Heading to state competition in Spokane.</p>
                   </div>
                 </div>
               </Link>
@@ -345,7 +348,7 @@ export default function CommunityHubPage() {
         </div>
       </section>
 
-      {/* News Archive — collapsible */}
+      {/* News Archive - collapsible */}
       <section className="py-20 bg-port-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealOnScroll>
