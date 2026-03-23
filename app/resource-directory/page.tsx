@@ -181,32 +181,21 @@ const siteContext = {
       stack: ["Next.js", "React", "TypeScript", "Tailwind", "Vercel"],
     },
     signIn: { description: "Sign In to manage resources, bills, and account items. New users can create an account." },
+    contact: { description: "Contact the city for general inquiries, feedback, or issues. Form available." },
+    alerts: { description: "Current emergency alerts and sign-up for notification system." },
+    privacy: { description: "Privacy policy regarding the use of Port Laken's digital services." }
   },
 };
 
 function buildAiContext(query: string, contextResources: Resource[]) {
   const allResources = contextResources.length ? contextResources : RESOURCES;
 
-  // Score resources by keyword relevance to avoid overflowing the prompt
-  const lowerQuery = query.toLowerCase();
-  const queryWords = lowerQuery.split(/\s+/).filter((w) => w.length > 2);
-  const scored = allResources.map((r) => {
-    const blob = [r.name, r.shortDescription, r.fullDescription, r.category, ...r.tags]
-      .join(" ")
-      .toLowerCase();
-    const score = queryWords.reduce((acc, w) => acc + (blob.includes(w) ? 1 : 0), 0);
-    return { r, score };
-  });
-  scored.sort((a, b) => b.score - a.score);
-  // Always include top matches + a broad sample so the AI has enough context
-  const topMatches = scored.filter((s) => s.score > 0).slice(0, 30).map((s) => s.r);
-  const fallback = scored.slice(0, 30).map((s) => s.r);
-  const visibleResources = topMatches.length >= 5 ? topMatches : fallback;
+  const visibleResources = allResources;
 
   const resourceLines = visibleResources
     .map((r) => {
       return [
-        `- ${r.name}: ${r.shortDescription || r.fullDescription || "No description."}`,
+        `- ${r.name}: ${r.shortDescription || "No description."} ${r.fullDescription || ""}`,
         `Category: ${r.category}.`,
         r.address ? `Address: ${r.address}.` : "",
         r.phone ? `Phone: ${r.phone}.` : "",
@@ -236,6 +225,9 @@ PAGES & CONTENT:
 - Careers: ${nav.residents.pages.employment}
 - References: ${nav.references.description}
 - Sign In: ${nav.signIn.description}
+- Contact: ${nav.contact.description}
+- Alerts: ${nav.alerts.description}
+- Privacy: ${nav.privacy.description}
 - Resource Directory (current page): Community resource listings with AI assistant.
 
 RESOURCE DIRECTORY LISTINGS:
@@ -464,17 +456,29 @@ function ResourceDirectoryContent() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams, communityResources]);
 
-  // Auto-fire AI search once on mount if ?q= is present
+  // Auto-fire AI search once on mount if ?q= is present and community resources have loaded
   useEffect(() => {
     const q = searchParams.get("q");
-    if (q && !hasAutoSearched.current) {
+    // Trigger AI search when both conditions are met:
+    // 1. There's a query in the URL
+    // 2. We haven't searched this query yet
+    // 3. Community resources have been loaded (so we have the full dataset)
+    if (q && q.trim() && !hasAutoSearched.current && communityResources.length > 0) {
       hasAutoSearched.current = true;
       console.log("[AutoSearch] firing for query:", q);
+      // Make sure to set the query in state first
+      setQuery(q);
+      // Then trigger the AI search with the full resource set
       const allResources = mergeResources(RESOURCES, communityResources);
       handleAiSearch(q, allResources);
     }
+    // Additionally, if we have a query but no community resources yet,
+    // set the query in state so the regular filter can work while waiting for AI
+    else if (q && q.trim() && communityResources.length === 0 && !hasAutoSearched.current) {
+      setQuery(q);
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [communityResources]);
+  }, [communityResources, searchParams]);
 
   useEffect(() => {
     const allResources = mergeResources(RESOURCES, communityResources);
@@ -539,8 +543,11 @@ function ResourceDirectoryContent() {
         <div className="max-w-[1600px] mx-auto px-6 space-y-6">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
             <div>
-              <h1 className="font-display text-4xl font-bold text-port-navy mb-2 animate-fade-in-up">
+              <h1 className="font-display text-4xl font-bold text-port-navy mb-2 animate-fade-in-up md:hidden">
                 Resource Directory
+              </h1>
+              <h1 className="font-display text-4xl font-bold text-port-navy mb-2 animate-fade-in-up hidden md:block">
+                Resources, Resources, and MORE RESOURCES!!!
               </h1>
               <p className="text-lg text-port-slate opacity-0 animate-fade-in-up [animation-delay:200ms] [animation-fill-mode:forwards]">
                 Find what you need in Port Laken.
@@ -645,6 +652,10 @@ function ResourceDirectoryContent() {
                 pageContextKey={aiPageContextKey}
                 address={aiAddress}
                 onResourceClick={(r) => setSelectedResource(r)}
+                onClose={() => {
+                  setAiQuery("");
+                  setAiOverview("");
+                }}
               />
             </div>
 
@@ -656,7 +667,7 @@ function ResourceDirectoryContent() {
               <span className="text-sm text-port-slate">resources</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 bg-white p-4 md:p-6 rounded-3xl">
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-3 md:gap-6 bg-white p-3 md:p-6 rounded-3xl">
               {filteredResources.map((resource) => (
                 <div
                   key={resource.id}

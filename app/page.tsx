@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
@@ -127,14 +127,14 @@ const quickActions = [
     title: "Access Regulatory Forms",
     link: "/forms",
     authLink: "/forms",
-    nonAuthLink: "/sign-in",
+    nonAuthLink: "/forms",
     icon: <MdPayment className="text-3xl text-primary" />,
   },
   {
     title: "Transportation & Maps",
     link: "/maps-transport",
     authLink: "/maps-transport",
-    nonAuthLink: "/sign-in",
+    nonAuthLink: "/maps-transport",
     icon: <FaBus className="text-3xl text-primary" />,
   },
 ];
@@ -287,7 +287,9 @@ export default function Home() {
                 href = action.authLink;
               } else {
                 // Non-authenticated user goes to sign-in with callback
-                href = `${action.nonAuthLink}?callbackUrl=${encodeURIComponent(action.authLink)}`;
+                href = action.nonAuthLink === '/sign-in' 
+                  ? `${action.nonAuthLink}?callbackUrl=${encodeURIComponent(action.authLink)}`
+                  : action.nonAuthLink;
               }
 
               return (
@@ -988,7 +990,7 @@ function PortLakenServicesSection() {
       resourceId: "1",
     },
     {
-      image: "https://www.outsideonline.com/wp-content/uploads/2025/05/GettyImages-103319910-scaled.jpg",
+      image: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&q=80",
       title: "Discovery Park",
       description: "Largest city park with beaches and forest trails.",
       resourceId: "32",

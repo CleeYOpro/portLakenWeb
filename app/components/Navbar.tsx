@@ -20,19 +20,47 @@ export default function Navbar() {
   const { user, logout } = useAuth();
   const router = useRouter();
 
+  const [gtOffset, setGtOffset] = useState('0px');
+
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
       setScrolled(currentY > 0);
-      if (currentY < lastScrollY.current || currentY < 10) {
+
+      // Only hide the navbar when scrolling down from the top
+      // Show navbar when at the top or when scrolling up
+      if (currentY <= 10) {
+      // At the top, always show navbar
         setNavVisible(true);
-      } else if (currentY > lastScrollY.current && currentY > 60) {
+        lastScrollY.current = currentY;
+      } else if (currentY > lastScrollY.current) {
+        // Scrolling down, hide navbar
         setNavVisible(false);
+      } else if (currentY < lastScrollY.current) {
+        // Scrolling up, show navbar
+        setNavVisible(true);
       }
       lastScrollY.current = currentY;
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    // Check if Google Translate has pushed the body down, and offset the navbar to match
+    const checkGtOffset = () => {
+      const bodyTop = document.body?.style?.top;
+      if (bodyTop && bodyTop !== '0px') {
+        setGtOffset(bodyTop);
+      } else {
+        setGtOffset('0px');
+      }
+    };
+    
+    checkGtOffset();
+    // Poll to keep the navbar aligned if GT changes the layout
+    const interval = setInterval(checkGtOffset, 100);
+    return () => clearInterval(interval);
   }, []);
 
   const handleMouseEnter = (item: string) => {
@@ -50,15 +78,15 @@ export default function Navbar() {
 
   const changeLanguage = (langCode: string) => {
     if (langCode === 'en') {
-      // Reset to original language
-      const cookie = document.cookie.match(/googtrans=([^;]+)/);
-      if (cookie) {
-        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname;
-      }
+      // Reset to English — clear all googtrans cookies
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname}`;
     } else {
+      // Google Translate expects /en/<target>
       document.cookie = `googtrans=/en/${langCode}; path=/`;
       document.cookie = `googtrans=/en/${langCode}; path=/; domain=${window.location.hostname}`;
+      document.cookie = `googtrans=/en/${langCode}; path=/; domain=.${window.location.hostname}`;
     }
     window.location.reload();
   };
@@ -161,11 +189,12 @@ export default function Navbar() {
     <>
       {/* Sticky Navbar */}
       <nav
-        className={`fixed top-0 z-50 w-full transition-all duration-300 ease-in-out border border-white/20 backdrop-blur-3xl shadow-md rounded-b-3xl ${navVisible ? 'translate-y-0' : '-translate-y-full'}`}
+        className={`fixed z-50 w-full transition-all duration-300 ease-in-out border border-white/20 backdrop-blur-3xl shadow-md rounded-b-3xl ${navVisible ? 'translate-y-0' : '-translate-y-full'}`}
         style={{
           backgroundColor: 'rgba(241, 245, 249, 0.75)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
+          top: gtOffset,
         }}
       >
         <div className="px-6 max-w-[80rem] mx-auto">
@@ -223,6 +252,7 @@ export default function Navbar() {
                 <DropdownLink href="/news" label="News" />
                 <DropdownLink href="/forms" label="Forms & Applications" />
                 <DropdownLink href="/maps-transport" label="Map" />
+                <DropdownLink href="/contact" label="Contact" />
               </NavDropdown>
               <NavLink href="/references" label="References" />
             </div>
@@ -263,20 +293,39 @@ export default function Navbar() {
                     {/* Accessibility / Language */}
                     <div className="px-4 py-2 border-t border-gray-100">
                       <p className="text-xs text-gray-400 font-nunito font-semibold uppercase tracking-wide mb-1.5">Accessibility</p>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm text-gray-600 font-nunito">Language</span>
-                        <select
-                          className="ml-auto text-xs border border-gray-200 rounded-lg px-2 py-1 font-nunito text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-primary"
-                          defaultValue="en"
-                          onChange={(e) => changeLanguage(e.target.value)}
-                        >
-                          <option value="en">English</option>
-                          <option value="es">Español</option>
-                          <option value="fr">Français</option>
-                          <option value="zh">中文</option>
-                          <option value="ar">العربية</option>
-                          <option value="pt">Português</option>
-                        </select>
+                      <div className="flex flex-col gap-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-gray-600 font-nunito">Language</span>
+                          <select
+                            className="ml-auto text-xs border border-gray-200 rounded-lg px-2 py-1 font-nunito text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-primary"
+                            defaultValue="en"
+                            onChange={(e) => changeLanguage(e.target.value)}
+                          >
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                            <option value="fr">Français</option>
+                            <option value="zh-CN">中文</option>
+                            <option value="hi">हिन्दी</option>
+                            <option value="ar">العربية</option>
+                            <option value="pt">Português</option>
+                            <option value="vi">Tiếng Việt</option>
+                            <option value="ko">한국어</option>
+                            <option value="ru">Русский</option>
+                            <option value="ja">日本語</option>
+                            <option value="de">Deutsch</option>
+                            <option value="tl">Filipino</option>
+                            <option value="fa">فارسی</option>
+                            <option value="ur">اردو</option>
+                          </select>
+                        </div>
+                        {gtOffset !== '0px' && (
+                          <button
+                            onClick={() => changeLanguage('en')}
+                            className="text-xs w-full text-center py-1.5 rounded-lg border border-red-200 bg-red-50 text-red-600 font-nunito font-semibold hover:bg-red-100 transition-colors notranslate"
+                          >
+                            Return to English
+                          </button>
+                        )}
                       </div>
                     </div>
                     <div className="border-t border-gray-100 mt-1">
@@ -309,20 +358,39 @@ export default function Navbar() {
                     {/* Accessibility / Language */}
                     <div className="px-4 py-2 border-t border-gray-100">
                       <p className="text-xs text-gray-400 font-nunito font-semibold uppercase tracking-wide mb-1.5">Accessibility</p>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm text-gray-600 font-nunito">Language</span>
-                        <select
-                          className="ml-auto text-xs border border-gray-200 rounded-lg px-2 py-1 font-nunito text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-primary"
-                          defaultValue="en"
-                          onChange={(e) => changeLanguage(e.target.value)}
-                        >
-                          <option value="en">English</option>
-                          <option value="es">Español</option>
-                          <option value="fr">Français</option>
-                          <option value="zh">中文</option>
-                          <option value="ar">العربية</option>
-                          <option value="pt">Português</option>
-                        </select>
+                      <div className="flex flex-col gap-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-gray-600 font-nunito">Language</span>
+                          <select
+                            className="ml-auto text-xs border border-gray-200 rounded-lg px-2 py-1 font-nunito text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-primary"
+                            defaultValue="en"
+                            onChange={(e) => changeLanguage(e.target.value)}
+                          >
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                            <option value="fr">Français</option>
+                            <option value="zh-CN">中文</option>
+                            <option value="hi">हिन्दी</option>
+                            <option value="ar">العربية</option>
+                            <option value="pt">Português</option>
+                            <option value="vi">Tiếng Việt</option>
+                            <option value="ko">한국어</option>
+                            <option value="ru">Русский</option>
+                            <option value="ja">日本語</option>
+                            <option value="de">Deutsch</option>
+                            <option value="tl">Filipino</option>
+                            <option value="fa">فارسی</option>
+                            <option value="ur">اردو</option>
+                          </select>
+                        </div>
+                        {gtOffset !== '0px' && (
+                          <button
+                            onClick={() => changeLanguage('en')}
+                            className="text-xs w-full text-center py-1.5 rounded-lg border border-red-200 bg-red-50 text-red-600 font-nunito font-semibold hover:bg-red-100 transition-colors notranslate"
+                          >
+                            Return to English
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -525,6 +593,7 @@ function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, onLogout }: { mob
                   <MobileLink href="/news" label="News" setMobileMenuOpen={setMobileMenuOpen} />
                   <MobileLink href="/forms" label="Forms & Applications" setMobileMenuOpen={setMobileMenuOpen} />
                   <MobileLink href="/maps-transport" label="Map" setMobileMenuOpen={setMobileMenuOpen} />
+                  <MobileLink href="/contact" label="Contact" setMobileMenuOpen={setMobileMenuOpen} />
                 </MobileDropdown>
               </div>
               <div className="mobile-link-item" style={{ '--link-delay': '360ms' } as React.CSSProperties}>

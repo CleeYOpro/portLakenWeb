@@ -41,7 +41,7 @@ export const RESOURCES: Resource[] = [
         name: "Harborview Medical Center",
         category: "Healthcare",
         shortDescription: "Comprehensive medical services including emergency care, trauma center, and specialized clinics.",
-        fullDescription: "Harborview Medical Center is Port Laken's primary healthcare provider, offering Level I trauma care, burn center services, and comprehensive medical and surgical care. Our dedicated team of specialists is committed to providing high-quality, patient-centered care to all residents.",
+        fullDescription: "Harborview Medical Center is Port Laken's primary healthcare provider, offering Level I trauma care, burn center services, and comprehensive medical and surgical care. Our dedicated team of specialists is committed to providing high-quality, patient-centered care to all residents. We are deeply committed to health equity, ensuring that every individual receives compassionate, state-of-the-art medical attention regardless of their background or financial status. Our facilities are equipped with the latest technology, and our staff regularly engage in community outreach to promote proactive wellness and preventative care across all of Port Laken.",
         address: "939 Caroline St, Port Angeles, WA 98362",
         // Based on: Olympic Medical Center — 939 Caroline St, Port Angeles
         mapCoordinates: { lat: 48.1154826, lng: -123.4144823 },
@@ -58,7 +58,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Community Clinic",
         category: "Healthcare",
         shortDescription: "Affordable primary care and walk-in services for families and individuals.",
-        fullDescription: "The Community Clinic provides essential primary care services, including routine check-ups, vaccinations, and chronic disease management. We offer a sliding scale fee structure to ensure accessibility for all community members.",
+        fullDescription: "The Community Clinic provides essential primary care services, including routine check-ups, vaccinations, and chronic disease management. We offer a sliding scale fee structure to ensure accessibility for all community members. We are deeply committed to health equity, ensuring that every individual receives compassionate, state-of-the-art medical attention regardless of their background or financial status. Our facilities are equipped with the latest technology, and our staff regularly engage in community outreach to promote proactive wellness and preventative care across all of Port Laken.",
         address: "819 Georgiana St, Port Angeles, WA 98362",
         // Based on: Olympic Peninsula Community Clinic — 819 Georgiana St, Port Angeles
         mapCoordinates: { lat: 48.115317, lng: -123.41765 },
@@ -74,7 +74,7 @@ export const RESOURCES: Resource[] = [
         name: "Laken Dental Health",
         category: "Healthcare",
         shortDescription: "Comprehensive dental care for children and adults.",
-        fullDescription: "From cleanings to oral surgery, Laken Dental Health provides full-service dental care. We accept most insurance plans and offer emergency dental services.",
+        fullDescription: "From cleanings to oral surgery, Laken Dental Health provides full-service dental care. We accept most insurance plans and offer emergency dental services. We are deeply committed to health equity, ensuring that every individual receives compassionate, state-of-the-art medical attention regardless of their background or financial status. Our facilities are equipped with the latest technology, and our staff regularly engage in community outreach to promote proactive wellness and preventative care across all of Port Laken.",
         address: "218 S Laurel St, Port Angeles, WA 98362",
         // Based on: Peninsula Dental Clinic — 218 S Laurel St, Port Angeles
         mapCoordinates: { lat: 48.117561, lng: -123.435209 },
@@ -90,7 +90,7 @@ export const RESOURCES: Resource[] = [
         name: "Vision Plus Eye Care",
         category: "Healthcare",
         shortDescription: "Optometry services and eyewear.",
-        fullDescription: "Comprehensive eye exams, contact lens fittings, and a wide selection of frames. Our optometrists are dedicated to preserving and enhancing your vision.",
+        fullDescription: "Comprehensive eye exams, contact lens fittings, and a wide selection of frames. Our optometrists are dedicated to preserving and enhancing your vision. We are deeply committed to health equity, ensuring that every individual receives compassionate, state-of-the-art medical attention regardless of their background or financial status. Our facilities are equipped with the latest technology, and our staff regularly engage in community outreach to promote proactive wellness and preventative care across all of Port Laken.",
         address: "1026 E 1st St, Port Angeles, WA 98362",
         // Based on: NOHN Eyecare Services — 1026 E 1st St, Port Angeles
         mapCoordinates: { lat: 48.1114489, lng: -123.4158214 },
@@ -106,7 +106,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Mental Health Services",
         category: "Healthcare",
         shortDescription: "Counseling and therapy for all ages.",
-        fullDescription: "Professional mental health support including individual therapy, couples counseling, and group sessions. We specialize in anxiety, depression, and trauma recovery.",
+        fullDescription: "Professional mental health support including individual therapy, couples counseling, and group sessions. We specialize in anxiety, depression, and trauma recovery. We are deeply committed to health equity, ensuring that every individual receives compassionate, state-of-the-art medical attention regardless of their background or financial status. Our facilities are equipped with the latest technology, and our staff regularly engage in community outreach to promote proactive wellness and preventative care across all of Port Laken.",
         address: "118 E 8th St, Port Angeles, WA 98362",
         // Based on: Peninsula Behavioral Health — 118 E 8th St, Port Angeles
         mapCoordinates: { lat: 48.1122743, lng: -123.4381435 },
@@ -124,7 +124,7 @@ export const RESOURCES: Resource[] = [
         name: "Eastlaken Community Center",
         category: "Family",
         shortDescription: "Family programs, youth activities, and community events.",
-        fullDescription: "A vibrant hub for the Eastlaken neighborhood, offering after-school programs, summer camps, fitness classes, and community meeting spaces. Join us for weekly movie nights and seasonal festivals.",
+        fullDescription: "A vibrant hub for the Eastlaken neighborhood, offering after-school programs, summer camps, fitness classes, and community meeting spaces. Join us for weekly movie nights and seasonal festivals. Our dedicated staff and volunteers undergo extensive training to create a welcoming, inclusive environment where families from all walks of life can find the guidance, resources, and community connections they need to thrive. We believe that empowering parents and uplifting children are the foundational steps toward building a strong, resilient, and deeply interconnected Port Laken.",
         address: "308 E 4th St, Port Angeles, WA 98362",
         // Based on: Vern Burton Community Center — 308 E 4th St, Port Angeles
         mapCoordinates: { lat: 48.1143219, lng: -123.4317178 },
@@ -141,7 +141,7 @@ export const RESOURCES: Resource[] = [
         name: "Little Stars Daycare",
         category: "Family",
         shortDescription: "Licensed childcare and early learning.",
-        fullDescription: "Providing a safe, nurturing environment for children aged 6 months to 5 years. Our curriculum focuses on social-emotional development and early literacy.",
+        fullDescription: "Providing a safe, nurturing environment for children aged 6 months to 5 years. Our curriculum focuses on social-emotional development and early literacy. Our dedicated staff and volunteers undergo extensive training to create a welcoming, inclusive environment where families from all walks of life can find the guidance, resources, and community connections they need to thrive. We believe that empowering parents and uplifting children are the foundational steps toward building a strong, resilient, and deeply interconnected Port Laken.",
         address: "712 E 5th St, Port Angeles, WA 98362",
         // Based on: Curious Critters Early Learning Center — 712 E 5th St, Port Angeles
         mapCoordinates: { lat: 48.1106672, lng: -123.4253774 },
@@ -157,7 +157,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Parenting Support",
         category: "Family",
         shortDescription: "Workshops and resources for new parents.",
-        fullDescription: "Free workshops on breastfeeding, sleep training, and positive discipline. Connect with other parents in our weekly support groups.",
+        fullDescription: "Free workshops on breastfeeding, sleep training, and positive discipline. Connect with other parents in our weekly support groups. Our dedicated staff and volunteers undergo extensive training to create a welcoming, inclusive environment where families from all walks of life can find the guidance, resources, and community connections they need to thrive. We believe that empowering parents and uplifting children are the foundational steps toward building a strong, resilient, and deeply interconnected Port Laken.",
         address: "325 E 6th St, Port Angeles, WA 98362",
         // Based on: First Step Family Support Center Drop In Center — 325 E 6th St, Port Angeles
         mapCoordinates: { lat: 48.1128825, lng: -123.432413 },
@@ -173,7 +173,7 @@ export const RESOURCES: Resource[] = [
         name: "Boys & Girls Club of Port Laken",
         category: "Family",
         shortDescription: "Youth mentorship and recreation programs.",
-        fullDescription: "Empowering young people to reach their full potential. We offer sports leagues, homework help, and arts programs for kids and teens.",
+        fullDescription: "Empowering young people to reach their full potential. We offer sports leagues, homework help, and arts programs for kids and teens. Our dedicated staff and volunteers undergo extensive training to create a welcoming, inclusive environment where families from all walks of life can find the guidance, resources, and community connections they need to thrive. We believe that empowering parents and uplifting children are the foundational steps toward building a strong, resilient, and deeply interconnected Port Laken.",
         address: "2301 S Francis St, Port Angeles, WA 98362",
         // Based on: Boys & Girls Clubs of the Olympic Peninsula, Turner Unit — 2301 S Francis St, Port Angeles
         mapCoordinates: { lat: 48.1046843, lng: -123.4288303 },
@@ -189,7 +189,7 @@ export const RESOURCES: Resource[] = [
         name: "Family First Resource Center",
         category: "Family",
         shortDescription: "Connecting families with essential services.",
-        fullDescription: "Your one-stop shop for accessing housing assistance, food benefits, and employment resources. Our case managers are here to advocate for your family.",
+        fullDescription: "Your one-stop shop for accessing housing assistance, food benefits, and employment resources. Our case managers are here to advocate for your family. Our dedicated staff and volunteers undergo extensive training to create a welcoming, inclusive environment where families from all walks of life can find the guidance, resources, and community connections they need to thrive. We believe that empowering parents and uplifting children are the foundational steps toward building a strong, resilient, and deeply interconnected Port Laken.",
         address: "323 E 6th St, Port Angeles, WA 98362",
         // Based on: First Step Family Support Center Administrative Building — 323 E 6th St, Port Angeles
         mapCoordinates: { lat: 48.1129863, lng: -123.432521 },
@@ -207,7 +207,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Food Bank",
         category: "Food",
         shortDescription: "Food assistance for families in need.",
-        fullDescription: "Providing nutritious groceries to individuals and families experiencing food insecurity. No ID required. Open Mondays, Wednesdays, and Fridays.",
+        fullDescription: "Providing nutritious groceries to individuals and families experiencing food insecurity. No ID required. Open Mondays, Wednesdays, and Fridays. We work closely with local farms, generous donors, and dedicated volunteers to ensure that fresh, nutritious foods reflect the cultural diversity of our community. By tackling food insecurity head-on and eliminating barriers to access, we strive to nourish both the body and the spirit, creating a Port Laken where no one ever has to worry about where their next meal will come from.",
         address: "632 N Oakridge Dr, Port Angeles, WA 98362",
         // Based on: Port Angeles Food Bank and The Market — 632 N Oakridge Dr, Port Angeles
         mapCoordinates: { lat: 48.1107438, lng: -123.3660841 },
@@ -224,7 +224,7 @@ export const RESOURCES: Resource[] = [
         name: "Meals on Wheels Port Laken",
         category: "Food",
         shortDescription: "Home-delivered meals for seniors and homebound residents.",
-        fullDescription: "Nutritious meals delivered directly to your door. We also conduct safety checks and provide social interaction for our clients.",
+        fullDescription: "Nutritious meals delivered directly to your door. We also conduct safety checks and provide social interaction for our clients. We work closely with local farms, generous donors, and dedicated volunteers to ensure that fresh, nutritious foods reflect the cultural diversity of our community. By tackling food insecurity head-on and eliminating barriers to access, we strive to nourish both the body and the spirit, creating a Port Laken where no one ever has to worry about where their next meal will come from.",
         address: "328 E 7th St, Port Angeles, WA 98362",
         // Based on: OlyCAP Senior Nutrition / Port Angeles Senior Services — 328 E 7th St, Port Angeles
         mapCoordinates: { lat: 48.111563, lng: -123.433737 },
@@ -240,7 +240,7 @@ export const RESOURCES: Resource[] = [
         name: "Urban Harvest Community Garden",
         category: "Food",
         shortDescription: "Grow your own food and learn about urban farming.",
-        fullDescription: "A shared green space where residents can rent plots to grow vegetables and flowers. We offer gardening workshops and donate surplus produce to local food banks.",
+        fullDescription: "A shared green space where residents can rent plots to grow vegetables and flowers. We offer gardening workshops and donate surplus produce to local food banks. We work closely with local farms, generous donors, and dedicated volunteers to ensure that fresh, nutritious foods reflect the cultural diversity of our community. By tackling food insecurity head-on and eliminating barriers to access, we strive to nourish both the body and the spirit, creating a Port Laken where no one ever has to worry about where their next meal will come from.",
         address: "328 E 5th St, Port Angeles, WA 98362",
         // Based on: Fifth Street Community Garden — 328 E 5th St, Port Angeles
         mapCoordinates: { lat: 48.113324, lng: -123.432101 },
@@ -257,7 +257,7 @@ export const RESOURCES: Resource[] = [
         category: "Food",
         categories: ["Food", "Religious", "Community"],
         shortDescription: "Hot daily meals for anyone hungry, run by St. Michael's Cathedral Parish.",
-        fullDescription: "Operated by the parish volunteers of St. Michael's Cathedral, The Soup Kitchen serves hot, nutritious lunches and dinners seven days a week. Everyone is welcome at our table — no questions asked. The ministry is a cornerstone of the Cathedral's outreach mission to serve the poor and vulnerable of Port Laken.",
+        fullDescription: "Operated by the parish volunteers of St. Michael's Cathedral, The Soup Kitchen serves hot, nutritious lunches and dinners seven days a week. Everyone is welcome at our table — no questions asked. The ministry is a cornerstone of the Cathedral's outreach mission to serve the poor and vulnerable of Port Laken. We work closely with local farms, generous donors, and dedicated volunteers to ensure that fresh, nutritious foods reflect the cultural diversity of our community. By tackling food insecurity head-on and eliminating barriers to access, we strive to nourish both the body and the spirit, creating a Port Laken where no one ever has to worry about where their next meal will come from.",
         address: "123 S Peabody St, Port Angeles, WA 98362",
         // Based on: The Salvation Army Port Angeles Food Pantry — 123 S Peabody St, Port Angeles
         mapCoordinates: { lat: 48.1160388, lng: -123.4283317 },
@@ -275,7 +275,7 @@ export const RESOURCES: Resource[] = [
         name: "Golden Years Senior Center",
         category: "Seniors",
         shortDescription: "Activities, classes, and support services for seniors 60+.",
-        fullDescription: "Join us for fitness classes, art workshops, technology training, and social events. We also offer caregiver support and resource referrals.",
+        fullDescription: "Join us for fitness classes, art workshops, technology training, and social events. We also offer caregiver support and resource referrals. Our wide range of programming is thoughtfully designed to promote cognitive health, physical mobility, and meaningful social interaction for older adults. We are profoundly dedicated to honoring the wisdom and experiences of our senior residents, providing them with a safe, accessible, and deeply respectful environment where they can enjoy their golden years with dignity and joy.",
         address: "328 E 7th St, Port Angeles, WA 98362",
         // Based on: Port Angeles Senior Center — 328 E 7th St, Port Angeles
         mapCoordinates: { lat: 48.111515, lng: -123.43351 },
@@ -291,7 +291,7 @@ export const RESOURCES: Resource[] = [
         name: "Senior Transport Services",
         category: "Seniors",
         shortDescription: "Free transportation for medical appointments and grocery shopping.",
-        fullDescription: "Volunteer drivers provide door-to-door transportation for eligible seniors. Advance reservation required.",
+        fullDescription: "Volunteer drivers provide door-to-door transportation for eligible seniors. Advance reservation required. Our wide range of programming is thoughtfully designed to promote cognitive health, physical mobility, and meaningful social interaction for older adults. We are profoundly dedicated to honoring the wisdom and experiences of our senior residents, providing them with a safe, accessible, and deeply respectful environment where they can enjoy their golden years with dignity and joy.",
         address: "830 W Lauridsen Blvd, Port Angeles, WA 98362",
         // Based on: Clallam Transit System — 830 W Lauridsen Blvd, Port Angeles
         mapCoordinates: { lat: 48.1100914, lng: -123.4625755 },
@@ -307,7 +307,7 @@ export const RESOURCES: Resource[] = [
         name: "StoryPoint Senior Living",
         category: "Seniors",
         shortDescription: "Independent and assisted living community.",
-        fullDescription: "Comfortable apartments with dining services, housekeeping, and nursing care available. Enjoy stunning views of the lake and a vibrant social calendar.",
+        fullDescription: "Comfortable apartments with dining services, housekeeping, and nursing care available. Enjoy stunning views of the lake and a vibrant social calendar. Our wide range of programming is thoughtfully designed to promote cognitive health, physical mobility, and meaningful social interaction for older adults. We are profoundly dedicated to honoring the wisdom and experiences of our senior residents, providing them with a safe, accessible, and deeply respectful environment where they can enjoy their golden years with dignity and joy.",
         address: "1133 E Park Ave, Port Angeles, WA 98362",
         // Based on: Laurel Place Assisted Living & Memory Care — 1133 E Park Ave, Port Angeles
         mapCoordinates: { lat: 48.1024284, lng: -123.4191970 },
@@ -325,7 +325,7 @@ export const RESOURCES: Resource[] = [
         name: "Community Legal Services",
         category: "Legal",
         shortDescription: "Free legal assistance for low-income residents.",
-        fullDescription: "Providing legal aid for housing disputes, family law, consumer protection, and immigration issues. We ensure equal access to justice.",
+        fullDescription: "Providing legal aid for housing disputes, family law, consumer protection, and immigration issues. We ensure equal access to justice. Our experienced attorneys and advocates are passionate about defending the rights of our most vulnerable community members, navigating complex legal systems to secure fair and transparent outcomes. By offering comprehensive clinics, personalized consultations, and unyielding advocacy, we work tirelessly to ensure that justice in Port Laken remains accessible to absolutely everyone.",
         address: "528 W 8th St, Port Angeles, WA 98362",
         // Based on: Clallam County Pro Bono — 528 W 8th St, Port Angeles
         mapCoordinates: { lat: 48.116492, lng: -123.448530 },
@@ -341,7 +341,7 @@ export const RESOURCES: Resource[] = [
         name: "Tenant Rights Union",
         category: "Legal",
         shortDescription: "Advocacy and education for renters.",
-        fullDescription: "Know your rights as a tenant. We offer counseling on eviction prevention, lease agreements, and repair issues.",
+        fullDescription: "Know your rights as a tenant. We offer counseling on eviction prevention, lease agreements, and repair issues. Our experienced attorneys and advocates are passionate about defending the rights of our most vulnerable community members, navigating complex legal systems to secure fair and transparent outcomes. By offering comprehensive clinics, personalized consultations, and unyielding advocacy, we work tirelessly to ensure that justice in Port Laken remains accessible to absolutely everyone.",
         address: "319 S Peabody St, Port Angeles, WA 98362",
         // Based on: United Way of Clallam County — 319 S Peabody St, Port Angeles
         mapCoordinates: { lat: 48.1141211, lng: -123.4299258 },
@@ -359,7 +359,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Police Department - Central Precinct",
         category: "Emergency",
         shortDescription: "Law enforcement and public safety.",
-        fullDescription: "Serving the downtown and central neighborhoods. For emergencies, always dial 911. For non-emergencies, call (206) 625-5011.",
+        fullDescription: "Serving the downtown and central neighborhoods. For emergencies, always dial 911. For non-emergencies, call (206) 625-5011. We operate with a steadfast commitment to rapid response, continuous community education, and proactive safety measures. Our highly trained personnel are equipped with state-of-the-art technology and resources to handle critical situations with the utmost professionalism, ensuring that the residents of Port Laken are protected, supported, and reassured during their times of greatest need.",
         address: "321 E 5th St, Port Angeles, WA 98362",
         // Based on: Port Angeles Police Department — 321 E 5th St, Port Angeles
         mapCoordinates: { lat: 48.1141983, lng: -123.4320323 },
@@ -375,7 +375,7 @@ export const RESOURCES: Resource[] = [
         name: "Fire Station 10",
         category: "Emergency",
         shortDescription: "Fire suppression and emergency medical services.",
-        fullDescription: "Ready to respond to fires, medical emergencies, and rescue operations. Visit us for free blood pressure checks.",
+        fullDescription: "Ready to respond to fires, medical emergencies, and rescue operations. Visit us for free blood pressure checks. We operate with a steadfast commitment to rapid response, continuous community education, and proactive safety measures. Our highly trained personnel are equipped with state-of-the-art technology and resources to handle critical situations with the utmost professionalism, ensuring that the residents of Port Laken are protected, supported, and reassured during their times of greatest need.",
         address: "102 E 5th St, Port Angeles, WA 98362",
         // Based on: Port Angeles Fire Department — 102 E 5th St, Port Angeles
         mapCoordinates: { lat: 48.1151498, lng: -123.4363536 },
@@ -391,7 +391,7 @@ export const RESOURCES: Resource[] = [
         name: "Domestic Violence Hotline",
         category: "Emergency",
         shortDescription: "24/7 confidential support for survivors.",
-        fullDescription: "Immediate crisis intervention, safety planning, and shelter referrals. You are not alone.",
+        fullDescription: "Immediate crisis intervention, safety planning, and shelter referrals. You are not alone. We operate with a steadfast commitment to rapid response, continuous community education, and proactive safety measures. Our highly trained personnel are equipped with state-of-the-art technology and resources to handle critical situations with the utmost professionalism, ensuring that the residents of Port Laken are protected, supported, and reassured during their times of greatest need.",
         address: "2321 W 18th St, Port Angeles, WA 98363",
         // Based on: Serenity House of Clallam County Adult Shelter — 2321 W 18th St, Port Angeles
         mapCoordinates: { lat: 48.1231935, lng: -123.4920216 },
@@ -409,7 +409,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Public Library - Central",
         category: "Education",
         shortDescription: "Books, technology, and learning for everyone.",
-        fullDescription: "An architectural marvel and a center for knowledge. Access computers, free wifi, job search assistance, and millions of books.",
+        fullDescription: "An architectural marvel and a center for knowledge. Access computers, free wifi, job search assistance, and millions of books. We foster a culture of lifelong learning, critical thinking, and intellectual curiosity through robust curriculums and experiential programs. Our educators and staff are devoted to inspiring the next generation of leaders and innovators, providing dynamic resources, inclusive classrooms, and personalized support that empower every student in Port Laken to reach their fullest potential.",
         address: "2210 S Peabody St, Port Angeles, WA 98362",
         // Based on: North Olympic Library System — 2210 S Peabody St, Port Angeles
         mapCoordinates: { lat: 48.1062041, lng: -123.4391900 },
@@ -425,7 +425,7 @@ export const RESOURCES: Resource[] = [
         name: "Lakefront High School",
         category: "Education",
         shortDescription: "Public high school serving grades 9-12.",
-        fullDescription: "Home of the Lakers. Dedicated to academic excellence and preparing students for college and careers.",
+        fullDescription: "Home of the Lakers. Dedicated to academic excellence and preparing students for college and careers. We foster a culture of lifelong learning, critical thinking, and intellectual curiosity through robust curriculums and experiential programs. Our educators and staff are devoted to inspiring the next generation of leaders and innovators, providing dynamic resources, inclusive classrooms, and personalized support that empower every student in Port Laken to reach their fullest potential.",
         address: "304 E Park Ave, Port Angeles, WA 98362",
         // Based on: Port Angeles High School — 304 E Park Ave, Port Angeles
         mapCoordinates: { lat: 48.1007549, lng: -123.4383328 },
@@ -441,7 +441,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Community College",
         category: "Education",
         shortDescription: "Affordable higher education and workforce training.",
-        fullDescription: "Offering associate degrees, vocational certificates, and transfer programs. Start your future here.",
+        fullDescription: "Offering associate degrees, vocational certificates, and transfer programs. Start your future here. We foster a culture of lifelong learning, critical thinking, and intellectual curiosity through robust curriculums and experiential programs. Our educators and staff are devoted to inspiring the next generation of leaders and innovators, providing dynamic resources, inclusive classrooms, and personalized support that empower every student in Port Laken to reach their fullest potential.",
         address: "1502 E Lauridsen Blvd, Port Angeles, WA 98362",
         // Based on: Peninsula College — 1502 E Lauridsen Blvd, Port Angeles
         mapCoordinates: { lat: 48.1022666, lng: -123.4124396 },
@@ -457,7 +457,7 @@ export const RESOURCES: Resource[] = [
         name: "Olympic University",
         category: "Education",
         shortDescription: "A top-20 global research university on the Pacific Rim.",
-        fullDescription: "Olympic University is a world-leading research institution with global strength in chemistry, molecular biology, law, and international law. Known for Nobel-level scientific research, elite legal scholarship, and strong ties to global policy institutions across the Pacific and Europe.",
+        fullDescription: "Olympic University is a world-leading research institution with global strength in chemistry, molecular biology, law, and international law. Known for Nobel-level scientific research, elite legal scholarship, and strong ties to global policy institutions across the Pacific and Europe. We foster a culture of lifelong learning, critical thinking, and intellectual curiosity through robust curriculums and experiential programs. Our educators and staff are devoted to inspiring the next generation of leaders and innovators, providing dynamic resources, inclusive classrooms, and personalized support that empower every student in Port Laken to reach their fullest potential.",
         address: "1700 E Lauridsen Blvd, Port Angeles, WA 98362",
         // Based on: Upper campus area east of Peninsula College — Port Angeles
         mapCoordinates: { lat: 48.1018, lng: -123.4089 },
@@ -473,7 +473,7 @@ export const RESOURCES: Resource[] = [
         name: "Early Learning Center",
         category: "Education",
         shortDescription: "Head Start and ECEAP programs.",
-        fullDescription: "Free preschool for income-eligible families. We support the whole child and the whole family.",
+        fullDescription: "Free preschool for income-eligible families. We support the whole child and the whole family. We foster a culture of lifelong learning, critical thinking, and intellectual curiosity through robust curriculums and experiential programs. Our educators and staff are devoted to inspiring the next generation of leaders and innovators, providing dynamic resources, inclusive classrooms, and personalized support that empower every student in Port Laken to reach their fullest potential.",
         address: "2321 S Francis St, Port Angeles, WA 98362",
         // Based on: Mount Angeles View Headstart — 2321 S Francis St, Port Angeles
         mapCoordinates: { lat: 48.1040634, lng: -123.4286438 },
@@ -489,7 +489,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Montessori School",
         category: "Education",
         shortDescription: "Child-centered Montessori early learning.",
-        fullDescription: "Serving children ages 2.5–6 through accredited Montessori programs that foster independence, curiosity, and confidence in a nurturing classroom environment.",
+        fullDescription: "Serving children ages 2.5–6 through accredited Montessori programs that foster independence, curiosity, and confidence in a nurturing classroom environment. We foster a culture of lifelong learning, critical thinking, and intellectual curiosity through robust curriculums and experiential programs. Our educators and staff are devoted to inspiring the next generation of leaders and innovators, providing dynamic resources, inclusive classrooms, and personalized support that empower every student in Port Laken to reach their fullest potential.",
         address: "105 W 6th St, Port Angeles, WA 98362",
         // Based on: Children's Montessori School — 105 W 6th St, Port Angeles
         mapCoordinates: { lat: 48.1149616, lng: -123.4375226 },
@@ -505,7 +505,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken KinderCare",
         category: "Education",
         shortDescription: "Early education and child care for infants through pre-K.",
-        fullDescription: "Providing licensed child care and early learning programs for infants, toddlers, preschool, and pre-kindergarten. Our curriculum supports social, emotional, and academic development in a safe, structured environment.",
+        fullDescription: "Providing licensed child care and early learning programs for infants, toddlers, preschool, and pre-kindergarten. Our curriculum supports social, emotional, and academic development in a safe, structured environment. We foster a culture of lifelong learning, critical thinking, and intellectual curiosity through robust curriculums and experiential programs. Our educators and staff are devoted to inspiring the next generation of leaders and innovators, providing dynamic resources, inclusive classrooms, and personalized support that empower every student in Port Laken to reach their fullest potential.",
         address: "1010 E Front St, Port Angeles, WA 98362",
         // Based on: Kid's Kampus Preschool & Daycare — 1010 E Front St, Port Angeles
         mapCoordinates: { lat: 48.112691, lng: -123.415959 },
@@ -523,7 +523,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken City Hall",
         category: "Community",
         shortDescription: "Municipal government services.",
-        fullDescription: "Pay utility bills, apply for permits, and attend city council meetings. Your local government at work.",
+        fullDescription: "Pay utility bills, apply for permits, and attend city council meetings. Your local government at work. By providing accessible spaces, robust programming, and continuous civic engagement opportunities, we bring together individuals from all backgrounds to collaborate and grow. We are firmly dedicated to cultivating a vibrant, inclusive Port Laken where every voice is heard, local culture is celebrated, and residents are empowered to actively shape the future of their shared neighborhoods.",
         address: "321 E 5th St, Port Angeles, WA 98362",
         // Based on: Port Angeles City Hall — 321 E 5th St, Port Angeles
         mapCoordinates: { lat: 48.1142082, lng: -123.4321594 },
@@ -539,7 +539,7 @@ export const RESOURCES: Resource[] = [
         name: "Downtown Neighborhood Association",
         category: "Community",
         shortDescription: "Advocating for downtown residents.",
-        fullDescription: "Promoting a safe, clean, and vibrant downtown neighborhood. Monthly meetings open to all residents.",
+        fullDescription: "Promoting a safe, clean, and vibrant downtown neighborhood. Monthly meetings open to all residents. By providing accessible spaces, robust programming, and continuous civic engagement opportunities, we bring together individuals from all backgrounds to collaborate and grow. We are firmly dedicated to cultivating a vibrant, inclusive Port Laken where every voice is heard, local culture is celebrated, and residents are empowered to actively shape the future of their shared neighborhoods.",
         address: "102 E 1st St, Port Angeles, WA 98362",
         // Based on: Port Angeles Waterfront District — 102½ E 1st St, Port Angeles
         mapCoordinates: { lat: 48.1187243, lng: -123.4333791 },
@@ -555,7 +555,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Humane Society",
         category: "Community",
         shortDescription: "Animal shelter and adoption center.",
-        fullDescription: "Find your new best friend. We offer pet adoptions, low-cost spay/neuter services, and dog training classes.",
+        fullDescription: "Find your new best friend. We offer pet adoptions, low-cost spay/neuter services, and dog training classes. By providing accessible spaces, robust programming, and continuous civic engagement opportunities, we bring together individuals from all backgrounds to collaborate and grow. We are firmly dedicated to cultivating a vibrant, inclusive Port Laken where every voice is heard, local culture is celebrated, and residents are empowered to actively shape the future of their shared neighborhoods.",
         address: "1743 Old Olympic Hwy, Port Angeles, WA 98362",
         // Based on: Olympic Peninsula Humane Society Barkhouse — 1743 Old Olympic Hwy, Port Angeles
         mapCoordinates: { lat: 48.1078206, lng: -123.2710421 },
@@ -573,7 +573,7 @@ export const RESOURCES: Resource[] = [
         name: "Green Lake Park",
         category: "Recreation",
         shortDescription: "Urban park with a lake, trails, and sports fields.",
-        fullDescription: "One of Port Laken's most beloved parks. Walk or run the 2.8-mile path around the lake, rent a paddleboat, or play tennis.",
+        fullDescription: "One of Port Laken's most beloved parks. Walk or run the 2.8-mile path around the lake, rent a paddleboat, or play tennis. Our beautifully maintained facilities, diverse public programs, and expansive natural spaces offer residents of all ages the perfect opportunity to stay active, explore the outdoors, and connect with their neighbors. We are committed to fostering a culture of health, wellness, and environmental stewardship, ensuring that Port Laken remains a breathtaking and vibrant place to live and play.",
         address: "613 S G St, Port Angeles, WA 98362",
         // Based on: Shane Park — 613 S G St, Port Angeles (large city park with fields, trails, sports)
         mapCoordinates: { lat: 48.1236113, lng: -123.4621725 },
@@ -589,7 +589,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Aquarium",
         category: "Recreation",
         shortDescription: "Discover the marine life of the Pacific Northwest.",
-        fullDescription: "Explore exhibits featuring sea otters, octopuses, and colorful fish. Great family fun on the waterfront.",
+        fullDescription: "Explore exhibits featuring sea otters, octopuses, and colorful fish. Great family fun on the waterfront. Our beautifully maintained facilities, diverse public programs, and expansive natural spaces offer residents of all ages the perfect opportunity to stay active, explore the outdoors, and connect with their neighbors. We are committed to fostering a culture of health, wellness, and environmental stewardship, ensuring that Port Laken remains a breathtaking and vibrant place to live and play.",
         address: "315 N Lincoln St, Port Angeles, WA 98362",
         // Based on: Feiro Marine Life Center — 315 N Lincoln St, Port Angeles
         mapCoordinates: { lat: 48.1201928, lng: -123.4288923 },
@@ -605,7 +605,7 @@ export const RESOURCES: Resource[] = [
         name: "Discovery Park",
         category: "Recreation",
         shortDescription: "Largest city park with beaches and forest trails.",
-        fullDescription: "A natural sanctuary in the city. Hike through forests, walk along the sandy beach, and visit the historic West Point Lighthouse.",
+        fullDescription: "A natural sanctuary in the city. Hike through forests, walk along the sandy beach, and visit the historic West Point Lighthouse. Our beautifully maintained facilities, diverse public programs, and expansive natural spaces offer residents of all ages the perfect opportunity to stay active, explore the outdoors, and connect with their neighbors. We are committed to fostering a culture of health, wellness, and environmental stewardship, ensuring that Port Laken remains a breathtaking and vibrant place to live and play.",
         address: "3002 Mt Angeles Rd, Port Angeles, WA 98362",
         // Based on: Olympic National Park visitor center — Port Angeles gateway
         mapCoordinates: { lat: 48.1023814, lng: -123.4303447 },
@@ -613,7 +613,7 @@ export const RESOURCES: Resource[] = [
         website: "https://seattle.gov/parks",
         email: "parks@portlaken.gov",
         tags: ["hiking", "beach", "nature"],
-        image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&q=80",
         rating: 4.9
     },
     {
@@ -621,7 +621,7 @@ export const RESOURCES: Resource[] = [
         name: "Yoga by the Lake",
         category: "Recreation",
         shortDescription: "Community yoga studio.",
-        fullDescription: "Offering Vinyasa, Hatha, and Yin yoga classes for all levels. First class is free.",
+        fullDescription: "Offering Vinyasa, Hatha, and Yin yoga classes for all levels. First class is free. Our beautifully maintained facilities, diverse public programs, and expansive natural spaces offer residents of all ages the perfect opportunity to stay active, explore the outdoors, and connect with their neighbors. We are committed to fostering a culture of health, wellness, and environmental stewardship, ensuring that Port Laken remains a breathtaking and vibrant place to live and play.",
         address: "110 W 1st St, Port Angeles, WA 98362",
         // Based on: ONYX MVMNT Studios — 110 W 1st St, Port Angeles
         mapCoordinates: { lat: 48.1191477, lng: -123.4341881 },
@@ -637,7 +637,7 @@ export const RESOURCES: Resource[] = [
         name: "CrossFit Port Laken",
         category: "Recreation",
         shortDescription: "Functional fitness gym.",
-        fullDescription: "High-intensity workouts led by certified coaches. Build strength and community.",
+        fullDescription: "High-intensity workouts led by certified coaches. Build strength and community. Our beautifully maintained facilities, diverse public programs, and expansive natural spaces offer residents of all ages the perfect opportunity to stay active, explore the outdoors, and connect with their neighbors. We are committed to fostering a culture of health, wellness, and environmental stewardship, ensuring that Port Laken remains a breathtaking and vibrant place to live and play.",
         address: "224 E 1st St, Port Angeles, WA 98362",
         // Based on: Storm King Athletic Club (CrossFit) — 224 E 1st St, Port Angeles
         mapCoordinates: { lat: 48.1177, lng: -123.4307041 },
@@ -655,7 +655,7 @@ export const RESOURCES: Resource[] = [
         name: "iCode Port Laken",
         category: "Education",
         shortDescription: "STEM education and coding for kids and teens.",
-        fullDescription: "iCode Port Laken offers after-school programs, camps, and competitive coding experiences for students ages 6–18. Courses include coding, robotics, game development, and AI fundamentals in a collaborative, project-based environment.",
+        fullDescription: "iCode Port Laken offers after-school programs, camps, and competitive coding experiences for students ages 6–18. Courses include coding, robotics, game development, and AI fundamentals in a collaborative, project-based environment. We foster a culture of lifelong learning, critical thinking, and intellectual curiosity through robust curriculums and experiential programs. Our educators and staff are devoted to inspiring the next generation of leaders and innovators, providing dynamic resources, inclusive classrooms, and personalized support that empower every student in Port Laken to reach their fullest potential.",
         address: "221 N Race St, Port Angeles, WA 98362",
         // Based on: Pacific Northwest Discovery Academy — 221 N Race St, Port Angeles
         mapCoordinates: { lat: 48.1144914, lng: -123.4172736 },
@@ -673,7 +673,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Art Museum",
         category: "Community",
         shortDescription: "Contemporary and classic art exhibits.",
-        fullDescription: "Experience world-class art right here in Port Laken. Free admission on first Thursdays.",
+        fullDescription: "Experience world-class art right here in Port Laken. Free admission on first Thursdays. By providing accessible spaces, robust programming, and continuous civic engagement opportunities, we bring together individuals from all backgrounds to collaborate and grow. We are firmly dedicated to cultivating a vibrant, inclusive Port Laken where every voice is heard, local culture is celebrated, and residents are empowered to actively shape the future of their shared neighborhoods.",
         address: "1203 E Lauridsen Blvd, Port Angeles, WA 98362",
         // Based on: Port Angeles Fine Arts Center — 1203 E Lauridsen Blvd, Port Angeles
         mapCoordinates: { lat: 48.1043051, lng: -123.4190275 },
@@ -689,7 +689,7 @@ export const RESOURCES: Resource[] = [
         name: "Volunteer Port Laken",
         category: "Community",
         shortDescription: "Connecting volunteers with non-profits.",
-        fullDescription: "Find meaningful volunteer opportunities that match your skills and interests. Give back to your community.",
+        fullDescription: "Find meaningful volunteer opportunities that match your skills and interests. Give back to your community. By providing accessible spaces, robust programming, and continuous civic engagement opportunities, we bring together individuals from all backgrounds to collaborate and grow. We are firmly dedicated to cultivating a vibrant, inclusive Port Laken where every voice is heard, local culture is celebrated, and residents are empowered to actively shape the future of their shared neighborhoods.",
         address: "1601 E Front St, Port Angeles, WA 98362",
         // Based on: Concerned Citizens of Port Angeles — 1601 E Front St, Port Angeles
         mapCoordinates: { lat: 48.1088386, lng: -123.4050884 },
@@ -707,7 +707,7 @@ export const RESOURCES: Resource[] = [
         name: "Fresh Market Co-op",
         category: "Food",
         shortDescription: "Community-owned grocery store.",
-        fullDescription: "Organic, local, and sustainable food. Open to everyone, members get discounts.",
+        fullDescription: "Organic, local, and sustainable food. Open to everyone, members get discounts. We work closely with local farms, generous donors, and dedicated volunteers to ensure that fresh, nutritious foods reflect the cultural diversity of our community. By tackling food insecurity head-on and eliminating barriers to access, we strive to nourish both the body and the spirit, creating a Port Laken where no one ever has to worry about where their next meal will come from.",
         address: "200 W 1st St, Port Angeles, WA 98362",
         // Based on: Country Aire Natural Foods — 200 W 1st St, Port Angeles
         mapCoordinates: { lat: 48.1197509, lng: -123.4361024 },
@@ -725,7 +725,7 @@ export const RESOURCES: Resource[] = [
         name: "Silver Sneakers Club",
         category: "Seniors",
         shortDescription: "Fitness program for older adults.",
-        fullDescription: "Stay active and healthy with our specialized fitness classes designed for seniors.",
+        fullDescription: "Stay active and healthy with our specialized fitness classes designed for seniors. Our wide range of programming is thoughtfully designed to promote cognitive health, physical mobility, and meaningful social interaction for older adults. We are profoundly dedicated to honoring the wisdom and experiences of our senior residents, providing them with a safe, accessible, and deeply respectful environment where they can enjoy their golden years with dignity and joy.",
         address: "114 S Lincoln St, Port Angeles, WA 98362",
         // Based on: Fitness West — 114 S Lincoln St, Port Angeles
         mapCoordinates: { lat: 48.117837, lng: -123.432404 },
@@ -743,7 +743,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Housing Authority",
         category: "Family",
         shortDescription: "Affordable housing programs.",
-        fullDescription: "Providing stable, quality housing for low-income families, seniors, and people with disabilities.",
+        fullDescription: "Providing stable, quality housing for low-income families, seniors, and people with disabilities. Our dedicated staff and volunteers undergo extensive training to create a welcoming, inclusive environment where families from all walks of life can find the guidance, resources, and community connections they need to thrive. We believe that empowering parents and uplifting children are the foundational steps toward building a strong, resilient, and deeply interconnected Port Laken.",
         address: "727 E 8th St, Port Angeles, WA 98362",
         // Based on: Peninsula Housing Authority — 727 E 8th St, Port Angeles
         mapCoordinates: { lat: 48.10809, lng: -123.4264326 },
@@ -761,7 +761,7 @@ export const RESOURCES: Resource[] = [
         name: "Elm Street Park",
         category: "Recreation",
         shortDescription: "Port Laken's newest green space with walking trails and community pavilion.",
-        fullDescription: "Elm Street Park is Port Laken's newest green space, opened January 2026. Built on a former industrial lot, it features walking trails, a native plant garden, and a community pavilion. Benches throughout provide restful spots to enjoy the landscape.",
+        fullDescription: "Elm Street Park is Port Laken's newest green space, opened January 2026. Built on a former industrial lot, it features walking trails, a native plant garden, and a community pavilion. Benches throughout provide restful spots to enjoy the landscape. Our beautifully maintained facilities, diverse public programs, and expansive natural spaces offer residents of all ages the perfect opportunity to stay active, explore the outdoors, and connect with their neighbors. We are committed to fostering a culture of health, wellness, and environmental stewardship, ensuring that Port Laken remains a breathtaking and vibrant place to live and play.",
         address: "207 W Railroad Ave, Port Angeles, WA 98362",
         // Based on: Waterfront Park — 207 W Railroad Ave, Port Angeles
         mapCoordinates: { lat: 48.1210374, lng: -123.4325808 },
@@ -777,7 +777,7 @@ export const RESOURCES: Resource[] = [
         name: "Lakeview Waterfront Park",
         category: "Recreation",
         shortDescription: "14-acre waterfront park with boat launch and restored habitat.",
-        fullDescription: "A 14-acre waterfront park along the Port Laken shoreline offering picnic areas, a boat launch, and restored wetland habitat. The Wetland Trail provides scenic views and opportunities for bird watching. Fishing is available from the designated pier.",
+        fullDescription: "A 14-acre waterfront park along the Port Laken shoreline offering picnic areas, a boat launch, and restored wetland habitat. The Wetland Trail provides scenic views and opportunities for bird watching. Fishing is available from the designated pier. Our beautifully maintained facilities, diverse public programs, and expansive natural spaces offer residents of all ages the perfect opportunity to stay active, explore the outdoors, and connect with their neighbors. We are committed to fostering a culture of health, wellness, and environmental stewardship, ensuring that Port Laken remains a breathtaking and vibrant place to live and play.",
         address: "Port Angeles Waterfront, Port Angeles, WA 98362",
         // Based on: Waterfront Trail / Olympic Discovery Trail — Port Angeles harbor area
         mapCoordinates: { lat: 48.1237169, lng: -123.4477244 },
@@ -793,7 +793,7 @@ export const RESOURCES: Resource[] = [
         name: "Riverside Community Garden",
         category: "Food",
         shortDescription: "Community garden with 80+ plots and composting facilities.",
-        fullDescription: "One of 12 community garden sites in Port Laken, Riverside hosts over 80 active garden plots alongside a composting station. Gardeners enjoy shared tool shed access and attend seasonal workshops on urban farming and sustainable gardening practices.",
+        fullDescription: "One of 12 community garden sites in Port Laken, Riverside hosts over 80 active garden plots alongside a composting station. Gardeners enjoy shared tool shed access and attend seasonal workshops on urban farming and sustainable gardening practices. We work closely with local farms, generous donors, and dedicated volunteers to ensure that fresh, nutritious foods reflect the cultural diversity of our community. By tackling food insecurity head-on and eliminating barriers to access, we strive to nourish both the body and the spirit, creating a Port Laken where no one ever has to worry about where their next meal will come from.",
         address: "811 Caroline St, Port Angeles, WA 98362",
         // Based on: 9/11 Memorial Waterfront Park area — 811 Caroline St, Port Angeles
         mapCoordinates: { lat: 48.1169026, lng: -123.4175939 },
@@ -811,7 +811,7 @@ export const RESOURCES: Resource[] = [
         name: "Portside Grille",
         category: "Food",
         shortDescription: "Downtown restaurant committed to supporting local food networks.",
-        fullDescription: "Portside Grille is a downtown dining destination that partners with the Port Laken Community Food Network to donate surplus food. The restaurant specializes in fresh, locally-sourced ingredients and is deeply invested in community food security initiatives.",
+        fullDescription: "Portside Grille is a downtown dining destination that partners with the Port Laken Community Food Network to donate surplus food. The restaurant specializes in fresh, locally-sourced ingredients and is deeply invested in community food security initiatives. We work closely with local farms, generous donors, and dedicated volunteers to ensure that fresh, nutritious foods reflect the cultural diversity of our community. By tackling food insecurity head-on and eliminating barriers to access, we strive to nourish both the body and the spirit, creating a Port Laken where no one ever has to worry about where their next meal will come from.",
         address: "122 W Lauridsen Blvd, Port Angeles, WA 98362",
         // Based on: Yodelin Broth Company — 122 W Lauridsen Blvd, Port Angeles
         mapCoordinates: { lat: 48.1073436, lng: -123.4464589 },
@@ -827,7 +827,7 @@ export const RESOURCES: Resource[] = [
         name: "Canela",
         category: "Food",
         shortDescription: "Community-focused restaurant supporting local food initiatives.",
-        fullDescription: "Owned by David Okafor, Canela is a restaurant dedicated to community engagement and food sustainability. As an early partner with the Port Laken Community Food Network, Canela participates in the weekly surplus food program that rescues nutritious meals for families in need.",
+        fullDescription: "Owned by David Okafor, Canela is a restaurant dedicated to community engagement and food sustainability. As an early partner with the Port Laken Community Food Network, Canela participates in the weekly surplus food program that rescues nutritious meals for families in need. We work closely with local farms, generous donors, and dedicated volunteers to ensure that fresh, nutritious foods reflect the cultural diversity of our community. By tackling food insecurity head-on and eliminating barriers to access, we strive to nourish both the body and the spirit, creating a Port Laken where no one ever has to worry about where their next meal will come from.",
         address: "112 W Front St, Port Angeles, WA 98362",
         // Nearby downtown restaurant location — Port Angeles waterfront district
         mapCoordinates: { lat: 48.1191, lng: -123.4355 },
@@ -843,7 +843,7 @@ export const RESOURCES: Resource[] = [
         name: "The Mariner",
         category: "Food",
         shortDescription: "Waterfront restaurant partnering with community food programs.",
-        fullDescription: "The Mariner is a waterfront restaurant committed to reducing food waste and supporting community nutrition programs. As a key partner with the Port Laken Community Food Network, The Mariner participates in initiatives to donate surplus food to families in need.",
+        fullDescription: "The Mariner is a waterfront restaurant committed to reducing food waste and supporting community nutrition programs. As a key partner with the Port Laken Community Food Network, The Mariner participates in initiatives to donate surplus food to families in need. We work closely with local farms, generous donors, and dedicated volunteers to ensure that fresh, nutritious foods reflect the cultural diversity of our community. By tackling food insecurity head-on and eliminating barriers to access, we strive to nourish both the body and the spirit, creating a Port Laken where no one ever has to worry about where their next meal will come from.",
         address: "221 N Lincoln St, Port Angeles, WA 98362",
         // Waterfront area near ferry terminal — Port Angeles
         mapCoordinates: { lat: 48.12019, lng: -123.42889 },
@@ -861,7 +861,7 @@ export const RESOURCES: Resource[] = [
         name: "Harbor Brew Coffee",
         category: "Community",
         shortDescription: "Local coffee shop that donates profits to homeless shelters.",
-        fullDescription: "Harbor Brew Coffee is a beloved Main Street café committed to making a difference in the community. The coffee shop donates 10% of profits to local homeless shelters and is a gathering place that reflects Port Laken's values of connection and compassion.",
+        fullDescription: "Harbor Brew Coffee is a beloved Main Street café committed to making a difference in the community. The coffee shop donates 10% of profits to local homeless shelters and is a gathering place that reflects Port Laken's values of connection and compassion. By providing accessible spaces, robust programming, and continuous civic engagement opportunities, we bring together individuals from all backgrounds to collaborate and grow. We are firmly dedicated to cultivating a vibrant, inclusive Port Laken where every voice is heard, local culture is celebrated, and residents are empowered to actively shape the future of their shared neighborhoods.",
         address: "115 E Railroad Ave, Port Angeles, WA 98362",
         // Based on: Downriggers on the Water area — 115 E Railroad Ave, Port Angeles waterfront
         mapCoordinates: { lat: 48.1210897, lng: -123.4302195 },
@@ -878,7 +878,7 @@ export const RESOURCES: Resource[] = [
         name: "Pages & Prose",
         category: "Community",
         shortDescription: "Independent bookstore hosting community reading clubs.",
-        fullDescription: "Pages & Prose is a cozy independent bookstore that serves as a cultural hub for Port Laken. The shop hosts weekly reading clubs, author events, and community gatherings, creating a welcoming space for book lovers and lifelong learners.",
+        fullDescription: "Pages & Prose is a cozy independent bookstore that serves as a cultural hub for Port Laken. The shop hosts weekly reading clubs, author events, and community gatherings, creating a welcoming space for book lovers and lifelong learners. By providing accessible spaces, robust programming, and continuous civic engagement opportunities, we bring together individuals from all backgrounds to collaborate and grow. We are firmly dedicated to cultivating a vibrant, inclusive Port Laken where every voice is heard, local culture is celebrated, and residents are empowered to actively shape the future of their shared neighborhoods.",
         address: "104 E 1st St, Port Angeles, WA 98362",
         // Based on: Port Book and News — 104 E 1st St, Port Angeles
         mapCoordinates: { lat: 48.1187167, lng: -123.4334472 },
@@ -894,7 +894,7 @@ export const RESOURCES: Resource[] = [
         name: "Green Thumb Nursery",
         category: "Community",
         shortDescription: "Family-owned nursery specializing in native plants and sustainable landscaping.",
-        fullDescription: "Green Thumb Nursery is a three-generation family business specializing in native plants and sustainable landscaping. Located at 789 Cedar Lane, the nursery offers free consultations, native landscaping workshops, and expert advice on creating thriving, environmentally-conscious gardens.",
+        fullDescription: "Green Thumb Nursery is a three-generation family business specializing in native plants and sustainable landscaping. Located at 789 Cedar Lane, the nursery offers free consultations, native landscaping workshops, and expert advice on creating thriving, environmentally-conscious gardens. By providing accessible spaces, robust programming, and continuous civic engagement opportunities, we bring together individuals from all backgrounds to collaborate and grow. We are firmly dedicated to cultivating a vibrant, inclusive Port Laken where every voice is heard, local culture is celebrated, and residents are empowered to actively shape the future of their shared neighborhoods.",
         address: "826 E 1st St, Port Angeles, WA 98362",
         // Based on: Sprouting Hope Greenhouse — 826 E 1st St, Port Angeles
         mapCoordinates: { lat: 48.113107, lng: -123.4197315 },
@@ -912,7 +912,7 @@ export const RESOURCES: Resource[] = [
         name: "Harbor Community Center",
         category: "Community",
         shortDescription: "Community gathering space hosting workshops and community events.",
-        fullDescription: "Harbor Community Center is a welcoming community gathering space that hosts a variety of programs including cooking classes, food network information sessions, and community events. The center provides meeting rooms and facilities for local organizations and residents.",
+        fullDescription: "Harbor Community Center is a welcoming community gathering space that hosts a variety of programs including cooking classes, food network information sessions, and community events. The center provides meeting rooms and facilities for local organizations and residents. By providing accessible spaces, robust programming, and continuous civic engagement opportunities, we bring together individuals from all backgrounds to collaborate and grow. We are firmly dedicated to cultivating a vibrant, inclusive Port Laken where every voice is heard, local culture is celebrated, and residents are empowered to actively shape the future of their shared neighborhoods.",
         address: "328 E 7th St, Port Angeles, WA 98362",
         // Based on: Port Angeles Community Center — 328 E 7th St, Port Angeles
         mapCoordinates: { lat: 48.1116633, lng: -123.4335472 },
@@ -944,7 +944,7 @@ export const RESOURCES: Resource[] = [
         name: "Westside Elementary School",
         category: "Education",
         shortDescription: "Public elementary school serving Port Laken's west side.",
-        fullDescription: "Westside Elementary is a public elementary school committed to providing quality education and fostering community connections. The school engages with local organizations and community initiatives, such as partnering with the Port Laken Community Food Network and creating collaborative art projects.",
+        fullDescription: "Westside Elementary is a public elementary school committed to providing quality education and fostering community connections. The school engages with local organizations and community initiatives, such as partnering with the Port Laken Community Food Network and creating collaborative art projects. We foster a culture of lifelong learning, critical thinking, and intellectual curiosity through robust curriculums and experiential programs. Our educators and staff are devoted to inspiring the next generation of leaders and innovators, providing dynamic resources, inclusive classrooms, and personalized support that empower every student in Port Laken to reach their fullest potential.",
         address: "2505 S Washington St, Port Angeles, WA 98362",
         // Based on: Franklin Elementary School — 2505 S Washington St, Port Angeles
         mapCoordinates: { lat: 48.1035232, lng: -123.4235992 },
@@ -962,7 +962,7 @@ export const RESOURCES: Resource[] = [
         name: "Laken Watersports Co.",
         category: "Recreation",
         shortDescription: "Kayak, paddleboard, and jet ski rentals on the waterfront.",
-        fullDescription: "Laken Watersports Co. is Port Laken's premier waterfront adventure hub. Rent kayaks, stand-up paddleboards, canoes, and jet skis by the hour or the day. We also offer guided tours of the harbor, beginner surf lessons, and seasonal whale-watching excursions. All equipment and safety gear included.",
+        fullDescription: "Laken Watersports Co. is Port Laken's premier waterfront adventure hub. Rent kayaks, stand-up paddleboards, canoes, and jet skis by the hour or the day. We also offer guided tours of the harbor, beginner surf lessons, and seasonal whale-watching excursions. All equipment and safety gear included. Our beautifully maintained facilities, diverse public programs, and expansive natural spaces offer residents of all ages the perfect opportunity to stay active, explore the outdoors, and connect with their neighbors. We are committed to fostering a culture of health, wellness, and environmental stewardship, ensuring that Port Laken remains a breathtaking and vibrant place to live and play.",
         address: "220 E 1st St, Port Angeles, WA 98362",
         // Based on: Elevate Outdoors — 220 E 1st St, Port Angeles
         mapCoordinates: { lat: 48.1177698, lng: -123.4308502 },
@@ -981,7 +981,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Immigration Law Clinic",
         category: "Legal",
         shortDescription: "Free immigration legal services for residents and families.",
-        fullDescription: "The Immigration Law Clinic provides free and low-cost legal assistance for visa applications, DACA renewals, asylum cases, naturalization, and family-based petitions. Staffed by licensed immigration attorneys and supervised law students, we serve Port Laken's diverse immigrant community with compassion and expertise.",
+        fullDescription: "The Immigration Law Clinic provides free and low-cost legal assistance for visa applications, DACA renewals, asylum cases, naturalization, and family-based petitions. Staffed by licensed immigration attorneys and supervised law students, we serve Port Laken's diverse immigrant community with compassion and expertise. Our experienced attorneys and advocates are passionate about defending the rights of our most vulnerable community members, navigating complex legal systems to secure fair and transparent outcomes. By offering comprehensive clinics, personalized consultations, and unyielding advocacy, we work tirelessly to ensure that justice in Port Laken remains accessible to absolutely everyone.",
         address: "412 E 3rd St, Port Angeles, WA 98362",
         // Based on: nearby legal office area east of downtown — Port Angeles
         mapCoordinates: { lat: 48.1175, lng: -123.4270 },
@@ -999,7 +999,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Foster & Adoption Services",
         category: "Family",
         shortDescription: "Support and resources for foster and adoptive families.",
-        fullDescription: "Connecting children in need with loving families. We provide training, licensing support, and ongoing case management for foster and adoptive parents. Our team offers 24/7 crisis support and connects families with counseling, respite care, and community networks.",
+        fullDescription: "Connecting children in need with loving families. We provide training, licensing support, and ongoing case management for foster and adoptive parents. Our team offers 24/7 crisis support and connects families with counseling, respite care, and community networks. Our dedicated staff and volunteers undergo extensive training to create a welcoming, inclusive environment where families from all walks of life can find the guidance, resources, and community connections they need to thrive. We believe that empowering parents and uplifting children are the foundational steps toward building a strong, resilient, and deeply interconnected Port Laken.",
         address: "1210 E Front St, Port Angeles, WA 98362",
         // Based on: Healthy Families of Clallam County — 1210 E Front St, Port Angeles
         mapCoordinates: { lat: 48.1111715, lng: -123.4123795 },
@@ -1015,7 +1015,7 @@ export const RESOURCES: Resource[] = [
         name: "Laken Family Counseling Center",
         category: "Family",
         shortDescription: "Affordable family and couples therapy.",
-        fullDescription: "The Laken Family Counseling Center offers sliding-scale therapy for families, couples, and individuals navigating life transitions, conflict, grief, and trauma. Our licensed therapists specialize in family systems, child behavioral issues, and co-parenting support.",
+        fullDescription: "The Laken Family Counseling Center offers sliding-scale therapy for families, couples, and individuals navigating life transitions, conflict, grief, and trauma. Our licensed therapists specialize in family systems, child behavioral issues, and co-parenting support. Our dedicated staff and volunteers undergo extensive training to create a welcoming, inclusive environment where families from all walks of life can find the guidance, resources, and community connections they need to thrive. We believe that empowering parents and uplifting children are the foundational steps toward building a strong, resilient, and deeply interconnected Port Laken.",
         address: "113 S Eunice St, Port Angeles, WA 98362",
         // Based on: Lisa McSweeney Counseling — 113 S Eunice St, Port Angeles
         mapCoordinates: { lat: 48.1139512, lng: -123.4228697 },
@@ -1033,7 +1033,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Community Food Network",
         category: "Service Stars",
         shortDescription: "Citywide network rescuing surplus food and feeding families in need.",
-        fullDescription: "The Port Laken Community Food Network coordinates with local restaurants, grocery stores, and farms to rescue surplus food and redistribute it to families experiencing food insecurity. The network operates weekly distribution events across the city and partners with schools, community centers, and faith organizations to reach those most in need.",
+        fullDescription: "The Port Laken Community Food Network coordinates with local restaurants, grocery stores, and farms to rescue surplus food and redistribute it to families experiencing food insecurity. The network operates weekly distribution events across the city and partners with schools, community centers, and faith organizations to reach those most in need. Driven by an unyielding passion for positive change, our organization relies on the extraordinary dedication of community volunteers and local partners to address pressing social challenges. We are immensely proud to champion innovative, grassroots solutions that directly uplift the most vulnerable among us, transforming compassion into tangible, lasting impact throughout Port Laken.",
         address: "500 E 4th St, Port Angeles, WA 98362",
         // Based on: East downtown Port Angeles, near Olympic Medical campus
         mapCoordinates: { lat: 48.1168, lng: -123.4260 },
@@ -1050,7 +1050,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Habitat for Humanity",
         category: "Service Stars",
         shortDescription: "Building affordable homes and stronger communities.",
-        fullDescription: "Port Laken Habitat for Humanity partners with families and volunteers to build and repair homes for low-income residents. Through sweat equity and community fundraising, we've helped over 150 families achieve stable, affordable homeownership. Volunteer build days are open to everyone.",
+        fullDescription: "Port Laken Habitat for Humanity partners with families and volunteers to build and repair homes for low-income residents. Through sweat equity and community fundraising, we've helped over 150 families achieve stable, affordable homeownership. Volunteer build days are open to everyone. Driven by an unyielding passion for positive change, our organization relies on the extraordinary dedication of community volunteers and local partners to address pressing social challenges. We are immensely proud to champion innovative, grassroots solutions that directly uplift the most vulnerable among us, transforming compassion into tangible, lasting impact throughout Port Laken.",
         address: "728 E Front St, Port Angeles, WA 98362",
         // Based on: Habitat for Humanity of Clallam County — 728 E Front St, Port Angeles
         mapCoordinates: { lat: 48.1146822, lng: -123.4208432 },
@@ -1067,7 +1067,7 @@ export const RESOURCES: Resource[] = [
         name: "Laken Literacy Project",
         category: "Service Stars",
         shortDescription: "Free adult literacy and ESL tutoring for Port Laken residents.",
-        fullDescription: "The Laken Literacy Project provides free one-on-one tutoring and small group classes for adults seeking to improve reading, writing, and English language skills. Our volunteer tutors work with learners at all levels, from basic literacy to GED preparation and professional communication.",
+        fullDescription: "The Laken Literacy Project provides free one-on-one tutoring and small group classes for adults seeking to improve reading, writing, and English language skills. Our volunteer tutors work with learners at all levels, from basic literacy to GED preparation and professional communication. Driven by an unyielding passion for positive change, our organization relies on the extraordinary dedication of community volunteers and local partners to address pressing social challenges. We are immensely proud to champion innovative, grassroots solutions that directly uplift the most vulnerable among us, transforming compassion into tangible, lasting impact throughout Port Laken.",
         address: "1116 Eckard Ave, Port Angeles, WA 98362",
         // Based on: Port Angeles Tutoring — 1116 Eckard Ave, Port Angeles
         mapCoordinates: { lat: 48.0954111, lng: -123.4216783 },
@@ -1083,7 +1083,7 @@ export const RESOURCES: Resource[] = [
         name: "Port Laken Clean Streets Initiative",
         category: "Service Stars",
         shortDescription: "Community-led neighborhood cleanup and beautification program.",
-        fullDescription: "The Clean Streets Initiative organizes monthly neighborhood cleanups, graffiti removal, and beautification projects across Port Laken. Powered entirely by volunteers, the program has removed over 40 tons of litter and planted more than 500 trees since its founding in 2018. Join a cleanup event or adopt a block in your neighborhood.",
+        fullDescription: "The Clean Streets Initiative organizes monthly neighborhood cleanups, graffiti removal, and beautification projects across Port Laken. Powered entirely by volunteers, the program has removed over 40 tons of litter and planted more than 500 trees since its founding in 2018. Join a cleanup event or adopt a block in your neighborhood. Driven by an unyielding passion for positive change, our organization relies on the extraordinary dedication of community volunteers and local partners to address pressing social challenges. We are immensely proud to champion innovative, grassroots solutions that directly uplift the most vulnerable among us, transforming compassion into tangible, lasting impact throughout Port Laken.",
         address: "223 E 4th St, Port Angeles, WA 98362",
         // Based on: Port Angeles City Hall annex area — 223 E 4th St, Port Angeles
         mapCoordinates: { lat: 48.117, lng: -123.4288 },
@@ -1100,7 +1100,7 @@ export const RESOURCES: Resource[] = [
         name: "Harbor Hope Homeless Outreach",
         category: "Service Stars",
         shortDescription: "Street outreach, shelter referrals, and wraparound services for unhoused residents.",
-        fullDescription: "Harbor Hope provides compassionate street outreach to Port Laken's unhoused population, connecting individuals with emergency shelter, mental health services, substance use treatment, and long-term housing programs. Our outreach workers are on the streets seven days a week, meeting people where they are.",
+        fullDescription: "Harbor Hope provides compassionate street outreach to Port Laken's unhoused population, connecting individuals with emergency shelter, mental health services, substance use treatment, and long-term housing programs. Our outreach workers are on the streets seven days a week, meeting people where they are. Driven by an unyielding passion for positive change, our organization relies on the extraordinary dedication of community volunteers and local partners to address pressing social challenges. We are immensely proud to champion innovative, grassroots solutions that directly uplift the most vulnerable among us, transforming compassion into tangible, lasting impact throughout Port Laken.",
         address: "410 W 1st St, Port Angeles, WA 98362",
         // Based on: West downtown Port Angeles outreach area
         mapCoordinates: { lat: 48.1190, lng: -123.4430 },
@@ -1119,7 +1119,7 @@ export const RESOURCES: Resource[] = [
         name: "Kroger Port Laken",
         category: "Food",
         shortDescription: "Full-service grocery store with pharmacy and fuel center.",
-        fullDescription: "Kroger Port Laken offers a wide selection of groceries, fresh produce, deli, bakery, pharmacy services, and a fuel center. The store features Kroger's digital coupons and loyalty rewards program. Open daily.",
+        fullDescription: "Kroger Port Laken offers a wide selection of groceries, fresh produce, deli, bakery, pharmacy services, and a fuel center. The store features Kroger's digital coupons and loyalty rewards program. Open daily. We work closely with local farms, generous donors, and dedicated volunteers to ensure that fresh, nutritious foods reflect the cultural diversity of our community. By tackling food insecurity head-on and eliminating barriers to access, we strive to nourish both the body and the spirit, creating a Port Laken where no one ever has to worry about where their next meal will come from.",
         address: "110 E 3rd St, Port Angeles, WA 98362",
         // Based on: Safeway — 110 E 3rd St, Port Angeles
         mapCoordinates: { lat: 48.1159861, lng: -123.4351831 },
@@ -1135,7 +1135,7 @@ export const RESOURCES: Resource[] = [
         name: "Walmart Supercenter Port Laken",
         category: "Food",
         shortDescription: "Supercenter with groceries, electronics, clothing, and more.",
-        fullDescription: "Port Laken's Walmart Supercenter carries a full grocery department alongside electronics, clothing, home goods, auto care, and a pharmacy. With everyday low prices and extended hours, it's a one-stop shop for the whole family.",
+        fullDescription: "Port Laken's Walmart Supercenter carries a full grocery department alongside electronics, clothing, home goods, auto care, and a pharmacy. With everyday low prices and extended hours, it's a one-stop shop for the whole family. We work closely with local farms, generous donors, and dedicated volunteers to ensure that fresh, nutritious foods reflect the cultural diversity of our community. By tackling food insecurity head-on and eliminating barriers to access, we strive to nourish both the body and the spirit, creating a Port Laken where no one ever has to worry about where their next meal will come from.",
         address: "3411 E Kolonels Way, Port Angeles, WA 98362",
         // Based on: Walmart Supercenter — 3411 E Kolonels Way, Port Angeles
         mapCoordinates: { lat: 48.1109791, lng: -123.3620161 },
@@ -1151,7 +1151,7 @@ export const RESOURCES: Resource[] = [
         name: "Costco Wholesale Port Laken",
         category: "Food",
         shortDescription: "Membership warehouse club with bulk groceries and more.",
-        fullDescription: "Costco Port Laken offers bulk groceries, fresh produce, meats, bakery items, electronics, furniture, and a gas station — all at warehouse prices. Membership required. The food court is a local favorite.",
+        fullDescription: "Costco Port Laken offers bulk groceries, fresh produce, meats, bakery items, electronics, furniture, and a gas station — all at warehouse prices. Membership required. The food court is a local favorite. We work closely with local farms, generous donors, and dedicated volunteers to ensure that fresh, nutritious foods reflect the cultural diversity of our community. By tackling food insecurity head-on and eliminating barriers to access, we strive to nourish both the body and the spirit, creating a Port Laken where no one ever has to worry about where their next meal will come from.",
         address: "955 W Washington St, Sequim, WA 98382",
         // Based on: Costco Wholesale — 955 W Washington St, Sequim (nearest Costco to Port Angeles)
         mapCoordinates: { lat: 48.0770765, lng: -123.1262952 },
@@ -1169,7 +1169,7 @@ export const RESOURCES: Resource[] = [
         name: "Founders' Statue & Plaza",
         category: "Recreation",
         shortDescription: "Historic bronze statue honoring Port Laken's founding families, set in a public plaza.",
-        fullDescription: "Standing at the heart of downtown, the Founders' Statue is a bronze monument dedicated to the families who established Port Laken in the late 19th century. The surrounding plaza features engraved historical plaques, seasonal flower beds, and benches — a popular gathering spot for residents and visitors alike.",
+        fullDescription: "Standing at the heart of downtown, the Founders' Statue is a bronze monument dedicated to the families who established Port Laken in the late 19th century. The surrounding plaza features engraved historical plaques, seasonal flower beds, and benches — a popular gathering spot for residents and visitors alike. Our beautifully maintained facilities, diverse public programs, and expansive natural spaces offer residents of all ages the perfect opportunity to stay active, explore the outdoors, and connect with their neighbors. We are committed to fostering a culture of health, wellness, and environmental stewardship, ensuring that Port Laken remains a breathtaking and vibrant place to live and play.",
         address: "115 E Railroad Ave, Port Angeles, WA 98362",
         // Based on: Port Angeles Ferry Terminal plaza area — waterfront downtown
         mapCoordinates: { lat: 48.1195, lng: -123.4350 },
@@ -1202,7 +1202,7 @@ export const RESOURCES: Resource[] = [
         name: "Laken Market",
         category: "Food",
         shortDescription: "Port Laken's own neighborhood grocery, locally owned since 1987.",
-        fullDescription: "Laken Market is Port Laken's beloved homegrown grocery store, family-owned and operated since 1987. Known for its locally sourced produce, fresh-cut meats, house-made deli items, and a curated selection of Pacific Northwest wines and craft beers. The store partners directly with regional farms and is a cornerstone of the community.",
+        fullDescription: "Laken Market is Port Laken's beloved homegrown grocery store, family-owned and operated since 1987. Known for its locally sourced produce, fresh-cut meats, house-made deli items, and a curated selection of Pacific Northwest wines and craft beers. The store partners directly with regional farms and is a cornerstone of the community. We work closely with local farms, generous donors, and dedicated volunteers to ensure that fresh, nutritious foods reflect the cultural diversity of our community. By tackling food insecurity head-on and eliminating barriers to access, we strive to nourish both the body and the spirit, creating a Port Laken where no one ever has to worry about where their next meal will come from.",
         address: "203 E Front St, Port Angeles, WA 98362",
         // Based on: Kokopelli Grill / downtown Front St block — 203 E Front St, Port Angeles
         mapCoordinates: { lat: 48.1192512, lng: -123.4304809 },
@@ -1240,7 +1240,7 @@ export const RESOURCES: Resource[] = [
         category: "Religious",
         categories: ["Religious", "Community"],
         shortDescription: "A welcoming non-denominational community church rooted in Port Laken.",
-        fullDescription: "Laken Community Church is a non-denominational congregation committed to being a home for everyone in Port Laken. With Sunday services, small groups, community events, and a strong focus on local service, the church partners with neighborhood organizations to support families and individuals in need.",
+        fullDescription: "Laken Community Church is a non-denominational congregation committed to being a home for everyone in Port Laken. With Sunday services, small groups, community events, and a strong focus on local service, the church partners with neighborhood organizations to support families and individuals in need. Rooted in a profound tradition of faith, fellowship, and compassionate service, our congregation actively embraces people of all backgrounds. We provide a sanctuary for spiritual growth, joyful worship, and meaningful dialogue, while answering the call to serve the broader Port Laken community through comprehensive outreach programs, charitable initiatives, and unwavering mutual support.",
         address: "3415 S Peabody St, Port Angeles, WA 98362",
         // Based on: The Revolution Church — 3415 S Peabody St, Port Angeles
         mapCoordinates: { lat: 48.0949594, lng: -123.4369592 },
@@ -1258,7 +1258,7 @@ export const RESOURCES: Resource[] = [
         category: "Religious",
         categories: ["Religious", "Community"],
         shortDescription: "Mosque and community center serving Port Laken's Muslim community.",
-        fullDescription: "The Port Laken Islamic Center is a welcoming mosque and community hub for Muslims in Port Laken and the surrounding region. The center offers daily prayers, Friday Jumu'ah services, Quran classes, youth programs, and interfaith outreach events. The community kitchen hosts monthly dinners open to all residents.",
+        fullDescription: "The Port Laken Islamic Center is a welcoming mosque and community hub for Muslims in Port Laken and the surrounding region. The center offers daily prayers, Friday Jumu'ah services, Quran classes, youth programs, and interfaith outreach events. The community kitchen hosts monthly dinners open to all residents. Rooted in a profound tradition of faith, fellowship, and compassionate service, our congregation actively embraces people of all backgrounds. We provide a sanctuary for spiritual growth, joyful worship, and meaningful dialogue, while answering the call to serve the broader Port Laken community through comprehensive outreach programs, charitable initiatives, and unwavering mutual support.",
         address: "820 E 4th St, Port Angeles, WA 98362",
         // No mosque in Port Angeles — using a nearby central location in Port Angeles
         mapCoordinates: { lat: 48.1165, lng: -123.4200 },
@@ -1276,7 +1276,7 @@ export const RESOURCES: Resource[] = [
         category: "Religious",
         categories: ["Religious", "Community"],
         shortDescription: "Port Laken's Jewish synagogue, a center for worship, learning, and community.",
-        fullDescription: "Congregation Beth Shalom is Port Laken's Jewish synagogue, serving the local Jewish community with Shabbat and holiday services, Torah study, a Hebrew school for children, and a vibrant social calendar. The congregation is affiliated with the Conservative movement and warmly welcomes Jews of all backgrounds and interfaith families.",
+        fullDescription: "Congregation Beth Shalom is Port Laken's Jewish synagogue, serving the local Jewish community with Shabbat and holiday services, Torah study, a Hebrew school for children, and a vibrant social calendar. The congregation is affiliated with the Conservative movement and warmly welcomes Jews of all backgrounds and interfaith families. Rooted in a profound tradition of faith, fellowship, and compassionate service, our congregation actively embraces people of all backgrounds. We provide a sanctuary for spiritual growth, joyful worship, and meaningful dialogue, while answering the call to serve the broader Port Laken community through comprehensive outreach programs, charitable initiatives, and unwavering mutual support.",
         address: "23 N Orchard Ln, Port Angeles, WA 98362",
         // Based on: Hebraic Assembly of Port Angeles — 23 N Orchard Ln, Port Angeles
         mapCoordinates: { lat: 48.111535, lng: -123.355044 },

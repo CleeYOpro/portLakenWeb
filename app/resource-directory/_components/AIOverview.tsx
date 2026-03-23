@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, ChevronDown, ChevronUp, ExternalLink, MapPin } from "lucide-react";
+import { Sparkles, ChevronDown, ChevronUp, ExternalLink, MapPin, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Resource } from "../resources";
 import { PAGE_CONTEXTS, PageImage } from "../page";
 import Link from "next/link";
@@ -18,6 +18,7 @@ interface AIOverviewProps {
   pageContextKey?: string;
   address?: string;
   onResourceClick?: (resource: Resource) => void;
+  onClose?: () => void;
 }
 
 const PAGE_ROUTES: Record<string, string> = {
@@ -176,20 +177,19 @@ export default function AIOverview({
   pageContextKey,
   address,
   onResourceClick,
+  onClose,
 }: AIOverviewProps) {
   const [summary, setSummary] = useState<string>("");
   const [expanded, setExpanded] = useState(false);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   useEffect(() => {
-    if (!aiQuery) { setSummary(""); setExpanded(false); return; }
-    if (loading) { setSummary(""); return; }
+    if (!aiQuery) { setSummary(""); setExpanded(false); setActiveImageIndex(0); return; }
+    if (loading) { setSummary(""); setActiveImageIndex(0); return; }
     if (error) { setSummary(error); setExpanded(false); return; }
     if (aiOverview) { setSummary(aiOverview); setExpanded(false); return; }
     setSummary("");
   }, [aiQuery, aiOverview, loading, error]);
-
-  if (!aiQuery) return null;
-  if (!loading && !summary) return null;
 
   const segments = summary ? parseSegments(summary, allResources) : [];
   const referencedResources = extractReferencedResources(segments);
@@ -200,6 +200,18 @@ export default function AIOverview({
   const hasPageImages = pageImages.length > 0;
   const hasResourceImages = referencedResources.length > 0;
   const hasImages = hasPageImages || hasResourceImages;
+  const activeImagesCount = hasPageImages ? pageImages.length : referencedResources.length;
+
+  useEffect(() => {
+    if (activeImagesCount <= 1) return;
+    const interval = setInterval(() => {
+      setActiveImageIndex((prev) => (prev + 1) % activeImagesCount);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [activeImagesCount, summary]);
+
+  if (!aiQuery) return null;
+  if (!loading && !summary) return null;
 
   // Source chips: resources + pages mentioned in text
   const sourceChips = segments
@@ -224,13 +236,22 @@ export default function AIOverview({
 
         <div className="bg-white rounded-2xl px-5 pt-5 pb-4 border border-port-mist shadow-sm">
           {/* Header */}
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-1.5">
               <Sparkles size={15} className="text-port-sky" />
               <span className="text-xs font-bold uppercase tracking-wider text-port-slate">
                 AI Overview
               </span>
             </div>
+            {onClose && (
+              <button
+                onClick={onClose}
+                className="text-xs font-bold uppercase tracking-wider text-port-slate/60 hover:text-port-sky transition-colors"
+                aria-label="Close AI Overview"
+              >
+                Close AI
+              </button>
+            )}
           </div>
 
           {loading ? (
@@ -353,23 +374,46 @@ export default function AIOverview({
               </div>
 
               {/* Image panel */}
-              {hasImages && (
-                <div className="flex sm:flex-col flex-row gap-2 sm:w-44 flex-shrink-0 overflow-x-auto sm:overflow-visible pb-1 sm:pb-0">
-                  {hasPageImages
-                    ? pageImages.map((img, i) => (
-                        <div key={i} className="sm:w-full w-36 flex-shrink-0">
-                          <PageImageCard img={img} href={pageCtx!.route} />
-                        </div>
-                      ))
-                    : referencedResources.map((r) => (
-                        <div key={r.id} className="sm:w-full w-36 flex-shrink-0">
-                          <ResourceImageCard
-                            resource={r}
-                            onClick={() => onResourceClick?.(r)}
-                          />
-                        </div>
-                      ))
-                  }
+              {hasImages && activeImagesCount > 0 && (
+                <div className="relative flex flex-col sm:w-44 flex-shrink-0">
+                  <div className="relative w-full overflow-hidden rounded-xl">
+                    <div
+                      className="flex transition-transform duration-500 ease-in-out"
+                      style={{ transform: `translateX(-${activeImageIndex * 100}%)` }}
+                    >
+                      {hasPageImages
+                        ? pageImages.map((img, i) => (
+                            <div key={i} className="w-full flex-shrink-0">
+                              <PageImageCard img={img} href={pageCtx!.route} />
+                            </div>
+                          ))
+                        : referencedResources.map((r) => (
+                            <div key={r.id} className="w-full flex-shrink-0">
+                              <ResourceImageCard
+                                resource={r}
+                                onClick={() => onResourceClick?.(r)}
+                              />
+                            </div>
+                          ))
+                      }
+                    </div>
+                  </div>
+                  
+                  {activeImagesCount > 1 && (
+                    <div className="flex justify-center items-center gap-2 mt-3">
+                       <button onClick={() => setActiveImageIndex((prev) => (prev - 1 + activeImagesCount) % activeImagesCount)} className="text-port-slate hover:text-port-sky p-1">
+                         <ChevronLeft size={16} />
+                       </button>
+                       <div className="flex gap-1.5">
+                         {Array.from({ length: activeImagesCount }).map((_, i) => (
+                            <button key={i} onClick={() => setActiveImageIndex(i)} className={`w-1.5 h-1.5 rounded-full transition-colors ${i === activeImageIndex ? 'bg-port-sky' : 'bg-port-mist hover:bg-port-sky/50'}`} aria-label={`Go to slide ${i + 1}`} />
+                         ))}
+                       </div>
+                       <button onClick={() => setActiveImageIndex((prev) => (prev + 1) % activeImagesCount)} className="text-port-slate hover:text-port-sky p-1">
+                         <ChevronRight size={16} />
+                       </button>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

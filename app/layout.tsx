@@ -49,6 +49,13 @@ export default function RootLayout({
           </div>
         </AuthProvider>
         <Analytics />
+
+        {/* GT banner is now allowed to show natively */}
+
+        {/*
+          Step 2: Define the GT init callback, then load GT.
+          GT calls googleTranslateElementInit() after it loads.
+        */}
         <Script
           id="google-translate-init"
           strategy="afterInteractive"
@@ -57,29 +64,9 @@ export default function RootLayout({
               function googleTranslateElementInit() {
                 new google.translate.TranslateElement({
                   pageLanguage: 'en',
-                  autoDisplay: false
+                  autoDisplay: false,
+                  includedLanguages: 'en,es,fr,zh-CN,ar,pt,hi,vi,ko,ru,ja,de,tl,fa,ur'
                 }, 'google_translate_element');
-
-                // Aggressively remove Google Translate banner and body offset
-                function removeGoogleBanner() {
-                  // Kill the iframe banner
-                  var banner = document.querySelector('.goog-te-banner-frame');
-                  if (banner) banner.remove();
-                  // Kill the top offset on body
-                  document.body.style.setProperty('top', '0', 'important');
-                  document.body.style.setProperty('margin-top', '0', 'important');
-                  document.body.style.setProperty('position', 'static', 'important');
-                }
-
-                // Run immediately and on any DOM/style mutation
-                removeGoogleBanner();
-                var observer = new MutationObserver(removeGoogleBanner);
-                observer.observe(document.documentElement, {
-                  childList: true,
-                  subtree: true,
-                  attributes: true,
-                  attributeFilter: ['style']
-                });
               }
             `,
           }}

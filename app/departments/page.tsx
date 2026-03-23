@@ -14,7 +14,7 @@ const departments = [
     title: "City Clerk",
     icon: "edit_document",
     description: "Official records, elections, and public information.",
-    url: "/departments/city-clerk",
+    url: "/contact",
   },
   {
     title: "Community Development",
