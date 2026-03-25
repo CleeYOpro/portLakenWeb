@@ -19,9 +19,16 @@ export default function EditResourcePage() {
   const [error, setError] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
-    title: "", description: "", category: "",
-    address: "", phone: "", email: "",
-    website: "", hours: "", imageUrl: "",
+    title: "",
+    shortDescription: "",
+    longDescription: "",
+    category: "",
+    address: "",
+    phone: "",
+    email: "",
+    website: "",
+    hours: "",
+    imageUrl: "",
   });
 
   useEffect(() => {
@@ -38,7 +45,8 @@ export default function EditResourcePage() {
         if (d.userId !== user!.uid) { router.push("/dashboard"); return; }
         setFormData({
           title: d.title ?? d.name ?? "",
-          description: d.description ?? d.shortDescription ?? "",
+          shortDescription: d.shortDescription ?? d.description ?? "",
+          longDescription: d.fullDescription ?? d.description ?? "",
           category: d.category ?? "",
           address: d.address ?? "",
           phone: d.phone ?? "",
@@ -57,7 +65,8 @@ export default function EditResourcePage() {
     fetchResource();
   }, [id, user, router]);
 
-  const wordCount = formData.description.trim().split(/\s+/).filter(Boolean).length;
+  const shortCharCount = formData.shortDescription.length;
+  const longCharCount = formData.longDescription.length;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -68,7 +77,29 @@ export default function EditResourcePage() {
     e.preventDefault();
     setError(null);
 
-    const validation = validateResource(formData);
+    // Validate character counts
+    if (formData.shortDescription.length > 70) {
+      setError("Short description must be 70 characters or less.");
+      return;
+    }
+
+    if (formData.longDescription.length > 700) {
+      setError("Long description must be 700 characters or less.");
+      return;
+    }
+
+    // Prepare validation data
+    const validationData = {
+      title: formData.title,
+      description: formData.longDescription, // Using long description for validation purposes
+      category: formData.category,
+      phone: formData.phone,
+      email: formData.email,
+      website: formData.website,
+      address: formData.address,
+    };
+
+    const validation = validateResource(validationData);
     if (!validation.approved) {
       setError(validation.reason);
       return;
@@ -79,9 +110,8 @@ export default function EditResourcePage() {
       await updateDoc(doc(db, "resources", id), {
         title: formData.title,
         name: formData.title,
-        description: formData.description,
-        shortDescription: formData.description,
-        fullDescription: formData.description,
+        shortDescription: formData.shortDescription,
+        fullDescription: formData.longDescription,
         category: formData.category,
         address: formData.address,
         phone: formData.phone,
@@ -90,8 +120,6 @@ export default function EditResourcePage() {
         hours: formData.hours,
         operatingHours: formData.hours,
         imageUrl: formData.imageUrl,
-        status: "approved",
-        approvalStatus: "approved",
         updatedAt: serverTimestamp(),
         reviewedAt: serverTimestamp(),
       });
@@ -135,14 +163,26 @@ export default function EditResourcePage() {
 
             <div>
               <div className="flex justify-between mb-1">
-                <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description *</label>
-                <span className={`text-xs ${wordCount >= 30 ? "text-green-600" : "text-gray-400"}`}>
-                  {wordCount} / 30 words min
+                <label htmlFor="shortDescription" className="block text-sm font-medium text-gray-700">Short Description *</label>
+                <span className={`text-xs ${shortCharCount > 60 ? "text-red-600" : "text-gray-400"}`}>
+                  {shortCharCount} / 70 chars max
                 </span>
               </div>
-              <textarea id="description" name="description" value={formData.description} onChange={handleChange} required rows={5}
+              <textarea id="shortDescription" name="shortDescription" value={formData.shortDescription} onChange={handleChange} required rows={2}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Describe the resource and what services it offers..." />
+                placeholder="Brief description (max 70 characters)" maxLength={70} />
+            </div>
+
+            <div>
+              <div className="flex justify-between mb-1">
+                <label htmlFor="longDescription" className="block text-sm font-medium text-gray-700">Full Description *</label>
+                <span className={`text-xs ${longCharCount > 600 ? "text-red-600" : "text-gray-400"}`}>
+                  {longCharCount} / 700 chars max
+                </span>
+              </div>
+              <textarea id="longDescription" name="longDescription" value={formData.longDescription} onChange={handleChange} required rows={5}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Detailed description of the resource and what services it offers (max 700 characters)" maxLength={700} />
             </div>
 
             <div>

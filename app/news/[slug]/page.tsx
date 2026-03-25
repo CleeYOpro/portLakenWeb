@@ -447,6 +447,37 @@ const articles: Record<string, Article> = {
       "A guided walking tour led by Marea collective members is scheduled for Saturday, April 26 at 10 a.m. Free and open to all. Meet at the Harbor Trail trailhead."
     ]
   },
+  "demarcus-jones": {
+    slug: "demarcus-jones",
+    title: "DeMarcus Jones: Fifteen Years, One Promise",
+    subtitle: "How a Port Laken youth mentor turned a personal vow into a program that has quietly changed the trajectory of hundreds of young lives",
+    category: "Community Spotlight",
+    author: "Priya Nair, Port Laken News",
+    date: "February 3, 2026",
+    readTime: "7 min read",
+    image: "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=1200&q=80",
+    content: [
+      "DeMarcus Jones was seventeen when a mentor he'd never met changed the direction of his life. The man's name was Gerald Osei, a Port Laken firefighter who ran an informal after-school program out of the Clement Street rec center. Jones had wandered in on a Wednesday afternoon looking for somewhere to be. He stayed for two years.",
+      "\"Gerald never made a big deal out of it,\" Jones says now, sitting in the same rec center, thirty years later. \"He just showed up. Every week. And he treated us like we were worth showing up for. That was the whole thing, really.\"",
+      "Jones, 47, has spent the last fifteen years trying to replicate that feeling at scale. His program, Groundwork Youth, has worked with more than 200 young people in Port Laken since its founding in 2011, pairing at-risk youth between the ages of 13 and 18 with trained adult mentors for a minimum eighteen-month commitment.",
+      "THE PROMISE:",
+      "Jones made the decision to start Groundwork the year his nephew, then fourteen, was suspended from school for the third time in a semester. Jones drove him home that afternoon and asked what was going on. His nephew shrugged and looked out the window.",
+      "\"He didn't have the words for it yet,\" Jones says. \"But I recognized the feeling. That sense that nobody's really watching. That you could disappear and the world would just keep moving.\"",
+      "Jones spent the next six months researching mentorship models, talking to school counselors, and meeting with the Port Laken Youth Services office. He launched Groundwork with four mentors, eight youth participants, and a borrowed room at the rec center.",
+      "WHAT GROUNDWORK DOES:",
+      "The program's structure is intentionally simple. Each mentor commits to meeting with their mentee at least twice a month for the full eighteen months. There are no grades, no performance reviews, no formal curriculum. Mentors and mentees decide together how to spend their time.",
+      "\"Some pairs go fishing. Some do homework. Some just drive around and talk,\" Jones explains. \"The activity is almost beside the point. What matters is the consistency. The young person learns that this adult will be there next week. And the week after that.\"",
+      "Groundwork also offers optional group programming: monthly dinners, a summer job readiness workshop, and an annual camping trip to Olympic National Park that has become, by all accounts, the program's most anticipated event.",
+      "THE RESULTS:",
+      "Of the 200-plus youth who have completed the Groundwork program, Jones estimates that over 85 percent have graduated high school. More than 60 have gone on to post-secondary education or vocational training. Several have returned as adult mentors themselves.",
+      "\"That's the part that gets me,\" Jones says, his voice quieting. \"When one of our kids comes back and says they want to do what we do. That's the whole cycle right there.\"",
+      "Port Laken Unified School District counselor Renata Voss has referred dozens of students to Groundwork over the years. \"DeMarcus doesn't promise miracles,\" she says. \"He promises presence. And in my experience, that's what these kids need most.\"",
+      "LOOKING AHEAD:",
+      "Groundwork is currently recruiting mentors for its spring cohort. Jones is looking for adults of any background willing to commit the time. Training is provided. The only real requirement, he says, is reliability.",
+      "\"You don't have to have all the answers. You don't have to have a perfect life. You just have to show up.\" He pauses. \"Gerald taught me that. I'm just passing it on.\"",
+      "To apply as a mentor or refer a young person to Groundwork Youth, visit the Port Laken Community Hub or contact the Youth Services office at City Hall."
+    ]
+  },
 };
 
 export function generateStaticParams() {

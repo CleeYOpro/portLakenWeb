@@ -383,7 +383,7 @@ export const RESOURCES: Resource[] = [
         website: "https://fire.portlaken.gov",
         email: "fireinfo@portlaken.gov",
         tags: ["fire", "ems", "emergency"],
-        image: "https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=800&q=80",
+        image: "https://photos.smugmug.com/PORT-AUTHORITY-OF-NEW-YORK-NEW-JERSEY/i-RXZ39M4/0/MSPVm2HrfW98kkT2QMNLmGPtFwWJxRHGCvbK7H4nR/XL/DSC_7219-XL.jpg",
         rating: 4.8
     },
     {
@@ -1288,4 +1288,5 @@ export const RESOURCES: Resource[] = [
         image: "https://images.unsplash.com/photo-1585834372646-5306d75a60ee?w=800&q=80",
         rating: 4.7
     },
+
 ];

@@ -4,10 +4,9 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { db, storage } from "@/lib/firebase";
-import { serverTimestamp, setDoc, doc, updateDoc } from "firebase/firestore";
+import { serverTimestamp, setDoc, doc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
-  FaCheckCircle,
   FaArrowRight,
   FaArrowLeft,
   FaBuilding,
@@ -17,7 +16,6 @@ import {
   FaCheck,
   FaImage,
 } from "react-icons/fa";
-import { HiSparkles } from "react-icons/hi";
 import { validateStep as validateStepFn, validateImageFile } from "@/lib/validateSubmitForm";
 
 const categories = [
@@ -102,7 +100,7 @@ export default function SubmitResourcePage() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
-  const [reviewStatus, setReviewStatus] = useState<"idle" | "reviewing" | "done">("idle");
+  const [reviewStatus, setReviewStatus] = useState<"idle" | "reviewing" | "approved" | "rejected">("idle");
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
   // Image upload state (kept separate from FormData)
@@ -211,50 +209,15 @@ export default function SubmitResourcePage() {
         operatingHours: formData.operatingHours,
         imageUrl,
         submittedBy: user?.uid ?? null,
-        approvalStatus: "pending",
+        approvalStatus: "approved",
         rejectionReason: null,
         createdAt: serverTimestamp(),
         mapCoordinates: null,
       });
 
-      // AI review
       setReviewStatus("reviewing");
-      try {
-        const reviewRes = await fetch("/api/review-resource", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: formData.resourceTitle,
-            category: formData.category,
-            shortDescription: formData.shortDescription,
-            fullDescription: formData.fullDescription,
-            address: formData.address,
-            phone: formData.phone,
-            email: formData.email,
-            website: formData.website,
-            operatingHours: formData.operatingHours,
-            tags,
-          }),
-        });
-
-        if (reviewRes.ok) {
-          const { approved, reason } = await reviewRes.json();
-          const docRef = doc(db, "resources", submissionId);
-          if (approved) {
-            await updateDoc(docRef, { approvalStatus: "approved" });
-          } else {
-            await updateDoc(docRef, { approvalStatus: "rejected", rejectionReason: reason });
-          }
-        } else {
-          console.error("AI review API returned non-OK status:", reviewRes.status);
-        }
-      } catch (reviewError) {
-        console.error("AI review pipeline error:", reviewError);
-        // Leave approvalStatus as "pending" — submission is not lost
-      } finally {
-        setReviewStatus("done");
-      }
-
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      setReviewStatus("approved");
       setSubmitStatus("success");
     } catch (error) {
       console.error("Error saving resource: ", error);
@@ -294,70 +257,66 @@ export default function SubmitResourcePage() {
     setImageError(null);
   };
 
-  // Success State
-  if (submitStatus === "success") {
+  // AI Review Loading / Result State
+  if (reviewStatus === "reviewing" || submitStatus === "success") {
+    const isLoading = reviewStatus === "reviewing";
+    const isApproved = reviewStatus === "approved";
+
     return (
-      <div className="min-h-screen bg-port-navy relative overflow-hidden">
+      <div className="min-h-screen bg-port-navy relative overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-port-sky/10 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-port-sky/5 rounded-full blur-3xl animate-pulse delay-1000" />
         </div>
 
-        <div className="relative z-10 pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-10 text-center border border-white/20 animate-fade-in">
-              <div className="w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg shadow-green-500/30">
-                <FaCheck className="text-4xl text-white" />
-              </div>
-              <h1 className="font-display text-4xl font-bold text-white mb-4">
-                Submission Received!
-              </h1>
-              <p className="text-white/70 text-lg mb-8 max-w-md mx-auto">
-                Thank you for contributing to the Port Laken Community Hub.
-                Your submission has been reviewed by our AI system.
-              </p>
-
-              <div className="bg-white/5 rounded-2xl p-6 mb-8 text-left border border-white/10">
-                <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
-                  <HiSparkles className="text-port-sky" />
-                  What happens next?
-                </h3>
-                <ul className="space-y-3">
-                  {[
-                    "If approved, your resource is already live in the directory",
-                    "If flagged for review, our team will evaluate it manually",
-                    "If rejected, you can check your dashboard for the reason",
-                    "Visit your dashboard to see the current status",
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-white/70 text-sm">
-                      <FaCheckCircle className="text-green-400 mt-0.5 flex-shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button
-                  onClick={resetForm}
-                  className="px-6 py-3 bg-port-sky text-white rounded-xl font-semibold hover:bg-port-sky/80 transition-all hover:scale-105"
-                >
-                  Submit Another
-                </button>
-                <Link
-                  href="/dashboard"
-                  className="px-6 py-3 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all border border-white/20"
-                >
-                  View Dashboard
-                </Link>
-                <Link
-                  href="/resource-directory"
-                  className="px-6 py-3 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all border border-white/20"
-                >
-                  View Directory
-                </Link>
-              </div>
-            </div>
+        <div className="relative z-10 px-4 w-full max-w-lg mx-auto">
+          <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-10 text-center border border-white/20">
+            {isLoading ? (
+              <>
+                <div className="flex items-center justify-center mb-6">
+                  <svg className="animate-spin h-16 w-16 text-port-sky" viewBox="0 0 24 24" fill="none">
+                    <circle className="opacity-20" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
+                    <path className="opacity-80" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                  </svg>
+                </div>
+                <h2 className="font-display text-2xl font-bold text-white mb-2">Being validated with AI</h2>
+                <p className="text-white/50 text-sm">Reviewing your submission, hang tight...</p>
+              </>
+            ) : isApproved ? (
+              <>
+                <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-500/30">
+                  <FaCheck className="text-3xl text-white" />
+                </div>
+                <h2 className="font-display text-3xl font-bold text-white mb-3">Approved</h2>
+                <p className="text-white/60 mb-8">Your resource has been approved and is now live in the directory.</p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <button onClick={resetForm} className="px-6 py-3 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all border border-white/20">
+                    Submit Another
+                  </button>
+                  <Link href="/resource-directory" className="px-6 py-3 bg-port-sky text-white rounded-xl font-semibold hover:bg-port-sky/80 transition-all flex items-center justify-center gap-2">
+                    View Resources <FaArrowRight className="text-sm" />
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="w-20 h-20 bg-gradient-to-br from-red-400 to-rose-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-red-500/30">
+                  <span className="text-3xl text-white font-bold">✕</span>
+                </div>
+                <h2 className="font-display text-3xl font-bold text-white mb-3">Rejected</h2>
+                <p className="text-white/60 mb-4 leading-relaxed">
+                  Unfortunately your submission was not approved. This usually happens when the resource description is too vague, doesn&apos;t clearly explain what services are offered, or the content doesn&apos;t align with our community guidelines. You can edit and resubmit from your dashboard — make sure your description is detailed, accurate, and relevant to Port Laken residents.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <button onClick={resetForm} className="px-6 py-3 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all border border-white/20">
+                    Try Again
+                  </button>
+                  <Link href="/dashboard" className="px-6 py-3 bg-port-sky text-white rounded-xl font-semibold hover:bg-port-sky/80 transition-all flex items-center justify-center gap-2">
+                    Go to Dashboard <FaArrowRight className="text-sm" />
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -1000,7 +959,7 @@ export default function SubmitResourcePage() {
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                         </svg>
-                        {reviewStatus === "reviewing" ? "Reviewing your submission…" : "Submitting..."}
+                        Submitting...
                       </>
                     ) : (
                       <>

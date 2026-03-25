@@ -48,7 +48,7 @@ export const PAGE_CONTEXTS: Record<string, PageContext> = {
   about: {
     route: "/about",
     label: "About",
-    description: "Port Laken was founded in 1834. Population ~85,000. 45 sq miles. 19 parks (50+ total green spaces). 1,500+ local businesses. 98% resident satisfaction. Located along northern Washington shores between the San Juan Strait and Olympic Mountains. Tagline: 'Rooted in Place. Rising Forward.' The city has a vibrant culinary scene, waterfront life, a thriving arts and education sector, and a strong sense of community. Key landmarks include the Founders' Statue & Plaza (downtown), Port Laken History Museum, Port Laken Art Museum, and the waterfront pier.",
+    description: "Port Laken was founded in 1834. Population 43,612. 45 sq miles. 19 parks (50+ total green spaces). 1,500+ local businesses. 98% resident satisfaction. Located along northern Washington shores between the San Juan Strait and Olympic Mountains. Tagline: 'Rooted in Place. Rising Forward.' The city has a vibrant culinary scene, waterfront life, a thriving arts and education sector, and a strong sense of community. Key landmarks include the Founders' Statue & Plaza (downtown), Port Laken History Museum, Port Laken Art Museum, and the waterfront pier.",
     images: [
       { url: "https://outdoor-society.com/wp-content/uploads/2018/04/MP7A1677-1.jpg", alt: "Port Laken aerial view", caption: "Port Laken" },
       { url: "https://olympicpeninsula.org/wp-content/uploads/2024/09/port-angeles-wa-city-pier-hdr-e1727213387696.jpg", alt: "Waterfront Life", caption: "Waterfront" },
@@ -173,7 +173,7 @@ const siteContext = {
     },
     news: { description: PAGE_CONTEXTS.news.description },
     about: {
-      stats: { population: "85,000", founded: "1834", area: "45 sq miles", parks: "50+", trails: "100 miles", schools: "25 public", safetyRating: "A+" },
+      stats: { population: "43,612", founded: "1834", area: "45 sq miles", parks: "50+", trails: "100 miles", schools: "25 public", safetyRating: "A+" },
       description: PAGE_CONTEXTS.about.description,
     },
     references: {
@@ -382,6 +382,7 @@ function mapSubmissionCategory(cat: string): ResourceCategory {
     education: "Education",
     community: "Community",
     recreation: "Recreation",
+    other: "Community", // Map 'other' to Community as default
   };
   return map[cat?.toLowerCase()] ?? "Community";
 }
@@ -671,7 +672,7 @@ function ResourceDirectoryContent() {
               {filteredResources.map((resource) => (
                 <div
                   key={resource.id}
-                  className="h-full relative z-0 touch-none"
+                  className="h-full relative z-0"
                 >
                   <ResourceCard
                     {...resource}

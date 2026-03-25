@@ -18,14 +18,18 @@ export interface ValidationResult {
 
 export function validateResource(data: {
   title: string;
-  description: string;
+  description?: string; // Keeping for backward compatibility
+  shortDescription?: string;
+  longDescription?: string;
   category: string;
   phone?: string;
   email?: string;
   website?: string;
   address?: string;
 }): ValidationResult {
-  const wordCount = data.description.trim().split(/\s+/).filter(Boolean).length;
+  // Use longDescription if available, otherwise fall back to description for backward compatibility
+  const descriptionToValidate = data.longDescription || data.description || "";
+  const wordCount = descriptionToValidate.trim().split(/\s+/).filter(Boolean).length;
 
   if (!data.title.trim()) {
     return { approved: false, reason: "Resource title is required." };
@@ -33,7 +37,7 @@ export function validateResource(data: {
   if (wordCount < MIN_WORDS) {
     return { approved: false, reason: `Description is too short. Please write at least ${MIN_WORDS} words (currently ${wordCount}).` };
   }
-  if (!descriptionMentionsTitle(data.title, data.description)) {
+  if (!descriptionMentionsTitle(data.title, descriptionToValidate)) {
     return { approved: false, reason: "Your description doesn't seem to relate to the resource title. Make sure the description mentions what the resource actually is." };
   }
   const hasContact = !!(data.phone || data.email || data.website || data.address);

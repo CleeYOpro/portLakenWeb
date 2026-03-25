@@ -113,21 +113,32 @@ const initiatives = [
 const parks = [
   {
     name: "Elm Street Park",
-    description: "Port Laken's newest green space, opened January 2026. Features walking trails, a native plant garden, and a community pavilion on a former industrial lot.",
+    description:
+      "Elm Street Park is one of Port Laken’s newest public spaces, transforming a former industrial lot into a welcoming green area. The park features paved walking trails, a native plant garden that supports local wildlife, and a covered pavilion for small gatherings and community events.",
     amenities: ["Walking Trails", "Pavilion", "Native Garden", "Benches"],
-    mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689.5!2d-122.3321!3d47.6062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDM2JzIyLjMiTiAxMjLCsDE5JzU1LjYiVw!5e0!3m2!1sen!2sus!4v1700000000000",
+    mapSrc:
+      "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2113.872137386077!2d-123.46696296453035!3d48.12350691107924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1774406397351!5m2!1sen!2sus",
   },
   {
     name: "Lakeview Waterfront Park",
-    description: "A 14-acre waterfront park along the Port Laken shoreline with picnic areas, a boat launch, and restored wetland habitat.",
+    description:
+      "Lakeview Waterfront Park offers scenic shoreline access with open views of the water and surrounding landscape. Spanning several acres, the park includes picnic areas, a public boat launch, a fishing pier, and a restored wetland trail designed to protect and showcase the area’s natural habitat.",
     amenities: ["Picnic Areas", "Boat Launch", "Wetland Trail", "Fishing Pier"],
-    mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689.5!2d-122.3421!3d47.6162!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDM2JzU4LjMiTiAxMjLCsDIwJzMxLjYiVw!5e0!3m2!1sen!2sus!4v1700000000001",
+    mapSrc:
+      "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3354.9417511123306!2d-123.46675498697667!3d48.133012492327374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1774406438699!5m2!1sen!2sus",
   },
   {
     name: "Riverside Community Garden",
-    description: "One of 12 community garden sites, Riverside hosts 80+ active plots alongside a composting station and seasonal workshops.",
-    amenities: ["80+ Garden Plots", "Composting Station", "Tool Shed", "Workshop Space"],
-    mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689.5!2d-122.3221!3d47.5962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDM1JzQ2LjMiTiAxMjLCsDE5JzE5LjYiVw!5e0!3m2!1sen!2sus!4v1700000000002",
+    description:
+      "Riverside Community Garden is a shared green space that brings residents together through urban agriculture and sustainability. The site includes over 80 garden plots, a composting station, a tool shed, and space for seasonal workshops that support local food education and community engagement.",
+    amenities: [
+      "80+ Garden Plots",
+      "Composting Station",
+      "Tool Shed",
+      "Workshop Space",
+    ],
+    mapSrc:
+      "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d593.2547327765125!2d-123.44702305283987!3d48.117499139547675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1774406490632!5m2!1sen!2sus",
   },
 ];
 
@@ -407,23 +418,23 @@ Our community is dedicated to fostering a sustainable future through proactive e
       </section>
 
       {/* ── PARKS & GREEN SPACES ── */}
-      <section className="bg-port-cream" style={{ padding: "6rem 0" }}>
+      <section className="bg-port-cream" style={{ padding: "4rem 0" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Fade>
-            <div className="w-10 h-1 rounded-full mb-8" style={{ background: GREEN }} />
-            <h2 className="font-display font-bold text-port-navy tracking-tight mb-4" style={{ fontSize: "clamp(38px,4vw,54px)", lineHeight: 1.05 }}>
+            <div className="w-10 h-1 rounded-full mb-6" style={{ background: GREEN }} />
+            <h2 className="font-display font-bold text-port-navy tracking-tight mb-3" style={{ fontSize: "clamp(32px,4vw,42px)", lineHeight: 1.1 }}>
               Parks &amp; <em className="italic" style={{ color: GREEN }}>Green Spaces</em>
             </h2>
-            <p className="text-port-slate font-light leading-relaxed mb-14 max-w-xl" style={{ fontSize: 16 }}>
+            <p className="text-port-slate font-light leading-relaxed mb-10 max-w-xl" style={{ fontSize: 15 }}>
               Port Laken's parks are living parts of our environmental commitment — maintained as natural habitats, community gathering spaces, and green corridors throughout the city.
             </p>
           </Fade>
-          <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-8">
             {parks.map((park, i) => (
               <Fade key={park.name} delay={i * 100}>
-                <div className={`grid lg:grid-cols-2 gap-8 items-start ${i % 2 === 1 ? "lg:[direction:rtl]" : ""}`}>
+                <div className={`grid lg:grid-cols-2 gap-6 items-start ${i % 2 === 1 ? "lg:[direction:rtl]" : ""}`}>
                   <div className={i % 2 === 1 ? "lg:[direction:ltr]" : ""}>
-                    <div className="rounded-2xl overflow-hidden border border-port-mist shadow-sm" style={{ height: 320 }}>
+                    <div className="rounded-2xl overflow-hidden border border-port-mist shadow-sm" style={{ height: 250 }}>
                       <iframe
                         src={park.mapSrc}
                         width="100%"
@@ -437,14 +448,12 @@ Our community is dedicated to fostering a sustainable future through proactive e
                     </div>
                   </div>
                   <div className={`flex flex-col justify-center ${i % 2 === 1 ? "lg:[direction:ltr]" : ""}`}>
-                    <p className="text-xs font-semibold tracking-widest uppercase flex items-center gap-2 mb-3" style={{ color: GREEN }}>
-                      <FaMapMarkerAlt size={10} /> Park Location
-                    </p>
-                    <h3 className="font-display font-bold text-port-navy mb-3" style={{ fontSize: "clamp(24px,3vw,32px)", lineHeight: 1.15 }}>{park.name}</h3>
-                    <p className="text-port-slate font-light leading-relaxed mb-6" style={{ fontSize: 15 }}>{park.description}</p>
+
+                    <h3 className="font-display font-bold text-port-navy mb-2" style={{ fontSize: "clamp(20px,3vw,28px)", lineHeight: 1.15 }}>{park.name}</h3>
+                    <p className="text-port-slate font-light leading-relaxed mb-4" style={{ fontSize: 14 }}>{park.description}</p>
                     <div className="flex flex-wrap gap-2">
                       {park.amenities.map(a => (
-                        <span key={a} className="text-xs font-semibold px-3 py-1.5 rounded-full border border-port-mist bg-white text-port-slate">{a}</span>
+                        <span key={a} className="text-xs font-semibold px-2.5 py-1.5 rounded-full border border-port-mist bg-white text-port-slate">{a}</span>
                       ))}
                     </div>
                   </div>
