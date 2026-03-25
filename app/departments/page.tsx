@@ -14,7 +14,7 @@ const departments = [
     title: "City Clerk",
     icon: "edit_document",
     description: "Official records, elections, and public information.",
-    url: "/departments/city-clerk",
+    url: "/contact",
   },
   {
     title: "Community Development",
@@ -41,10 +41,10 @@ const departments = [
     url: "/departments/public-works",
   },
   {
-    title: "Recreation & Parks",
+    title: "Environment",
     icon: "park",
-    description: "Parks, trails, and community programs.",
-    url: "/departments/recreation-parks",
+    description: "Environmental protection, parks, and sustainability programs.",
+    url: "/environmental",
   },
   {
     title: "Finance",
@@ -199,7 +199,7 @@ export default function DepartmentsPage() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="text-lg text-port-slate max-w-2xl"
           >
-            Learn more about the departments that serve Port Laken.
+            Click on each icon to learn more about the departments that serve Port Laken.
           </motion.p>
         </div>
       </section>

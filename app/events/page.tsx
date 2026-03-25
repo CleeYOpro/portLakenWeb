@@ -124,6 +124,102 @@ const events: Event[] = [
     organizer: "City of Port Laken",
     contact: "events@portlaken.gov"
   },
+  {
+    title: "City Center Egg Hunt",
+    description: "Easter egg hunt in the heart of the city at Elm Street Park.",
+    image: "https://images.unsplash.com/photo-1585155770447-2f66e2a397b5?w=600&q=80",
+    category: "Community",
+    date: "April 5, 2026",
+    location: "Elm Street Park",
+    time: "11 AM - 2 PM",
+    fullDescription: "Celebrate Easter Sunday with the City Center Egg Hunt at Elm Street Park! This downtown egg hunt features over 5,000 hidden eggs filled with candy, small toys, and prize vouchers. Age-divided hunt zones ensure every child gets a fair shot. The Easter Bunny will be available for photos, and local food vendors will be on-site. Bring your own basket and enjoy a festive afternoon in the heart of Port Laken. Free admission for all.",
+    organizer: "City of Port Laken",
+    contact: "events@portlaken.gov"
+  },
+  {
+    title: "Easter Egg Hunt",
+    description: "A festive egg hunt for kids of all ages across Lakeside Park.",
+    image: "https://images.unsplash.com/photo-1615486511484-92e172cc4fe0?w=600&q=80",
+    category: "Community",
+    date: "April 4, 2026",
+    location: "Lakeside Park",
+    time: "10 AM - 1 PM",
+    fullDescription: "Bring the whole family to Port Laken's annual Easter Egg Hunt! Thousands of eggs are hidden throughout Lakeside Park, filled with candy, prizes, and special golden eggs redeemable for gift baskets. Hunt areas are divided by age group (0–3, 4–7, 8–12) so every child has a fair chance. The Easter Bunny will be on-site for photos. Bring your own basket! Free admission.",
+    organizer: "Parks & Recreation Department",
+    contact: "recreation@portlaken.gov"
+  },
+  {
+    title: "Easter Sunday Community Brunch",
+    description: "A free community brunch to celebrate Easter together.",
+    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80",
+    category: "Community",
+    date: "April 5, 2026",
+    location: "Community Center",
+    time: "9 AM - 12 PM",
+    fullDescription: "Join neighbors and friends for a warm Easter Sunday brunch hosted by the City of Port Laken. Enjoy a spread of seasonal dishes, pastries, and beverages in a welcoming, family-friendly atmosphere. All residents are welcome — no registration required. Donations of non-perishable food items for the local food pantry are appreciated but not required.",
+    organizer: "Port Laken Community Services",
+    contact: "community@portlaken.gov"
+  },
+  {
+    title: "Spring Kite Festival",
+    description: "Colorful kites fill the sky above Harbor Beach.",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
+    category: "Community",
+    date: "March 28, 2026",
+    location: "Harbor Beach",
+    time: "11 AM - 4 PM",
+    fullDescription: "Welcome spring with Port Laken's annual Kite Festival! Watch spectacular kite displays from local enthusiasts and professional flyers, or bring your own kite and join in. Kite-making workshops for kids run throughout the day. Food vendors, live acoustic music, and a kite decorating contest round out the fun. Free and open to all — no registration needed.",
+    organizer: "Parks & Recreation Department",
+    contact: "recreation@portlaken.gov"
+  },
+  {
+    title: "Spring Home & Garden Expo",
+    description: "Tips, vendors, and inspiration for your home and garden.",
+    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80",
+    category: "Community",
+    date: "April 11, 2026",
+    location: "Civic Expo Center",
+    time: "9 AM - 5 PM",
+    fullDescription: "Get ready for the growing season at the Spring Home & Garden Expo! Over 80 vendors showcase plants, seeds, landscaping services, home improvement products, and outdoor furniture. Attend free workshops on composting, raised bed gardening, and native plant landscaping. Master Gardeners will be available for one-on-one consultations. Admission is free; parking available on-site.",
+    organizer: "Port Laken Chamber of Commerce",
+    contact: "chamber@portlaken.gov"
+  },
+  {
+    title: "Earth Month Tree Planting",
+    description: "Help green our city by planting trees in local neighborhoods.",
+    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&q=80",
+    category: "Environment",
+    date: "April 18, 2026",
+    location: "Northside Neighborhood",
+    time: "8 AM - 11 AM",
+    fullDescription: "In honor of Earth Month, join the Environmental Services Department for a community tree planting event. Volunteers will plant 150 native trees along Northside streets and in Riverside Park. All tools and saplings provided. Wear sturdy shoes and bring work gloves if you have them. Light breakfast and refreshments provided. Great for students needing community service hours.",
+    organizer: "Environmental Services Department",
+    contact: "environment@portlaken.gov"
+  },
+  {
+    title: "Spring Arts & Crafts Fair",
+    description: "Local artisans showcase handmade goods and fine art.",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
+    category: "Arts",
+    date: "April 25, 2026",
+    location: "Town Square",
+    time: "10 AM - 6 PM",
+    fullDescription: "Browse and shop from over 100 local artists and craftspeople at the Spring Arts & Crafts Fair. Find one-of-a-kind jewelry, paintings, ceramics, textiles, woodwork, and more. Live music performances throughout the day. Kids' craft activity tent open 10 AM – 3 PM. Free admission. A portion of vendor proceeds supports the Port Laken Arts Council scholarship fund.",
+    organizer: "Port Laken Arts Council",
+    contact: "arts@portlaken.gov"
+  },
+  {
+    title: "Good Friday Interfaith Service",
+    description: "A community interfaith gathering to observe Good Friday.",
+    image: "https://images.unsplash.com/photo-1519817650390-64a93db51149?w=600&q=80",
+    category: "Community",
+    date: "April 3, 2026",
+    location: "Port Laken Civic Auditorium",
+    time: "7 PM - 8:30 PM",
+    fullDescription: "Port Laken's faith communities come together for a reflective Good Friday interfaith service. The evening features readings, music, and a moment of community remembrance. All are welcome regardless of faith background. The service is free and open to the public. Doors open at 6:30 PM.",
+    organizer: "Port Laken Interfaith Council",
+    contact: "interfaith@portlaken.gov"
+  },
 ];
 
 // Generate some realistic upcoming events for the calendar (focusing on Feb-April 2026)
@@ -143,6 +239,27 @@ const generateCalendarEvents = (): CalendarEvent[] => {
     { id: '10', title: "School Board Meeting", location: "District Office", time: "6:30 PM", date: new Date(2026, 2, 3), type: 'government' },
     { id: '11', title: "First Friday Art Walk", location: "Downtown Arts District", time: "5:00 PM", date: new Date(2026, 2, 6), type: 'arts' },
     { id: '12', title: "Spring Cleaning Day", location: "Various Parks", time: "8:00 AM", date: new Date(2026, 2, 14), type: 'community' },
+    { id: '13', title: "City Council Meeting", location: "City Hall Chamber", time: "6:00 PM", date: new Date(2026, 2, 17), type: 'government' },
+    { id: '14', title: "Spring Kite Festival", location: "Harbor Beach", time: "11:00 AM", date: new Date(2026, 2, 28), type: 'community' },
+    { id: '15', title: "Neighborhood Watch Meeting", location: "Community Center", time: "7:00 PM", date: new Date(2026, 2, 25), type: 'meeting' },
+    { id: '16', title: "Youth Basketball Tournament", location: "Rec Center Gym", time: "9:00 AM", date: new Date(2026, 2, 21), type: 'health' },
+    { id: '17', title: "Spring Food Drive", location: "Community Center", time: "9:00 AM", date: new Date(2026, 2, 15), type: 'community' },
+
+    // April
+    { id: '18', title: "Good Friday Interfaith Service", location: "Civic Auditorium", time: "7:00 PM", date: new Date(2026, 3, 3), type: 'community' },
+    { id: '19', title: "Easter Egg Hunt", location: "Lakeside Park", time: "10:00 AM", date: new Date(2026, 3, 4), type: 'community' },
+    { id: '20', title: "Easter Sunday Community Brunch", location: "Community Center", time: "9:00 AM", date: new Date(2026, 3, 5), type: 'social' },
+    { id: '31', title: "City Center Egg Hunt", location: "Elm Street Park", time: "11:00 AM", date: new Date(2026, 3, 5), type: 'community' },
+    { id: '21', title: "City Council Meeting", location: "City Hall Chamber", time: "6:00 PM", date: new Date(2026, 3, 7), type: 'government' },
+    { id: '22', title: "Spring Home & Garden Expo", location: "Civic Expo Center", time: "9:00 AM", date: new Date(2026, 3, 11), type: 'community' },
+    { id: '23', title: "Planning Commission", location: "City Hall Room 101", time: "2:00 PM", date: new Date(2026, 3, 14), type: 'government' },
+    { id: '24', title: "Earth Month Tree Planting", location: "Northside Neighborhood", time: "8:00 AM", date: new Date(2026, 3, 18), type: 'community' },
+    { id: '25', title: "Earth Day Cleanup", location: "Various Locations", time: "8:00 AM", date: new Date(2026, 3, 22), type: 'community' },
+    { id: '26', title: "Summer Concert Series Kickoff", location: "Lakeside Park", time: "6:00 PM", date: new Date(2026, 3, 22), type: 'arts' },
+    { id: '27', title: "Spring Arts & Crafts Fair", location: "Town Square", time: "10:00 AM", date: new Date(2026, 3, 25), type: 'arts' },
+    { id: '28', title: "Senior Health Fair", location: "Senior Center", time: "10:00 AM", date: new Date(2026, 3, 28), type: 'health' },
+    { id: '29', title: "Small Business Networking", location: "Chamber of Commerce", time: "5:30 PM", date: new Date(2026, 3, 16), type: 'meeting' },
+    { id: '30', title: "Easter Basket Drive Drop-off", location: "Fire Station No. 1", time: "10:00 AM", date: new Date(2026, 3, 1), type: 'community' },
   ];
   return events;
 };

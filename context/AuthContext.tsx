@@ -9,7 +9,8 @@ import {
   User,
   GoogleAuthProvider,
   signInWithPopup,
-  sendEmailVerification
+  sendEmailVerification,
+  updateProfile
 } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { db } from '@/lib/firebase'; // Import Firestore instance
@@ -19,7 +20,7 @@ interface AuthContextType {
   user: User | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string, subscribe?: boolean) => Promise<void>;
+  signUp: (email: string, password: string, displayName?: string, subscribe?: boolean) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
   sendVerificationEmail: () => Promise<void>;
@@ -39,17 +40,20 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     await signInWithEmailAndPassword(auth, email, password);
   };
 
-  const signUp = async (email: string, password: string, subscribe: boolean = true): Promise<void> => {
+  const signUp = async (email: string, password: string, displayName?: string, subscribe: boolean = true): Promise<void> => {
     const result = await createUserWithEmailAndPassword(auth, email, password);
     
-    // Send verification email after registration
     if (result.user) {
+      if (displayName) {
+        await updateProfile(result.user, { displayName });
+      }
       await sendEmailVerification(result.user);
       
       // Create a user profile in Firestore
       try {
         await setDoc(doc(db, "users", result.user.uid), {
           email: result.user.email,
+          displayName: displayName ?? null,
           createdAt: serverTimestamp(),
           alerts: {
             emergency: true,
@@ -60,8 +64,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             notifications: true
           }
         });
-
-          // Email logic removed
       } catch (error) {
         console.error("Error creating user profile in Firestore:", error);
       }

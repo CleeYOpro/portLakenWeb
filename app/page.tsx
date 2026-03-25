@@ -9,6 +9,8 @@ import { IoMdAlert } from "react-icons/io";
 import { HiDocumentText } from "react-icons/hi";
 import { MdPayment } from "react-icons/md";
 import { FaBus } from "react-icons/fa";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 import { motion } from "framer-motion";
 import { FaArrowRight } from 'react-icons/fa6';
@@ -32,34 +34,34 @@ import {
 
 const upcomingEvents = [
   {
-    month: 'FEB',
-    day: '2',
-    title: 'Groundhog Day Celebration',
-    desc: 'Join us at the park for the annual Groundhog Day festivities with local treats and games.',
-  },
-  {
-    month: 'FEB',
-    day: '14',
-    title: 'Valentine’s Day Market',
-    desc: 'Local vendors showcase handmade gifts, flowers, and sweets for everyone to enjoy.',
-  },
-  {
-    month: 'FEB',
-    day: '17',
-    title: 'Winter Arts Workshop',
-    desc: 'Interactive workshops for all ages at the community arts center.',
-  },
-  {
-    month: 'FEB',
+    month: 'MAR',
     day: '20',
+    title: 'First Day of Spring Celebration',
+    desc: 'Welcome the new season with live music, food vendors, and family activities at Lakeside Park.',
+  },
+  {
+    month: 'MAR',
+    day: '22',
+    title: 'Spring Farmers Market Opening',
+    desc: 'The seasonal farmers market returns to Town Square with fresh produce, local goods, and more.',
+  },
+  {
+    month: 'MAR',
+    day: '25',
     title: 'City Council Town Hall',
     desc: 'Discuss upcoming projects and community initiatives with local leaders.',
   },
   {
-    month: 'FEB',
+    month: 'MAR',
     day: '28',
     title: 'Community Clean-Up Day',
     desc: 'Volunteer to help keep our parks and streets clean; tools and refreshments provided.',
+  },
+  {
+    month: 'MAR',
+    day: '31',
+    title: 'Spring Arts & Crafts Fair',
+    desc: 'Local artists and makers showcase their work at the community arts center — all ages welcome.',
   },
 ];
 
@@ -80,7 +82,7 @@ const heroSlides = [
     title: "Winter",
     titleItalic: "Highlights",
     description:
-      "The downtown ice rink reopens this December! Enjoy free skating weekends, winter lights, and cozy cocoa pop-ups across Port Laken.",
+      "The downtown ice rink reopened in December! Enjoy free skating weekends, winter lights, and cozy cocoa pop-ups across Port Laken.",
     buttonText: "Read More",
     buttonLink: "/news",
   },
@@ -125,14 +127,14 @@ const quickActions = [
     title: "Access Regulatory Forms",
     link: "/forms",
     authLink: "/forms",
-    nonAuthLink: "/sign-in",
+    nonAuthLink: "/forms",
     icon: <MdPayment className="text-3xl text-primary" />,
   },
   {
     title: "Transportation & Maps",
     link: "/maps-transport",
     authLink: "/maps-transport",
-    nonAuthLink: "/sign-in",
+    nonAuthLink: "/maps-transport",
     icon: <FaBus className="text-3xl text-primary" />,
   },
 ];
@@ -285,7 +287,9 @@ export default function Home() {
                 href = action.authLink;
               } else {
                 // Non-authenticated user goes to sign-in with callback
-                href = `${action.nonAuthLink}?callbackUrl=${encodeURIComponent(action.authLink)}`;
+                href = action.nonAuthLink === '/sign-in' 
+                  ? `${action.nonAuthLink}?callbackUrl=${encodeURIComponent(action.authLink)}`
+                  : action.nonAuthLink;
               }
 
               return (
@@ -435,7 +439,7 @@ export default function Home() {
               WHAT&apos;S <span className="text-primary italic">HAPPENING</span> IN PORT LAKEN?
             </h2>
             <p className="text-gray-600 text-lg">
-              Fresh stories and winter updates from around the city this season.{' '}
+              Fresh stories and spring updates from around the city this season.{' '}
               <a
                 href="/news"
                 className="text-black border-b-2 border-transparent hover:border-primary hover:text-primary transition-colors"
@@ -449,25 +453,25 @@ export default function Home() {
           <div className="space-y-8">
             {[
               {
-                slug: "mlk-day-service",
-                date: "JAN 19, 2026",
-                title: "MLK Day Service & Community Glow",
-                desc: "Port Laken honors the legacy with a special MLK Day event at the waterfront park, featuring community service, live music, and glowing lantern displays.",
-                image: "https://riverheadlocal.com/wp-content/uploads/2025/01/2025_0120_Martin-Luther-King-Lincoln-Memorial-28-Aug-1963-681x516.jpg",
+                slug: "spring-cleanup-2026",
+                date: "MAR 22, 2026",
+                title: "Spring Cleanup Day Draws Record Volunteers",
+                desc: "Hundreds of Port Laken residents turned out for the annual Spring Cleanup, clearing trails, planting flowers along the waterfront, and refreshing neighborhood parks ahead of the season.",
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
               },
               {
-                slug: "winter-market",
-                date: "JAN 25, 2026",
-                title: "Winter Market Lights Up Harbor",
-                desc: "The Winter Market returns to Harbor Plaza with local artisans, warm food trucks, craft drinks, and waterfront lights.",
-                image: "https://foxbaltimore.com/resources/media2/16x9/3851/986/0x361/90/63423fb2-22ce-4454-aed0-68d5eab9dc17-1TOP5_ChristmasVillageinBaltimore2022_heatedtent5_creditChristinaKalff.jpg",
+                slug: "harbor-farmers-market",
+                date: "MAR 26, 2026",
+                title: "Harbor Farmers Market Opens for the Season",
+                desc: "The beloved Harbor Farmers Market is back every Saturday morning, featuring local produce, fresh-baked goods, handmade crafts, and live acoustic performances through the spring.",
+                image: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80",
               },
               {
                 slug: "sustainability-vision-2026",
-                date: "FEB 10, 2026",
-                title: "City Unveils 2026 Sustainability Vision",
-                desc: "Mayor Johnson outlines new green spaces, waterfront upgrades, and eco-friendly public projects.",
-                image: "https://www.hkinteriors.com/wp-content/uploads/2018/11/bg-useful-links.jpg",
+                date: "MAR 18, 2026",
+                title: "City Breaks Ground on Waterfront Green Corridor",
+                desc: "Mayor Johnson joined city officials and community members to break ground on the new Waterfront Green Corridor, a mile-long eco-trail connecting Harbor Plaza to Laken Park.",
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
               },
             ].map((item, i) => (
               <ScrollReveal
@@ -830,6 +834,18 @@ function AccountSection() {
   const router = useRouter();
   const [googleLoading, setGoogleLoading] = useState(false);
   const [googleError, setGoogleError] = useState("");
+  const [firestoreName, setFirestoreName] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (user && !user.displayName) {
+      getDoc(doc(db, "users", user.uid)).then((snap) => {
+        if (snap.exists()) {
+          const name = snap.data()?.displayName as string | undefined;
+          if (name) setFirestoreName(name.split(" ")[0]);
+        }
+      });
+    }
+  }, [user]);
 
   const handleGoogle = async () => {
     setGoogleLoading(true);
@@ -847,7 +863,7 @@ function AccountSection() {
 
   // ── Signed-in state: full-width, no left column ──────────────────────────
   if (user) {
-    const firstName = user.displayName?.split(" ")[0] ?? null;
+    const firstName = user.displayName?.split(" ")[0] ?? firestoreName;
     return (
       <section className="relative py-24 px-6 md:px-20 overflow-hidden">
         <div className="absolute inset-0 -z-10">
@@ -856,7 +872,7 @@ function AccountSection() {
         <div className="max-w-6xl mx-auto text-center">
 
           <h3 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-primary-shade leading-tight tracking-tight mb-6">
-            <span className="italic">Welcome back{firstName ? `, ${firstName}` : ""}.</span>
+            <span className="italic">Welcome back {user.displayName || user.email?.split('@')[0]}!</span>
           </h3>
           <p className="text-primary-shade/55 text-base font-light leading-relaxed max-w-md mx-auto mb-10">
             You&apos;re already part of Port Laken. Stay connected, manage your preferences, and never miss a thing.
@@ -940,7 +956,7 @@ function AccountSection() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
               </svg>
               <span className="flex-1 text-left font-semibold text-primary-shade group-hover:text-primary-shade/90 tracking-wide text-sm transition-colors duration-300">
-                Get Updates
+                Create an account with email
               </span>
               <FaArrowRight className="text-primary-shade/30 group-hover:text-primary-shade group-hover:translate-x-1 transition-all duration-300 text-xs" />
             </Link>
@@ -974,7 +990,7 @@ function PortLakenServicesSection() {
       resourceId: "1",
     },
     {
-      image: "https://www.outsideonline.com/wp-content/uploads/2025/05/GettyImages-103319910-scaled.jpg",
+      image: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&q=80",
       title: "Discovery Park",
       description: "Largest city park with beaches and forest trails.",
       resourceId: "32",
@@ -1506,7 +1522,7 @@ function GallerySection() {
     { src: "https://peakbaggerblobs.blob.core.windows.net/pbphoto/p515L.jpg", alt: "Mountain landscape" },
     { src: "https://www.globalholdings-mgmt.com/wp-content/uploads/2022/09/washington-harbour-1-1024x682.jpg", alt: "Nature scene" },
     { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJRUxmnROa9bcRLzcl0S-vhdwFVkDycEtGiA&s", alt: "Lake view" },
-    { src: "https://excursionmania.com/cdn-cgi/image/quality=75,format=webp,w=auto,h=auto,fit=scale-down,trim=border/https://excursionmania.com/uploads/blog/ideas/420a5a39e12ea478c2f267b2cee4607f.jpg", alt: "Forest view" },
+    { src: "https://olympicpeninsula.org/wp-content/uploads/2025/03/Olympic-National-Park-Sign-v3-800x600.jpg", alt: "Forest view" },
     { src: "https://nrs.objectstore.gov.bc.ca/kuwyyf/frontcountry_camping_RS_8873_82ab7cecb1.jpg", alt: "Waterfall" },
     { src: "https://www.thoughtco.com/thmb/qO4W06u8TNDKXRktinwhTHMLZHE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-885794240-5b5e2c574cedfd0050fae7f2.jpg", alt: "City skyline" },
     { src: "https://quietly-image-uploads.s3.amazonaws.com/image_7015_1280px_c975e1f0ed274103ad6d949df3292aaf.jpeg", alt: "Park trees" },

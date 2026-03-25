@@ -75,7 +75,7 @@ export default function FireDepartmentPage() {
               className="relative h-72 lg:h-80 rounded-2xl overflow-hidden shadow-sm"
             >
               <Image
-                src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&q=80&w=1000"
+                src="https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&q=80&w=1000"
                 alt="Fire Department"
                 fill
                 className="object-cover object-center"
@@ -168,7 +168,7 @@ export default function FireDepartmentPage() {
             className="relative h-72 lg:h-[360px] rounded-2xl overflow-hidden shadow-sm"
           >
             <Image
-              src="https://images.unsplash.com/photo-1582655432879-67d4fedc6f57?auto=format&fit=crop&q=80&w=900"
+              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=900"
               alt="Firefighters in action"
               fill
               className="object-cover"

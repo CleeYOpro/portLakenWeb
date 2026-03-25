@@ -52,12 +52,7 @@ export default function CommunityDevelopmentPage() {
               animate="visible"
               variants={fadeUp}
             >
-              <div
-                className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4"
-                style={{ color: PRIMARY, backgroundColor: `${SHADE}30`, border: `1px solid ${SHADE}` }}
-              >
-                Planning &amp; Growth
-              </div>
+
               <h1 className="font-display text-5xl md:text-6xl font-bold text-port-navy mb-4 leading-tight">
                 Community <em style={{ color: PRIMARY }}>Development</em>
               </h1>
@@ -119,9 +114,7 @@ export default function CommunityDevelopmentPage() {
             variants={fadeUp}
             className="mb-8"
           >
-            <p className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ color: PRIMARY }}>What We Do</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-port-navy">Our Services</h2>
-            <div className="mt-4 w-10 h-0.5 rounded-full" style={{ backgroundColor: SHADE }} />
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -185,9 +178,7 @@ export default function CommunityDevelopmentPage() {
             viewport={{ once: true }}
             variants={fadeUp}
           >
-            <p className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ color: PRIMARY }}>
-              Building Tomorrow
-            </p>
+
             <h3 className="font-display text-3xl md:text-4xl font-bold text-port-navy mb-4 leading-snug">
               A City That <em>Grows With Purpose</em>
             </h3>
@@ -195,7 +186,7 @@ export default function CommunityDevelopmentPage() {
               Every permit issued, every zoning decision made, and every neighborhood plan adopted is a step toward the Port Laken we want to be.
             </p>
             <p className="text-port-slate/70 leading-relaxed mb-6">
-              We engage residents at every stage — from early planning to final approval — to ensure development reflects the community&apos;s vision.
+              We engage residents at every stage, from early planning to final approval, to ensure development reflects the community&apos;s vision.
             </p>
             <div className="h-px" style={{ backgroundColor: SHADE }} />
           </motion.div>
@@ -215,16 +206,16 @@ export default function CommunityDevelopmentPage() {
               Start Your <em>Project</em>
             </h2>
             <p className="text-port-slate/70 text-lg mb-7 max-w-xl mx-auto">
-              Apply for permits, check zoning requirements, or schedule a pre-application meeting with our planning team.
+              Apply for permits and check zoning requirements.
             </p>
             <Link
-              href="/contact"
+              href="/forms"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-white transition-all"
               style={{ backgroundColor: PRIMARY }}
               onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#5a7389")}
               onMouseLeave={e => (e.currentTarget.style.backgroundColor = PRIMARY)}
             >
-              Contact Planning Division
+              Check out Forms and Applications
             </Link>
           </motion.div>
         </div>

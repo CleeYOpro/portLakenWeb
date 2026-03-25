@@ -19,9 +19,10 @@ const nextConfig = {
       { protocol: "https", hostname: "wp.bibbeo.com" },
       { protocol: "https", hostname: "olympicpeninsula.org" },
       { protocol: "https", hostname: "www.olympicpeninsula.org" },
+      { protocol: "https", hostname: "www.visitportangeles.com" },
+      { protocol: "https", hostname: "**" },
     ],
-    domains: ['www.visitportangeles.com', '*'], // Allow all external domains including visitportangeles.com
-    unoptimized: true // This allows any external image to be used without optimization
+    unoptimized: true,
   },
 }
 

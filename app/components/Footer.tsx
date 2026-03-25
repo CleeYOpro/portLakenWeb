@@ -128,7 +128,7 @@ export default function Footer() {
               className="flex flex-col gap-4 text-white/70 py-3 border-b border-white/10 w-full"
             >
               {user ? (
-                // Show welcome message if user is logged in
+               
                 <div className="flex flex-col gap-3">
                   <h3 className="text-lg font-medium">Port Laken welcomes you back, {user.displayName || user.email?.split('@')[0]}</h3>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, Suspense, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { RESOURCES, Resource, ResourceCategory } from "./resources";
 import ResourceCard from "./_components/ResourceCard";
@@ -8,6 +8,9 @@ import ResourcePopup from "./_components/ResourcePopup";
 import SearchSection from "./_components/SearchSection";
 import AIOverview from "./_components/AIOverview";
 import { FolderOpen, PlusCircle, ChevronDown } from "lucide-react";
+import { db } from "@/lib/firebase";
+import { collection, query as firestoreQuery, where, getDocs } from "firebase/firestore";
+import { mergeResources } from "@/lib/mergeResources";
 
 const CATEGORIES: { label: string; value: ResourceCategory | "All" }[] = [
   { label: "All Resources", value: "All" },
@@ -20,303 +23,290 @@ const CATEGORIES: { label: string; value: ResourceCategory | "All" }[] = [
   { label: "Education", value: "Education" },
   { label: "Community", value: "Community" },
   { label: "Recreation", value: "Recreation" },
+  { label: "Religious", value: "Religious" },
   { label: "Service Stars", value: "Service Stars" },
 ];
+
+// ─── Rich site-wide context for AI ───────────────────────────────────────────
+
+export interface PageImage {
+  url: string;
+  alt: string;
+  caption?: string;
+}
+
+export interface PageContext {
+  route: string;
+  label: string;
+  images?: PageImage[];
+  address?: string;
+  description?: string;
+}
+
+// Images and structured data extracted from each page
+export const PAGE_CONTEXTS: Record<string, PageContext> = {
+  about: {
+    route: "/about",
+    label: "About",
+    description: "Port Laken was founded in 1834. Population 43,612. 45 sq miles. 19 parks (50+ total green spaces). 1,500+ local businesses. 98% resident satisfaction. Located along northern Washington shores between the San Juan Strait and Olympic Mountains. Tagline: 'Rooted in Place. Rising Forward.' The city has a vibrant culinary scene, waterfront life, a thriving arts and education sector, and a strong sense of community. Key landmarks include the Founders' Statue & Plaza (downtown), Port Laken History Museum, Port Laken Art Museum, and the waterfront pier.",
+    images: [
+      { url: "https://outdoor-society.com/wp-content/uploads/2018/04/MP7A1677-1.jpg", alt: "Port Laken aerial view", caption: "Port Laken" },
+      { url: "https://olympicpeninsula.org/wp-content/uploads/2024/09/port-angeles-wa-city-pier-hdr-e1727213387696.jpg", alt: "Waterfront Life", caption: "Waterfront" },
+      { url: "https://images.trvl-media.com/place/6219551/4ada606a-cc8f-4451-9010-293cace04a6b.jpg", alt: "City Center", caption: "City Center" },
+      { url: "https://www.smartmeetings.com/wp-content/uploads/2015/11/washington-cover-dukes-chowder-house-1.jpg", alt: "Culinary Scene", caption: "Culinary Scene" },
+    ],
+  },
+  events: {
+    route: "/events",
+    label: "Events",
+    description: "Upcoming events: Spring Food Drive (March 15, 2026, Community Center, 9AM-4PM), Summer Concert Series (April 22, 2026, Lakeside Park, 6-10PM), Job Skills Workshop (May 8, 2026, Public Library, 10AM-2PM), Earth Day Cleanup (April 22, 2026, Various Locations, 8AM-12PM), Farmers Market Opening (May 1, 2026, Town Square, 7AM-1PM), Kids Art Camp (June 15-19, 2026, Arts Center, 9AM-3PM), Senior Health Fair (May 20, 2026, Senior Center, 10AM-3PM), Independence Day Celebration (July 4, 2026, Harbor Park, 4-10PM), Summer Festival (annual, multiple venues).",
+    images: [
+      { url: "https://images.unsplash.com/photo-1513618827672-0d7c5ad591b1?w=600&q=80", alt: "Spring Food Drive", caption: "Spring Food Drive" },
+      { url: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=600&q=80", alt: "Summer Concert Series", caption: "Summer Concert" },
+      { url: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=600&q=80", alt: "Earth Day Cleanup", caption: "Earth Day Cleanup" },
+      { url: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80", alt: "Independence Day", caption: "July 4th Celebration" },
+      { url: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=600&q=80", alt: "Farmers Market", caption: "Farmers Market" },
+    ],
+  },
+  maps: {
+    route: "/maps-transport",
+    label: "Map",
+    description: "Interactive map of Port Laken with key locations. Bus routes: Route 120 (Downtown Loop, every 15 min), Route 240 (Riverside Park, every 20 min), Route 480 (Airport, every 30 min), Route 960 (Arts District, every 25 min). Intercity rail: West/South Peninsula Line to Tacoma/Olympia, East/North Sound Line to Seattle/Bellevue. Port Laken is approximately a 2-hour drive from Seattle.",
+    images: [
+      { url: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80", alt: "Harborview Medical Center", caption: "Harborview Medical" },
+      { url: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80", alt: "Eastlaken Community Center", caption: "Community Center" },
+    ],
+  },
+  forms: {
+    route: "/forms",
+    label: "Forms & Applications",
+    description: "Available forms: Residential Building Permit Application (Building & Zoning, planning@portlaken.gov), Special Event Permit Application (City Clerk), Park Facility Reservation Form (Parks & Recreation), Business License Application (Finance, $150/year), Zoning Variance Request, Water Service Connection Application (Public Works), Street Closure Permit, Dog License Application, Garage Sale Permit, Public Records Request, Commercial Sign Permit, Sidewalk Cafe Permit ($100/year). Featured: 2025 Business License Renewal (deadline Jan 31), Property Tax Assessment Appeal (deadline Mar 15), Summer Recreation Program Registration.",
+    images: [
+      { url: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80", alt: "Business License Renewal", caption: "Business License" },
+      { url: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80", alt: "Property Tax Appeal", caption: "Property Tax" },
+      { url: "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=800&q=80", alt: "Recreation Registration", caption: "Recreation Programs" },
+    ],
+  },
+  council: {
+    route: "/mayor-council",
+    label: "Council",
+    description: "City Council members: Mayor Sarah Johnson, David Martinez (District 1, infrastructure), Emily Chen (District 2, environment), Michael Thompson (District 3, public safety), Lisa Rodriguez (District 4, education), James Wilson (At Large, fiscal). Upcoming meetings: Regular City Council Meeting (Jan 15, 2026), Special Session on Urban Planning (Jan 8, 2026), Public Hearing on Budget Allocation (Dec 20, 2025). Council meetings are open to the public.",
+    images: [],
+  },
+  ordinances: {
+    route: "/ordinances",
+    label: "Ordinances",
+    description: "Active ordinances: Residential Noise Abatement (ORD-2023-12, max 65dB daytime/55dB nighttime), Zoning Regulations Amendment (ORD-2023-05, new MU-1 mixed-use zone, 45ft height limit), Environmental Protection Standards (ORD-2022-05, LEED Silver required for 10k+ sqft buildings), Business Licensing Requirements (ORD-2021-89, general license $150/year), Water Conservation Requirements (ORD-2023-22, no outdoor watering 10AM-6PM), Short-Term Rental Regulations (ORD-2023-08, $350/year permit), Accessory Dwelling Unit Standards (ORD-2022-33), Outdoor Dining Permit Program (ORD-2021-52, sidewalk dining $100/year).",
+    images: [],
+  },
+  boardsCommittees: {
+    route: "/boards-committees",
+    label: "Boards & Committees",
+    description: "Residents can apply to serve on city boards and commissions including the Planning Commission and Civic Arts Commission. An online application form is available on the Boards & Committees page.",
+    images: [],
+  },
+  environment: {
+    route: "/environmental",
+    label: "Environment",
+    description: "Port Laken environmental programs: Recycling & Waste (curbside pickup Tuesdays, 40% landfill diversion goal by 2026), Green Energy (100% renewable by 2030, $3,000 solar rebate available, 75% clean energy now), Water Conservation (2M gallons saved, usage down 30%, smart irrigation rebates up to $200), Community Gardens (12 sites citywide, 400+ plots, 10,000 lbs donated to food banks annually). Parks: Elm Street Park (opened Jan 2026, walking trails, native plant garden, community pavilion), Lakeview Waterfront Park (14 acres, boat launch, wetland trail, fishing pier), Riverside Community Garden (80+ plots, composting station). Initiatives: Tree Planting (5,000+ trees planted), Clean Harbor Project, Green Building Standards (LEED Silver required for large buildings).",
+    images: [
+      { url: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=1920&q=80", alt: "Olympic National Forest", caption: "Port Laken Environment" },
+      { url: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800&q=80", alt: "Community Gardens", caption: "Community Gardens" },
+      { url: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80", alt: "Solar Energy", caption: "Solar Initiative" },
+      { url: "https://images.unsplash.com/photo-1468421870903-4df1664ac249?w=800&q=80", alt: "Water Conservation", caption: "Water Conservation" },
+    ],
+  },
+  news: {
+    route: "/news",
+    label: "News",
+    description: "Latest news: Green Port 2026 sustainability plan (Feb 10, 2026), $50M Downtown Revitalization Initiative (Jan 16, 2026), Elm Street Park opening (Jan 11, 2026), New Park Opens on Elm Street, Council Meeting Highlights, Summer Festival Schedule. Featured resident stories: Sarah Martinez (community volunteer, leads food drive initiatives), Michael Chen (youth mentor, 15 years mentoring at-risk youth, founded Future Forward Port Laken in 2013). Business spotlights: Harbor Brew Coffee, Green Thumb Nursery, Pages & Prose.",
+    images: [],
+  },
+  departments: {
+    route: "/departments",
+    label: "Departments",
+    description: "City departments: City Clerk (records, elections), Community Development (planning, zoning, permits), Fire Department (fire suppression, EMS), Police Department (law enforcement, public safety), Public Works (infrastructure, roads, utilities), Finance (budget, taxes, billing), Human Resources (city employment), Recreation and Parks (parks, trails, recreation programs).",
+    images: [],
+  },
+  careers: {
+    route: "/careers",
+    label: "Careers",
+    description: "Port Laken city employment opportunities. Benefits include comprehensive health, dental & vision coverage, generous retirement & pension plans, paid time off & holidays, and long-term job stability. The city values community impact, career growth, and stability. Job listings are posted on Indeed. Roles include civil engineers, recreation coordinators, IT support specialists, and more. The Careers page links to the full Benefits Guide.",
+    images: [],
+  },
+};
 
 const siteContext = {
   siteName: "Port Laken",
   global: {
-    footer:
-      "The footer appears across the website and includes contact info, weather, and quick links to About, Amenities, Events, and Gallery.",
-    topRight:
-      "The top right includes a Sign In page for managing resources and bills, plus a search bar that helps users quickly navigate to any page.",
+    footer: "The footer includes contact info, weather, and quick links to About, Amenities, Events, and Gallery.",
+    topRight: "The top right includes a Sign In page and a search bar for quick navigation.",
   },
   homePage: {
-    quickActions: [
-      "Emergency Alerts",
-      "Submit Resources",
-      "Pay Utilities",
-      "Transportation and Maps",
-    ],
-    bottomSection:
-      "The bottom of the home page includes a way for users to stay in the loop and sign up for newsletters.",
+    quickActions: ["Emergency Alerts", "Submit Resources", "Pay Utilities", "Transportation and Maps"],
+    bottomSection: "The bottom of the home page includes a newsletter sign-up.",
   },
   navigation: {
     communityHub: {
-      label: "Community Hub",
       pages: {
-        resourceDirectory:
-          "A Resource Directory page where the AI is located. Users can ask about navigation and find community resources.",
-        events:
-          "The Events and Calendar page has featured events at the top and a calendar with upcoming events and important holidays. Featured events include Earth Day Cleanup, Farmers Market Opening, Kids Art Camp, Senior Health Fair, Independence Day Celebration, and more.",
-        map:
-          "The Map page includes a map of Port Laken with important locations highlighted, including parks, facilities, and more.",
-        submitResource:
-          "The Submit a Resource page allows users to submit items to the city for review or attention and attach files.",
-        communityStories:
-          "The Community Stories page highlights stories from the community, similar to a newsletter with updates from around town.",
+        resourceDirectory: "Resource Directory — AI assistant and community resource listings covering Healthcare, Family, Food, Seniors, Legal, Emergency, Education, Community, Recreation, and Service Stars categories.",
+        events: "Events & Calendar — featured events, calendar with upcoming events.",
+        map: "Map — interactive map of Port Laken with key locations and transit routes.",
+        submitResource: "Submit a Resource — submit items to the city for review.",
+        communityStories: "Community Stories — community newsletter and updates.",
       },
     },
     residents: {
-      label: "Residents",
       pages: {
-        life: {
-          description:
-            "The Life page gives a quick overview of Port Laken and lets users navigate through civic and resident services.",
-          sections: [
-            "Affordable Housing",
-            "Schools and Childcare",
-            "Parks and Recreation",
-            "Local Business and Economy",
-            "Public Transit",
-            "Community Centers",
-            "Waste and Recycling",
-            "Public Safety",
-            "Health Services",
-            "Libraries and Arts",
-            "Permits & Licenses",
-          ],
-          linkedPages: {
-            careers:
-              "Local Business and Economy leads to a Careers tab with information on jobs and employee benefits.",
-            forms:
-              "Permits & Licenses leads to a Forms tab with permits and applications that can be downloaded, viewed, or signed and submitted, with details on the processes.",
-          },
-        },
-        formsAndApplications:
-          "Forms and Applications is available under Residents and relates to permits, downloadable forms, applications, and submission processes.",
-        employment:
-          "Employment is available under Residents and relates to jobs and city employment information.",
+        formsAndApplications: PAGE_CONTEXTS.forms.description,
+        employment: "Employment — city jobs and employment information. Benefits: health/dental/vision, pension, PTO. Apply via Indeed.",
       },
     },
-    departments: {
-      label: "Departments",
-      description:
-        "The Departments dropdown includes City Clerk, Community Department, Fire Department, Police Department, Public Works, Finance, HR, and Recreation and Parks. It also explains how Port Laken serves residents through sustainable infrastructure, community safety, and public spaces.",
-    },
+    departments: { description: PAGE_CONTEXTS.departments.description },
     government: {
-      label: "Government",
       pages: {
-        council:
-          "Council introduces the city council and mayor, with information on districts, agendas, and upcoming meetings and hearings.",
-        ordinances:
-          "Ordinances lets users browse and search city ordinances and regulations with filters. Examples include zoning regulations, parking rules for commercial vehicles, environmental protection standards, and short-term rental regulations.",
-        boardsAndCommittees:
-          "Boards and Committees allows users to submit a board application and view commissions such as planning and civic arts commissions.",
-        environment:
-          "Environment highlights Port Laken's dedication to a greener future, with programs like recycling and waste, green energy, water conservation, and community gardens. Featured initiatives include Tree Planting, Clean Harbor Project, and Green Building Standards. A button at the bottom invites users to get started and volunteer today.",
+        council: PAGE_CONTEXTS.council.description,
+        ordinances: PAGE_CONTEXTS.ordinances.description,
+        boardsAndCommittees: PAGE_CONTEXTS.boardsCommittees.description,
+        environment: PAGE_CONTEXTS.environment.description,
       },
     },
-    news: {
-      label: "News",
-      description:
-        "News highlights featured resident stories, local business spotlights, latest news, and newsletters about the city.",
-    },
+    news: { description: PAGE_CONTEXTS.news.description },
     about: {
-      label: "About",
-      stats: {
-        population: "125,000",
-        founded: "1834",
-        area: "45 sq miles",
-      },
-      description:
-        "The About page covers the city's heritage, sustainability practices, culture, restaurants, art, innovation, waterfront life, and includes a way for users to stay connected by entering their email.",
-      sustainability: [
-        "12 MW solar power",
-        "40+ hydrogen fuel cell buses",
-        "65% renewable energy",
-      ],
+      stats: { population: "43,612", founded: "1834", area: "45 sq miles", parks: "50+", trails: "100 miles", schools: "25 public", safetyRating: "A+" },
+      description: PAGE_CONTEXTS.about.description,
     },
     references: {
-      label: "References",
-      description:
-        'The References page explains what powers the site, including the code stack, development standards, additional libraries, image credits, resources, a copyright checklist, and a final disclaimer. The disclaimer states: "This website is a demonstration project created for educational purposes. Port Laken is a fictional city, and any resemblance to actual places, organizations, or events is coincidental. All content is created to showcase web development capabilities and municipal website design best practices."',
+      description: "References page explains the code stack and includes a disclaimer that Port Laken is a fictional city for educational purposes.",
       stack: ["Next.js", "React", "TypeScript", "Tailwind", "Vercel"],
     },
-    signIn: {
-      label: "Sign In",
-      description:
-        "Users can sign in to manage resources, bills, and account-related items. New users can click Create Account and enter first name, last name, date of birth, email, username, and password.",
-    },
+    signIn: { description: "Sign In to manage resources, bills, and account items. New users can create an account." },
+    contact: { description: "Contact the city for general inquiries, feedback, or issues. Form available." },
+    alerts: { description: "Current emergency alerts and sign-up for notification system." },
+    privacy: { description: "Privacy policy regarding the use of Port Laken's digital services." }
   },
 };
 
 function buildAiContext(query: string, contextResources: Resource[]) {
-  const visibleResources = contextResources.length ? contextResources : RESOURCES;
+  const allResources = contextResources.length ? contextResources : RESOURCES;
+
+  const visibleResources = allResources;
 
   const resourceLines = visibleResources
     .map((r) => {
-      const pieces = [
-        `- ${r.name}: ${r.shortDescription || r.fullDescription || "No description provided."}`,
+      return [
+        `- ${r.name}: ${r.shortDescription || "No description."} ${r.fullDescription || ""}`,
         `Category: ${r.category}.`,
         r.address ? `Address: ${r.address}.` : "",
         r.phone ? `Phone: ${r.phone}.` : "",
         r.tags?.length ? `Tags: ${r.tags.join(", ")}.` : "",
-      ]
-        .filter(Boolean)
-        .join(" ");
-
-      return pieces;
+      ].filter(Boolean).join(" ");
     })
     .join("\n");
 
-  const communityHub = siteContext.navigation.communityHub.pages;
-  const residentsLife = siteContext.navigation.residents.pages.life;
-  const government = siteContext.navigation.government.pages;
-  const about = siteContext.navigation.about;
-  const references = siteContext.navigation.references;
-  const signIn = siteContext.navigation.signIn;
+  const nav = siteContext.navigation;
 
   return `
-WEBSITE NAME:
-${siteContext.siteName}
+WEBSITE: ${siteContext.siteName}
+GLOBAL: ${siteContext.global.footer} ${siteContext.global.topRight}
+HOME PAGE QUICK ACTIONS: ${siteContext.homePage.quickActions.join(", ")}
 
-GLOBAL WEBSITE DETAILS:
-- ${siteContext.global.footer}
-- ${siteContext.global.topRight}
+PAGES & CONTENT:
+- About: ${nav.about.description} Stats: population ${nav.about.stats.population}, founded ${nav.about.stats.founded}, area ${nav.about.stats.area}.
+- Events: ${nav.communityHub.pages.events}
+- Map: ${nav.communityHub.pages.map}
+- Forms & Applications: ${nav.residents.pages.formsAndApplications}
+- Council: ${nav.government.pages.council}
+- Ordinances: ${nav.government.pages.ordinances}
+- Boards & Committees: ${nav.government.pages.boardsAndCommittees}
+- Environment: ${nav.government.pages.environment}
+- News: ${nav.news.description}
+- Departments: ${nav.departments.description}
+- Careers: ${nav.residents.pages.employment}
+- References: ${nav.references.description}
+- Sign In: ${nav.signIn.description}
+- Contact: ${nav.contact.description}
+- Alerts: ${nav.alerts.description}
+- Privacy: ${nav.privacy.description}
+- Resource Directory (current page): Community resource listings with AI assistant.
 
-HOME PAGE:
-- Quick action buttons: ${siteContext.homePage.quickActions.join(", ")}.
-- ${siteContext.homePage.bottomSection}
-
-TOP NAVIGATION:
-- Community Hub
-  - Resource Directory: ${communityHub.resourceDirectory}
-  - Events: ${communityHub.events}
-  - Map: ${communityHub.map}
-  - Submit a Resource: ${communityHub.submitResource}
-  - Community Stories: ${communityHub.communityStories}
-
-- Residents
-  - Life: ${residentsLife.description}
-  - Life sections: ${residentsLife.sections.join(", ")}
-  - Careers tab: ${residentsLife.linkedPages.careers}
-  - Forms tab: ${residentsLife.linkedPages.forms}
-  - Forms and Applications: ${siteContext.navigation.residents.pages.formsAndApplications}
-  - Employment: ${siteContext.navigation.residents.pages.employment}
-
-- Departments
-  - ${siteContext.navigation.departments.description}
-
-- Government
-  - Council: ${government.council}
-  - Ordinances: ${government.ordinances}
-  - Boards and Committees: ${government.boardsAndCommittees}
-  - Environment: ${government.environment}
-
-- News
-  - ${siteContext.navigation.news.description}
-
-- About
-  - Population: ${about.stats.population}
-  - Founded: ${about.stats.founded}
-  - Area: ${about.stats.area}
-  - ${about.description}
-  - Sustainability highlights: ${about.sustainability.join(", ")}
-
-- References
-  - ${references.description}
-  - Code stack: ${references.stack.join(", ")}
-
-- Sign In
-  - ${signIn.description}
-
-CURRENT PAGE:
-Resource Directory
-
-CURRENT PAGE DETAILS:
-- This is the page where the AI assistant appears.
-- Users can use the search bar and Ask AI button on this page.
-- The page contains a resource grid with these visible resources:
+RESOURCE DIRECTORY LISTINGS:
 ${resourceLines}
 
-USER QUESTION:
-"${query}"
+USER QUESTION: "${query}"
 `.trim();
 }
 
-async function generateOverview(query: string, contextResources: Resource[]) {
+export interface AIResult {
+  text: string;
+  pageContextKey?: string; // key into PAGE_CONTEXTS
+  address?: string;        // if question is about a location
+}
+
+async function generateOverview(query: string, contextResources: Resource[]): Promise<AIResult> {
   const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-  if (!apiKey) {
-    throw new Error("Missing NEXT_PUBLIC_GEMINI_API_KEY in .env.local");
-  }
+  if (!apiKey) throw new Error("Missing NEXT_PUBLIC_GEMINI_API_KEY in .env.local");
 
   const context = buildAiContext(query, contextResources);
 
-  const isNavigationQuery =
-    /where|navigate|go to|find|how do i|get to|which page|where can i|where do i/i.test(
-      query
-    );
+  const pageKeys = Object.keys(PAGE_CONTEXTS).join(", ");
 
-  const isResourceQuery =
-    /resource|food|legal|health|counseling|senior|community center|medical|doctor|therapy|housing/i.test(
-      query
-    );
+  const prompt = `
+You are the built-in AI guide for the Port Laken city website.
 
-  const callGemini = async (minChars: number) => {
-    const prompt = `
-You are the built-in AI guide for the Port Laken website.
-
-Your job is to answer based only on the website context provided below.
-You must help users navigate Port Laken's website and explain where information or features are located.
+Answer based ONLY on the website context below. Do not invent anything not described.
+IMPORTANT: Always check the RESOURCE DIRECTORY LISTINGS section first. If the answer exists there, use those resources — do not say something is unavailable if it appears in the listings.
 
 ${context}
 
-STRICT RULES:
-- Answer specifically about the Port Laken website.
-- Use only the provided website context.
-- Do not invent pages, dropdown items, buttons, forms, laws, events, or features that were not described.
-- If the user asks where to find something, name the relevant page, dropdown, section, or tool on the website.
-- If the answer is on the current Resource Directory page, say that clearly.
-- If the answer belongs on another page, tell the user exactly where to go in the site's navigation.
-- If something is not described in the website context, say that clearly instead of guessing.
-- Mention the top navigation or top-right search bar when useful.
-- Mention the footer only if it is relevant.
-
-${
-  isNavigationQuery
-    ? `
-This is a navigation question.
-Prioritize giving step-by-step website guidance, such as which top navigation dropdown to open, which page to select, and what section to look at.
-`
-    : ""
+RESPONSE FORMAT — return ONLY valid JSON, no markdown, no code fences:
+{
+  "text": "Your 4-sentence answer here.",
+  "pageContextKey": "one of: ${pageKeys} — or null if no specific page applies",
+  "address": "a specific address string if the question is about a physical location, otherwise null"
 }
 
-${
-  isResourceQuery
-    ? `
-This may relate to the Resource Directory.
-If the answer is available through the visible resource cards, mention the specific resource title and category.
-`
-    : ""
-}
-
-STYLE RULES:
-- Write EXACTLY 4 sentences.
-- Each sentence should be 18-30 words when possible.
-- Be specific and helpful.
-- No bullet points.
-- No markdown.
+RULES FOR text:
+- Exactly 3 sentences, 20-30 words each, ~250 chars total.
+- No bullet points, no markdown.
 - End with a period.
-- Sound like an on-site assistant, not a generic chatbot.
+- Sound like an on-site assistant.
+- ALWAYS check the RESOURCE DIRECTORY LISTINGS first. If relevant resources exist there, name them by their exact name. Never say something is "not listed" if it appears in the listings.
+- When referencing a resource, use its exact name from the listings.
+- When referencing a page, use its exact navigation name (Events, Map, Forms & Applications, Council, Ordinances, Boards & Committees, Environment, Careers, News, About, Departments).
 
-Return only the final paragraph text.
+RULES FOR pageContextKey:
+- Set to the most relevant page key if the question is primarily about that page's content.
+- about → questions about city history, age, population, founding, stats, culture, waterfront. NOT for food/restaurant questions if resources exist.
+- events → questions about events, activities, calendar, things to do, upcoming happenings.
+- maps → questions about locations, getting around, transit, bus routes, directions.
+- forms → questions about permits, applications, licenses, forms, paperwork.
+- council → questions about city council, mayor, meetings, government leadership.
+- ordinances → questions about laws, rules, regulations, ordinances, noise, zoning, parking.
+- boardsCommittees → questions about boards, commissions, committees, applying to serve.
+- environment → questions about recycling, solar, green energy, water conservation, parks, gardens, sustainability.
+- news → questions about news, announcements, stories, updates.
+- departments → questions about city departments, fire, police, public works, finance.
+- careers → questions about jobs, employment, working for the city.
+- null → if the answer is primarily from the Resource Directory listings on this page.
+
+RULES FOR address:
+- Only set if the question asks where something is physically located.
+- Use the exact address from the resource listings or page context.
+- null otherwise.
+
+Return ONLY the JSON object.
 `.trim();
 
+  const callGemini = async (): Promise<AIResult> => {
     const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(
-        apiKey
-      )}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contents: [{ role: "user", parts: [{ text: prompt }] }],
-          generationConfig: {
-            temperature: 0.2,
-            maxOutputTokens: 800,
-            topP: 0.9,
-          },
+          generationConfig: { temperature: 0.2, maxOutputTokens: 2048, topP: 0.9, responseMimeType: "application/json" },
         }),
       }
     );
@@ -327,24 +317,74 @@ Return only the final paragraph text.
     }
 
     const data = await res.json();
-    const text =
-      data?.candidates?.[0]?.content?.parts
-        ?.map((p: { text?: string }) => p?.text)
-        ?.filter(Boolean)
-        ?.join("") ?? "";
+    console.log("[Gemini] full response:", JSON.stringify(data, null, 2));
 
-    const cleaned = text.trim();
-    const finalized =
-      cleaned.length && !/[.!?]$/.test(cleaned) ? `${cleaned}.` : cleaned;
+    const candidate = data?.candidates?.[0];
+    const finishReason = candidate?.finishReason;
+    console.log("[Gemini] finishReason:", finishReason);
 
-    return finalized.length >= minChars ? finalized : "";
+    const raw = candidate?.content?.parts
+      ?.map((p: { text?: string }) => p?.text)
+      ?.filter(Boolean)
+      ?.join("") ?? "";
+
+    console.log("[Gemini] raw text:", raw);
+
+    // Strip markdown fences
+    const cleaned = raw.trim()
+      .replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/```\s*$/i, "").trim();
+
+    // Try full JSON parse first
+    try {
+      const parsed = JSON.parse(cleaned);
+      const text = (parsed.text ?? "").trim();
+      const finalized = text && !/[.!?]$/.test(text) ? `${text}.` : text;
+      return {
+        text: finalized || "No response generated.",
+        pageContextKey: parsed.pageContextKey && parsed.pageContextKey !== "null" ? parsed.pageContextKey : undefined,
+        address: parsed.address && parsed.address !== "null" ? parsed.address : undefined,
+      };
+    } catch (parseErr) {
+      console.log("[Gemini] JSON parse failed:", parseErr, "cleaned:", cleaned);
+      // Regex fallback — extract "text" field value even from malformed JSON
+      const textMatch = cleaned.match(/"text"\s*:\s*"((?:[^"\\]|\\.)*)"/);
+      if (textMatch) {
+        const extracted = textMatch[1].replace(/\\n/g, " ").replace(/\\"/g, '"').trim();
+        const finalized = extracted && !/[.!?]$/.test(extracted) ? `${extracted}.` : extracted;
+        const pageMatch = cleaned.match(/"pageContextKey"\s*:\s*"([^"]+)"/);
+        const addrMatch = cleaned.match(/"address"\s*:\s*"([^"]+)"/);
+        return {
+          text: finalized || "No response generated.",
+          pageContextKey: pageMatch?.[1] && pageMatch[1] !== "null" ? pageMatch[1] : undefined,
+          address: addrMatch?.[1] && addrMatch[1] !== "null" ? addrMatch[1] : undefined,
+        };
+      }
+      // Last resort: if it looks like raw JSON leaked, return empty
+      if (cleaned.startsWith("{") || cleaned.startsWith('"text"')) {
+        return { text: "No response generated." };
+      }
+      const finalized = cleaned && !/[.!?]$/.test(cleaned) ? `${cleaned}.` : cleaned;
+      return { text: finalized || "No response generated." };
+    }
   };
 
-  let out = await callGemini(260);
-  if (!out) out = await callGemini(220);
-  if (!out) out = await callGemini(180);
+  return callGemini();
+}
 
-  return out || "No response generated.";
+function mapSubmissionCategory(cat: string): ResourceCategory {
+  const map: Record<string, ResourceCategory> = {
+    healthcare: "Healthcare",
+    food: "Food",
+    family: "Family",
+    seniors: "Seniors",
+    legal: "Legal",
+    emergency: "Emergency",
+    education: "Education",
+    community: "Community",
+    recreation: "Recreation",
+    other: "Community", // Map 'other' to Community as default
+  };
+  return map[cat?.toLowerCase()] ?? "Community";
 }
 
 function ResourceDirectoryContent() {
@@ -355,12 +395,50 @@ function ResourceDirectoryContent() {
   const [aiQuery, setAiQuery] = useState("");
   const [aiContextResources, setAiContextResources] = useState<Resource[]>([]);
   const [activeCategory, setActiveCategory] = useState<ResourceCategory | "All">("All");
+  const [communityResources, setCommunityResources] = useState<Resource[]>([]);
   const [filteredResources, setFilteredResources] = useState<Resource[]>(RESOURCES);
   const [selectedResource, setSelectedResource] = useState<Resource | null>(null);
 
   const [aiOverview, setAiOverview] = useState("");
+  const [aiPageContextKey, setAiPageContextKey] = useState<string | undefined>();
+  const [aiAddress, setAiAddress] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const hasAutoSearched = useRef(false);
+
+  // Fetch approved community submissions from Firestore on mount
+  useEffect(() => {
+    async function fetchApprovedResources() {
+      try {
+        const q = firestoreQuery(collection(db, "resources"), where("approvalStatus", "==", "approved"));
+        const snapshot = await getDocs(q);
+        const fetched: Resource[] = snapshot.docs.map((doc) => {
+          const d = doc.data() as Record<string, any>;
+          return {
+            id: doc.id,
+            name: d.name ?? d.title ?? "",
+            category: mapSubmissionCategory(d.category),
+            shortDescription: d.shortDescription ?? d.description ?? "",
+            fullDescription: d.fullDescription ?? d.description ?? "",
+            address: d.address ?? "",
+            mapCoordinates: d.mapCoordinates ?? { lat: 0, lng: 0 },
+            phone: d.phone ?? "",
+            website: d.website ?? "",
+            email: d.email ?? "",
+            tags: Array.isArray(d.tags) ? d.tags : [],
+            image: d.imageUrl || d.image || "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
+            rating: 4.0,
+          };
+        });
+        setCommunityResources(fetched);
+      } catch (err) {
+        console.error("[ResourceDirectory] Failed to fetch community resources:", err);
+      }
+    }
+    fetchApprovedResources();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const q = searchParams.get("q");
@@ -370,18 +448,48 @@ function ResourceDirectoryContent() {
 
     const resourceId = searchParams.get("resourceId");
     if (resourceId) {
-      const resource = RESOURCES.find((r) => r.id === resourceId);
+      const allResources = mergeResources(RESOURCES, communityResources);
+      const resource = allResources.find((r) => r.id === resourceId);
       if (resource) {
         setSelectedResource(resource);
       }
     }
-  }, [searchParams]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams, communityResources]);
+
+  // Auto-fire AI search once on mount if ?q= is present and community resources have loaded
+  useEffect(() => {
+    const q = searchParams.get("q");
+    // Trigger AI search when both conditions are met:
+    // 1. There's a query in the URL
+    // 2. We haven't searched this query yet
+    // 3. Community resources have been loaded (so we have the full dataset)
+    if (q && q.trim() && !hasAutoSearched.current && communityResources.length > 0) {
+      hasAutoSearched.current = true;
+      console.log("[AutoSearch] firing for query:", q);
+      // Make sure to set the query in state first
+      setQuery(q);
+      // Then trigger the AI search with the full resource set
+      const allResources = mergeResources(RESOURCES, communityResources);
+      handleAiSearch(q, allResources);
+    }
+    // Additionally, if we have a query but no community resources yet,
+    // set the query in state so the regular filter can work while waiting for AI
+    else if (q && q.trim() && communityResources.length === 0 && !hasAutoSearched.current) {
+      setQuery(q);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [communityResources, searchParams]);
 
   useEffect(() => {
-    let result = RESOURCES;
+    const allResources = mergeResources(RESOURCES, communityResources);
+    let result = allResources;
 
     if (activeCategory !== "All") {
-      result = result.filter((r) => r.category === activeCategory);
+      result = result.filter((r) => {
+        const allCats = r.categories ?? [r.category];
+        return allCats.includes(activeCategory);
+      });
     }
 
     if (query) {
@@ -401,21 +509,26 @@ function ResourceDirectoryContent() {
     }
 
     setFilteredResources(result);
-  }, [query, activeCategory]);
+  }, [query, activeCategory, communityResources]);
 
-  const handleAiSearch = async (q: string) => {
+  const handleAiSearch = async (q: string, resourcesOverride?: Resource[]) => {
     setAiQuery(q);
-
-    const snapshot = filteredResources;
+    // Always give the AI the full resource list (static + community) so it can reason over everything,
+    // regardless of what the UI filter currently shows.
+    const allResources = mergeResources(RESOURCES, communityResources);
+    const snapshot = resourcesOverride ?? allResources;
     setAiContextResources(snapshot);
-
     setLoading(true);
     setError("");
     setAiOverview("");
+    setAiPageContextKey(undefined);
+    setAiAddress(undefined);
 
     try {
-      const text = await generateOverview(q, snapshot);
-      setAiOverview(text);
+      const result = await generateOverview(q, snapshot);
+      setAiOverview(result.text);
+      setAiPageContextKey(result.pageContextKey);
+      setAiAddress(result.address);
     } catch (e: unknown) {
       const message = e instanceof Error ? e.message : "Gemini failed.";
       setError(message);
@@ -431,10 +544,13 @@ function ResourceDirectoryContent() {
         <div className="max-w-[1600px] mx-auto px-6 space-y-6">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
             <div>
-              <h1 className="font-display text-4xl font-bold text-port-navy mb-2">
+              <h1 className="font-display text-4xl font-bold text-port-navy mb-2 animate-fade-in-up md:hidden">
                 Resource Directory
               </h1>
-              <p className="text-lg text-port-slate">
+              <h1 className="font-display text-4xl font-bold text-port-navy mb-2 animate-fade-in-up hidden md:block">
+                Resources, Resources, and MORE RESOURCES!!!
+              </h1>
+              <p className="text-lg text-port-slate opacity-0 animate-fade-in-up [animation-delay:200ms] [animation-fill-mode:forwards]">
                 Find what you need in Port Laken.
               </p>
             </div>
@@ -457,9 +573,13 @@ function ResourceDirectoryContent() {
             <SearchSection
               onSearch={handleAiSearch}
               onQueryChange={setQuery}
+              onClear={() => { setQuery(""); setAiOverview(""); setAiQuery(""); }}
               initialValue={query}
               isLoading={loading}
             />
+            <p className="mt-2 text-xs text-port-slate/60 text-center">
+              Tap <span className="font-semibold text-port-slate/80">AI</span> & it will search and summarize resources for you using AI
+            </p>
           </div>
         </div>
       </div>
@@ -467,6 +587,11 @@ function ResourceDirectoryContent() {
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           <aside className="w-full lg:w-1/4 flex-shrink-0 space-y-8 sticky top-36 h-fit hidden md:block">
+            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs text-amber-800 leading-relaxed">
+              <span className="font-bold">Disclaimer: </span>
+              The resource locations listed in this directory are not real. Port Laken is a fictional city inspired by the real city of Port Angeles in Washington State. Some listings may reference similar types of locations found in Port Angeles, while others point to random nearby areas. These resources are for demonstration purposes only and should not be used for real-world navigation or services.
+            </div>
+
             <div className="bg-white p-6 rounded-3xl border border-port-mist shadow-sm">
               <div className="mb-6 border-b border-port-mist pb-4">
                 <h2 className="font-display text-xl font-bold text-port-navy">
@@ -524,6 +649,14 @@ function ResourceDirectoryContent() {
                 aiOverview={aiOverview}
                 loading={loading}
                 error={error}
+                allResources={mergeResources(RESOURCES, communityResources)}
+                pageContextKey={aiPageContextKey}
+                address={aiAddress}
+                onResourceClick={(r) => setSelectedResource(r)}
+                onClose={() => {
+                  setAiQuery("");
+                  setAiOverview("");
+                }}
               />
             </div>
 
@@ -535,11 +668,11 @@ function ResourceDirectoryContent() {
               <span className="text-sm text-port-slate">resources</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 bg-white p-4 md:p-6 rounded-3xl">
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-3 md:gap-6 bg-white p-3 md:p-6 rounded-3xl">
               {filteredResources.map((resource) => (
                 <div
                   key={resource.id}
-                  className="h-full relative z-0 touch-none"
+                  className="h-full relative z-0"
                 >
                   <ResourceCard
                     {...resource}
@@ -558,7 +691,7 @@ function ResourceDirectoryContent() {
                   No resources found
                 </h3>
                 <p className="text-port-slate">
-                  Try adjusting your search or category filters.
+                  If you are using AI driven search, press enter to continue.
                 </p>
                 <button
                   onClick={() => {

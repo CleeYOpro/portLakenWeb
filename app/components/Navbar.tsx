@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { GiWaves } from 'react-icons/gi';
-import { Search, LogIn, ChevronDown, User, LogOut } from 'lucide-react';
+import { Search, LogIn, ChevronDown, User, LogOut, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -13,16 +14,53 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [navVisible, setNavVisible] = useState(true);
   const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(null);
+  const lastScrollY = useRef(0);
   const { user, logout } = useAuth();
   const router = useRouter();
 
+  const [gtOffset, setGtOffset] = useState('0px');
+
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 0);
+      const currentY = window.scrollY;
+      setScrolled(currentY > 0);
+
+      // Only hide the navbar when scrolling down from the top
+      // Show navbar when at the top or when scrolling up
+      if (currentY <= 10) {
+      // At the top, always show navbar
+        setNavVisible(true);
+        lastScrollY.current = currentY;
+      } else if (currentY > lastScrollY.current) {
+        // Scrolling down, hide navbar
+        setNavVisible(false);
+      } else if (currentY < lastScrollY.current) {
+        // Scrolling up, show navbar
+        setNavVisible(true);
+      }
+      lastScrollY.current = currentY;
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    // Check if Google Translate has pushed the body down, and offset the navbar to match
+    const checkGtOffset = () => {
+      const bodyTop = document.body?.style?.top;
+      if (bodyTop && bodyTop !== '0px') {
+        setGtOffset(bodyTop);
+      } else {
+        setGtOffset('0px');
+      }
+    };
+    
+    checkGtOffset();
+    // Poll to keep the navbar aligned if GT changes the layout
+    const interval = setInterval(checkGtOffset, 100);
+    return () => clearInterval(interval);
   }, []);
 
   const handleMouseEnter = (item: string) => {
@@ -30,12 +68,27 @@ export default function Navbar() {
       clearTimeout(dropdownTimeout);
       setDropdownTimeout(null);
     }
-    setTimeout(() => setActiveDropdown(item), 150);
+    setActiveDropdown(item);
   };
 
   const handleMouseLeave = () => {
-    const timeout = setTimeout(() => setActiveDropdown(null), 200);
+    const timeout = setTimeout(() => setActiveDropdown(null), 300);
     setDropdownTimeout(timeout);
+  };
+
+  const changeLanguage = (langCode: string) => {
+    if (langCode === 'en') {
+      // Reset to English — clear all googtrans cookies
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname}`;
+    } else {
+      // Google Translate expects /en/<target>
+      document.cookie = `googtrans=/en/${langCode}; path=/`;
+      document.cookie = `googtrans=/en/${langCode}; path=/; domain=${window.location.hostname}`;
+      document.cookie = `googtrans=/en/${langCode}; path=/; domain=.${window.location.hostname}`;
+    }
+    window.location.reload();
   };
 
   const handleLogout = async () => {
@@ -48,15 +101,100 @@ export default function Navbar() {
     }
   };
 
+  function NavDropdown({
+    label,
+    children,
+    isActive,
+    onMouseEnter,
+    onMouseLeave,
+  }: {
+    label: string;
+    children: React.ReactNode;
+    isActive: boolean;
+    onMouseEnter: () => void;
+    onMouseLeave: () => void;
+  }) {
+    const triggerRef = useRef<HTMLDivElement>(null);
+    const [pos, setPos] = useState<{ top: number; left: number; triggerWidth: number; triggerBottom: number } | null>(null);
+
+    useEffect(() => {
+      if (isActive && triggerRef.current) {
+        const rect = triggerRef.current.getBoundingClientRect();
+        setPos({ top: rect.bottom + 32, left: rect.left, triggerWidth: rect.width, triggerBottom: rect.bottom });
+      }
+    }, [isActive]);
+
+    return (
+      <div ref={triggerRef} className="relative" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+        <button className="flex items-center gap-1 font-nunito font-semibold text-deep-navy hover:text-primary transition-colors group relative">
+          <span className="relative inline-block">
+            {label}
+            <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+          </span>
+          <ChevronDown className={`w-4 h-4 transition-transform ${isActive ? 'rotate-180' : ''}`} />
+        </button>
+        {isActive && pos && typeof document !== 'undefined' && createPortal(
+          <div
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+          >
+            {/* Invisible bridge covering the gap between navbar and dropdown */}
+            <div
+              className="fixed"
+              style={{
+                top: pos.triggerBottom,
+                left: pos.left,
+                width: '240px',
+                height: '32px',
+                zIndex: 9999,
+              }}
+            />
+            <div
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}
+              className="fixed rounded-2xl border border-white/20 shadow-md min-w-[240px] animate-fadeIn"
+              style={{
+                top: pos.top,
+                left: pos.left,
+                zIndex: 9999,
+                backgroundColor: 'rgba(241, 245, 249, 0.75)',
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
+              }}
+            >
+              {children}
+            </div>
+          </div>,
+          document.body
+        )}
+      </div>
+    );
+  }
+
+  function DropdownLink({ href, label }: { href: string; label: string }) {
+    return (
+      <Link
+        href={href}
+        className="block px-6 py-2.5 font-nunito font-semibold text-deep-navy hover:bg-primary/10 hover:text-primary transition-colors rounded-lg group"
+      >
+        <span className="relative inline-block">
+          {label}
+          <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+        </span>
+      </Link>
+    );
+  }
+
   return (
     <>
       {/* Sticky Navbar */}
       <nav
-        className={`fixed top-0 z-50 w-full transition-all duration-300 ease-in-out border border-white/20 backdrop-blur-3xl shadow-md ${scrolled ? 'rounded-b-3xl' : 'rounded-b-3xl'}`}
+        className={`fixed z-50 w-full transition-all duration-300 ease-in-out border border-white/20 backdrop-blur-3xl shadow-md rounded-b-3xl ${navVisible ? 'translate-y-0' : '-translate-y-full'}`}
         style={{
           backgroundColor: 'rgba(241, 245, 249, 0.75)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
+          top: gtOffset,
         }}
       >
         <div className="px-6 max-w-[80rem] mx-auto">
@@ -72,7 +210,10 @@ export default function Navbar() {
                   alt="Port Laken"
                   width={160}
                   height={48}
-                  className="h-12 w-auto object-contain transition-transform group-hover:scale-[1.04] -translate-y-[1px]"
+                  priority
+                  loading="eager"
+                  style={{ width: "auto" }}
+                  className="h-12 object-contain transition-transform group-hover:scale-[1.04] -translate-y-[1px]"
                 />
                 <span className="text-2xl font-steel text-slate tracking-tight group-hover:text-primary transition-colors translate-y-[1px]">
                   Port Laken
@@ -107,66 +248,153 @@ export default function Navbar() {
                 onMouseEnter={() => handleMouseEnter('residents')}
                 onMouseLeave={handleMouseLeave}
               >
-                <DropdownLink href="/living-in-portlaken" label="Life" />
+
                 <DropdownLink href="/news" label="News" />
                 <DropdownLink href="/forms" label="Forms & Applications" />
                 <DropdownLink href="/maps-transport" label="Map" />
+                <DropdownLink href="/contact" label="Contact" />
               </NavDropdown>
               <NavLink href="/references" label="References" />
             </div>
 
             {/* Right: Quick Actions */}
             <div className="absolute right-6 flex items-center gap-3">
-              <button
-                onClick={() => setSearchOpen(true)}
-                className="p-2 text-deep-navy hover:text-primary transition-colors hover:bg-primary/10 rounded-full"
-                aria-label="Search"
-              >
-                <Search className="w-6 h-6" />
-              </button>
+<button
+  onClick={() => setSearchOpen(true)}
+  aria-label="AI Search"
+  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border-2 border-primary text-primary font-nunito font-semibold text-sm sm:gap-2 sm:px-4 sm:py-2 sm:text-base hover:bg-primary hover:text-white transition-all hover:shadow-lg"
+>
+  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+  <span className="hidden sm:inline">AI</span>
+</button>
 
               {user ? (
-                // User is logged in - show profile menu
+                // User is logged in - show settings menu
                 <div className="hidden md:block relative group">
                   <button
-                    className="flex items-center gap-2 px-5 py-2 border-2 border-primary text-primary rounded-full font-nunito font-semibold hover:bg-primary hover:text-white transition-all hover:shadow-lg"
+                    className="flex items-center gap-2 px-4 py-2 border-2 border-primary text-primary rounded-full font-nunito font-semibold hover:bg-primary hover:text-white transition-all hover:shadow-lg"
                   >
                     <User className="w-5 h-5" />
-                    <span className="hidden md:inline">Account</span>
                   </button>
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-gray-100">
+                  <div className="absolute right-0 mt-2 w-56 bg-white/90 backdrop-blur-3xl rounded-2xl shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-white/20">
+                    {/* Greeting */}
+                    <div className="px-4 py-2 border-b border-gray-100">
+                      <p className="font-nunito font-bold text-deep-navy text-sm">
+                        Hi, {user.displayName?.split(' ')[0] ?? user.email?.split('@')[0] ?? 'there'} 👋
+                      </p>
+                    </div>
                     <Link
                       href="/dashboard"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white flex items-center gap-2"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white flex items-center gap-2 transition-colors"
                     >
                       <User className="w-4 h-4" />
                       Dashboard
                     </Link>
-                    <Link
-                      href="/alerts"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white flex items-center gap-2"
-                    >
-                      <span className="material-symbols-outlined text-base">notifications</span>
-                      Alerts Settings
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white flex items-center gap-2"
-                    >
-                      <LogOut className="w-4 h-4" />
-                      Logout
-                    </button>
+                    {/* Accessibility / Language */}
+                    <div className="px-4 py-2 border-t border-gray-100">
+                      <p className="text-xs text-gray-400 font-nunito font-semibold uppercase tracking-wide mb-1.5">Accessibility</p>
+                      <div className="flex flex-col gap-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-gray-600 font-nunito">Language</span>
+                          <select
+                            className="ml-auto text-xs border border-gray-200 rounded-lg px-2 py-1 font-nunito text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-primary"
+                            defaultValue="en"
+                            onChange={(e) => changeLanguage(e.target.value)}
+                          >
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                            <option value="fr">Français</option>
+                            <option value="zh-CN">中文</option>
+                            <option value="hi">हिन्दी</option>
+                            <option value="ar">العربية</option>
+                            <option value="pt">Português</option>
+                            <option value="vi">Tiếng Việt</option>
+                            <option value="ko">한국어</option>
+                            <option value="ru">Русский</option>
+                            <option value="ja">日本語</option>
+                            <option value="de">Deutsch</option>
+                            <option value="tl">Filipino</option>
+                            <option value="fa">فارسی</option>
+                            <option value="ur">اردو</option>
+                          </select>
+                        </div>
+                        {gtOffset !== '0px' && (
+                          <button
+                            onClick={() => changeLanguage('en')}
+                            className="text-xs w-full text-center py-1.5 rounded-lg border border-red-200 bg-red-50 text-red-600 font-nunito font-semibold hover:bg-red-100 transition-colors notranslate"
+                          >
+                            Return to English
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="border-t border-gray-100 mt-1">
+                      <button
+                        onClick={handleLogout}
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 flex items-center gap-2 transition-colors"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Logout
+                      </button>
+                    </div>
                   </div>
                 </div>
               ) : (
-                // User is not logged in - show sign in button
-                <Link
-                  href="/sign-in"
-                  className="hidden md:flex items-center gap-2 px-5 py-2 border-2 border-primary text-primary rounded-full font-nunito font-semibold hover:bg-primary hover:text-white transition-all hover:shadow-lg"
-                >
-                  <LogIn className="w-5 h-5" />
-                  Sign In
-                </Link>
+                // User is not logged in - show icon button with dropdown
+                <div className="hidden md:block relative group">
+                  <button
+                    className="flex items-center gap-2 px-4 py-2 border-2 border-primary text-primary rounded-full font-nunito font-semibold hover:bg-primary hover:text-white transition-all hover:shadow-lg"
+                  >
+                    <User className="w-5 h-5" />
+                  </button>
+                  <div className="absolute right-0 mt-2 w-56 bg-white/90 backdrop-blur-3xl rounded-2xl shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-white/20">
+                    <Link
+                      href="/sign-in"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white flex items-center gap-2 transition-colors"
+                    >
+                      <LogIn className="w-4 h-4" />
+                      Sign In
+                    </Link>
+                    {/* Accessibility / Language */}
+                    <div className="px-4 py-2 border-t border-gray-100">
+                      <p className="text-xs text-gray-400 font-nunito font-semibold uppercase tracking-wide mb-1.5">Accessibility</p>
+                      <div className="flex flex-col gap-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-gray-600 font-nunito">Language</span>
+                          <select
+                            className="ml-auto text-xs border border-gray-200 rounded-lg px-2 py-1 font-nunito text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-primary"
+                            defaultValue="en"
+                            onChange={(e) => changeLanguage(e.target.value)}
+                          >
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                            <option value="fr">Français</option>
+                            <option value="zh-CN">中文</option>
+                            <option value="hi">हिन्दी</option>
+                            <option value="ar">العربية</option>
+                            <option value="pt">Português</option>
+                            <option value="vi">Tiếng Việt</option>
+                            <option value="ko">한국어</option>
+                            <option value="ru">Русский</option>
+                            <option value="ja">日本語</option>
+                            <option value="de">Deutsch</option>
+                            <option value="tl">Filipino</option>
+                            <option value="fa">فارسی</option>
+                            <option value="ur">اردو</option>
+                          </select>
+                        </div>
+                        {gtOffset !== '0px' && (
+                          <button
+                            onClick={() => changeLanguage('en')}
+                            className="text-xs w-full text-center py-1.5 rounded-lg border border-red-200 bg-red-50 text-red-600 font-nunito font-semibold hover:bg-red-100 transition-colors notranslate"
+                          >
+                            Return to English
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               )}
 
               {/* Mobile Menu Button */}
@@ -244,11 +472,11 @@ export default function Navbar() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-3 border-b-2 border-primary pb-3">
-              <Search className="w-6 h-6 text-primary" />
+              <Sparkles className="w-6 h-6 text-primary" />
               <SearchInput setSearchOpen={setSearchOpen} />
             </div>
             <div className="mt-4 text-sm text-gray-500 font-nunito">
-              Start typing and press Enter to search...
+               Ask a question and press Enter for AI results.
             </div>
           </div>
         </div>
@@ -267,70 +495,6 @@ function NavLink({ href, label }: { href: string; label: string }) {
       {label}
       <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
     </Link>
-  );
-}
-
-// NavDropdown Component
-function NavDropdown({
-  label,
-  children,
-  isActive,
-  onMouseEnter,
-  onMouseLeave,
-}: {
-  label: string;
-  children: React.ReactNode;
-  isActive: boolean;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
-}) {
-  return (
-    <div
-      className="relative"
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      <button className="flex items-center gap-1 font-nunito font-semibold text-deep-navy hover:text-primary transition-colors group relative">
-        <span className="relative inline-block">
-          {label}
-          <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-        </span>
-        <ChevronDown
-          className={`w-4 h-4 transition-transform ${isActive ? 'rotate-180' : ''}`}
-        />
-      </button>
-
-
-      {isActive && (
-        <div
-          className="absolute top-full left-0 mt-8 rounded-2xl border  shadow-sm min-w-[240px] animate-fadeIn"
-          style={{
-            zIndex: 60,
-            backgroundColor: 'rgba(241, 245, 249, 0.7)', // increased transparency for more blur effect
-            backdropFilter: 'blur(100px)', // increased blur amount
-            WebkitBackdropFilter: 'blur(100px)', // increased blur amount
-          }}
-        >
-          {children}
-        </div>
-      )}
-
-    </div>
-  );
-}
-
-function DropdownLink({ href, label }: { href: string; label: string }) {
-  return (
-    <Link
-      href={href}
-      className="block px-6 py-2.5 font-nunito font-semibold text-deep-navy hover:bg-primary/10 hover:text-primary transition-colors rounded-lg group"
-    >
-      <span className="relative inline-block">
-        {label}
-        <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-      </span>
-    </Link>
-
   );
 }
 
@@ -385,7 +549,7 @@ function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, onLogout }: { mob
             {/* Header */}
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-2.5">
-                <Image src="/Port Laken (6 x 2 in) (6 x 1.6 in) (6 x 6 in).svg" alt="Port Laken" width={120} height={36} className="h-9 w-auto object-contain" />
+                <Image src="/Port Laken (6 x 2 in) (6 x 1.6 in) (6 x 6 in).svg" alt="Port Laken" width={120} height={36} style={{ width: "auto" }} className="h-9 object-contain" />
                 <span className="font-nunito font-bold text-xl text-deep-navy">Port Laken</span>
               </div>
               <button
@@ -425,10 +589,11 @@ function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, onLogout }: { mob
               </div>
               <div className="mobile-link-item" style={{ '--link-delay': '310ms' } as React.CSSProperties}>
                 <MobileDropdown label="Residents" setMobileMenuOpen={setMobileMenuOpen}>
-                  <MobileLink href="/living-in-portlaken" label="Life" setMobileMenuOpen={setMobileMenuOpen} />
+
                   <MobileLink href="/news" label="News" setMobileMenuOpen={setMobileMenuOpen} />
                   <MobileLink href="/forms" label="Forms & Applications" setMobileMenuOpen={setMobileMenuOpen} />
                   <MobileLink href="/maps-transport" label="Map" setMobileMenuOpen={setMobileMenuOpen} />
+                  <MobileLink href="/contact" label="Contact" setMobileMenuOpen={setMobileMenuOpen} />
                 </MobileDropdown>
               </div>
               <div className="mobile-link-item" style={{ '--link-delay': '360ms' } as React.CSSProperties}>
