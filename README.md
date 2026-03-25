@@ -6,7 +6,7 @@ This project serves as an **AI-powered civic portal** that demonstrates high-end
 
 ---
 
-## 🏗 High-Level Architecture
+## 🏗 High-Level Architecturee
 
 The Port Laken web application is highly modular. It utilizes the **Next.js 14 App Router** for Server-Side Rendering (SSR) and seamless client navigation, while relying on **Firebase** for backend services (Auth/Database), and the **Google Gemini API** for intelligent data aggregation.
 
