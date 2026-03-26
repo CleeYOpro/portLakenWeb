@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+
 import {
   FaArrowLeft,
   FaPhoneAlt,
@@ -56,10 +58,10 @@ const services = [
 ];
 
 const stats = [
-  { value: "120+", label: "Officers" },
-  { value: "< 6 min", label: "Average Response Time" },
-  { value: "92%", label: "Case Resolution Rate" },
-  { value: "1", label: "Headquarters" },
+  { value: "120+", label: "Sworn Officers" },
+  { value: "12K+", label: "Calls Responded To Annually" },
+  { value: "5", label: "Patrol Zones" },
+  { value: "50+", label: "Community Events Each Year" },
 ];
 
 const quickActions = [
@@ -98,72 +100,142 @@ const fadeUp: Variants = {
   },
 };
 
-export default function PoliceDepartmentPage() {
+const videos = [
+  "/policedept/6580999-uhd_3840_2160_24fps.mp4",
+  "/policedept/6581005-uhd_3840_2160_24fps.mp4",
+  "/policedept/videoplayback.mp4",
+];
+function StatCard({ stat, glitchOffset }: { stat: { value: string; label: string }; glitchOffset: number }) {
+  const [display, setDisplay] = useState(stat.value);
+  const [glitching, setGlitching] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const trigger = () => {
+        setGlitching(true);
+        let ticks = 0;
+        const total = 10;
+        const interval = setInterval(() => {
+          setDisplay(
+            stat.value
+              .split("")
+              .map((char) => {
+                if (isNaN(Number(char))) return char;
+                return Math.floor(Math.random() * 10).toString();
+              })
+              .join("")
+          );
+          ticks++;
+          if (ticks >= total) {
+            clearInterval(interval);
+            setDisplay(stat.value);
+            setGlitching(false);
+          }
+        }, 60);
+      };
+
+      trigger();
+      const loop = setInterval(trigger, 3000);
+      return () => clearInterval(loop);
+    }, glitchOffset);
+
+    return () => clearTimeout(timeout);
+  }, [stat.value, glitchOffset]);
+
   return (
-    <>
-      {/* HERO */}
-      <section className="pt-24 pb-16 bg-port-cream">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+    <div>
+      <div
+        className="text-4xl font-bold mb-2 transition-all"
+        style={{ color: glitching ? SHADE : PRIMARY, letterSpacing: glitching ? "0.05em" : undefined }}
+      >
+        {display}
+      </div>
+      <div className="text-sm uppercase tracking-wide text-port-slate/70 font-medium">
+        {stat.label}
+      </div>
+    </div>
+  );
+}
+
+export default function PoliceDepartmentPage() {
+  const [activeVideo, setActiveVideo] = useState(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveVideo((prev) => (prev + 1) % videos.length);
+    }, 1500); // 每1.5秒切换一次视频 (之前是2000ms)
+    return () => clearInterval(interval);
+  }, []);
+
+  const plpd = ["PORT", "LAKEN", "POLICE"];
+
+  return (
+    <div className="bg-white">
+      {/* ── HERO ── */}
+      <section className="relative h-[90vh] md:h-[95vh] w-full flex flex-col justify-center items-center">
+
+        {/* Video Container */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden rounded-b-[40px] shadow-sm">
+
+          {videos.map((src, idx) => (
+            <video
+              key={src}
+              ref={(el) => {
+                if (el) videoRefs.current[idx] = el;
+              }}
+              src={src}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${activeVideo === idx ? "opacity-100" : "opacity-0"
+                }`}
+            />
+          ))}
+
+          {/* Overlay (hides micro flicker) */}
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+
+        {/* Back Button */}
+        <div className="absolute top-28 left-6 md:top-36 md:left-10 z-50">
           <Link
             href="/departments"
-            className="inline-flex items-center gap-2 text-sm font-medium mb-8 transition-colors"
-            style={{ color: PRIMARY }}
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-black/30 backdrop-blur-md rounded-full text-white hover:bg-black/50 text-sm font-medium tracking-wide transition-all"
           >
-            <FaArrowLeft className="text-xs" /> Back to All Departments
+            <FaArrowLeft className="text-xs" /> back to departments
           </Link>
+        </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-              
-
-              <h1 className="text-5xl md:text-6xl font-bold text-port-navy leading-tight mb-6">
-                Port Laken <span style={{ color: PRIMARY }}>Police Department</span>
-              </h1>
-
-              <p className="text-lg text-port-slate/80 leading-relaxed max-w-2xl mb-8">
-                Committed to protecting our community through professional law enforcement,
-                rapid emergency response, and strong partnerships with residents.
-              </p>
-
-              
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-              className="relative aspect-[4/3] lg:aspect-video rounded-2xl overflow-hidden shadow-md"
-            >
-              <Image
-                src="https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?auto=format&fit=crop&q=80&w=1200"
-                alt="Police officers serving the community"
-                fill
-                className="object-cover"
-                priority
-              />
-              <div
-                className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-black/5"
-              />
-            </motion.div>
+        {/* Title */}
+        <div className="relative z-10 flex flex-col items-center text-center px-4 -mt-16 md:-mt-24">
+          <div className="flex space-x-2 md:space-x-6 overflow-hidden">
+            {plpd.map((word, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                  duration: 1.5,
+                  delay: i * 0.9,
+                }}
+                className="font-display text-7xl md:text-9xl font-black text-white drop-shadow-2xl"
+              >
+                {word}
+              </motion.span>
+            ))}
           </div>
         </div>
       </section>
 
       
 
-      {/* STATS */}
       <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {stats.map((s, i) => (
-            <div key={s.label}>
-              
-              <div className="text-4xl font-bold mb-2" style={{ color: PRIMARY }}>
-                {s.value}
-              </div>
-              <div className="text-sm uppercase tracking-wide text-port-slate/70 font-medium">
-                {s.label}
-              </div>
-            </div>
+            <StatCard key={s.label} stat={s} glitchOffset={i * 750} />
           ))}
         </div>
       </section>
@@ -226,8 +298,8 @@ export default function PoliceDepartmentPage() {
               Safety Through Trust & Collaboration
             </h2>
             <p className="text-lg text-port-slate/80 mb-6">
-              Our officers are not only responders — they are neighbors, mentors, and partners dedicated to building safer, stronger communities.
-            </p>
+              Our officers aren’t just responders. They’re neighbors, mentors, and people who genuinely care about building a safer community.            </p>
+
             <div className="grid sm:grid-cols-2 gap-6">
               <div className="p-6 rounded-xl bg-white border" style={{ borderColor: SHADE }}>
                 <div className="flex items-center gap-4 mb-3">
@@ -294,10 +366,10 @@ export default function PoliceDepartmentPage() {
 
       {/* Retired Officers */}
       {[
-        { name: "Edward Lang", years: "1982–2015 (Retired)" },
-        { name: "Sandra Kline", years: "1990–2022 (Retired)" },
-        { name: "Thomas Reed", years: "1978–2008 (Retired)" },
-        { name: "Carla Morales", years: "1995–2025 (Retired)" },
+              { name: "Edward Lang", years: "1982-2015 (Retired)" },
+              { name: "Sandra Kline", years: "1990-2022 (Retired)" },
+              { name: "Thomas Reed", years: "1978-2008 (Retired)" },
+              { name: "Carla Morales", years: "1995-2025 (Retired)" },
       ].map((ret) => (
         <div
           key={ret.name}
@@ -319,9 +391,11 @@ export default function PoliceDepartmentPage() {
       Thank you for your decades of dedicated service. Your legacy continues.
     </p>
 
-  </div>
-</section>
 
+  </div>
+      </section >
+
+      <div>
       {/* FINAL CTA */}
       <section className="py-20 bg-white">
         <div className="max-w-5xl mx-auto px-5 sm:px-6 lg:px-8 text-center">
@@ -350,6 +424,8 @@ export default function PoliceDepartmentPage() {
          
         </div>
       </section>
-    </>
+      </div>
+    </div >
+
   );
 }
