@@ -659,7 +659,7 @@ export default function Home() {
                   },
                   {
                     id: 3,
-                    award: "#1 Civic Building Redesign — Port Laken City Hall",
+                    award: "#1 Civic Building Redesign - Port Laken City Hall",
                     source: "Design Forward Awards, 2025",
                     description: "A blend of heritage design, solar glass, and open-floor collaboration.",
                     image: "https://www.utiledesign.com/wp-content/uploads/2025/10/City-Hall-Lobby-424_low-1024x678.jpg",
@@ -675,7 +675,7 @@ export default function Home() {
                   },
                   {
                     id: 5,
-                    award: "Top 100 Emerging AI Startups — NeuralHaven Labs",
+                    award: "Top 100 Emerging AI Startups: NeuralHaven Labs",
                     source: "TechNation, 2025",
                     description: "Port Laken's own accessibility-focused AI firm making global waves.",
                     image: "https://substackcdn.com/image/fetch/$s_!PSnS!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa7f4e29e-9704-41dc-8d8e-f9b17ad8eb15_1489x498.png",
@@ -728,7 +728,7 @@ export default function Home() {
                   },
                   {
                     id: 3,
-                    award: "#1 Civic Building Redesign — Port Laken City Hall",
+                    award: "#1 Civic Building Redesign - Port Laken City Hall",
                     source: "Design Forward Awards, 2025",
                     description: "A blend of heritage design, solar glass, and open-floor collaboration.",
                     image: "https://www.utiledesign.com/wp-content/uploads/2025/10/City-Hall-Lobby-424_low-1024x678.jpg",
@@ -744,7 +744,7 @@ export default function Home() {
                   },
                   {
                     id: 5,
-                    award: "Top 100 Emerging AI Startups — NeuralHaven Labs",
+                    award: "Top 100 Emerging AI Startups: NeuralHaven Labs",
                     source: "TechNation, 2025",
                     description: "Port Laken's own accessibility-focused AI firm making global waves.",
                     image: "https://substackcdn.com/image/fetch/$s_!PSnS!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa7f4e29e-9704-41dc-8d8e-f9b17ad8eb15_1489x498.png",
@@ -1194,7 +1194,7 @@ function SpotlightSlideshow() {
     },
     {
       id: 3,
-      image: "https://www.bellevuereporter.com/wp-content/uploads/2022/06/29337375_web1_Marymoor-Park-concert-series_1.jpg",
+      image: "https://images.stockcake.com/public/9/f/e/9fe5cc0f-4eb2-495f-9943-7cb3fd851c75_large/outdoor-summer-concert-stockcake.jpg",
       title: "Summer Concert Series",
       description: "Free outdoor concerts every Saturday evening. Bring your blanket and enjoy local musicians under the stars."
     }
