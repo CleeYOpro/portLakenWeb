@@ -181,4 +181,4 @@ To prevent spam on the civic portal, any resource inserted by a client starts wi
 
 ---
 
-> **Design Philosophy**: Port Laken prioritizes visual excellence and dynamic CSS over static utility, using a cohesive style system matching vibrant UI components with complex transitions. It acts as both a visual portfolio piece and a technical playground for combining robust architecture with experimental APIs.
+> **Design Philosophy**: Port Laken prioritizes visual excellence and dynamic CSS over static utility, using a cohesive style system matching vibrant UI componenhkjmb ts with complex transitions. It acts as both a visual portfolio piece and a technical playground for combining robust architecture with experimental APIs.
